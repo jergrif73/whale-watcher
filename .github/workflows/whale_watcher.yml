@@ -2,9 +2,8 @@ name: Daily Whale Watcher
 
 on:
   schedule:
-    # Runs at 8:00 AM and 8:00 PM UTC every day
-    - cron: '0 8,20 * * *'
-  # Allows manual run for testing
+    # Runs at minute 0 of every hour
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -22,6 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # This installs the missing tools
           pip install requests yfinance pandas
 
       - name: Run Whale Watcher Agent
