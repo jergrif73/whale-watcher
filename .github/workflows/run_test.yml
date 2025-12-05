@@ -10,3 +10,9 @@ jobs:
           python-version: '3.9'
       - run: pip install requests
       - run: python test_whale_watcher.py
+        env:
+          # We provide fake values so the agent initializes correctly
+          ALPHA_VANTAGE_KEY: "test_key_123"
+          SENDER_EMAIL: "test@test.com"
+          SENDER_PASSWORD: "fake_password"
+          RECEIVER_EMAIL: "test@test.com"
