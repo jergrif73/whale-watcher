@@ -16,37 +16,15 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 COINGECKO_URL = "https://api.coingecko.com/api/v3"
 
 # --- HIGH VOLATILITY WATCHLIST (12 Stocks) ---
-# We track 12 stocks. Run 2x daily = 24 calls (Limit 25).
 STOCKS_TO_WATCH = [
-    # --- The "High Octane" Volatility Kings ---
-    'MSTR',  # Bitcoin Proxy (Extremely Volatile)
-    'SMCI',  # AI Servers (Wild Swings)
-    'COIN',  # Crypto Exchange
-    'TSLA',  # Retail Favorite
-    'MARA',  # Bitcoin Miner
-    'PLTR',  # AI Defense / Meme Strength
-    
-    # --- The AI Leaders (Must Watch) ---
-    'NVDA',  # The Market Mover
-    'AMD',   # Chip Volatility
-    'AVGO',  # AI Networking
-    'META',  # Big Tech High Beta
-    
-    # --- Leveraged ETFs (3x Moves) ---
-    'SOXL',  # 3x Bull Semiconductor
-    'TQQQ'   # 3x Bull Tech
+    'MSTR', 'SMCI', 'COIN', 'TSLA', 'MARA', 'PLTR', 
+    'NVDA', 'AMD', 'AVGO', 'META', 'SOXL', 'TQQQ'
 ]
 
-# --- CRYPTO (Unlimited Free Checks) ---
+# --- CRYPTO ---
 CRYPTO_IDS = [
-    'bitcoin',
-    'ethereum',
-    'solana',
-    'fetch-ai',
-    'render-token',
-    'bittensor',
-    'pepe',        # Meme Coin Volatility
-    'dogecoin'     # Meme Coin Volatility
+    'bitcoin', 'ethereum', 'solana', 'fetch-ai', 
+    'render-token', 'bittensor', 'pepe', 'dogecoin'
 ]
 
 class MarketAgent:
@@ -56,45 +34,91 @@ class MarketAgent:
     def log(self, message):
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {message}")
 
+    def calculate_rsi(self, prices, period=14):
+        """Calculates the Relative Strength Index (RSI)"""
+        if len(prices) < period + 1:
+            return 50 # Not enough data
+        
+        deltas = [prices[i] - prices[i+1] for i in range(len(prices)-1)]
+        gains = [d if d > 0 else 0 for d in deltas]
+        losses = [abs(d) if d < 0 else 0 for d in deltas]
+        
+        avg_gain = sum(gains[:period]) / period
+        avg_loss = sum(losses[:period]) / period
+        
+        if avg_loss == 0: return 100
+        
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+        return round(rsi, 2)
+
     def fetch_stock_whale_activity(self, symbol):
-        if not ALPHA_VANTAGE_KEY:
-            return None
-            
-        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}'
+        if not ALPHA_VANTAGE_KEY: return None
+        # Get 100 days of data for Trend Analysis
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&outputsize=compact&apikey={ALPHA_VANTAGE_KEY}'
+        
         try:
             response = requests.get(url)
             data = response.json()
-            
-            if "Time Series (Daily)" not in data:
-                return None
+            if "Time Series (Daily)" not in data: return None
 
             dates = list(data["Time Series (Daily)"].keys())
-            today = dates[0]
+            if len(dates) < 50: return None # Need 50 days for trend
+
+            # Parse Data
+            today_data = data["Time Series (Daily)"][dates[0]]
+            price = float(today_data['4. close'])
+            vol = int(today_data['5. volume'])
             
-            today_data = data["Time Series (Daily)"][today]
-            today_vol = int(today_data['5. volume'])
-            today_close = float(today_data['4. close'])
-            
-            # Calculate 10-day average volume
+            # History for calcs
+            past_closes = [float(data["Time Series (Daily)"][d]['4. close']) for d in dates]
             past_vols = [int(data["Time Series (Daily)"][d]['5. volume']) for d in dates[1:11]]
+            
+            # --- CALCULATIONS ---
+            # 1. Volume Ratio
             avg_vol = statistics.mean(past_vols)
+            vol_ratio = round(vol / avg_vol, 2)
             
-            volume_ratio = today_vol / avg_vol
+            # 2. Trend (50-Day SMA)
+            sma_50 = statistics.mean(past_closes[:50])
+            trend = "UP" if price > sma_50 else "DOWN"
             
-            # Dynamic Signals for Volatile Stocks
+            # 3. RSI (14-Day Momentum)
+            rsi = self.calculate_rsi(past_closes)
+            
+            # --- SIGNAL LOGIC ---
             signal = "NEUTRAL"
-            if volume_ratio > 2.0:
-                signal = "🚀 WHALE ERUPTION"
-            elif volume_ratio > 1.5:
-                signal = "WHALE ACTIVE"
-            elif volume_ratio < 0.6:
-                signal = "LOW VOL (Ignore)"
+            color = "black"
+
+            # Context-Aware Signals
+            if vol_ratio > 1.5:
+                if trend == "UP":
+                    signal = "🚀 RALLY (Vol+Trend)"
+                    color = "green"
+                else:
+                    signal = "⚠️ SELLING PRESSURE"
+                    color = "orange"
+            
+            elif rsi < 30:
+                if trend == "UP":
+                    signal = "✅ BUY THE DIP (Oversold)"
+                    color = "green"
+                else:
+                    signal = "✋ CATCHING KNIFE (Be Careful)"
+                    color = "red"
+            
+            elif rsi > 70:
+                signal = "💰 OVERBOUGHT (Take Profit)"
+                color = "red"
 
             return {
                 "symbol": symbol,
-                "price": today_close,
-                "ratio": round(volume_ratio, 2),
-                "signal": signal
+                "price": price,
+                "vol_ratio": vol_ratio,
+                "trend": trend,
+                "rsi": rsi,
+                "signal": signal,
+                "color": color
             }
         except Exception as e:
             self.log(f"Error {symbol}: {e}")
@@ -109,63 +133,69 @@ class MarketAgent:
             if not data: return None
             
             price = data['usd']
-            change_24h = data['usd_24h_change']
+            change = data['usd_24h_change']
             
+            # Basic Trend Logic for Crypto (since no history)
             signal = "HOLD"
-            # Volatility Thresholds
-            if change_24h > 10.0:
-                signal = "🚀 MOONSHOT ALERT"
-            elif change_24h > 5.0:
-                signal = "PUMP WATCH"
-            elif change_24h < -10.0:
-                signal = "🩸 CRASH DIP BUY"
-            elif change_24h < -5.0:
-                signal = "DIP BUY WATCH"
+            color = "black"
+            
+            if change > 10: 
+                signal = "🚀 MOONSHOT"
+                color = "green"
+            elif change < -8: 
+                signal = "🩸 DIP ALERT"
+                color = "red"
 
             return {
                 "symbol": coin_id.upper(),
                 "price": price,
-                "change": round(change_24h, 2),
-                "signal": signal
+                "change": round(change, 2),
+                "signal": signal,
+                "color": color
             }
-        except Exception as e:
-            self.log(f"Error {coin_id}: {e}")
-            return None
+        except Exception as e: return None
 
     def generate_report(self):
         html = f"""
         <html><body>
-        <h2>🔥 High Voltage Market Report: {self.timestamp}</h2>
-        <p><i>Tracking the most explosive assets in Tech & Crypto.</i></p>
+        <h2>🧠 Smart-Trend Market Report: {self.timestamp}</h2>
+        <p><i>Analysis: Volume + 50-Day Trend + RSI Momentum</i></p>
         <hr>
-        <h3>⚡ Volatility Kings (Stocks)</h3>
+        <h3>📊 Stock Trends</h3>
         <table border="1" cellpadding="5" cellspacing="0">
-        <tr><th>Ticker</th><th>Price</th><th>Vol Ratio</th><th>Signal</th></tr>
+        <tr>
+            <th>Ticker</th>
+            <th>Price</th>
+            <th>Trend</th>
+            <th>RSI</th>
+            <th>Signal</th>
+        </tr>
         """
         
         for stock in STOCKS_TO_WATCH:
             data = self.fetch_stock_whale_activity(stock)
             if data:
-                color = "red" if "ERUPTION" in data['signal'] else "green" if "ACTIVE" in data['signal'] else "black"
+                # Add arrow to trend
+                trend_icon = "📈" if data['trend'] == "UP" else "📉"
                 html += f"""
                 <tr>
                     <td><b>{data['symbol']}</b></td>
                     <td>${data['price']}</td>
-                    <td>{data['ratio']}x</td>
-                    <td style="color:{color}"><b>{data['signal']}</b></td>
+                    <td>{trend_icon} {data['trend']}</td>
+                    <td>{data['rsi']}</td>
+                    <td style="color:{data['color']}"><b>{data['signal']}</b></td>
                 </tr>"""
             time.sleep(12) 
             
-        html += "</table><h3>🪙 Crypto & Memes</h3><ul>"
+        html += "</table><h3>🪙 Crypto Quick-Scan</h3><ul>"
         
         for coin in CRYPTO_IDS:
             data = self.fetch_crypto_whale_activity(coin)
             if data:
-                color = "green" if "MOONSHOT" in data['signal'] else "red" if "CRASH" in data['signal'] else "black"
-                html += f"<li><b>{data['symbol']}</b>: ${data['price']} ({data['change']}%) - <span style='color:{color}'><b>{data['signal']}</b></span></li>"
+                html += f"<li><b>{data['symbol']}</b>: ${data['price']} ({data['change']}%) - <span style='color:{data['color']}'><b>{data['signal']}</b></span></li>"
             time.sleep(2)
             
-        html += "</ul><hr><p><i>Automated Strategy Agent</i></p></body></html>"
+        html += "</ul><hr><p><i>Trend is your friend.</i></p></body></html>"
         return html
 
     def send_email(self, html_report):
@@ -173,7 +203,7 @@ class MarketAgent:
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = RECEIVER_EMAIL
-        msg['Subject'] = f"⚡ VOLATILITY ALERT: {self.timestamp}"
+        msg['Subject'] = f"📈 TREND ALERT: {self.timestamp}"
         msg.attach(MIMEText(html_report, 'html'))
         
         try:
