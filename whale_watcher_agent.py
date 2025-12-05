@@ -8,7 +8,6 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 
 # --- CONFIGURATION ---
-# These specific variable names are required for GitHub Actions Secrets
 ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY")
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
@@ -16,26 +15,38 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 
 COINGECKO_URL = "https://api.coingecko.com/api/v3"
 
-# --- WATCHLISTS (AI, TECH, CRYPTO) ---
-# Strictly limited to <10 stocks to stay under Alpha Vantage Free Tier (25 req/day)
-# Running this script 2x daily = 14 requests total.
+# --- HIGH VOLATILITY WATCHLIST (12 Stocks) ---
+# We track 12 stocks. Run 2x daily = 24 calls (Limit 25).
 STOCKS_TO_WATCH = [
-    'NVDA', # AI Hardware King
-    'AMD',  # AI/Chip Competitor
-    'PLTR', # AI Software/Defense
-    'MSFT', # Tech/OpenAI Partner
-    'GOOGL',# Tech/Gemini
-    'TSLA', # Tech/Robotics
-    'QQQ'   # Broad Tech ETF
+    # --- The "High Octane" Volatility Kings ---
+    'MSTR',  # Bitcoin Proxy (Extremely Volatile)
+    'SMCI',  # AI Servers (Wild Swings)
+    'COIN',  # Crypto Exchange
+    'TSLA',  # Retail Favorite
+    'MARA',  # Bitcoin Miner
+    'PLTR',  # AI Defense / Meme Strength
+    
+    # --- The AI Leaders (Must Watch) ---
+    'NVDA',  # The Market Mover
+    'AMD',   # Chip Volatility
+    'AVGO',  # AI Networking
+    'META',  # Big Tech High Beta
+    
+    # --- Leveraged ETFs (3x Moves) ---
+    'SOXL',  # 3x Bull Semiconductor
+    'TQQQ'   # 3x Bull Tech
 ]
 
-# AI-Focused Crypto + Majors
+# --- CRYPTO (Unlimited Free Checks) ---
 CRYPTO_IDS = [
     'bitcoin',
     'ethereum',
     'solana',
-    'fetch-ai', # AI Crypto Agent
-    'render-token' # GPU Rendering (AI adj)
+    'fetch-ai',
+    'render-token',
+    'bittensor',
+    'pepe',        # Meme Coin Volatility
+    'dogecoin'     # Meme Coin Volatility
 ]
 
 class MarketAgent:
@@ -46,11 +57,7 @@ class MarketAgent:
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {message}")
 
     def fetch_stock_whale_activity(self, symbol):
-        """
-        Wall St Logic: Vol > 1.5x Avg = Institutional Action
-        """
         if not ALPHA_VANTAGE_KEY:
-            self.log("Missing Alpha Vantage Key")
             return None
             
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}'
@@ -58,9 +65,7 @@ class MarketAgent:
             response = requests.get(url)
             data = response.json()
             
-            # Handle API errors or limits
             if "Time Series (Daily)" not in data:
-                self.log(f"Skipping {symbol}: API limit or error.")
                 return None
 
             dates = list(data["Time Series (Daily)"].keys())
@@ -76,33 +81,30 @@ class MarketAgent:
             
             volume_ratio = today_vol / avg_vol
             
-            # AI/Tech stocks are volatile; we need stricter triggers
+            # Dynamic Signals for Volatile Stocks
             signal = "NEUTRAL"
-            if volume_ratio > 1.8: # Raised threshold for high-beta tech
-                signal = "WHALE ALERT (High Vol)"
-            elif volume_ratio < 0.5:
+            if volume_ratio > 2.0:
+                signal = "🚀 WHALE ERUPTION"
+            elif volume_ratio > 1.5:
+                signal = "WHALE ACTIVE"
+            elif volume_ratio < 0.6:
                 signal = "LOW VOL (Ignore)"
 
             return {
                 "symbol": symbol,
                 "price": today_close,
                 "ratio": round(volume_ratio, 2),
-                "signal": signal,
-                "avg_vol": f"{int(avg_vol):,}"
+                "signal": signal
             }
         except Exception as e:
             self.log(f"Error {symbol}: {e}")
             return None
 
     def fetch_crypto_whale_activity(self, coin_id):
-        """
-        Crypto Logic: Price/Vol divergence
-        """
         url = f"{COINGECKO_URL}/simple/price?ids={coin_id}&vs_currencies=usd&include_24hr_vol=true&include_24hr_change=true"
         try:
             response = requests.get(url)
-            if response.status_code != 200: 
-                return None
+            if response.status_code != 200: return None
             data = response.json().get(coin_id)
             if not data: return None
             
@@ -110,12 +112,14 @@ class MarketAgent:
             change_24h = data['usd_24h_change']
             
             signal = "HOLD"
-            # AI Coins (Fetch/Render) are more volatile than BTC
-            threshold = 8.0 if coin_id in ['fetch-ai', 'render-token'] else 4.0
-            
-            if change_24h > threshold:
+            # Volatility Thresholds
+            if change_24h > 10.0:
+                signal = "🚀 MOONSHOT ALERT"
+            elif change_24h > 5.0:
                 signal = "PUMP WATCH"
-            elif change_24h < -threshold:
+            elif change_24h < -10.0:
+                signal = "🩸 CRASH DIP BUY"
+            elif change_24h < -5.0:
                 signal = "DIP BUY WATCH"
 
             return {
@@ -129,12 +133,12 @@ class MarketAgent:
             return None
 
     def generate_report(self):
-        self.log("Generating Report...")
         html = f"""
         <html><body>
-        <h2>🤖 AI & Whale Tech Tracker: {self.timestamp}</h2>
+        <h2>🔥 High Voltage Market Report: {self.timestamp}</h2>
+        <p><i>Tracking the most explosive assets in Tech & Crypto.</i></p>
         <hr>
-        <h3>🧠 Wall St: AI & Big Tech</h3>
+        <h3>⚡ Volatility Kings (Stocks)</h3>
         <table border="1" cellpadding="5" cellspacing="0">
         <tr><th>Ticker</th><th>Price</th><th>Vol Ratio</th><th>Signal</th></tr>
         """
@@ -142,7 +146,7 @@ class MarketAgent:
         for stock in STOCKS_TO_WATCH:
             data = self.fetch_stock_whale_activity(stock)
             if data:
-                color = "green" if "WHALE" in data['signal'] else "black"
+                color = "red" if "ERUPTION" in data['signal'] else "green" if "ACTIVE" in data['signal'] else "black"
                 html += f"""
                 <tr>
                     <td><b>{data['symbol']}</b></td>
@@ -150,30 +154,26 @@ class MarketAgent:
                     <td>{data['ratio']}x</td>
                     <td style="color:{color}"><b>{data['signal']}</b></td>
                 </tr>"""
-            time.sleep(12) # CRITICAL: Respect Alpha Vantage 5 calls/min limit
+            time.sleep(12) 
             
-        html += "</table><h3>🔗 Crypto: AI & L1s</h3><ul>"
+        html += "</table><h3>🪙 Crypto & Memes</h3><ul>"
         
         for coin in CRYPTO_IDS:
             data = self.fetch_crypto_whale_activity(coin)
             if data:
-                color = "red" if "DIP" in data['signal'] else "green" if "PUMP" in data['signal'] else "black"
+                color = "green" if "MOONSHOT" in data['signal'] else "red" if "CRASH" in data['signal'] else "black"
                 html += f"<li><b>{data['symbol']}</b>: ${data['price']} ({data['change']}%) - <span style='color:{color}'><b>{data['signal']}</b></span></li>"
             time.sleep(2)
             
-        html += "</ul><hr><p><i>Automated Agent Report</i></p></body></html>"
+        html += "</ul><hr><p><i>Automated Strategy Agent</i></p></body></html>"
         return html
 
     def send_email(self, html_report):
-        if not SENDER_EMAIL or not SENDER_PASSWORD:
-            self.log("Email credentials missing. Printing report to console instead.")
-            print(html_report)
-            return
-
+        if not SENDER_EMAIL: return
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = RECEIVER_EMAIL
-        msg['Subject'] = f"MARKET ALERT: {self.timestamp}"
+        msg['Subject'] = f"⚡ VOLATILITY ALERT: {self.timestamp}"
         msg.attach(MIMEText(html_report, 'html'))
         
         try:
@@ -182,9 +182,8 @@ class MarketAgent:
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
             server.quit()
-            self.log("Email sent!")
         except Exception as e:
-            self.log(f"Email failed: {e}")
+            print(e)
 
 if __name__ == "__main__":
     agent = MarketAgent()
