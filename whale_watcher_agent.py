@@ -60,7 +60,6 @@ class MarketAgent:
             color = "black"
 
             # 🚨 EMERGENCY LOGIC (Overrides everything)
-            # Triggers if: Move > 10% OR Volume > 3.5x OR Extreme RSI
             if abs(pct_change) > 10.0:
                 signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
                 color = "purple"
