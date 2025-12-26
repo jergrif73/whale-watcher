@@ -15,7 +15,8 @@ IS_MANUAL = is_manual_env == "true"
 
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
-d (Watching Only)
+# --- 💼 YOUR PORTFOLIO DASHBOARD ---
+# STATUS: 0.00 = Not Owned (Watching Only)
 # ACTION: Add entry price and purchase date when you buy.
 # EXAMPLE: 'SMCI': {'entry': 45.50, 'date': '2024-11-15'},
 MY_PORTFOLIO = {
@@ -213,11 +214,11 @@ class MarketAgent:
                 
                 # Calculate annualized return if we have dates
                 annualized_return = None
-                if holding_days and holding_days > 0:
+                if holding_days is not None and holding_days > 0:
                     annualized_return = (gain_loss_pct / holding_days) * 365
                 
                 # Tax status check
-                if holding_days:
+                if holding_days is not None:
                     days_to_long_term = LONG_TERM_DAYS - holding_days
                     if days_to_long_term <= 0:
                         tax_note = "📗 LONG-TERM"
@@ -225,10 +226,11 @@ class MarketAgent:
                         tax_note = f"⏳ {days_to_long_term}d to LT"
                 
                 # Debug Print for Logs
-                duration_str = format_duration(holding_days) if holding_days else "No date"
+                duration_str = format_duration(holding_days) if holding_days is not None else "No date"
                 print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}% | Held {duration_str}")
 
                 # --- STRICT LOGIC WITH TIME AWARENESS ---
+                # This protects you from panic selling on the first few days
                 is_settling = holding_days is not None and holding_days <= SETTLING_PERIOD_DAYS
                 
                 if gain_loss_pct >= PROFIT_TARGET_PCT:
@@ -308,13 +310,11 @@ class MarketAgent:
         print("\n--- 🔍 PORTFOLIO CHECK ---")
         owned_count = 0
         for ticker, position in MY_PORTFOLIO.items():
-            if position and isinstance(position, dict) and position.get('entry', 0) > 0:
-                date_str = position.get('date', 'No date')
-                print(f"✅ TRACKING: {ticker} @ ${position['entry']} (since {date_str})")
-                owned_count += 1
-            elif position and not isinstance(position, dict) and position > 0:
-                # Legacy format
-                print(f"✅ TRACKING: {ticker} @ ${position} (no date - legacy format)")
+            if is_owned(ticker):
+                details = get_position(ticker)
+                entry = details['entry']
+                d_str = details['date'].strftime('%Y-%m-%d') if details['date'] else "Legacy"
+                print(f"✅ TRACKING: {ticker} @ ${entry} (since {d_str})")
                 owned_count += 1
         if owned_count == 0:
             print("❌ WARNING: Bot sees NO owned stocks. Did you save the file?")
@@ -338,9 +338,8 @@ class MarketAgent:
         """
         
         # PORTFOLIO LOOP (Owned Items Only)
-        for ticker, position in MY_PORTFOLIO.items():
-            if not (position and ((isinstance(position, dict) and position.get('entry', 0) > 0) or (not isinstance(position, dict) and position > 0))):
-                continue
+        for ticker in MY_PORTFOLIO.keys():
+            if not is_owned(ticker): continue
                 
             yf_ticker = f"{ticker}-USD" if ticker in ['BTC','ETH','SOL','FET','RNDR','DOGE','PEPE'] else ticker
             data = self.fetch_data(yf_ticker)
@@ -370,8 +369,7 @@ class MarketAgent:
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
             # Skip items we already own
-            if is_owned(ticker):
-                continue
+            if is_owned(ticker): continue
             
             data = self.fetch_data(ticker)
             if data:
