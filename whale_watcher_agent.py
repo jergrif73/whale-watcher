@@ -18,8 +18,8 @@ IS_MANUAL = is_manual_env == "true"
 # ACTION: Replace 0.00 with your buy price to track profits.
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': 20.00,
-    'MARA': 50.00,
+    'SMCI': 0.00,
+    'MARA': 0.00,
     'MSTR': 0.00,
     'COIN': 0.00,
     'TSLA': 0.00,
@@ -128,7 +128,7 @@ class MarketAgent:
 
             clean_ticker = ticker.replace("-USD", "")
             
-            # 1. PORTFOLIO LOGIC (Only if price > 0)
+            # 1. PORTFOLIO LOGIC (STRICTLY PROFIT/LOSS ONLY)
             if clean_ticker in MY_PORTFOLIO and MY_PORTFOLIO[clean_ticker] > 0:
                 entry_price = MY_PORTFOLIO[clean_ticker]
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
@@ -141,10 +141,8 @@ class MarketAgent:
                     signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
                     color = "red"
                     self.has_critical_news = True
-                elif current_rsi > 70:
-                    signal = f"⚠️ RSI HIGH (Take Profit?)"
-                    color = "orange"
                 else:
+                    # Purely holding. Ignore RSI/Trend for owned assets.
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
 
