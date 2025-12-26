@@ -31,8 +31,8 @@ PERFORMANCE_JSON = DATA_DIR / "performance.json"
 # EXAMPLE: 'SMCI': {'entry': 45.50, 'date': '2024-11-15'},
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': {'entry': 0.00, 'date': '2025-12-26'},
-    'MARA': {'entry': 0.00, 'date': '2025-12-26'},
+    'SMCI': {'entry': 20.00, 'date': '2025-12-26'},
+    'MARA': {'entry': 50.00, 'date': '2025-12-26'},
     'MSTR': {'entry': 0.00, 'date': '2025-12-26'},
     'COIN': {'entry': 0.00, 'date': '2025-12-26'},
     'TSLA': {'entry': 0.00, 'date': '2025-12-26'},
