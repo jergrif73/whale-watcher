@@ -11,6 +11,11 @@ SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 
+# CHECK FOR MANUAL OVERRIDE (Case insensitive safety check)
+# This reads the signal you set up in the YAML file
+is_manual_env = os.environ.get("IS_MANUAL_RUN", "false").lower()
+IS_MANUAL = is_manual_env == "true"
+
 STOCKS_TO_WATCH = [
     'MSTR', 'SMCI', 'COIN', 'TSLA', 'MARA', 'PLTR',
     'NVDA', 'AMD', 'AVGO', 'META', 'GOOGL', 'MSFT',
@@ -25,7 +30,7 @@ CRYPTO_TO_WATCH = [
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.has_critical_news = False # The "Red Alert" flag
+        self.has_critical_news = False 
 
     def fetch_data(self, ticker):
         try:
@@ -43,8 +48,6 @@ class MarketAgent:
             
             sma_50 = df['Close'].rolling(window=50).mean().iloc[-1]
             trend = "UP" if current_price > sma_50 else "DOWN"
-            
-            # Calculate % Change for "Breaking News" detection
             pct_change = ((current_price - prev_close) / prev_close) * 100
             
             # RSI
@@ -59,7 +62,6 @@ class MarketAgent:
             signal = "NEUTRAL"
             color = "black"
 
-            # 🚨 EMERGENCY LOGIC (Overrides everything)
             if abs(pct_change) > 10.0:
                 signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
                 color = "purple"
@@ -76,8 +78,6 @@ class MarketAgent:
                 signal = "🩸 EXTREME OVERSOLD"
                 color = "green"
                 self.has_critical_news = True
-            
-            # Normal Logic (Routine Only)
             elif vol_ratio > 1.5:
                 if trend == "UP":
                     signal = "🚀 RALLY"
@@ -111,7 +111,6 @@ class MarketAgent:
         <table border="1" cellpadding="5" cellspacing="0">
         <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th></tr>
         """
-        
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             data = self.fetch_data(ticker)
@@ -129,7 +128,10 @@ class MarketAgent:
         return html
 
     def send_email(self, html_report, subject_prefix=""):
-        if not SENDER_EMAIL: return
+        if not SENDER_EMAIL: 
+            print("❌ Error: No Sender Email found.")
+            return
+        
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = RECEIVER_EMAIL
@@ -142,24 +144,23 @@ class MarketAgent:
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
             server.quit()
-            print("Email Sent.")
+            print("✅ Email Sent Successfully.")
         except Exception as e:
-            print(e)
+            print(f"❌ Email Failed: {e}")
 
 if __name__ == "__main__":
-    # Check time (UTC). 16:00 UTC = 8 AM PST. 04:00 UTC = 8 PM PST.
     current_hour = datetime.utcnow().hour
     is_routine_time = current_hour in [4, 16] 
     
+    print("🤖 Agent Starting...")
     agent = MarketAgent()
     report = agent.generate_report()
     
-    # LOGIC GATE:
-    # 1. If it's routine time -> Send Email
-    # 2. If it's NOT routine, but Critical News exists -> Send Emergency Email
-    # 3. Otherwise -> Stay Silent
-    
-    if agent.has_critical_news:
+    # NEW LOGIC: Priority Check
+    if IS_MANUAL:
+        print("🕹️ Manual Override Detected. Sending Test Email.")
+        agent.send_email(report, subject_prefix="🕹️ TEST:")
+    elif agent.has_critical_news:
         print("🚨 CRITICAL NEWS DETECTED. Sending Emergency Alert.")
         agent.send_email(report, subject_prefix="🚨 URGENT:")
     elif is_routine_time:
