@@ -20,7 +20,7 @@ EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
 # --- FILE PATHS ---
 SCRIPT_DIR = Path(__file__).parent
-DATA_DIR = SCRIPT_DIR / "data"
+DATA_DIR = SCRIPT_DIR / "docs" / "data"
 DASHBOARD_JSON = DATA_DIR / "dashboard.json"
 TRADE_JOURNAL_CSV = DATA_DIR / "trade_journal.csv"
 PERFORMANCE_JSON = DATA_DIR / "performance.json"
@@ -153,7 +153,7 @@ def format_duration(days):
 
 def ensure_data_dir():
     """Create data directory if it doesn't exist."""
-    DATA_DIR.mkdir(exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_benchmark_performance(days=7):
