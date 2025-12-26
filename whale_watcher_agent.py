@@ -13,9 +13,12 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 is_manual_env = os.environ.get("IS_MANUAL_RUN", "false").lower()
 IS_MANUAL = is_manual_env == "true"
 
+# --- 📧 EMAIL SUBJECT LINE ---
+EMAIL_SUBJECT_BASE = "Market Intelligence Report"
+
 # --- 💼 YOUR PORTFOLIO DASHBOARD ---
 # STATUS: 0.00 = Not Owned (Watching Only)
-# ACTION: Replace 0.00 with your buy price to track profits.
+# ACTION: Replace 0.00 with your buy price.
 MY_PORTFOLIO = {
     # --- STOCKS ---
     'SMCI': 20.00,
@@ -127,12 +130,14 @@ class MarketAgent:
             color = "black"
 
             clean_ticker = ticker.replace("-USD", "")
+            is_owned = clean_ticker in MY_PORTFOLIO and MY_PORTFOLIO[clean_ticker] > 0
             
-            # 1. PORTFOLIO LOGIC (STRICTLY PROFIT/LOSS ONLY)
-            if clean_ticker in MY_PORTFOLIO and MY_PORTFOLIO[clean_ticker] > 0:
+            # --- SCENARIO A: YOU OWN THIS STOCK ---
+            if is_owned:
                 entry_price = MY_PORTFOLIO[clean_ticker]
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
                 
+                # Priority 1: Profit/Loss Targets
                 if gain_loss_pct >= 20.0:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
@@ -141,32 +146,43 @@ class MarketAgent:
                     signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
                     color = "red"
                     self.has_critical_news = True
+                
+                # Priority 2: Critical Market Warnings (Whales/Crashes) override "Holding"
+                elif abs(pct_change) > 10.0:
+                    signal = f"🚨 NEWS (+{round(gain_loss_pct, 1)}%)"
+                    color = "purple"
+                    self.has_critical_news = True
+                elif current_rsi > 85:
+                    signal = f"🔥 DANGER (+{round(gain_loss_pct, 1)}%)"
+                    color = "orange"
+                    
+                # Priority 3: Default Holding
                 else:
-                    # Purely holding. Ignore RSI/Trend for owned assets.
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
 
-            # 2. GENERAL MARKET LOGIC (For non-owned or general monitoring)
-            elif abs(pct_change) > 10.0:
-                signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
-                color = "purple"
-                self.has_critical_news = True
-            elif vol_ratio > 3.5:
-                signal = f"🐳 WHALE ERUPTION ({vol_ratio}x Vol)"
-                color = "purple"
-                self.has_critical_news = True
-            elif current_rsi > 85:
-                signal = "🔥 EXTREME OVERBOUGHT"
-                color = "red"
-            elif current_rsi < 15:
-                signal = "🩸 EXTREME OVERSOLD"
-                color = "green"
-                self.has_critical_news = True
-            elif vol_ratio > 1.5:
-                if trend == "UP": signal = "🚀 RALLY"; color = "green"
-                else: signal = "⚠️ PRESSURE"; color = "orange"
-            elif current_rsi < 30: signal = "✅ BUY DIP"; color = "green"
-            elif current_rsi > 70: signal = "💰 TAKE PROFIT"; color = "red"
+            # --- SCENARIO B: YOU ARE JUST WATCHING ---
+            else:
+                if abs(pct_change) > 10.0:
+                    signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
+                    color = "purple"
+                    self.has_critical_news = True
+                elif vol_ratio > 3.5:
+                    signal = f"🐳 WHALE ERUPTION ({vol_ratio}x Vol)"
+                    color = "purple"
+                    self.has_critical_news = True
+                elif current_rsi > 85:
+                    signal = "🔥 EXTREME OVERBOUGHT"
+                    color = "red"
+                elif current_rsi < 15:
+                    signal = "🩸 EXTREME OVERSOLD"
+                    color = "green"
+                    self.has_critical_news = True
+                elif vol_ratio > 1.5:
+                    if trend == "UP": signal = "🚀 RALLY"; color = "green"
+                    else: signal = "⚠️ PRESSURE"; color = "orange"
+                elif current_rsi < 30: signal = "✅ BUY DIP"; color = "green"
+                elif current_rsi > 70: signal = "💰 TAKE PROFIT"; color = "red"
 
             return {
                 "symbol": clean_ticker,
@@ -183,7 +199,7 @@ class MarketAgent:
     def generate_report(self):
         html = f"""
         <html><body>
-        <h2>💼 Portfolio & Market Watch: {self.timestamp}</h2>
+        <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
         <hr>
         
         <h3>💰 Your Holdings (Sell Watch)</h3>
@@ -191,10 +207,8 @@ class MarketAgent:
         <tr><th>Asset</th><th>Current Price</th><th>Action</th><th>Intel</th></tr>
         """
         
-        # Loop through Portfolio, but skip items with 0.00 price
         for ticker, entry in MY_PORTFOLIO.items():
-            if entry <= 0: continue # Skip not owned
-            
+            if entry <= 0: continue 
             yf_ticker = f"{ticker}-USD" if ticker in ['BTC','ETH','SOL','FET','RNDR','DOGE','PEPE'] else ticker
             data = self.fetch_data(yf_ticker)
             if data:
@@ -217,7 +231,6 @@ class MarketAgent:
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
-            # Only skip if we ACTUALLY own it (Price > 0)
             if clean in MY_PORTFOLIO and MY_PORTFOLIO[clean] > 0: continue
             
             data = self.fetch_data(ticker)
@@ -240,7 +253,7 @@ class MarketAgent:
         msg = MIMEMultipart()
         msg['From'] = SENDER_EMAIL
         msg['To'] = RECEIVER_EMAIL
-        msg['Subject'] = f"{subject_prefix} PORTFOLIO UPDATE: {self.timestamp}"
+        msg['Subject'] = f"{subject_prefix} {EMAIL_SUBJECT_BASE}: {self.timestamp}"
         msg.attach(MIMEText(html_report, 'html'))
         try:
             server = smtplib.SMTP('smtp.gmail.com', 587)
