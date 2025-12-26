@@ -124,6 +124,8 @@ def format_duration(days):
     """Format holding duration for display."""
     if days is None:
         return "—"
+    if days == 0:
+        return "Today"
     if days < 7:
         return f"{days}d"
     elif days < 30:
@@ -217,8 +219,8 @@ class MarketAgent:
                 if holding_days is not None and holding_days > 0:
                     annualized_return = (gain_loss_pct / holding_days) * 365
                 
-                # Tax status check
-                if holding_days is not None:
+                # Tax status check (only after day 0)
+                if holding_days is not None and holding_days > 0:
                     days_to_long_term = LONG_TERM_DAYS - holding_days
                     if days_to_long_term <= 0:
                         tax_note = "📗 LONG-TERM"
@@ -230,16 +232,24 @@ class MarketAgent:
                 print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}% | Held {duration_str}")
 
                 # --- STRICT LOGIC WITH TIME AWARENESS ---
-                # This protects you from panic selling on the first few days
-                is_settling = holding_days is not None and holding_days <= SETTLING_PERIOD_DAYS
+                # Day 0: No comparison - you just bought, stay neutral
+                # Days 1-3: Track P/L but suppress stop-loss panic  
+                # Day 4+: Full logic applies
                 
-                if gain_loss_pct >= PROFIT_TARGET_PCT:
+                is_day_zero = holding_days is not None and holding_days == 0
+                is_settling = holding_days is not None and 0 < holding_days <= SETTLING_PERIOD_DAYS
+                
+                if is_day_zero:
+                    # Purchase day - no sell signals, just confirmation
+                    signal = "🆕 JUST BOUGHT"
+                    color = "blue"
+                elif gain_loss_pct >= PROFIT_TARGET_PCT:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
                     self.has_critical_news = True
                 elif gain_loss_pct <= STOP_LOSS_PCT:
                     if is_settling:
-                        # Don't trigger stop loss during settling period
+                        # Don't trigger stop loss during settling period (days 1-3)
                         signal = f"⚠️ VOLATILE ({round(gain_loss_pct, 1)}%) - Settling"
                         color = "orange"
                     else:
@@ -389,6 +399,7 @@ class MarketAgent:
         <hr>
         <p style="font-size:11px; color:gray;">
             <b>Legend:</b> 
+            🆕 Just Bought (Day 0) |
             💰 Sell Target (+20%) | 
             🛑 Stop Loss (-8%) | 
             💎 Holding | 
