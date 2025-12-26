@@ -18,8 +18,8 @@ IS_MANUAL = is_manual_env == "true"
 # ACTION: Replace 0.00 with your buy price to track profits.
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': 0.00,
-    'MARA': 0.00,
+    'SMCI': 20.00,
+    'MARA': 50.00,
     'MSTR': 0.00,
     'COIN': 0.00,
     'TSLA': 0.00,
