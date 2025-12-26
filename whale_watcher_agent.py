@@ -398,13 +398,28 @@ class MarketAgent:
         </table>
         <hr>
         <p style="font-size:11px; color:gray;">
-            <b>Legend:</b> 
+            <b>Portfolio Signals:</b> 
             🆕 Just Bought (Day 0) |
+            💎 Holding |
+            ⚠️ Volatile - Settling (Days 1-3) |
             💰 Sell Target (+20%) | 
-            🛑 Stop Loss (-8%) | 
-            💎 Holding | 
+            🛑 Stop Loss (-8%) |
             📗 Long-Term (365+ days) | 
             ⏳ Approaching Long-Term
+            <br>
+            <b>Watchlist Signals:</b>
+            🚨 Breaking News (&gt;10% move) |
+            🐳 Whale Eruption (&gt;3.5x vol) |
+            🔥 Extreme Overbought (RSI &gt;85) |
+            🩸 Extreme Oversold (RSI &lt;15) |
+            🚀 Rally |
+            ⚠️ Pressure |
+            ✅ Buy Dip (RSI &lt;30) |
+            💰 Take Profit (RSI &gt;70)
+            <br>
+            <b>Intel:</b>
+            🐳 Whale in News |
+            👔 Insider Buy
         </p>
         </body></html>
         """
