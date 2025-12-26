@@ -2,9 +2,12 @@ import smtplib
 import yfinance as yf
 import pandas as pd
 import os
+import json
+import csv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
+from pathlib import Path
 
 # --- CONFIGURATION ---
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
@@ -15,14 +18,21 @@ IS_MANUAL = is_manual_env == "true"
 
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
+# --- FILE PATHS ---
+SCRIPT_DIR = Path(__file__).parent
+DATA_DIR = SCRIPT_DIR / "data"
+DASHBOARD_JSON = DATA_DIR / "dashboard.json"
+TRADE_JOURNAL_CSV = DATA_DIR / "trade_journal.csv"
+PERFORMANCE_JSON = DATA_DIR / "performance.json"
+
 # --- 💼 YOUR PORTFOLIO DASHBOARD ---
 # STATUS: 0.00 = Not Owned (Watching Only)
 # ACTION: Add entry price and purchase date when you buy.
 # EXAMPLE: 'SMCI': {'entry': 45.50, 'date': '2024-11-15'},
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': {'entry': 20.00, 'date': '2025-12-26'},
-    'MARA': {'entry': 50.00, 'date': '2025-12-26'},
+    'SMCI': {'entry': 0.00, 'date': '2025-12-26'},
+    'MARA': {'entry': 0.00, 'date': '2025-12-26'},
     'MSTR': {'entry': 0.00, 'date': '2025-12-26'},
     'COIN': {'entry': 0.00, 'date': '2025-12-26'},
     'TSLA': {'entry': 0.00, 'date': '2025-12-26'},
@@ -76,6 +86,9 @@ CRYPTO_TO_WATCH = [
     'RNDR-USD', 'DOGE-USD', 'PEPE-USD'
 ]
 
+# --- BENCHMARKS ---
+BENCHMARKS = ['SPY', 'QQQ']
+
 
 def is_owned(ticker):
     """Check if a ticker is owned (has valid entry data)."""
@@ -85,7 +98,6 @@ def is_owned(ticker):
         return False
     if isinstance(position, dict):
         return position.get('entry', 0) > 0
-    # Legacy support: bare number
     return position > 0
 
 
@@ -107,7 +119,6 @@ def get_position(ticker):
             except ValueError:
                 pass
         return {'entry': entry, 'date': entry_date}
-    # Legacy support: bare number
     if position > 0:
         return {'entry': position, 'date': None}
     return None
@@ -140,10 +151,84 @@ def format_duration(days):
         return f"{years}y {months}mo"
 
 
+def ensure_data_dir():
+    """Create data directory if it doesn't exist."""
+    DATA_DIR.mkdir(exist_ok=True)
+
+
+def get_benchmark_performance(days=7):
+    """Get benchmark performance over specified days."""
+    benchmarks = {}
+    for ticker in BENCHMARKS:
+        try:
+            stock = yf.Ticker(ticker)
+            df = stock.history(period="1mo")
+            if len(df) >= days:
+                current = df['Close'].iloc[-1]
+                past = df['Close'].iloc[-days] if days <= len(df) else df['Close'].iloc[0]
+                pct = ((current - past) / past) * 100
+                benchmarks[ticker] = {
+                    'current': round(current, 2),
+                    'change_pct': round(pct, 2),
+                    'period_days': days
+                }
+        except Exception as e:
+            print(f"   [ERROR] Benchmark {ticker}: {e}")
+    return benchmarks
+
+
+class TradeJournal:
+    """Manages the trade journal CSV."""
+    
+    def __init__(self, filepath):
+        self.filepath = filepath
+        self._ensure_file()
+    
+    def _ensure_file(self):
+        """Create CSV with headers if it doesn't exist."""
+        if not self.filepath.exists():
+            with open(self.filepath, 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    'timestamp', 'ticker', 'action', 'price', 
+                    'entry_price', 'gain_loss_pct', 'holding_days', 'notes'
+                ])
+    
+    def log_signal(self, ticker, action, price, entry_price=None, 
+                   gain_loss_pct=None, holding_days=None, notes=""):
+        """Log a trading signal to the journal."""
+        with open(self.filepath, 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                datetime.now().isoformat(),
+                ticker,
+                action,
+                price,
+                entry_price or "",
+                f"{gain_loss_pct:.1f}" if gain_loss_pct else "",
+                holding_days or "",
+                notes
+            ])
+    
+    def get_recent_trades(self, limit=20):
+        """Get recent trade log entries."""
+        trades = []
+        if self.filepath.exists():
+            with open(self.filepath, 'r') as f:
+                reader = csv.DictReader(f)
+                trades = list(reader)
+        return trades[-limit:] if len(trades) > limit else trades
+
+
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.has_critical_news = False 
+        self.has_critical_news = False
+        self.portfolio_data = []
+        self.watchlist_data = []
+        self.benchmarks = {}
+        ensure_data_dir()
+        self.journal = TradeJournal(TRADE_JOURNAL_CSV)
 
     def check_whale_intel(self, ticker_obj, symbol):
         intel = []
@@ -180,12 +265,25 @@ class MarketAgent:
             prev_close = df['Close'].iloc[-2]
             current_vol = df['Volume'].iloc[-1]
             
+            # Historical prices for charts
+            price_history = []
+            for date, row in df.tail(30).iterrows():
+                price_history.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'close': round(row['Close'], 2),
+                    'volume': int(row['Volume'])
+                })
+            
             # Calculations
             avg_vol = df['Volume'].iloc[-11:-1].mean()
             vol_ratio = round(current_vol / avg_vol, 2) if avg_vol > 0 else 0
             sma_50 = df['Close'].rolling(window=50).mean().iloc[-1] if len(df) > 50 else current_price
             trend = "UP" if current_price > sma_50 else "DOWN"
             pct_change = ((current_price - prev_close) / prev_close) * 100
+            
+            # Weekly change
+            week_ago_price = df['Close'].iloc[-6] if len(df) >= 6 else df['Close'].iloc[0]
+            weekly_change = ((current_price - week_ago_price) / week_ago_price) * 100
             
             # RSI
             delta = df['Close'].diff()
@@ -202,7 +300,6 @@ class MarketAgent:
             color = "black"
             clean_ticker = ticker.replace("-USD", "")
             
-            # Initialize position tracking fields
             holding_days = None
             tax_note = ""
             
@@ -214,12 +311,10 @@ class MarketAgent:
                 holding_days = calc_holding_days(entry_date)
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
                 
-                # Calculate annualized return if we have dates
                 annualized_return = None
                 if holding_days is not None and holding_days > 0:
                     annualized_return = (gain_loss_pct / holding_days) * 365
                 
-                # Tax status check (only after day 0)
                 if holding_days is not None and holding_days > 0:
                     days_to_long_term = LONG_TERM_DAYS - holding_days
                     if days_to_long_term <= 0:
@@ -227,40 +322,35 @@ class MarketAgent:
                     elif days_to_long_term <= TAX_WARNING_DAYS:
                         tax_note = f"⏳ {days_to_long_term}d to LT"
                 
-                # Debug Print for Logs
                 duration_str = format_duration(holding_days) if holding_days is not None else "No date"
                 print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}% | Held {duration_str}")
 
-                # --- STRICT LOGIC WITH TIME AWARENESS ---
-                # Day 0: No comparison - you just bought, stay neutral
-                # Days 1-3: Track P/L but suppress stop-loss panic  
-                # Day 4+: Full logic applies
-                
                 is_day_zero = holding_days is not None and holding_days == 0
                 is_settling = holding_days is not None and 0 < holding_days <= SETTLING_PERIOD_DAYS
                 
                 if is_day_zero:
-                    # Purchase day - no sell signals, just confirmation
                     signal = "🆕 JUST BOUGHT"
                     color = "blue"
                 elif gain_loss_pct >= PROFIT_TARGET_PCT:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
                     self.has_critical_news = True
+                    self.journal.log_signal(clean_ticker, "SELL_SIGNAL", round(current_price, 2),
+                                           entry_price, gain_loss_pct, holding_days, "Profit target reached")
                 elif gain_loss_pct <= STOP_LOSS_PCT:
                     if is_settling:
-                        # Don't trigger stop loss during settling period (days 1-3)
                         signal = f"⚠️ VOLATILE ({round(gain_loss_pct, 1)}%) - Settling"
                         color = "orange"
                     else:
                         signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
                         color = "red"
                         self.has_critical_news = True
+                        self.journal.log_signal(clean_ticker, "STOP_LOSS_SIGNAL", round(current_price, 2),
+                                               entry_price, gain_loss_pct, holding_days, "Stop loss triggered")
                 else:
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
                 
-                # Append tax note to signal if present
                 if tax_note:
                     signal = f"{signal} {tax_note}"
 
@@ -275,6 +365,9 @@ class MarketAgent:
                     "whale_intel": whale_intel,
                     "holding_days": holding_days,
                     "gain_loss_pct": round(gain_loss_pct, 1),
+                    "weekly_change": round(weekly_change, 2),
+                    "vol_ratio": vol_ratio,
+                    "price_history": price_history,
                     "is_owned": True
                 }
 
@@ -284,10 +377,14 @@ class MarketAgent:
                     signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
                     color = "purple"
                     self.has_critical_news = True
+                    self.journal.log_signal(clean_ticker, "BREAKING_NEWS", round(current_price, 2),
+                                           notes=f"{round(pct_change,1)}% daily move")
                 elif vol_ratio > 3.5:
                     signal = f"🐳 WHALE ERUPTION ({vol_ratio}x Vol)"
                     color = "purple"
                     self.has_critical_news = True
+                    self.journal.log_signal(clean_ticker, "WHALE_ACTIVITY", round(current_price, 2),
+                                           notes=f"{vol_ratio}x volume")
                 elif current_rsi > 85:
                     signal = "🔥 EXTREME OVERBOUGHT"
                     color = "red"
@@ -309,14 +406,67 @@ class MarketAgent:
                 "signal": signal,
                 "color": color,
                 "whale_intel": whale_intel,
+                "daily_change": round(pct_change, 2),
+                "weekly_change": round(weekly_change, 2),
+                "vol_ratio": vol_ratio,
+                "price_history": price_history,
                 "is_owned": False
             }
         except Exception as e:
             print(f"   [ERROR] {ticker}: {e}")
             return None
 
+    def calculate_portfolio_summary(self):
+        """Calculate overall portfolio performance."""
+        if not self.portfolio_data:
+            return None
+        
+        total_invested = 0
+        total_current = 0
+        
+        for item in self.portfolio_data:
+            if item.get('entry_price') and item.get('price'):
+                total_invested += item['entry_price']
+                total_current += item['price']
+        
+        if total_invested == 0:
+            return None
+        
+        total_gain_loss = total_current - total_invested
+        total_gain_loss_pct = ((total_current - total_invested) / total_invested) * 100
+        
+        return {
+            'total_invested': round(total_invested, 2),
+            'total_current': round(total_current, 2),
+            'total_gain_loss': round(total_gain_loss, 2),
+            'total_gain_loss_pct': round(total_gain_loss_pct, 2),
+            'position_count': len(self.portfolio_data)
+        }
+
+    def export_dashboard_data(self):
+        """Export data for the web dashboard."""
+        summary = self.calculate_portfolio_summary()
+        
+        dashboard_data = {
+            'generated_at': self.timestamp,
+            'portfolio': self.portfolio_data,
+            'watchlist': self.watchlist_data,
+            'benchmarks': self.benchmarks,
+            'summary': summary,
+            'recent_signals': self.journal.get_recent_trades(10),
+            'settings': {
+                'profit_target': PROFIT_TARGET_PCT,
+                'stop_loss': STOP_LOSS_PCT,
+                'settling_days': SETTLING_PERIOD_DAYS
+            }
+        }
+        
+        with open(DASHBOARD_JSON, 'w') as f:
+            json.dump(dashboard_data, f, indent=2)
+        
+        print(f"📊 Dashboard data exported to {DASHBOARD_JSON}")
+
     def generate_report(self):
-        # DIAGNOSTIC: Print what the bot thinks you own
         print("\n--- 🔍 PORTFOLIO CHECK ---")
         owned_count = 0
         for ticker, position in MY_PORTFOLIO.items():
@@ -330,11 +480,28 @@ class MarketAgent:
             print("❌ WARNING: Bot sees NO owned stocks. Did you save the file?")
         print("---------------------------\n")
 
+        # Fetch benchmark data
+        print("--- 📈 FETCHING BENCHMARKS ---")
+        self.benchmarks = get_benchmark_performance(days=7)
+        for ticker, data in self.benchmarks.items():
+            print(f"   {ticker}: ${data['current']} ({data['change_pct']:+.2f}% / 7d)")
+        print("---------------------------\n")
+
         html = f"""
         <html><body>
         <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
         <hr>
+        """
         
+        # Benchmark summary
+        if self.benchmarks:
+            html += "<h3>📈 Market Benchmarks (7-Day)</h3><table border='1' cellpadding='5' cellspacing='0'><tr><th>Index</th><th>Price</th><th>7-Day Change</th></tr>"
+            for ticker, data in self.benchmarks.items():
+                color = "green" if data['change_pct'] >= 0 else "red"
+                html += f"<tr><td><b>{ticker}</b></td><td>${data['current']}</td><td style='color:{color}'>{data['change_pct']:+.2f}%</td></tr>"
+            html += "</table><hr>"
+
+        html += """
         <h3>💰 Your Holdings (Position Tracker)</h3>
         <table border="1" cellpadding="5" cellspacing="0">
         <tr>
@@ -342,54 +509,82 @@ class MarketAgent:
             <th>Entry</th>
             <th>Current</th>
             <th>Held</th>
+            <th>P/L</th>
+            <th>Week</th>
             <th>Action</th>
             <th>Intel</th>
         </tr>
         """
         
-        # PORTFOLIO LOOP (Owned Items Only)
+        # PORTFOLIO LOOP
         for ticker in MY_PORTFOLIO.keys():
             if not is_owned(ticker): continue
                 
             yf_ticker = f"{ticker}-USD" if ticker in ['BTC','ETH','SOL','FET','RNDR','DOGE','PEPE'] else ticker
             data = self.fetch_data(yf_ticker)
             if data:
+                self.portfolio_data.append(data)
                 entry_display = f"${data.get('entry_price', '—')}"
                 duration_display = format_duration(data.get('holding_days'))
+                gain_loss = data.get('gain_loss_pct', 0)
+                weekly = data.get('weekly_change', 0)
+                gl_color = "green" if gain_loss >= 0 else "red"
+                wk_color = "green" if weekly >= 0 else "red"
                 html += f"""
                 <tr>
                     <td><b>{data['symbol']}</b></td>
                     <td>{entry_display}</td>
                     <td>${data['price']}</td>
                     <td>{duration_display}</td>
+                    <td style="color:{gl_color}">{gain_loss:+.1f}%</td>
+                    <td style="color:{wk_color}">{weekly:+.1f}%</td>
                     <td style="color:{data['color']}"><b>{data['signal']}</b></td>
                     <td style="font-size:12px">{data['whale_intel']}</td>
                 </tr>"""
+
+        # Portfolio summary
+        summary = self.calculate_portfolio_summary()
+        if summary:
+            sum_color = "green" if summary['total_gain_loss_pct'] >= 0 else "red"
+            html += f"""
+            <tr style="background-color:#f0f0f0; font-weight:bold;">
+                <td>TOTAL ({summary['position_count']} positions)</td>
+                <td>${summary['total_invested']}</td>
+                <td>${summary['total_current']}</td>
+                <td colspan="2" style="color:{sum_color}">{summary['total_gain_loss_pct']:+.2f}% (${summary['total_gain_loss']:+.2f})</td>
+                <td colspan="3"></td>
+            </tr>"""
 
         html += """
         </table>
         <hr>
         <h3>⚡ Market Opportunities (Watchlist)</h3>
         <table border="1" cellpadding="5" cellspacing="0">
-        <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Whale Intel</th></tr>
+        <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Day</th><th>Week</th><th>Signal</th><th>Whale Intel</th></tr>
         """
         
-        # WATCHLIST LOOP (Skip Owned Items)
+        # WATCHLIST LOOP
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
-            # Skip items we already own
             if is_owned(ticker): continue
             
             data = self.fetch_data(ticker)
             if data:
+                self.watchlist_data.append(data)
                 trend_icon = "📈" if data['trend'] == "UP" else "📉"
+                daily = data.get('daily_change', 0)
+                weekly = data.get('weekly_change', 0)
+                d_color = "green" if daily >= 0 else "red"
+                w_color = "green" if weekly >= 0 else "red"
                 html += f"""
                 <tr>
                     <td><b>{data['symbol']}</b></td>
                     <td>${data['price']}</td>
                     <td>{trend_icon}</td>
                     <td>{data['rsi']}</td>
+                    <td style="color:{d_color}">{daily:+.1f}%</td>
+                    <td style="color:{w_color}">{weekly:+.1f}%</td>
                     <td style="color:{data['color']}"><b>{data['signal']}</b></td>
                     <td style="font-size:12px">{data['whale_intel']}</td>
                 </tr>"""
@@ -421,8 +616,72 @@ class MarketAgent:
             🐳 Whale in News |
             👔 Insider Buy
         </p>
+        <p style="font-size:10px; color:#999;">
+            <a href="https://jergrif73.github.io/whale-watcher/">View Live Dashboard</a>
+        </p>
         </body></html>
         """
+        
+        # Export dashboard data
+        self.export_dashboard_data()
+        
+        return html
+
+    def generate_weekly_summary(self):
+        """Generate a weekly performance summary (call on Sundays)."""
+        summary = self.calculate_portfolio_summary()
+        if not summary:
+            return None
+        
+        html = f"""
+        <html><body>
+        <h2>📊 Weekly Performance Summary: {self.timestamp}</h2>
+        <hr>
+        <h3>Portfolio Overview</h3>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr><td><b>Positions</b></td><td>{summary['position_count']}</td></tr>
+            <tr><td><b>Total Invested</b></td><td>${summary['total_invested']}</td></tr>
+            <tr><td><b>Current Value</b></td><td>${summary['total_current']}</td></tr>
+            <tr><td><b>Total P/L</b></td><td style="color:{'green' if summary['total_gain_loss'] >= 0 else 'red'}">${summary['total_gain_loss']:+.2f} ({summary['total_gain_loss_pct']:+.2f}%)</td></tr>
+        </table>
+        <hr>
+        <h3>vs Benchmarks (7-Day)</h3>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr><th>Benchmark</th><th>7-Day Change</th><th>Your Portfolio</th><th>Alpha</th></tr>
+        """
+        
+        for ticker, data in self.benchmarks.items():
+            alpha = summary['total_gain_loss_pct'] - data['change_pct']
+            alpha_color = "green" if alpha >= 0 else "red"
+            html += f"""
+            <tr>
+                <td><b>{ticker}</b></td>
+                <td>{data['change_pct']:+.2f}%</td>
+                <td>{summary['total_gain_loss_pct']:+.2f}%</td>
+                <td style="color:{alpha_color}">{alpha:+.2f}%</td>
+            </tr>
+            """
+        
+        html += """
+        </table>
+        <hr>
+        <h3>Recent Activity</h3>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <tr><th>Time</th><th>Ticker</th><th>Action</th><th>Price</th><th>Notes</th></tr>
+        """
+        
+        for trade in self.journal.get_recent_trades(10):
+            html += f"""
+            <tr>
+                <td style="font-size:11px">{trade['timestamp'][:16]}</td>
+                <td><b>{trade['ticker']}</b></td>
+                <td>{trade['action']}</td>
+                <td>${trade['price']}</td>
+                <td style="font-size:11px">{trade['notes']}</td>
+            </tr>
+            """
+        
+        html += "</table></body></html>"
         return html
 
     def send_email(self, html_report, subject_prefix=""):
@@ -445,7 +704,10 @@ class MarketAgent:
 
 if __name__ == "__main__":
     current_hour = datetime.utcnow().hour
-    is_routine_time = current_hour in [4, 16]  # 8 AM/PM EST (UTC offset)
+    current_day = datetime.utcnow().weekday()  # 0=Monday, 6=Sunday
+    
+    is_routine_time = current_hour in [4, 16]  # 8 AM/PM EST
+    is_weekly_summary_time = current_day == 6 and current_hour == 16  # Sunday 4 PM UTC
     
     agent = MarketAgent()
     report = agent.generate_report()
@@ -453,6 +715,11 @@ if __name__ == "__main__":
     if IS_MANUAL:
         print("🕹️ Manual Override.")
         agent.send_email(report, subject_prefix="🕹️ TEST:")
+    elif is_weekly_summary_time:
+        print("📊 Weekly Summary Time.")
+        weekly = agent.generate_weekly_summary()
+        if weekly:
+            agent.send_email(weekly, subject_prefix="📊 WEEKLY:")
     elif agent.has_critical_news:
         print("🚨 CRITICAL UPDATE (Portfolio or Market).")
         agent.send_email(report, subject_prefix="🚨 ACTION REQ:")

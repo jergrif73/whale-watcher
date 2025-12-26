@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐳 Whale Watcher Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --green: #238636;
+            --green-light: #3fb950;
+            --red: #da3633;
+            --red-light: #f85149;
+            --blue: #388bfd;
+            --purple: #a371f7;
+            --orange: #d29922;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .refresh-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .refresh-btn:hover {
+            background: var(--border-color);
+        }
+        
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .summary-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .summary-card .label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .summary-card .value {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .summary-card .change {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .positive { color: var(--green-light); }
+        .negative { color: var(--red-light); }
+        
+        /* Tables */
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .ticker {
+            font-weight: 600;
+            color: var(--blue);
+        }
+        
+        .signal {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .signal-green { background: rgba(35, 134, 54, 0.2); color: var(--green-light); }
+        .signal-red { background: rgba(218, 54, 51, 0.2); color: var(--red-light); }
+        .signal-blue { background: rgba(56, 139, 253, 0.2); color: var(--blue); }
+        .signal-purple { background: rgba(163, 113, 247, 0.2); color: var(--purple); }
+        .signal-orange { background: rgba(210, 153, 34, 0.2); color: var(--orange); }
+        
+        .trend-up { color: var(--green-light); }
+        .trend-down { color: var(--red-light); }
+        
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .chart-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .chart-card h3 {
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Activity Log */
+        .activity-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        /* Benchmarks */
+        .benchmark-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .benchmark-row:last-child {
+            border-bottom: none;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: var(--red-light);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .hide-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🐳 Whale Watcher</h1>
+                <div class="timestamp" id="timestamp">Loading...</div>
+            </div>
+            <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+        </header>
+        
+        <!-- Summary Cards -->
+        <div class="summary-grid" id="summary-cards">
+            <div class="summary-card">
+                <div class="label">Portfolio Value</div>
+                <div class="value" id="portfolio-value">—</div>
+                <div class="change" id="portfolio-change">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">Total P/L</div>
+                <div class="value" id="total-pl">—</div>
+                <div class="change" id="total-pl-pct">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">SPY (7d)</div>
+                <div class="value" id="spy-price">—</div>
+                <div class="change" id="spy-change">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">QQQ (7d)</div>
+                <div class="value" id="qqq-price">—</div>
+                <div class="change" id="qqq-change">—</div>
+            </div>
+        </div>
+        
+        <!-- Portfolio Table -->
+        <div class="section">
+            <div class="section-header">💰 Your Holdings</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th>Entry</th>
+                        <th>Current</th>
+                        <th>P/L</th>
+                        <th class="hide-mobile">Week</th>
+                        <th>Held</th>
+                        <th>Signal</th>
+                    </tr>
+                </thead>
+                <tbody id="portfolio-table">
+                    <tr><td colspan="7" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Watchlist Table -->
+        <div class="section">
+            <div class="section-header">⚡ Watchlist</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                        <th>Trend</th>
+                        <th>RSI</th>
+                        <th class="hide-mobile">Day</th>
+                        <th class="hide-mobile">Week</th>
+                        <th>Signal</th>
+                    </tr>
+                </thead>
+                <tbody id="watchlist-table">
+                    <tr><td colspan="7" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Charts & Activity -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Portfolio Allocation</h3>
+                <canvas id="allocation-chart"></canvas>
+            </div>
+            <div class="section" style="margin-bottom: 0;">
+                <div class="section-header">📋 Recent Activity</div>
+                <div id="activity-log">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Info -->
+        <div class="section">
+            <div class="section-header">⚙️ Current Settings</div>
+            <div id="settings-info" style="padding: 16px; color: var(--text-secondary); font-size: 14px;">
+                Loading...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allocationChart = null;
+        
+        async function loadData() {
+            try {
+                // Load the JSON data - adjust path based on your repo structure
+                const response = await fetch('data/dashboard.json');
+                if (!response.ok) throw new Error('Data not found');
+                const data = await response.json();
+                
+                renderDashboard(data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('timestamp').textContent = 'Error loading data';
+                document.getElementById('portfolio-table').innerHTML = 
+                    '<tr><td colspan="7" class="error">Could not load data. Make sure the agent has run at least once.</td></tr>';
+                document.getElementById('watchlist-table').innerHTML = 
+                    '<tr><td colspan="7" class="error">Could not load data.</td></tr>';
+            }
+        }
+        
+        function renderDashboard(data) {
+            // Timestamp
+            document.getElementById('timestamp').textContent = `Last updated: ${data.generated_at}`;
+            
+            // Summary Cards
+            if (data.summary) {
+                document.getElementById('portfolio-value').textContent = `$${data.summary.total_current.toLocaleString()}`;
+                document.getElementById('portfolio-change').textContent = `${data.summary.position_count} positions`;
+                
+                const plClass = data.summary.total_gain_loss >= 0 ? 'positive' : 'negative';
+                document.getElementById('total-pl').textContent = `$${data.summary.total_gain_loss.toFixed(2)}`;
+                document.getElementById('total-pl').className = `value ${plClass}`;
+                document.getElementById('total-pl-pct').textContent = `${data.summary.total_gain_loss_pct >= 0 ? '+' : ''}${data.summary.total_gain_loss_pct.toFixed(2)}%`;
+                document.getElementById('total-pl-pct').className = `change ${plClass}`;
+            }
+            
+            // Benchmarks
+            if (data.benchmarks) {
+                if (data.benchmarks.SPY) {
+                    document.getElementById('spy-price').textContent = `$${data.benchmarks.SPY.current}`;
+                    const spyClass = data.benchmarks.SPY.change_pct >= 0 ? 'positive' : 'negative';
+                    document.getElementById('spy-change').textContent = `${data.benchmarks.SPY.change_pct >= 0 ? '+' : ''}${data.benchmarks.SPY.change_pct}%`;
+                    document.getElementById('spy-change').className = `change ${spyClass}`;
+                }
+                if (data.benchmarks.QQQ) {
+                    document.getElementById('qqq-price').textContent = `$${data.benchmarks.QQQ.current}`;
+                    const qqqClass = data.benchmarks.QQQ.change_pct >= 0 ? 'positive' : 'negative';
+                    document.getElementById('qqq-change').textContent = `${data.benchmarks.QQQ.change_pct >= 0 ? '+' : ''}${data.benchmarks.QQQ.change_pct}%`;
+                    document.getElementById('qqq-change').className = `change ${qqqClass}`;
+                }
+            }
+            
+            // Portfolio Table
+            renderPortfolioTable(data.portfolio);
+            
+            // Watchlist Table
+            renderWatchlistTable(data.watchlist);
+            
+            // Allocation Chart
+            renderAllocationChart(data.portfolio);
+            
+            // Activity Log
+            renderActivityLog(data.recent_signals);
+            
+            // Settings
+            if (data.settings) {
+                document.getElementById('settings-info').innerHTML = `
+                    <b>Profit Target:</b> +${data.settings.profit_target}% | 
+                    <b>Stop Loss:</b> ${data.settings.stop_loss}% | 
+                    <b>Settling Period:</b> ${data.settings.settling_days} days
+                `;
+            }
+        }
+        
+        function renderPortfolioTable(portfolio) {
+            const tbody = document.getElementById('portfolio-table');
+            
+            if (!portfolio || portfolio.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-secondary);">No positions. Add entries to MY_PORTFOLIO to track.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = portfolio.map(item => {
+                const plClass = item.gain_loss_pct >= 0 ? 'positive' : 'negative';
+                const weekClass = item.weekly_change >= 0 ? 'positive' : 'negative';
+                const signalClass = getSignalClass(item.color);
+                const heldDays = item.holding_days !== null ? formatDuration(item.holding_days) : '—';
+                
+                return `
+                    <tr>
+                        <td class="ticker">${item.symbol}</td>
+                        <td>$${item.entry_price}</td>
+                        <td>$${item.price}</td>
+                        <td class="${plClass}">${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%</td>
+                        <td class="hide-mobile ${weekClass}">${item.weekly_change >= 0 ? '+' : ''}${item.weekly_change}%</td>
+                        <td>${heldDays}</td>
+                        <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function renderWatchlistTable(watchlist) {
+            const tbody = document.getElementById('watchlist-table');
+            
+            if (!watchlist || watchlist.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-secondary);">No watchlist data.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = watchlist.map(item => {
+                const trendClass = item.trend === 'UP' ? 'trend-up' : 'trend-down';
+                const trendIcon = item.trend === 'UP' ? '📈' : '📉';
+                const dayClass = item.daily_change >= 0 ? 'positive' : 'negative';
+                const weekClass = item.weekly_change >= 0 ? 'positive' : 'negative';
+                const signalClass = getSignalClass(item.color);
+                
+                return `
+                    <tr>
+                        <td class="ticker">${item.symbol}</td>
+                        <td>$${item.price}</td>
+                        <td class="${trendClass}">${trendIcon}</td>
+                        <td>${item.rsi}</td>
+                        <td class="hide-mobile ${dayClass}">${item.daily_change >= 0 ? '+' : ''}${item.daily_change}%</td>
+                        <td class="hide-mobile ${weekClass}">${item.weekly_change >= 0 ? '+' : ''}${item.weekly_change}%</td>
+                        <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function renderAllocationChart(portfolio) {
+            if (!portfolio || portfolio.length === 0) return;
+            
+            const ctx = document.getElementById('allocation-chart').getContext('2d');
+            
+            if (allocationChart) {
+                allocationChart.destroy();
+            }
+            
+            const labels = portfolio.map(p => p.symbol);
+            const values = portfolio.map(p => p.price);
+            const colors = [
+                '#388bfd', '#3fb950', '#a371f7', '#d29922', '#f85149',
+                '#79c0ff', '#56d364', '#bc8cff', '#e3b341', '#ff7b72'
+            ];
+            
+            allocationChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors.slice(0, portfolio.length),
+                        borderColor: '#0d1117',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#8b949e',
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderActivityLog(signals) {
+            const container = document.getElementById('activity-log');
+            
+            if (!signals || signals.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No recent activity.</div>';
+                return;
+            }
+            
+            container.innerHTML = signals.slice().reverse().map(signal => {
+                const time = signal.timestamp ? signal.timestamp.substring(5, 16).replace('T', ' ') : '';
+                const actionClass = signal.action.includes('SELL') || signal.action.includes('STOP') ? 'negative' : 
+                                   signal.action.includes('BUY') ? 'positive' : '';
+                
+                return `
+                    <div class="activity-item">
+                        <div class="activity-info">
+                            <span class="ticker">${signal.ticker}</span>
+                            <span class="${actionClass}">${signal.action}</span>
+                            <span style="color: var(--text-secondary);">@ $${signal.price}</span>
+                        </div>
+                        <span class="activity-time">${time}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getSignalClass(color) {
+            const map = {
+                'green': 'signal-green',
+                'red': 'signal-red',
+                'blue': 'signal-blue',
+                'purple': 'signal-purple',
+                'orange': 'signal-orange'
+            };
+            return map[color] || 'signal-blue';
+        }
+        
+        function stripEmoji(text) {
+            // Keep the text readable without emojis for the badge
+            return text.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').trim();
+        }
+        
+        function formatDuration(days) {
+            if (days === 0) return 'Today';
+            if (days < 7) return `${days}d`;
+            if (days < 30) return `${Math.floor(days/7)}w`;
+            if (days < 365) return `${Math.floor(days/30)}mo`;
+            return `${Math.floor(days/365)}y`;
+        }
+        
+        // Load data on page load
+        loadData();
+        
+        // Auto-refresh every 5 minutes
+        setInterval(loadData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
