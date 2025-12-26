@@ -15,38 +15,44 @@ IS_MANUAL = is_manual_env == "true"
 
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
-# --- 💼 YOUR PORTFOLIO DASHBOARD ---
-# STATUS: 0.00 = Not Owned (Watching Only)
-# ACTION: Replace 0.00 with your buy price.
-# EXAMPLE: 'SMCI': 45.50,
+d (Watching Only)
+# ACTION: Add entry price and purchase date when you buy.
+# EXAMPLE: 'SMCI': {'entry': 45.50, 'date': '2024-11-15'},
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': 20.00,
-    'MARA': 50.00,
-    'MSTR': 0.00,
-    'COIN': 0.00,
-    'TSLA': 0.00,
-    'PLTR': 0.00,
-    'NVDA': 0.00,
-    'AMD':  0.00,
-    'AVGO': 0.00,
-    'META': 0.00,
-    'GOOGL': 0.00,
-    'MSFT': 0.00,
-    'SOXL': 0.00,
-    'TQQQ': 0.00,
-    'SPY':  0.00,
-    'QQQ':  0.00,
+    'SMCI': 20.00, 'date': '2025-12-26'},
+    'MARA': 50.00, 'date': '2025-12-26'},
+    'MSTR': None,
+    'COIN': None,
+    'TSLA': None,
+    'PLTR': None,
+    'NVDA': None,
+    'AMD':  None,
+    'AVGO': None,
+    'META': None,
+    'GOOGL': None,
+    'MSFT': None,
+    'SOXL': None,
+    'TQQQ': None,
+    'SPY':  None,
+    'QQQ':  None,
 
     # --- CRYPTO ---
-    'BTC':  0.00,
-    'ETH':  0.00,
-    'SOL':  0.00,
-    'FET':  0.00,
-    'RNDR': 0.00,
-    'DOGE': 0.00,
-    'PEPE': 0.00
+    'BTC':  None,
+    'ETH':  None,
+    'SOL':  None,
+    'FET':  None,
+    'RNDR': None,
+    'DOGE': None,
+    'PEPE': None
 }
+
+# --- POSITION SETTINGS ---
+PROFIT_TARGET_PCT = 20.0      # Take profit at +20%
+STOP_LOSS_PCT = -8.0          # Stop loss at -8%
+LONG_TERM_DAYS = 365          # Days until long-term capital gains
+TAX_WARNING_DAYS = 30         # Warn this many days before long-term threshold
+SETTLING_PERIOD_DAYS = 3      # Don't panic on volatility during first N days
 
 # --- THE WHALE LIST ---
 WHALE_KEYWORDS = [
@@ -68,6 +74,68 @@ CRYPTO_TO_WATCH = [
     'BTC-USD', 'ETH-USD', 'SOL-USD', 'FET-USD', 
     'RNDR-USD', 'DOGE-USD', 'PEPE-USD'
 ]
+
+
+def is_owned(ticker):
+    """Check if a ticker is owned (has valid entry data)."""
+    clean = ticker.replace("-USD", "")
+    position = MY_PORTFOLIO.get(clean)
+    if position is None:
+        return False
+    if isinstance(position, dict):
+        return position.get('entry', 0) > 0
+    # Legacy support: bare number
+    return position > 0
+
+
+def get_position(ticker):
+    """Get position details for an owned ticker."""
+    clean = ticker.replace("-USD", "")
+    position = MY_PORTFOLIO.get(clean)
+    if position is None:
+        return None
+    if isinstance(position, dict):
+        entry = position.get('entry', 0)
+        date_str = position.get('date')
+        if entry <= 0:
+            return None
+        entry_date = None
+        if date_str:
+            try:
+                entry_date = datetime.strptime(date_str, '%Y-%m-%d')
+            except ValueError:
+                pass
+        return {'entry': entry, 'date': entry_date}
+    # Legacy support: bare number
+    if position > 0:
+        return {'entry': position, 'date': None}
+    return None
+
+
+def calc_holding_days(entry_date):
+    """Calculate days held from entry date."""
+    if entry_date is None:
+        return None
+    return (datetime.now() - entry_date).days
+
+
+def format_duration(days):
+    """Format holding duration for display."""
+    if days is None:
+        return "—"
+    if days < 7:
+        return f"{days}d"
+    elif days < 30:
+        weeks = days // 7
+        return f"{weeks}w {days % 7}d"
+    elif days < 365:
+        months = days // 30
+        return f"{months}mo"
+    else:
+        years = days // 365
+        months = (days % 365) // 30
+        return f"{years}y {months}mo"
+
 
 class MarketAgent:
     def __init__(self):
@@ -129,30 +197,74 @@ class MarketAgent:
             # --- SIGNAL LOGIC ---
             signal = "NEUTRAL"
             color = "black"
-
             clean_ticker = ticker.replace("-USD", "")
-            is_owned = clean_ticker in MY_PORTFOLIO and MY_PORTFOLIO[clean_ticker] > 0
+            
+            # Initialize position tracking fields
+            holding_days = None
+            tax_note = ""
             
             # --- SCENARIO A: YOU OWN THIS STOCK (STRICT MODE) ---
-            if is_owned:
-                entry_price = MY_PORTFOLIO[clean_ticker]
+            position = get_position(ticker)
+            if position:
+                entry_price = position['entry']
+                entry_date = position['date']
+                holding_days = calc_holding_days(entry_date)
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
                 
+                # Calculate annualized return if we have dates
+                annualized_return = None
+                if holding_days and holding_days > 0:
+                    annualized_return = (gain_loss_pct / holding_days) * 365
+                
+                # Tax status check
+                if holding_days:
+                    days_to_long_term = LONG_TERM_DAYS - holding_days
+                    if days_to_long_term <= 0:
+                        tax_note = "📗 LONG-TERM"
+                    elif days_to_long_term <= TAX_WARNING_DAYS:
+                        tax_note = f"⏳ {days_to_long_term}d to LT"
+                
                 # Debug Print for Logs
-                print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}%")
+                duration_str = format_duration(holding_days) if holding_days else "No date"
+                print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}% | Held {duration_str}")
 
-                # STRICT LOGIC: IGNORE ALL NEWS. ONLY MATH MATTERS.
-                if gain_loss_pct >= 20.0:
+                # --- STRICT LOGIC WITH TIME AWARENESS ---
+                is_settling = holding_days is not None and holding_days <= SETTLING_PERIOD_DAYS
+                
+                if gain_loss_pct >= PROFIT_TARGET_PCT:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
                     self.has_critical_news = True
-                elif gain_loss_pct <= -8.0:
-                    signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
-                    color = "red"
-                    self.has_critical_news = True
+                elif gain_loss_pct <= STOP_LOSS_PCT:
+                    if is_settling:
+                        # Don't trigger stop loss during settling period
+                        signal = f"⚠️ VOLATILE ({round(gain_loss_pct, 1)}%) - Settling"
+                        color = "orange"
+                    else:
+                        signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
+                        color = "red"
+                        self.has_critical_news = True
                 else:
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
+                
+                # Append tax note to signal if present
+                if tax_note:
+                    signal = f"{signal} {tax_note}"
+
+                return {
+                    "symbol": clean_ticker,
+                    "price": round(current_price, 2),
+                    "entry_price": entry_price,
+                    "trend": trend,
+                    "rsi": current_rsi,
+                    "signal": signal,
+                    "color": color,
+                    "whale_intel": whale_intel,
+                    "holding_days": holding_days,
+                    "gain_loss_pct": round(gain_loss_pct, 1),
+                    "is_owned": True
+                }
 
             # --- SCENARIO B: WATCHING (FULL MARKET LOGIC) ---
             else:
@@ -184,18 +296,25 @@ class MarketAgent:
                 "rsi": current_rsi,
                 "signal": signal,
                 "color": color,
-                "whale_intel": whale_intel
+                "whale_intel": whale_intel,
+                "is_owned": False
             }
         except Exception as e:
+            print(f"   [ERROR] {ticker}: {e}")
             return None
 
     def generate_report(self):
         # DIAGNOSTIC: Print what the bot thinks you own
         print("\n--- 🔍 PORTFOLIO CHECK ---")
         owned_count = 0
-        for k, v in MY_PORTFOLIO.items():
-            if v > 0:
-                print(f"✅ TRACKING: {k} at ${v}")
+        for ticker, position in MY_PORTFOLIO.items():
+            if position and isinstance(position, dict) and position.get('entry', 0) > 0:
+                date_str = position.get('date', 'No date')
+                print(f"✅ TRACKING: {ticker} @ ${position['entry']} (since {date_str})")
+                owned_count += 1
+            elif position and not isinstance(position, dict) and position > 0:
+                # Legacy format
+                print(f"✅ TRACKING: {ticker} @ ${position} (no date - legacy format)")
                 owned_count += 1
         if owned_count == 0:
             print("❌ WARNING: Bot sees NO owned stocks. Did you save the file?")
@@ -206,21 +325,34 @@ class MarketAgent:
         <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
         <hr>
         
-        <h3>💰 Your Holdings (Sell Watch)</h3>
+        <h3>💰 Your Holdings (Position Tracker)</h3>
         <table border="1" cellpadding="5" cellspacing="0">
-        <tr><th>Asset</th><th>Current Price</th><th>Action</th><th>Intel</th></tr>
+        <tr>
+            <th>Asset</th>
+            <th>Entry</th>
+            <th>Current</th>
+            <th>Held</th>
+            <th>Action</th>
+            <th>Intel</th>
+        </tr>
         """
         
         # PORTFOLIO LOOP (Owned Items Only)
-        for ticker, entry in MY_PORTFOLIO.items():
-            if entry <= 0: continue 
+        for ticker, position in MY_PORTFOLIO.items():
+            if not (position and ((isinstance(position, dict) and position.get('entry', 0) > 0) or (not isinstance(position, dict) and position > 0))):
+                continue
+                
             yf_ticker = f"{ticker}-USD" if ticker in ['BTC','ETH','SOL','FET','RNDR','DOGE','PEPE'] else ticker
             data = self.fetch_data(yf_ticker)
             if data:
+                entry_display = f"${data.get('entry_price', '—')}"
+                duration_display = format_duration(data.get('holding_days'))
                 html += f"""
                 <tr>
                     <td><b>{data['symbol']}</b></td>
+                    <td>{entry_display}</td>
                     <td>${data['price']}</td>
+                    <td>{duration_display}</td>
                     <td style="color:{data['color']}"><b>{data['signal']}</b></td>
                     <td style="font-size:12px">{data['whale_intel']}</td>
                 </tr>"""
@@ -228,17 +360,18 @@ class MarketAgent:
         html += """
         </table>
         <hr>
-        <h3>⚡ Market Opportunities</h3>
+        <h3>⚡ Market Opportunities (Watchlist)</h3>
         <table border="1" cellpadding="5" cellspacing="0">
-        <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>Signal</th><th>Whale Intel</th></tr>
+        <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Whale Intel</th></tr>
         """
         
         # WATCHLIST LOOP (Skip Owned Items)
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
-            # CRITICAL: Exclude items we already own
-            if clean in MY_PORTFOLIO and MY_PORTFOLIO[clean] > 0: continue
+            # Skip items we already own
+            if is_owned(ticker):
+                continue
             
             data = self.fetch_data(ticker)
             if data:
@@ -248,11 +381,24 @@ class MarketAgent:
                     <td><b>{data['symbol']}</b></td>
                     <td>${data['price']}</td>
                     <td>{trend_icon}</td>
+                    <td>{data['rsi']}</td>
                     <td style="color:{data['color']}"><b>{data['signal']}</b></td>
                     <td style="font-size:12px">{data['whale_intel']}</td>
                 </tr>"""
                 
-        html += "</table></body></html>"
+        html += """
+        </table>
+        <hr>
+        <p style="font-size:11px; color:gray;">
+            <b>Legend:</b> 
+            💰 Sell Target (+20%) | 
+            🛑 Stop Loss (-8%) | 
+            💎 Holding | 
+            📗 Long-Term (365+ days) | 
+            ⏳ Approaching Long-Term
+        </p>
+        </body></html>
+        """
         return html
 
     def send_email(self, html_report, subject_prefix=""):
@@ -268,11 +414,14 @@ class MarketAgent:
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
             server.quit()
-        except: pass
+            print("📧 Email sent successfully.")
+        except Exception as e:
+            print(f"📧 Email failed: {e}")
+
 
 if __name__ == "__main__":
     current_hour = datetime.utcnow().hour
-    is_routine_time = current_hour in [4, 16] 
+    is_routine_time = current_hour in [4, 16]  # 8 AM/PM EST (UTC offset)
     
     agent = MarketAgent()
     report = agent.generate_report()
