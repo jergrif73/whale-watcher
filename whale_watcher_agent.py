@@ -18,10 +18,11 @@ EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 # --- 💼 YOUR PORTFOLIO DASHBOARD ---
 # STATUS: 0.00 = Not Owned (Watching Only)
 # ACTION: Replace 0.00 with your buy price.
+# EXAMPLE: 'SMCI': 45.50,
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': 20.00,  # <--- DID YOU CHANGE THIS?
-    'MARA': 50.00,  # <--- DID YOU CHANGE THIS?
+    'SMCI': 20.00,
+    'MARA': 50.00,
     'MSTR': 0.00,
     'COIN': 0.00,
     'TSLA': 0.00,
@@ -101,7 +102,6 @@ class MarketAgent:
     def fetch_data(self, ticker):
         try:
             stock = yf.Ticker(ticker)
-            # Fetch minimal history for price check
             df = stock.history(period="3mo")
             if len(df) < 2: return None
             
@@ -133,15 +133,15 @@ class MarketAgent:
             clean_ticker = ticker.replace("-USD", "")
             is_owned = clean_ticker in MY_PORTFOLIO and MY_PORTFOLIO[clean_ticker] > 0
             
-            # --- SCENARIO A: YOU OWN THIS STOCK ---
+            # --- SCENARIO A: YOU OWN THIS STOCK (STRICT MODE) ---
             if is_owned:
                 entry_price = MY_PORTFOLIO[clean_ticker]
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
                 
-                # Debug Print
+                # Debug Print for Logs
                 print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}%")
 
-                # Strict Profit/Loss Rules
+                # STRICT LOGIC: IGNORE ALL NEWS. ONLY MATH MATTERS.
                 if gain_loss_pct >= 20.0:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
@@ -150,19 +150,11 @@ class MarketAgent:
                     signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
                     color = "red"
                     self.has_critical_news = True
-                
-                # Breaking News Exception
-                elif abs(pct_change) > 10.0:
-                    signal = f"🚨 NEWS ({round(pct_change,1)}%)"
-                    color = "purple"
-                    self.has_critical_news = True
-                    
-                # Otherwise JUST HOLD
                 else:
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
 
-            # --- SCENARIO B: WATCHING ---
+            # --- SCENARIO B: WATCHING (FULL MARKET LOGIC) ---
             else:
                 if abs(pct_change) > 10.0:
                     signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
@@ -198,14 +190,15 @@ class MarketAgent:
             return None
 
     def generate_report(self):
-        print("\n--- 🔍 DIAGNOSTIC CHECK ---")
+        # DIAGNOSTIC: Print what the bot thinks you own
+        print("\n--- 🔍 PORTFOLIO CHECK ---")
         owned_count = 0
         for k, v in MY_PORTFOLIO.items():
             if v > 0:
                 print(f"✅ TRACKING: {k} at ${v}")
                 owned_count += 1
         if owned_count == 0:
-            print("❌ WARNING: No stocks are set to Owned (> 0.00). Check MY_PORTFOLIO values.")
+            print("❌ WARNING: Bot sees NO owned stocks. Did you save the file?")
         print("---------------------------\n")
 
         html = f"""
@@ -218,6 +211,7 @@ class MarketAgent:
         <tr><th>Asset</th><th>Current Price</th><th>Action</th><th>Intel</th></tr>
         """
         
+        # PORTFOLIO LOOP (Owned Items Only)
         for ticker, entry in MY_PORTFOLIO.items():
             if entry <= 0: continue 
             yf_ticker = f"{ticker}-USD" if ticker in ['BTC','ETH','SOL','FET','RNDR','DOGE','PEPE'] else ticker
@@ -239,9 +233,11 @@ class MarketAgent:
         <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>Signal</th><th>Whale Intel</th></tr>
         """
         
+        # WATCHLIST LOOP (Skip Owned Items)
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
+            # CRITICAL: Exclude items we already own
             if clean in MY_PORTFOLIO and MY_PORTFOLIO[clean] > 0: continue
             
             data = self.fetch_data(ticker)
