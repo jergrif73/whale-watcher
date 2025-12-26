@@ -13,7 +13,6 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 is_manual_env = os.environ.get("IS_MANUAL_RUN", "false").lower()
 IS_MANUAL = is_manual_env == "true"
 
-# --- 📧 EMAIL SUBJECT LINE ---
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
 # --- 💼 YOUR PORTFOLIO DASHBOARD ---
@@ -21,8 +20,8 @@ EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 # ACTION: Replace 0.00 with your buy price.
 MY_PORTFOLIO = {
     # --- STOCKS ---
-    'SMCI': 20.00,
-    'MARA': 50.00,
+    'SMCI': 20.00,  # <--- DID YOU CHANGE THIS?
+    'MARA': 50.00,  # <--- DID YOU CHANGE THIS?
     'MSTR': 0.00,
     'COIN': 0.00,
     'TSLA': 0.00,
@@ -102,8 +101,9 @@ class MarketAgent:
     def fetch_data(self, ticker):
         try:
             stock = yf.Ticker(ticker)
+            # Fetch minimal history for price check
             df = stock.history(period="3mo")
-            if len(df) < 50: return None
+            if len(df) < 2: return None
             
             current_price = df['Close'].iloc[-1]
             prev_close = df['Close'].iloc[-2]
@@ -112,10 +112,11 @@ class MarketAgent:
             # Calculations
             avg_vol = df['Volume'].iloc[-11:-1].mean()
             vol_ratio = round(current_vol / avg_vol, 2) if avg_vol > 0 else 0
-            sma_50 = df['Close'].rolling(window=50).mean().iloc[-1]
+            sma_50 = df['Close'].rolling(window=50).mean().iloc[-1] if len(df) > 50 else current_price
             trend = "UP" if current_price > sma_50 else "DOWN"
             pct_change = ((current_price - prev_close) / prev_close) * 100
             
+            # RSI
             delta = df['Close'].diff()
             gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
             loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -137,7 +138,10 @@ class MarketAgent:
                 entry_price = MY_PORTFOLIO[clean_ticker]
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
                 
-                # Priority 1: Profit/Loss Targets
+                # Debug Print
+                print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}%")
+
+                # Strict Profit/Loss Rules
                 if gain_loss_pct >= 20.0:
                     signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
                     color = "green"
@@ -147,21 +151,18 @@ class MarketAgent:
                     color = "red"
                     self.has_critical_news = True
                 
-                # Priority 2: Critical Market Warnings (Whales/Crashes) override "Holding"
+                # Breaking News Exception
                 elif abs(pct_change) > 10.0:
-                    signal = f"🚨 NEWS (+{round(gain_loss_pct, 1)}%)"
+                    signal = f"🚨 NEWS ({round(pct_change,1)}%)"
                     color = "purple"
                     self.has_critical_news = True
-                elif current_rsi > 85:
-                    signal = f"🔥 DANGER (+{round(gain_loss_pct, 1)}%)"
-                    color = "orange"
                     
-                # Priority 3: Default Holding
+                # Otherwise JUST HOLD
                 else:
                     signal = f"💎 HOLDING ({round(gain_loss_pct, 1)}%)"
                     color = "blue"
 
-            # --- SCENARIO B: YOU ARE JUST WATCHING ---
+            # --- SCENARIO B: WATCHING ---
             else:
                 if abs(pct_change) > 10.0:
                     signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
@@ -197,6 +198,16 @@ class MarketAgent:
             return None
 
     def generate_report(self):
+        print("\n--- 🔍 DIAGNOSTIC CHECK ---")
+        owned_count = 0
+        for k, v in MY_PORTFOLIO.items():
+            if v > 0:
+                print(f"✅ TRACKING: {k} at ${v}")
+                owned_count += 1
+        if owned_count == 0:
+            print("❌ WARNING: No stocks are set to Owned (> 0.00). Check MY_PORTFOLIO values.")
+        print("---------------------------\n")
+
         html = f"""
         <html><body>
         <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
