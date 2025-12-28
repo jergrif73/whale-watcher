@@ -18,8 +18,8 @@ EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
 # --- 💼 YOUR PORTFOLIO ---
 MY_PORTFOLIO = {
-    'SMCI': {'entry': 20.00, 'date': '2025-12-26'},
-    'MARA': {'entry': 50.00, 'date': '2025-12-26'},
+    'SMCI': {'entry': 0.00, 'date': '2025-12-26'},
+    'MARA': {'entry': 0.00, 'date': '2025-12-26'},
     'MSTR': {'entry': 0.00, 'date': '2025-12-26'},
     'COIN': {'entry': 0.00, 'date': '2025-12-26'},
     'TSLA': {'entry': 0.00, 'date': '2025-12-26'},
@@ -253,81 +253,112 @@ class MarketAgent:
         }
 
     def generate_dashboard_html(self, data):
-        # Inject the JSON data directly into the HTML variable
-        json_str = json.dumps(data)
+        # --- SERVER SIDE RENDERING FOR EMAIL SUPPORT ---
         
-        html = f"""
-        <!DOCTYPE html><html lang="en"><head>
-        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>🐳 Whale Watcher Dashboard</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <style>
-            :root {{ --bg-primary: #0d1117; --bg-secondary: #161b22; --text-primary: #e6edf3; --text-secondary: #8b949e; --border-color: #30363d; --green: #238636; --red: #da3633; --blue: #388bfd; }}
-            body {{ font-family: sans-serif; background: var(--bg-primary); color: var(--text-primary); padding: 20px; }}
-            .container {{ max-width: 1200px; margin: 0 auto; }}
-            table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
-            th, td {{ padding: 12px; border-bottom: 1px solid var(--border-color); text-align: left; }}
-            th {{ color: var(--text-secondary); font-size: 12px; text-transform: uppercase; }}
-            .ticker a {{ color: var(--blue); text-decoration: none; font-weight: bold; }}
-            .ticker a:hover {{ text-decoration: underline; }}
-            .signal {{ padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }}
-            .green {{ color: #3fb950; }} .red {{ color: #f85149; }} .blue {{ color: #58a6ff; }}
-        </style>
-        </head><body>
-        <div class="container">
-            <header>
-                <h1>🐳 Whale Watcher</h1>
-                <div style="color: var(--text-secondary); font-size: 14px;">Last Updated: {data['generated_at']}</div>
-            </header>
-
-            <h3 style="margin-top: 30px;">💰 Your Holdings</h3>
-            <table id="portfolio-table">
-                <thead><tr><th>Asset</th><th>Entry</th><th>Current</th><th>P/L</th><th>Signal</th><th>Intel</th></tr></thead>
-                <tbody></tbody>
-            </table>
-
-            <h3 style="margin-top: 30px;">⚡ Watchlist</h3>
-            <table id="watchlist-table">
-                <thead><tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Intel</th></tr></thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <script>
-            // INJECTED DATA FROM PYTHON
-            const data = {json_str};
-
-            function render() {{
-                const pTable = document.querySelector('#portfolio-table tbody');
-                const wTable = document.querySelector('#watchlist-table tbody');
+        def build_rows(items, is_portfolio):
+            html_rows = ""
+            for item in items:
+                # Styles for Email Compatibility (Inline styles are safest)
+                color_style = f"color: {item['color']}; border: 1px solid {item['color']}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;"
                 
-                // Render Portfolio
-                pTable.innerHTML = data.portfolio.map(item => `
-                    <tr>
-                        <td class="ticker"><a href="https://finance.yahoo.com/quote/${{item.yf_symbol}}" target="_blank">${{item.symbol}}</a></td>
-                        <td>$${{item.entry_price}}</td>
-                        <td>$${{item.price}}</td>
-                        <td class="${{item.gain_loss_pct >= 0 ? 'green' : 'red'}}">${{item.gain_loss_pct}}%</td>
-                        <td><span class="signal" style="border: 1px solid ${{item.color}}">${{item.signal}}</span></td>
-                        <td style="font-size: 12px;">${{item.whale_intel}}</td>
-                    </tr>
-                `).join('');
+                # Determine colors for metrics
+                pl_color = "#3fb950" if item['gain_loss_pct'] >= 0 else "#f85149" # green / red
+                trend_color = "#3fb950" if item['trend'] == 'UP' else "#f85149"
+                
+                link_style = "color: #388bfd; text-decoration: none; font-weight: bold;"
+                
+                row = "<tr>"
+                # Ticker & Link
+                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
+                
+                if is_portfolio:
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["entry_price"]}</td>'
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["price"]}</td>'
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; color: {pl_color};">{item["gain_loss_pct"]}%</td>'
+                else:
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["price"]}</td>'
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; color: {trend_color};">{item["trend"]}</td>'
+                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">{item["rsi"]}</td>'
+                
+                # Signal
+                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;"><span style="{color_style}">{item["signal"]}</span></td>'
+                # Intel
+                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; font-size: 12px; color: #8b949e;">{item["whale_intel"]}</td>'
+                row += "</tr>"
+                html_rows += row
+            return html_rows
 
-                // Render Watchlist
-                wTable.innerHTML = data.watchlist.map(item => `
-                    <tr>
-                        <td class="ticker"><a href="https://finance.yahoo.com/quote/${{item.yf_symbol}}" target="_blank">${{item.symbol}}</a></td>
-                        <td>$${{item.price}}</td>
-                        <td class="${{item.trend === 'UP' ? 'green' : 'red'}}">${{item.trend}}</td>
-                        <td>${{item.rsi}}</td>
-                        <td><span class="signal" style="border: 1px solid ${{item.color}}">${{item.signal}}</span></td>
-                        <td style="font-size: 12px;">${{item.whale_intel}}</td>
-                    </tr>
-                `).join('');
-            }}
-            render();
-        </script>
-        </body></html>
+        portfolio_html = build_rows(data['portfolio'], True)
+        watchlist_html = build_rows(data['watchlist'], False)
+
+        html = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>🐳 Whale Watcher Dashboard</title>
+            <style>
+                /* Base Styles for Browser View */
+                body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background-color: #0d1117; color: #e6edf3; padding: 20px; margin: 0; }}
+                .container {{ max-width: 1200px; margin: 0 auto; background-color: #0d1117; }}
+                h1 {{ color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 10px; }}
+                h3 {{ color: #e6edf3; margin-top: 30px; border-bottom: 1px solid #30363d; padding-bottom: 5px; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 10px; color: #e6edf3; }}
+                th {{ text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase; }}
+                td {{ padding: 12px; border-bottom: 1px solid #30363d; }}
+                a {{ color: #388bfd; text-decoration: none; }}
+                a:hover {{ text-decoration: underline; }}
+            </style>
+        </head>
+        <body style="background-color: #0d1117; color: #e6edf3; font-family: sans-serif;">
+            <div class="container">
+                <header>
+                    <h1 style="color: #e6edf3;">🐳 Whale Watcher</h1>
+                    <div style="color: #8b949e; font-size: 14px;">Last Updated: {data['generated_at']}</div>
+                </header>
+
+                <h3 style="color: #e6edf3; border-bottom: 1px solid #30363d;">💰 Your Holdings</h3>
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; color: #e6edf3;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Asset</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Entry</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Current</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">P/L</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Signal</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Intel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {portfolio_html}
+                    </tbody>
+                </table>
+
+                <h3 style="color: #e6edf3; border-bottom: 1px solid #30363d; margin-top: 30px;">⚡ Watchlist</h3>
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; color: #e6edf3;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Ticker</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Price</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Trend</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">RSI</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Signal</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Intel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {watchlist_html}
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 40px; color: #8b949e; font-size: 12px;">
+                    Generated by Whale Watcher Agent. <br>
+                    Markets are volatile. DYOR.
+                </p>
+            </div>
+        </body>
+        </html>
         """
         return html
 
@@ -356,7 +387,7 @@ if __name__ == "__main__":
     # 1. Generate Data
     data = agent.generate_json_data()
     
-    # 2. Generate Dashboard HTML (With Fixed Links)
+    # 2. Generate Dashboard HTML (Now using Python Server-Side Rendering)
     dashboard_html = agent.generate_dashboard_html(data)
     
     # 3. Save to Website
