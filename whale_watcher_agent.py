@@ -327,11 +327,12 @@ class MarketAgent:
             yf_ticker = f"{ticker}-USD" if ticker in CRYPTO_SYMBOLS else ticker
             data = self.fetch_data(yf_ticker)
             if data:
+                link = f"https://finance.yahoo.com/quote/{yf_ticker}"
                 entry_display = f"${data.get('entry_price', '—')}"
                 duration_display = format_duration(data.get('holding_days'))
                 html += f"""
                 <tr>
-                    <td><b>{data['symbol']}</b></td>
+                    <td><b><a href="{link}" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
                     <td>{entry_display}</td>
                     <td>${data['price']}</td>
                     <td>{duration_display}</td>
@@ -354,10 +355,11 @@ class MarketAgent:
             
             data = self.fetch_data(ticker)
             if data:
+                link = f"https://finance.yahoo.com/quote/{ticker}"
                 trend_icon = "📈" if data['trend'] == "UP" else "📉"
                 html += f"""
                 <tr>
-                    <td><b>{data['symbol']}</b></td>
+                    <td><b><a href="{link}" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
                     <td>${data['price']}</td>
                     <td>{trend_icon}</td>
                     <td>{data['rsi']}</td>
