@@ -1,33 +1,30 @@
-name: Whale Watcher Agent
+name: Daily Whale Watcher
 
 on:
   schedule:
-    # Run at the start of every hour
     - cron: '0 * * * *'
   workflow_dispatch:
 
+# CRITICAL: This gives the bot permission to update the website
+permissions:
+  contents: write
+
 jobs:
-  run-agent:
+  run-script:
     runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write  # Required to push data files
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
       - name: Install dependencies
         run: |
           pip install requests yfinance pandas
-
-      - name: Create data directory
-        run: mkdir -p docs/data
 
       - name: Run Whale Watcher Agent
         env:
@@ -37,10 +34,13 @@ jobs:
           IS_MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
         run: python whale_watcher_agent.py
 
-      - name: Commit dashboard data
+      # This step pushes the index.html file to your repo
+      - name: Deploy to Website
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "Whale Watcher Bot"
-          git add docs/data/
-          git diff --staged --quiet || git commit -m "📊 Update dashboard data [skip ci]"
+          git config --global user.name "Whale Bot"
+          git config --global user.email "bot@whale.watcher"
+          git add index.html
+          git commit -m "Update Market Report" || echo "No changes to commit"
           git push
