@@ -253,37 +253,53 @@ class MarketAgent:
         }
 
     def generate_dashboard_html(self, data):
-        # --- SERVER SIDE RENDERING FOR EMAIL SUPPORT ---
+        # --- ROBUST EMAIL & WEB GENERATION ---
         
         def build_rows(items, is_portfolio):
             html_rows = ""
             for item in items:
-                # Styles for Email Compatibility (Inline styles are safest)
-                color_style = f"color: {item['color']}; border: 1px solid {item['color']}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;"
+                # 1. COLOR LOGIC (Hardcoded for Email Clients)
                 
-                # Determine colors for metrics
-                pl_color = "#3fb950" if item['gain_loss_pct'] >= 0 else "#f85149" # green / red
+                # Signal Badge Colors
+                badge_bg = "#21262d" # Default dark gray
+                badge_text = item['color']
+                
+                # Metric Colors (P/L and Trend)
+                # Green: #3fb950, Red: #f85149
+                pl_color = "#3fb950" if item['gain_loss_pct'] >= 0 else "#f85149"
                 trend_color = "#3fb950" if item['trend'] == 'UP' else "#f85149"
                 
+                # 2. STYLES
+                # Cell Style: Explicit background and text color for every cell
+                cell_style = "padding: 12px; border-bottom: 1px solid #30363d; color: #e6edf3; font-family: sans-serif; font-size: 14px;"
+                
+                # Link Style: Explicit blue
                 link_style = "color: #388bfd; text-decoration: none; font-weight: bold;"
                 
+                # Badge Style
+                badge_style = f"color: {badge_text}; border: 1px solid {badge_text}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; white-space: nowrap;"
+
+                # 3. ROW CONSTRUCTION
                 row = "<tr>"
-                # Ticker & Link
-                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
+                
+                # TICKER (With Link)
+                row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
                 
                 if is_portfolio:
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["entry_price"]}</td>'
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["price"]}</td>'
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; color: {pl_color};">{item["gain_loss_pct"]}%</td>'
+                    row += f'<td style="{cell_style}">${item["entry_price"]}</td>'
+                    row += f'<td style="{cell_style}">${item["price"]}</td>'
+                    row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]}%</td>'
                 else:
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">${item["price"]}</td>'
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; color: {trend_color};">{item["trend"]}</td>'
-                    row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;">{item["rsi"]}</td>'
+                    row += f'<td style="{cell_style}">${item["price"]}</td>'
+                    row += f'<td style="{cell_style} color: {trend_color};">{item["trend"]}</td>'
+                    row += f'<td style="{cell_style}">{item["rsi"]}</td>'
                 
-                # Signal
-                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d;"><span style="{color_style}">{item["signal"]}</span></td>'
-                # Intel
-                row += f'<td style="padding: 12px; border-bottom: 1px solid #30363d; font-size: 12px; color: #8b949e;">{item["whale_intel"]}</td>'
+                # SIGNAL
+                row += f'<td style="{cell_style}"><span style="{badge_style}">{item["signal"]}</span></td>'
+                
+                # INTEL
+                row += f'<td style="{cell_style} font-size: 12px; color: #8b949e;">{item["whale_intel"]}</td>'
+                
                 row += "</tr>"
                 html_rows += row
             return html_rows
@@ -291,72 +307,88 @@ class MarketAgent:
         portfolio_html = build_rows(data['portfolio'], True)
         watchlist_html = build_rows(data['watchlist'], False)
 
+        # 4. HTML CONTAINER (Table Wrapper for Email Compatibility)
+        # Using a wrapping table is the only way to force background color in Outlook/Gmail
         html = f"""
-        <!DOCTYPE html>
-        <html lang="en">
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>🐳 Whale Watcher Dashboard</title>
-            <style>
-                /* Base Styles for Browser View */
-                body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background-color: #0d1117; color: #e6edf3; padding: 20px; margin: 0; }}
-                .container {{ max-width: 1200px; margin: 0 auto; background-color: #0d1117; }}
-                h1 {{ color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 10px; }}
-                h3 {{ color: #e6edf3; margin-top: 30px; border-bottom: 1px solid #30363d; padding-bottom: 5px; }}
-                table {{ width: 100%; border-collapse: collapse; margin-top: 10px; color: #e6edf3; }}
-                th {{ text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase; }}
-                td {{ padding: 12px; border-bottom: 1px solid #30363d; }}
-                a {{ color: #388bfd; text-decoration: none; }}
-                a:hover {{ text-decoration: underline; }}
-            </style>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title>Whale Watcher Report</title>
         </head>
-        <body style="background-color: #0d1117; color: #e6edf3; font-family: sans-serif;">
-            <div class="container">
-                <header>
-                    <h1 style="color: #e6edf3;">🐳 Whale Watcher</h1>
-                    <div style="color: #8b949e; font-size: 14px;">Last Updated: {data['generated_at']}</div>
-                </header>
+        <body style="margin: 0; padding: 0; background-color: #0d1117;">
+            <!-- OUTER WRAPPER TABLE (Forces Dark Background) -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#0d1117" style="background-color: #0d1117; color: #e6edf3;">
+                <tr>
+                    <td align="center" style="padding: 20px 10px;">
+                        
+                        <!-- MAIN CONTAINER TABLE -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #e6edf3;">
+                            
+                            <!-- HEADER -->
+                            <tr>
+                                <td align="center" style="padding-bottom: 20px; border-bottom: 2px solid #30363d;">
+                                    <h1 style="margin: 0; font-size: 24px; color: #e6edf3;">🐳 Whale Watcher</h1>
+                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #8b949e;">{data['generated_at']}</p>
+                                </td>
+                            </tr>
 
-                <h3 style="color: #e6edf3; border-bottom: 1px solid #30363d;">💰 Your Holdings</h3>
-                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; color: #e6edf3;">
-                    <thead>
-                        <tr>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Asset</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Entry</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Current</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">P/L</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Signal</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Intel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {portfolio_html}
-                    </tbody>
-                </table>
+                            <!-- PORTFOLIO SECTION -->
+                            <tr>
+                                <td style="padding-top: 30px;">
+                                    <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">💰 Your Holdings</h3>
+                                    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Asset</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Entry</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Price</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">P/L</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Signal</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Intel</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {portfolio_html}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
 
-                <h3 style="color: #e6edf3; border-bottom: 1px solid #30363d; margin-top: 30px;">⚡ Watchlist</h3>
-                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; color: #e6edf3;">
-                    <thead>
-                        <tr>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Ticker</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Price</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Trend</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">RSI</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Signal</th>
-                            <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e;">Intel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {watchlist_html}
-                    </tbody>
-                </table>
-                
-                <p style="margin-top: 40px; color: #8b949e; font-size: 12px;">
-                    Generated by Whale Watcher Agent. <br>
-                    Markets are volatile. DYOR.
-                </p>
-            </div>
+                            <!-- WATCHLIST SECTION -->
+                            <tr>
+                                <td style="padding-top: 30px;">
+                                    <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">⚡ Watchlist</h3>
+                                    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Ticker</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Price</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Trend</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">RSI</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Signal</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Intel</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {watchlist_html}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <!-- FOOTER -->
+                            <tr>
+                                <td align="center" style="padding-top: 40px; padding-bottom: 20px; color: #8b949e; font-size: 12px;">
+                                    <p>Generated by Whale Watcher Agent.</p>
+                                    <p>Markets are volatile. DYOR.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </body>
         </html>
         """
@@ -387,10 +419,10 @@ if __name__ == "__main__":
     # 1. Generate Data
     data = agent.generate_json_data()
     
-    # 2. Generate Dashboard HTML (Now using Python Server-Side Rendering)
+    # 2. Generate Dashboard HTML (Robust Server-Side Rendering)
     dashboard_html = agent.generate_dashboard_html(data)
     
-    # 3. Save to Website
+    # 3. Save to Website (This OVERWRITES the index.html with the fixed version)
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(dashboard_html)
     print("✅ Dashboard generated.")
