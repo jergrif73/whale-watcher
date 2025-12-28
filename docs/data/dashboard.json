@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-27 23:24:25",
+  "generated_at": "2025-12-28 02:21:23",
   "portfolio": [
     {
       "symbol": "SMCI",
@@ -10,7 +10,7 @@
       "signal": "\ud83d\udcb0 SELL NOW (+53.2%)",
       "color": "green",
       "whale_intel": "",
-      "holding_days": 1,
+      "holding_days": 2,
       "gain_loss_pct": 53.2,
       "weekly_change": 4.32,
       "vol_ratio": 0.64,
@@ -177,7 +177,7 @@
       "signal": "\u26a0\ufe0f VOLATILE (-80.8%) - Settling",
       "color": "orange",
       "whale_intel": "",
-      "holding_days": 1,
+      "holding_days": 2,
       "gain_loss_pct": -80.8,
       "weekly_change": -1.03,
       "vol_ratio": 0.7,
@@ -2649,15 +2649,15 @@
     },
     {
       "symbol": "BTC",
-      "price": 87620.42,
+      "price": 87727.36,
       "trend": "DOWN",
-      "rsi": 39.71,
+      "rsi": 40.2,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
-      "daily_change": 0.37,
-      "weekly_change": -0.98,
-      "vol_ratio": 0.39,
+      "daily_change": 0.49,
+      "weekly_change": -0.86,
+      "vol_ratio": 0.4,
       "price_history": [
         {
           "date": "2025-11-28",
@@ -2805,24 +2805,24 @@
           "volume": 42455674908
         },
         {
-          "date": "2025-12-27",
-          "close": 87620.42,
-          "volume": 13611985920
+          "date": "2025-12-28",
+          "close": 87727.36,
+          "volume": 13850949632
         }
       ],
       "is_owned": false
     },
     {
       "symbol": "ETH",
-      "price": 2937.88,
+      "price": 2942.86,
       "trend": "DOWN",
-      "rsi": 35.25,
+      "rsi": 35.78,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
-      "daily_change": 0.41,
-      "weekly_change": -2.27,
-      "vol_ratio": 0.38,
+      "daily_change": 0.58,
+      "weekly_change": -2.1,
+      "vol_ratio": 0.4,
       "price_history": [
         {
           "date": "2025-11-28",
@@ -2970,24 +2970,24 @@
           "volume": 18562196049
         },
         {
-          "date": "2025-12-27",
-          "close": 2937.88,
-          "volume": 7110618624
+          "date": "2025-12-28",
+          "close": 2942.86,
+          "volume": 7441949184
         }
       ],
       "is_owned": false
     },
     {
       "symbol": "SOL",
-      "price": 124.22,
+      "price": 123.98,
       "trend": "DOWN",
-      "rsi": 36.8,
+      "rsi": 36.34,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
-      "daily_change": 1.66,
-      "weekly_change": -1.25,
-      "vol_ratio": 0.47,
+      "daily_change": 1.46,
+      "weekly_change": -1.45,
+      "vol_ratio": 0.48,
       "price_history": [
         {
           "date": "2025-11-28",
@@ -3135,9 +3135,9 @@
           "volume": 3779508002
         },
         {
-          "date": "2025-12-27",
-          "close": 124.22,
-          "volume": 1660116864
+          "date": "2025-12-28",
+          "close": 123.98,
+          "volume": 1683698432
         }
       ],
       "is_owned": false
@@ -3146,13 +3146,13 @@
       "symbol": "FET",
       "price": 0.22,
       "trend": "DOWN",
-      "rsi": 36.76,
+      "rsi": 35.16,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
-      "daily_change": 3.44,
-      "weekly_change": 5.11,
-      "vol_ratio": 0.77,
+      "daily_change": 2.23,
+      "weekly_change": 3.88,
+      "vol_ratio": 0.8,
       "price_history": [
         {
           "date": "2025-11-28",
@@ -3300,9 +3300,9 @@
           "volume": 48692963
         },
         {
-          "date": "2025-12-27",
+          "date": "2025-12-28",
           "close": 0.22,
-          "volume": 44226580
+          "volume": 45788800
         }
       ],
       "is_owned": false
@@ -3311,13 +3311,13 @@
       "symbol": "DOGE",
       "price": 0.12,
       "trend": "DOWN",
-      "rsi": 33.21,
+      "rsi": 33.34,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
-      "daily_change": 1.4,
-      "weekly_change": -6.57,
-      "vol_ratio": 0.45,
+      "daily_change": 1.48,
+      "weekly_change": -6.51,
+      "vol_ratio": 0.47,
       "price_history": [
         {
           "date": "2025-11-28",
@@ -3465,9 +3465,9 @@
           "volume": 1170409215
         },
         {
-          "date": "2025-12-27",
+          "date": "2025-12-28",
           "close": 0.12,
-          "volume": 464370144
+          "volume": 488823904
         }
       ],
       "is_owned": false
@@ -3493,16 +3493,6 @@
     "position_count": 2
   },
   "recent_signals": [
-    {
-      "timestamp": "2025-12-27T14:23:51.940978",
-      "ticker": "SMCI",
-      "action": "SELL_SIGNAL",
-      "price": "30.64",
-      "entry_price": "20.0",
-      "gain_loss_pct": "53.2",
-      "holding_days": "1",
-      "notes": "Profit target reached"
-    },
     {
       "timestamp": "2025-12-27T15:24:45.980945",
       "ticker": "SMCI",
@@ -3591,6 +3581,16 @@
       "entry_price": "20.0",
       "gain_loss_pct": "53.2",
       "holding_days": "1",
+      "notes": "Profit target reached"
+    },
+    {
+      "timestamp": "2025-12-28T02:21:25.091774",
+      "ticker": "SMCI",
+      "action": "SELL_SIGNAL",
+      "price": "30.64",
+      "entry_price": "20.0",
+      "gain_loss_pct": "53.2",
+      "holding_days": "2",
       "notes": "Profit target reached"
     }
   ],
