@@ -2,6 +2,7 @@ import smtplib
 import yfinance as yf
 import pandas as pd
 import os
+import json
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
@@ -15,12 +16,8 @@ IS_MANUAL = is_manual_env == "true"
 
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
-# --- 💼 YOUR PORTFOLIO DASHBOARD ---
-# STATUS: 0.00 = Not Owned (Watching Only)
-# ACTION: Add entry price and purchase date when you buy.
-# EXAMPLE: 'SMCI': {'entry': 45.50, 'date': '2024-11-15'},
+# --- 💼 YOUR PORTFOLIO ---
 MY_PORTFOLIO = {
-    # --- STOCKS ---
     'SMCI': {'entry': 20.00, 'date': '2025-12-26'},
     'MARA': {'entry': 50.00, 'date': '2025-12-26'},
     'MSTR': {'entry': 0.00, 'date': '2025-12-26'},
@@ -37,8 +34,6 @@ MY_PORTFOLIO = {
     'TQQQ': {'entry': 0.00, 'date': '2025-12-26'},
     'SPY':  {'entry': 0.00, 'date': '2025-12-26'},
     'QQQ':  {'entry': 0.00, 'date': '2025-12-26'},
-
-    # --- CRYPTO ---
     'BTC':  {'entry': 0.00, 'date': '2025-12-26'},
     'ETH':  {'entry': 0.00, 'date': '2025-12-26'},
     'SOL':  {'entry': 0.00, 'date': '2025-12-26'},
@@ -48,38 +43,26 @@ MY_PORTFOLIO = {
     'PEPE': {'entry': 0.00, 'date': '2025-12-26'}
 }
 
-# --- POSITION SETTINGS ---
-PROFIT_TARGET_PCT = 20.0      # Take profit at +20%
-STOP_LOSS_PCT = -8.0          # Stop loss at -8%
-LONG_TERM_DAYS = 365          # Days until long-term capital gains
-TAX_WARNING_DAYS = 30         # Warn this many days before long-term threshold
-SETTLING_PERIOD_DAYS = 3      # Don't panic on volatility during first N days
+# --- SETTINGS ---
+PROFIT_TARGET_PCT = 20.0
+STOP_LOSS_PCT = -8.0
+LONG_TERM_DAYS = 365
+TAX_WARNING_DAYS = 30
+SETTLING_PERIOD_DAYS = 3
 
-# --- THE WHALE LIST ---
 WHALE_KEYWORDS = [
-    "Public Investment Fund", "PIF", "Norges", "NBIM", 
-    "Abu Dhabi Investment", "ADIA", "Mubadala", "Qatar Investment", "QIA",
-    "Elliott", "Pershing Square", "Ackman", "Third Point", "Loeb", 
-    "Icahn", "Trian", "Peltz", "Starboard",
-    "Citadel", "Bridgewater", "Millennium", "Point72", "D. E. Shaw",
-    "Berkshire", "Buffett", "BlackRock", "Vanguard"
+    "Public Investment Fund", "PIF", "Norges", "NBIM", "Abu Dhabi Investment", "ADIA", 
+    "Mubadala", "Qatar Investment", "QIA", "Elliott", "Pershing Square", "Ackman", 
+    "Third Point", "Loeb", "Icahn", "Trian", "Peltz", "Starboard", "Citadel", 
+    "Bridgewater", "Millennium", "Point72", "D. E. Shaw", "Berkshire", "Buffett", 
+    "BlackRock", "Vanguard"
 ]
 
-STOCKS_TO_WATCH = [
-    'MSTR', 'SMCI', 'COIN', 'TSLA', 'MARA', 'PLTR',
-    'NVDA', 'AMD', 'AVGO', 'META', 'GOOGL', 'MSFT',
-    'SOXL', 'TQQQ', 'SPY', 'QQQ'
-]
-
-CRYPTO_TO_WATCH = [
-    'BTC-USD', 'ETH-USD', 'SOL-USD', 'FET-USD', 
-    'RNDR-USD', 'DOGE-USD', 'PEPE-USD'
-]
-
+STOCKS_TO_WATCH = ['MSTR', 'SMCI', 'COIN', 'TSLA', 'MARA', 'PLTR', 'NVDA', 'AMD', 'AVGO', 'META', 'GOOGL', 'MSFT', 'SOXL', 'TQQQ', 'SPY', 'QQQ']
+CRYPTO_TO_WATCH = ['BTC-USD', 'ETH-USD', 'SOL-USD', 'FET-USD', 'RNDR-USD', 'DOGE-USD', 'PEPE-USD']
 CRYPTO_SYMBOLS = ['BTC', 'ETH', 'SOL', 'FET', 'RNDR', 'DOGE', 'PEPE']
 
 def is_owned(ticker):
-    """Check if a ticker is owned (has valid entry data)."""
     clean = ticker.replace("-USD", "")
     position = MY_PORTFOLIO.get(clean)
     if position is None: return False
@@ -87,7 +70,6 @@ def is_owned(ticker):
     return position > 0
 
 def get_position(ticker):
-    """Get position details for an owned ticker."""
     clean = ticker.replace("-USD", "")
     position = MY_PORTFOLIO.get(clean)
     if position is None: return None
@@ -108,13 +90,6 @@ def calc_holding_days(entry_date):
     if entry_date is None: return None
     return (datetime.now() - entry_date).days
 
-def format_duration(days):
-    if days is None: return "—"
-    if days < 7: return f"{days}d"
-    elif days < 30: return f"{days // 7}w {days % 7}d"
-    elif days < 365: return f"{days // 30}mo"
-    else: return f"{days // 365}y"
-
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -128,7 +103,7 @@ class MarketAgent:
                 title = story.get('title', '').lower()
                 for whale in WHALE_KEYWORDS:
                     if whale.lower() in title:
-                        intel.append(f"🐳 <b>{whale}</b> mentioned in news")
+                        intel.append(f"🐳 {whale}")
         except: pass
 
         if "-" not in symbol: 
@@ -140,10 +115,10 @@ class MarketAgent:
                         text = str(row.get('Text', '')).lower()
                         shares = row.get('Shares', 0)
                         if "purchase" in text:
-                            intel.append(f"👔 <b>Insider Buy:</b> {shares} shares")
+                            intel.append(f"👔 Insider Buy: {shares}")
                             self.has_critical_news = True 
             except: pass
-        return "<br>".join(list(set(intel))) 
+        return " | ".join(list(set(intel))) 
 
     def fetch_data(self, ticker):
         try:
@@ -154,15 +129,12 @@ class MarketAgent:
             current_price = df['Close'].iloc[-1]
             prev_close = df['Close'].iloc[-2]
             current_vol = df['Volume'].iloc[-1]
-            
-            # Calculations
             avg_vol = df['Volume'].iloc[-11:-1].mean()
             vol_ratio = round(current_vol / avg_vol, 2) if avg_vol > 0 else 0
             sma_50 = df['Close'].rolling(window=50).mean().iloc[-1] if len(df) > 50 else current_price
             trend = "UP" if current_price > sma_50 else "DOWN"
             pct_change = ((current_price - prev_close) / prev_close) * 100
             
-            # RSI
             delta = df['Close'].diff()
             gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
             loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -171,229 +143,190 @@ class MarketAgent:
             current_rsi = round(rsi.iloc[-1], 2)
             
             whale_intel = self.check_whale_intel(stock, ticker)
-            
-            # --- SIGNAL LOGIC ---
-            signal = "NEUTRAL"
-            color = "black"
             clean_ticker = ticker.replace("-USD", "")
             
             holding_days = None
-            tax_note = ""
-            
-            is_weekend_now = datetime.utcnow().weekday() >= 5 # 5=Sat, 6=Sun
+            gain_loss_pct = 0.0
+            entry_price = 0.0
+            is_weekend_now = datetime.utcnow().weekday() >= 5
             is_crypto_asset = clean_ticker in CRYPTO_SYMBOLS
             
-            # --- SCENARIO A: YOU OWN THIS STOCK (STRICT MODE) ---
+            signal = "NEUTRAL"
+            color = "black"
+
             position = get_position(ticker)
-            if position:
+            is_owned_asset = position is not None
+
+            if is_owned_asset:
                 entry_price = position['entry']
                 entry_date = position['date']
                 holding_days = calc_holding_days(entry_date)
                 gain_loss_pct = ((current_price - entry_price) / entry_price) * 100
-                
-                # Tax check
-                if holding_days is not None:
-                    days_to_long_term = LONG_TERM_DAYS - holding_days
-                    if days_to_long_term <= 0: tax_note = "📗 LONG-TERM"
-                    elif days_to_long_term <= TAX_WARNING_DAYS: tax_note = f"⏳ {days_to_long_term}d to LT"
-                
-                # Debug Print
-                duration_str = format_duration(holding_days) if holding_days is not None else "No date"
-                print(f"   [OWNED] {clean_ticker}: Entry ${entry_price} | Curr ${round(current_price,2)} | P/L {round(gain_loss_pct,1)}% | Held {duration_str}")
+                print(f"   [OWNED] {clean_ticker}: P/L {round(gain_loss_pct,1)}%")
 
-                # --- WEEKEND SHIELD ---
                 if is_weekend_now and not is_crypto_asset:
-                    signal = f"⏸️ WEEKEND ({round(gain_loss_pct, 1)}%)"
+                    signal = "⏸️ WEEKEND"
                     color = "gray"
                 else:
-                    # --- OPERATING LOGIC ---
                     is_settling = holding_days is not None and holding_days <= SETTLING_PERIOD_DAYS
-                    
                     if gain_loss_pct >= PROFIT_TARGET_PCT:
-                        if is_settling:
-                            signal = f"💰 FAST PROFIT (+{round(gain_loss_pct, 1)}%)"
-                            color = "green"
-                            self.has_critical_news = True
-                        else:
-                            signal = f"💰 SELL NOW (+{round(gain_loss_pct, 1)}%)"
-                            color = "green"
-                            self.has_critical_news = True
-                            
+                        signal = "💰 FAST PROFIT" if is_settling else "💰 SELL NOW"
+                        color = "green"
+                        self.has_critical_news = True
                     elif gain_loss_pct <= STOP_LOSS_PCT:
-                        if is_settling:
-                            signal = f"⚠️ SETTLING ({round(gain_loss_pct, 1)}%)"
-                            color = "orange"
-                        else:
-                            signal = f"🛑 STOP LOSS ({round(gain_loss_pct, 1)}%)"
-                            color = "red"
-                            self.has_critical_news = True
+                        signal = "⚠️ SETTLING" if is_settling else "🛑 STOP LOSS"
+                        color = "orange" if is_settling else "red"
+                        if not is_settling: self.has_critical_news = True
                     else:
-                        status_label = "SETTLING" if is_settling else "HOLDING"
-                        signal = f"💎 {status_label} ({round(gain_loss_pct, 1)}%)"
+                        signal = "💎 HOLDING"
                         color = "blue"
-                
-                if tax_note: signal = f"{signal} {tax_note}"
-
-                return {
-                    "symbol": clean_ticker,
-                    "price": round(current_price, 2),
-                    "entry_price": entry_price,
-                    "trend": trend,
-                    "rsi": current_rsi,
-                    "signal": signal,
-                    "color": color,
-                    "whale_intel": whale_intel,
-                    "holding_days": holding_days,
-                    "gain_loss_pct": round(gain_loss_pct, 1),
-                    "is_owned": True
-                }
-
-            # --- SCENARIO B: WATCHING ---
             else:
                 if is_weekend_now and not is_crypto_asset:
                     signal = "⏸️ WEEKEND"
                     color = "gray"
                 else:
                     if abs(pct_change) > 10.0:
-                        signal = f"🚨 BREAKING NEWS ({round(pct_change,1)}%)"
+                        signal = f"🚨 NEWS ({round(pct_change,1)}%)"
                         color = "purple"
                         self.has_critical_news = True
                     elif vol_ratio > 3.5:
-                        signal = f"🐳 WHALE ERUPTION ({vol_ratio}x Vol)"
+                        signal = f"🐳 WHALE"
                         color = "purple"
                         self.has_critical_news = True
                     elif current_rsi > 85:
-                        signal = "🔥 EXTREME OVERBOUGHT"
+                        signal = "🔥 DANGER"
                         color = "red"
-                    elif current_rsi < 15:
-                        signal = "🩸 EXTREME OVERSOLD"
+                    elif current_rsi < 30:
+                        signal = "✅ BUY DIP"
                         color = "green"
-                        self.has_critical_news = True
-                    elif vol_ratio > 1.5:
-                        if trend == "UP": signal = "🚀 RALLY"; color = "green"
-                        else: signal = "⚠️ PRESSURE"; color = "orange"
-                    elif current_rsi < 30: signal = "✅ BUY DIP"; color = "green"
-                    elif current_rsi > 70: signal = "💰 TAKE PROFIT"; color = "red"
+                    elif current_rsi > 70:
+                        signal = "💰 TAKE PROFIT"
+                        color = "red"
 
             return {
                 "symbol": clean_ticker,
+                "yf_symbol": ticker,
                 "price": round(current_price, 2),
+                "entry_price": entry_price,
                 "trend": trend,
                 "rsi": current_rsi,
                 "signal": signal,
                 "color": color,
                 "whale_intel": whale_intel,
-                "is_owned": False
+                "holding_days": holding_days,
+                "gain_loss_pct": round(gain_loss_pct, 1),
+                "daily_change": round(pct_change, 1)
             }
         except Exception as e:
-            print(f"   [ERROR] {ticker}: {e}")
             return None
 
-    def generate_report(self):
-        print("\n--- 🔍 PORTFOLIO CHECK ---")
-        owned_count = 0
-        for ticker, position in MY_PORTFOLIO.items():
-            if is_owned(ticker):
-                details = get_position(ticker)
-                entry = details['entry']
-                print(f"✅ TRACKING: {ticker} @ ${entry}")
-                owned_count += 1
-        print("---------------------------\n")
-
-        # HTML Header with Meta Tags for Mobile Responsiveness
-        html = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>{EMAIL_SUBJECT_BASE}</title>
-            <style>
-                body {{ font-family: Arial, sans-serif; margin: 20px; }}
-                h2 {{ color: #333; }}
-                table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
-                th, td {{ padding: 8px; border: 1px solid #ddd; text-align: left; }}
-                th {{ background-color: #f2f2f2; }}
-                .green {{ color: green; font-weight: bold; }}
-                .red {{ color: red; font-weight: bold; }}
-                .blue {{ color: blue; font-weight: bold; }}
-                .orange {{ color: orange; font-weight: bold; }}
-                .purple {{ color: purple; font-weight: bold; }}
-                .gray {{ color: gray; }}
-            </style>
-        </head>
-        <body>
-        <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
-        <hr>
+    def generate_json_data(self):
+        # Generate clean JSON data for the dashboard
+        portfolio_data = []
+        watchlist_data = []
         
-        <h3>💰 Your Holdings (Position Tracker)</h3>
-        <table>
-        <tr>
-            <th>Asset</th>
-            <th>Entry</th>
-            <th>Current</th>
-            <th>Held</th>
-            <th>Action</th>
-            <th>Intel</th>
-        </tr>
-        """
+        print("\n--- 📊 GENERATING DATA ---")
         
+        # Portfolio
         for ticker in MY_PORTFOLIO.keys():
             if not is_owned(ticker): continue
             yf_ticker = f"{ticker}-USD" if ticker in CRYPTO_SYMBOLS else ticker
             data = self.fetch_data(yf_ticker)
-            if data:
-                link = f"https://finance.yahoo.com/quote/{yf_ticker}"
-                entry_display = f"${data.get('entry_price', '—')}"
-                duration_display = format_duration(data.get('holding_days'))
-                html += f"""
-                <tr>
-                    <td><b><a href="{link}" target="_blank" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
-                    <td>{entry_display}</td>
-                    <td>${data['price']}</td>
-                    <td>{duration_display}</td>
-                    <td style="color:{data['color']}"><b>{data['signal']}</b></td>
-                    <td style="font-size:12px">{data['whale_intel']}</td>
-                </tr>"""
+            if data: portfolio_data.append(data)
 
-        html += """
-        </table>
-        <hr>
-        <h3>⚡ Market Opportunities (Watchlist)</h3>
-        <table>
-        <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Whale Intel</th></tr>
-        """
-        
+        # Watchlist
         all_assets = STOCKS_TO_WATCH + CRYPTO_TO_WATCH
         for ticker in all_assets:
             clean = ticker.replace("-USD", "")
             if is_owned(ticker): continue
-            
             data = self.fetch_data(ticker)
-            if data:
-                link = f"https://finance.yahoo.com/quote/{ticker}"
-                trend_icon = "📈" if data['trend'] == "UP" else "📉"
-                html += f"""
-                <tr>
-                    <td><b><a href="{link}" target="_blank" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
-                    <td>${data['price']}</td>
-                    <td>{trend_icon}</td>
-                    <td>{data['rsi']}</td>
-                    <td style="color:{data['color']}"><b>{data['signal']}</b></td>
-                    <td style="font-size:12px">{data['whale_intel']}</td>
-                </tr>"""
+            if data: watchlist_data.append(data)
+            
+        return {
+            "generated_at": self.timestamp,
+            "portfolio": portfolio_data,
+            "watchlist": watchlist_data,
+            "settings": {
+                "profit_target": PROFIT_TARGET_PCT,
+                "stop_loss": STOP_LOSS_PCT
+            }
+        }
+
+    def generate_dashboard_html(self, data):
+        # Inject the JSON data directly into the HTML variable
+        json_str = json.dumps(data)
+        
+        html = f"""
+        <!DOCTYPE html><html lang="en"><head>
+        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🐳 Whale Watcher Dashboard</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            :root {{ --bg-primary: #0d1117; --bg-secondary: #161b22; --text-primary: #e6edf3; --text-secondary: #8b949e; --border-color: #30363d; --green: #238636; --red: #da3633; --blue: #388bfd; }}
+            body {{ font-family: sans-serif; background: var(--bg-primary); color: var(--text-primary); padding: 20px; }}
+            .container {{ max-width: 1200px; margin: 0 auto; }}
+            table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
+            th, td {{ padding: 12px; border-bottom: 1px solid var(--border-color); text-align: left; }}
+            th {{ color: var(--text-secondary); font-size: 12px; text-transform: uppercase; }}
+            .ticker a {{ color: var(--blue); text-decoration: none; font-weight: bold; }}
+            .ticker a:hover {{ text-decoration: underline; }}
+            .signal {{ padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }}
+            .green {{ color: #3fb950; }} .red {{ color: #f85149; }} .blue {{ color: #58a6ff; }}
+        </style>
+        </head><body>
+        <div class="container">
+            <header>
+                <h1>🐳 Whale Watcher</h1>
+                <div style="color: var(--text-secondary); font-size: 14px;">Last Updated: {data['generated_at']}</div>
+            </header>
+
+            <h3 style="margin-top: 30px;">💰 Your Holdings</h3>
+            <table id="portfolio-table">
+                <thead><tr><th>Asset</th><th>Entry</th><th>Current</th><th>P/L</th><th>Signal</th><th>Intel</th></tr></thead>
+                <tbody></tbody>
+            </table>
+
+            <h3 style="margin-top: 30px;">⚡ Watchlist</h3>
+            <table id="watchlist-table">
+                <thead><tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Intel</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <script>
+            // INJECTED DATA FROM PYTHON
+            const data = {json_str};
+
+            function render() {{
+                const pTable = document.querySelector('#portfolio-table tbody');
+                const wTable = document.querySelector('#watchlist-table tbody');
                 
-        html += """
-        </table>
-        <hr>
-        <p style="font-size:11px; color:gray;">
-            <b>Legend:</b> 
-            💰 Sell Target (+20%) | 
-            🛑 Stop Loss (-8%) | 
-            💎 Holding | 
-            ⚠️ Settling (First 3 Days) |
-            ⏸️ Weekend (Market Closed)
-        </p>
+                // Render Portfolio
+                pTable.innerHTML = data.portfolio.map(item => `
+                    <tr>
+                        <td class="ticker"><a href="https://finance.yahoo.com/quote/${{item.yf_symbol}}" target="_blank">${{item.symbol}}</a></td>
+                        <td>$${{item.entry_price}}</td>
+                        <td>$${{item.price}}</td>
+                        <td class="${{item.gain_loss_pct >= 0 ? 'green' : 'red'}}">${{item.gain_loss_pct}}%</td>
+                        <td><span class="signal" style="border: 1px solid ${{item.color}}">${{item.signal}}</span></td>
+                        <td style="font-size: 12px;">${{item.whale_intel}}</td>
+                    </tr>
+                `).join('');
+
+                // Render Watchlist
+                wTable.innerHTML = data.watchlist.map(item => `
+                    <tr>
+                        <td class="ticker"><a href="https://finance.yahoo.com/quote/${{item.yf_symbol}}" target="_blank">${{item.symbol}}</a></td>
+                        <td>$${{item.price}}</td>
+                        <td class="${{item.trend === 'UP' ? 'green' : 'red'}}">${{item.trend}}</td>
+                        <td>${{item.rsi}}</td>
+                        <td><span class="signal" style="border: 1px solid ${{item.color}}">${{item.signal}}</span></td>
+                        <td style="font-size: 12px;">${{item.whale_intel}}</td>
+                    </tr>
+                `).join('');
+            }}
+            render();
+        </script>
         </body></html>
         """
         return html
@@ -411,35 +344,35 @@ class MarketAgent:
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
             server.quit()
-            print("📧 Email sent successfully.")
-        except Exception as e:
-            print(f"📧 Email failed: {e}")
-
+            print("📧 Email sent.")
+        except Exception as e: pass
 
 if __name__ == "__main__":
     current_hour = datetime.utcnow().hour
     is_routine_time = current_hour in [4, 16] 
     
     agent = MarketAgent()
-    report = agent.generate_report()
     
-    # --- SAVE TO GITHUB PAGES ---
-    try:
-        with open("index.html", "w", encoding="utf-8") as f:
-            f.write(report)
-        print("✅ Report saved to index.html for Website")
-    except Exception as e:
-        print(f"❌ Failed to save report: {e}")
+    # 1. Generate Data
+    data = agent.generate_json_data()
+    
+    # 2. Generate Dashboard HTML (With Fixed Links)
+    dashboard_html = agent.generate_dashboard_html(data)
+    
+    # 3. Save to Website
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(dashboard_html)
+    print("✅ Dashboard generated.")
 
-    # --- EMAIL LOGIC ---
+    # 4. Email Logic
     if IS_MANUAL:
         print("🕹️ Manual Override.")
-        agent.send_email(report, subject_prefix="🕹️ TEST:")
+        agent.send_email(dashboard_html, subject_prefix="🕹️ TEST:")
     elif agent.has_critical_news:
-        print("🚨 CRITICAL UPDATE (Portfolio or Market).")
-        agent.send_email(report, subject_prefix="🚨 ACTION REQ:")
+        print("🚨 CRITICAL UPDATE.")
+        agent.send_email(dashboard_html, subject_prefix="🚨 ACTION REQ:")
     elif is_routine_time:
         print("⏰ Routine Schedule.")
-        agent.send_email(report, subject_prefix="📊 DAILY:")
+        agent.send_email(dashboard_html, subject_prefix="📊 DAILY:")
     else:
         print("💤 No news. Staying silent.")
