@@ -1,1 +1,23 @@
-
+{
+  "trades": [
+    {
+      "id": "example-001",
+      "ticker": "SMCI",
+      "action": "BUY",
+      "price": 20.00,
+      "shares": 1,
+      "date": "2025-12-26T10:00:00Z",
+      "notes": "Initial position"
+    },
+    {
+      "id": "example-002",
+      "ticker": "MARA",
+      "action": "BUY",
+      "price": 50.00,
+      "shares": 1,
+      "date": "2025-12-26T10:00:00Z",
+      "notes": "Initial position"
+    }
+  ],
+  "watchlist": ["MSTR", "COIN", "TSLA", "PLTR", "NVDA", "AMD", "AVGO", "META", "GOOGL", "MSFT", "SOXL", "TQQQ", "SPY", "QQQ", "BTC", "ETH", "SOL", "FET", "RNDR", "DOGE", "PEPE"]
+}
