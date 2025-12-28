@@ -370,15 +370,27 @@ class MarketAgent:
         
         def build_rows(items, is_portfolio):
             html_rows = ""
+            
+            # Color mapping for dark background visibility
+            color_map = {
+                "black": "#8b949e",   # NEUTRAL - muted gray
+                "gray": "#8b949e",    # WEEKEND - muted gray  
+                "green": "#3fb950",   # SELL NOW, BUY DIP - bright green
+                "red": "#f85149",     # STOP LOSS, DANGER - bright red
+                "orange": "#d29922",  # SETTLING - amber/orange
+                "blue": "#58a6ff",    # HOLDING - bright blue
+                "purple": "#a371f7",  # NEWS, WHALE - purple
+            }
+            
             for item in items:
-                badge_bg = "#21262d"
-                badge_text = item['color']
+                # Map color name to hex for dark backgrounds
+                badge_color = color_map.get(item['color'], "#8b949e")
                 pl_color = "#3fb950" if item['gain_loss_pct'] >= 0 else "#f85149"
                 trend_color = "#3fb950" if item['trend'] == 'UP' else "#f85149"
                 
                 cell_style = "padding: 12px; border-bottom: 1px solid #30363d; color: #e6edf3; font-family: sans-serif; font-size: 14px;"
                 link_style = "color: #388bfd; text-decoration: none; font-weight: bold;"
-                badge_style = f"color: {badge_text}; border: 1px solid {badge_text}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; white-space: nowrap;"
+                badge_style = f"color: {badge_color}; border: 1px solid {badge_color}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; white-space: nowrap;"
 
                 row = "<tr>"
                 row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
