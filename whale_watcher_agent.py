@@ -421,18 +421,31 @@ if __name__ == "__main__":
     
     agent = MarketAgent()
     
-    # 1. Generate Data
+    # 1. Clean up OLD data files ("Ghost Busting")
+    ghost_file = "data/dashboard.json"
+    if os.path.exists(ghost_file):
+        try:
+            os.remove(ghost_file)
+            print(f"👻 Ghost file '{ghost_file}' deleted.")
+        except OSError:
+            print(f"⚠️ Could not delete ghost file '{ghost_file}'.")
+
+    # 2. Generate Data
     data = agent.generate_json_data()
     
-    # 2. Generate Dashboard HTML (Robust Server-Side Rendering)
+    # 3. Generate Dashboard HTML (Robust Server-Side Rendering)
     dashboard_html = agent.generate_dashboard_html(data)
     
-    # 3. Save to Website (This OVERWRITES the index.html with the fixed version)
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(dashboard_html)
-    print("✅ Dashboard generated.")
+    # 4. Save to Website (This OVERWRITES the index.html with the fixed version)
+    file_path = "index.html"
+    try:
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(dashboard_html)
+        print(f"✅ Dashboard generated at {file_path}. Size: {len(dashboard_html)} bytes.")
+    except Exception as e:
+        print(f"❌ Error writing file: {e}")
 
-    # 4. Email Logic
+    # 5. Email Logic
     if IS_MANUAL:
         print("🕹️ Manual Override.")
         agent.send_email(dashboard_html, subject_prefix="🕹️ TEST:")
