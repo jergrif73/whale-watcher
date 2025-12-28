@@ -18,8 +18,8 @@ EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
 # --- 💼 YOUR PORTFOLIO ---
 MY_PORTFOLIO = {
-    'SMCI': {'entry': 0.00, 'date': '2025-12-26'},
-    'MARA': {'entry': 0.00, 'date': '2025-12-26'},
+    'SMCI': {'entry': 20.00, 'date': '2025-12-26'},
+    'MARA': {'entry': 50.00, 'date': '2025-12-26'},
     'MSTR': {'entry': 0.00, 'date': '2025-12-26'},
     'COIN': {'entry': 0.00, 'date': '2025-12-26'},
     'TSLA': {'entry': 0.00, 'date': '2025-12-26'},
