@@ -38,23 +38,26 @@ jobs:
           python whale_watcher_agent.py
 
       - name: Debug - List Files After
-        run: ls -R
+        run: |
+          echo "=== Root ==="
+          ls -la
+          echo "=== docs/data ==="
+          ls -la docs/data/
 
       - name: Commit and Push changes
         run: |
-          git config --global user.name "GitHub Action"
+          git config --global user.name "actions-user"
           git config --global user.email "action@github.com"
           
-          # 1. Stage the new HTML
+          # Stage all updated files
           git add index.html
+          git add docs/data/dashboard.json
+          git add docs/data/signals.json || true
           
-          # 2. Stage the deletion of the ghost JSON (if it was deleted)
-          git add -u
-          
-          # 3. Commit
+          # Commit and push
           if git diff --staged --quiet; then
-            echo "No changes to commit. (This is unexpected if index.html is updating)"
+            echo "No changes to commit."
           else
-            git commit -m "Update Dashboard & Remove Ghost Data [skip ci]"
+            git commit -m "📊 Update dashboard data [skip ci]"
             git push origin HEAD:${{ github.ref }}
           fi
