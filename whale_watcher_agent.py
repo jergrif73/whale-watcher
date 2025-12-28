@@ -180,7 +180,6 @@ class MarketAgent:
             holding_days = None
             tax_note = ""
             
-            # Time & Asset Type Check
             is_weekend_now = datetime.utcnow().weekday() >= 5 # 5=Sat, 6=Sun
             is_crypto_asset = clean_ticker in CRYPTO_SYMBOLS
             
@@ -206,14 +205,12 @@ class MarketAgent:
                 if is_weekend_now and not is_crypto_asset:
                     signal = f"⏸️ WEEKEND ({round(gain_loss_pct, 1)}%)"
                     color = "gray"
-                    # Do not set has_critical_news on weekend for stocks
                 else:
                     # --- OPERATING LOGIC ---
                     is_settling = holding_days is not None and holding_days <= SETTLING_PERIOD_DAYS
                     
                     if gain_loss_pct >= PROFIT_TARGET_PCT:
                         if is_settling:
-                            # Too fast? Caution or just take it. User said "barely bought".
                             signal = f"💰 FAST PROFIT (+{round(gain_loss_pct, 1)}%)"
                             color = "green"
                             self.has_critical_news = True
@@ -301,17 +298,36 @@ class MarketAgent:
                 entry = details['entry']
                 print(f"✅ TRACKING: {ticker} @ ${entry}")
                 owned_count += 1
-        if owned_count == 0:
-            print("❌ WARNING: Bot sees NO owned stocks. Did you save the file?")
         print("---------------------------\n")
 
+        # HTML Header with Meta Tags for Mobile Responsiveness
         html = f"""
-        <html><body>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{EMAIL_SUBJECT_BASE}</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; margin: 20px; }}
+                h2 {{ color: #333; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
+                th, td {{ padding: 8px; border: 1px solid #ddd; text-align: left; }}
+                th {{ background-color: #f2f2f2; }}
+                .green {{ color: green; font-weight: bold; }}
+                .red {{ color: red; font-weight: bold; }}
+                .blue {{ color: blue; font-weight: bold; }}
+                .orange {{ color: orange; font-weight: bold; }}
+                .purple {{ color: purple; font-weight: bold; }}
+                .gray {{ color: gray; }}
+            </style>
+        </head>
+        <body>
         <h2>{EMAIL_SUBJECT_BASE}: {self.timestamp}</h2>
         <hr>
         
         <h3>💰 Your Holdings (Position Tracker)</h3>
-        <table border="1" cellpadding="5" cellspacing="0">
+        <table>
         <tr>
             <th>Asset</th>
             <th>Entry</th>
@@ -332,7 +348,7 @@ class MarketAgent:
                 duration_display = format_duration(data.get('holding_days'))
                 html += f"""
                 <tr>
-                    <td><b><a href="{link}" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
+                    <td><b><a href="{link}" target="_blank" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
                     <td>{entry_display}</td>
                     <td>${data['price']}</td>
                     <td>{duration_display}</td>
@@ -344,7 +360,7 @@ class MarketAgent:
         </table>
         <hr>
         <h3>⚡ Market Opportunities (Watchlist)</h3>
-        <table border="1" cellpadding="5" cellspacing="0">
+        <table>
         <tr><th>Ticker</th><th>Price</th><th>Trend</th><th>RSI</th><th>Signal</th><th>Whale Intel</th></tr>
         """
         
@@ -359,7 +375,7 @@ class MarketAgent:
                 trend_icon = "📈" if data['trend'] == "UP" else "📉"
                 html += f"""
                 <tr>
-                    <td><b><a href="{link}" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
+                    <td><b><a href="{link}" target="_blank" style="text-decoration:none; color:#0044CC;">{data['symbol']}</a></b></td>
                     <td>${data['price']}</td>
                     <td>{trend_icon}</td>
                     <td>{data['rsi']}</td>
@@ -407,6 +423,15 @@ if __name__ == "__main__":
     agent = MarketAgent()
     report = agent.generate_report()
     
+    # --- SAVE TO GITHUB PAGES ---
+    try:
+        with open("index.html", "w", encoding="utf-8") as f:
+            f.write(report)
+        print("✅ Report saved to index.html for Website")
+    except Exception as e:
+        print(f"❌ Failed to save report: {e}")
+
+    # --- EMAIL LOGIC ---
     if IS_MANUAL:
         print("🕹️ Manual Override.")
         agent.send_email(report, subject_prefix="🕹️ TEST:")
