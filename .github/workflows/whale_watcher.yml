@@ -2,6 +2,7 @@ name: Daily Whale Watcher
 
 on:
   schedule:
+    # Run at the start of every single hour (0 * * * *)
     - cron: '0 * * * *'
   workflow_dispatch:
 
@@ -20,6 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
+          # Uses Python 3.11 to support yfinance syntax
           python-version: '3.11'
 
       - name: Install dependencies
@@ -34,7 +36,7 @@ jobs:
           IS_MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
         run: python whale_watcher_agent.py
 
-      # This step pushes the index.html file to your repo
+      # This step pushes the index.html file to your repo for the website
       - name: Deploy to Website
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
