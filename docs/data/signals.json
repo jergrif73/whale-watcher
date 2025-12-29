@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2025-12-29T23:30:34.588387+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "155.39",
+    "notes": "RSI oversold: 28.15"
+  },
+  {
+    "timestamp": "2025-12-29T23:30:34.932332+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "233.77",
+    "notes": "RSI oversold: 20.5"
+  },
+  {
     "timestamp": "2025-12-29T22:56:00.812099+00:00",
     "ticker": "MSTR",
     "action": "BUY_SIGNAL",
@@ -130,22 +144,5 @@
     "action": "STRONG_BUY",
     "price": "233.96",
     "notes": "RSI extremely oversold: 20.56"
-  },
-  {
-    "timestamp": "2025-12-29T16:09:34.621544+00:00",
-    "ticker": "SMCI",
-    "action": "PROFIT_SETTLING",
-    "price": "30.47",
-    "notes": "Profit target hit but settling",
-    "entry_price": "20.0",
-    "gain_loss_pct": "52.3",
-    "holding_days": "3"
-  },
-  {
-    "timestamp": "2025-12-29T16:09:35.483225+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "157.96",
-    "notes": "RSI oversold: 29.31"
   }
 ]
