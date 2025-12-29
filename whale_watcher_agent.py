@@ -115,11 +115,12 @@ class TradeJournal:
         return trade
     
     def get_positions(self):
-        """Calculate current positions from trade history - PURE DOLLAR TRACKING
+        """Calculate current positions from trade history - FRACTIONAL SHARE TRACKING
         
         Each position tracks:
-        - amount_invested: Total $ put in
-        - price_at_purchase: Weighted average purchase price (for % calculation)
+        - total_invested: Total $ put in
+        - shares: Fractional shares owned (amount / price_at_purchase)
+        - avg_price: Weighted average purchase price
         """
         positions = {}
         
@@ -128,8 +129,9 @@ class TradeJournal:
             
             if ticker not in positions:
                 positions[ticker] = {
-                    'amount_invested': 0,
-                    'price_at_purchase': 0,
+                    'total_invested': 0,
+                    'shares': 0,
+                    'avg_price': 0,
                     'first_buy_date': None,
                     'last_buy_date': None,
                     'buy_count': 0,
@@ -140,53 +142,54 @@ class TradeJournal:
             pos['trades'].append(trade)
             
             if trade['action'] == 'BUY':
-                # Get values - support both old and new formats
-                if 'amount_invested' in trade:
-                    amount = trade['amount_invested']
-                    purchase_price = trade['price_at_purchase']
-                else:
-                    # Old format: price = price per unit, shares = number of units
-                    amount = trade.get('price', 0) * trade.get('shares', 1)
-                    purchase_price = trade.get('price', 0)
+                # Support multiple field name formats
+                amount = trade.get('amount', trade.get('amount_invested', 0))
+                shares = trade.get('shares', 0)
+                price = trade.get('price_at_purchase', trade.get('price', 0))
                 
-                # Calculate weighted average price
-                old_total = pos['amount_invested']
-                new_total = old_total + amount
+                # If shares not provided, calculate from amount/price
+                if shares == 0 and price > 0:
+                    shares = amount / price
                 
-                if new_total > 0 and purchase_price > 0:
-                    # Weighted average of old and new purchase prices
-                    if pos['price_at_purchase'] > 0:
-                        pos['price_at_purchase'] = (
-                            (old_total * pos['price_at_purchase']) + (amount * purchase_price)
-                        ) / new_total
-                    else:
-                        pos['price_at_purchase'] = purchase_price
+                # Update position
+                pos['total_invested'] += amount
+                pos['shares'] += shares
                 
-                pos['amount_invested'] = new_total
+                # Recalculate average price
+                if pos['shares'] > 0:
+                    pos['avg_price'] = pos['total_invested'] / pos['shares']
+                
                 pos['last_buy_date'] = trade['date']
                 pos['buy_count'] += 1
                 if pos['first_buy_date'] is None:
                     pos['first_buy_date'] = trade['date']
                     
             elif trade['action'] == 'SELL':
-                # For sells, reduce the position by the sold amount
-                if 'amount_invested' in trade:
-                    sell_amount = trade['amount_invested']
-                else:
-                    sell_amount = trade.get('price', 0) * trade.get('shares', 1)
+                # For sells, reduce shares proportionally
+                sell_amount = trade.get('amount', trade.get('amount_invested', 0))
+                sell_shares = trade.get('shares', 0)
                 
-                pos['amount_invested'] = max(0, pos['amount_invested'] - sell_amount)
+                # If shares not provided, calculate what portion is being sold
+                if sell_shares == 0 and pos['total_invested'] > 0:
+                    sell_ratio = min(sell_amount / pos['total_invested'], 1.0)
+                    sell_shares = pos['shares'] * sell_ratio
+                
+                pos['shares'] -= sell_shares
+                pos['total_invested'] -= sell_amount
                 
                 # If fully sold out, reset
-                if pos['amount_invested'] <= 0:
-                    pos['amount_invested'] = 0
-                    pos['price_at_purchase'] = 0
+                if pos['shares'] <= 0 or pos['total_invested'] <= 0:
+                    pos['shares'] = 0
+                    pos['total_invested'] = 0
+                    pos['avg_price'] = 0
                     pos['first_buy_date'] = None
                     pos['last_buy_date'] = None
                     pos['buy_count'] = 0
+                else:
+                    pos['avg_price'] = pos['total_invested'] / pos['shares']
         
         # Filter to only active positions
-        active = {k: v for k, v in positions.items() if v['amount_invested'] > 0}
+        active = {k: v for k, v in positions.items() if v['shares'] > 0}
         return active
     
     def get_position(self, ticker):
@@ -296,7 +299,12 @@ class TechnicalAnalyzer:
 
 
 class PositionAnalyzer:
-    """Analyzes owned positions and generates trading signals - PURE DOLLAR TRACKING"""
+    """Analyzes owned positions and generates trading signals - FRACTIONAL SHARE TRACKING
+    
+    Model: You invest $X when stock is at $Y/share
+           You own X/Y fractional shares
+           Current value = shares × current_price
+    """
     
     def __init__(self, ticker, position, df):
         self.ticker = ticker
@@ -307,24 +315,19 @@ class PositionAnalyzer:
         # Current market price
         self.current_price = df['Close'].iloc[-1]
         
-        # Dollar-based position data
-        self.amount_invested = position.get('amount_invested', 0)
-        self.price_at_purchase = position.get('price_at_purchase', 0)
+        # Position data - fractional shares
+        self.total_invested = position.get('total_invested', position.get('amount_invested', 0))
+        self.shares = position.get('shares', 0)
+        self.avg_price = position.get('avg_price', position.get('price_at_purchase', 0))
         
-        # Calculate current value based on price change
-        # If you invested $20 when stock was $20, and now it's $19.72
-        # Your $20 is now worth: $20 * ($19.72 / $20) = $19.72
-        if self.price_at_purchase > 0:
-            price_change_ratio = self.current_price / self.price_at_purchase
-            self.current_value = self.amount_invested * price_change_ratio
-        else:
-            self.current_value = self.amount_invested
+        # Current value = shares × current price
+        self.current_value = self.shares * self.current_price
         
         self.holding_days = self._calc_holding_days()
         
-        # P/L calculations - PURE DOLLAR BASED
-        self.gain_loss_pct = ((self.current_price - self.price_at_purchase) / self.price_at_purchase) * 100 if self.price_at_purchase > 0 else 0
-        self.gain_loss_dollars = self.current_value - self.amount_invested
+        # P/L calculations
+        self.gain_loss_dollars = self.current_value - self.total_invested
+        self.gain_loss_pct = (self.gain_loss_dollars / self.total_invested) * 100 if self.total_invested > 0 else 0
         
         # Peak tracking (for trailing stop)
         self.peak_since_buy = self._get_peak_since_buy()
@@ -849,7 +852,7 @@ class MarketAgent:
             return None
 
     def fetch_data_for_position(self, ticker, position):
-        """Fetch data for an owned position - PURE DOLLAR TRACKING"""
+        """Fetch data for an owned position - FRACTIONAL SHARE TRACKING"""
         try:
             stock = yf.Ticker(ticker)
             df = stock.history(period="3mo")
@@ -866,7 +869,7 @@ class MarketAgent:
                     ticker.replace("-USD", ""),
                     signal_data['action'] or "ALERT",
                     analyzer.current_price,
-                    analyzer.price_at_purchase,
+                    analyzer.avg_price,
                     analyzer.gain_loss_pct,
                     analyzer.holding_days,
                     "; ".join(signal_data['reasoning'][:2])
@@ -885,7 +888,7 @@ class MarketAgent:
             whale_intel = self.check_whale_intel(stock, ticker)
             clean_ticker = ticker.replace("-USD", "")
             
-            print(f"   [OWNED] {clean_ticker}: ${analyzer.amount_invested:.2f} invested | "
+            print(f"   [OWNED] {clean_ticker}: ${analyzer.total_invested:.2f} invested ({analyzer.shares:.4f} shares) | "
                   f"Now ${analyzer.current_value:.2f} | P/L: {analyzer.gain_loss_pct:.1f}% (${analyzer.gain_loss_dollars:.2f}) | "
                   f"{analyzer.holding_days}d | Risk: {signal_data['risk_score']}")
 
@@ -893,8 +896,9 @@ class MarketAgent:
                 "symbol": clean_ticker,
                 "yf_symbol": ticker,
                 "price": round(analyzer.current_price, 2),
-                "price_at_purchase": round(analyzer.price_at_purchase, 2),
-                "amount_invested": round(analyzer.amount_invested, 2),
+                "avg_price": round(analyzer.avg_price, 2),
+                "shares": round(analyzer.shares, 6),
+                "amount_invested": round(analyzer.total_invested, 2),
                 "current_value": round(analyzer.current_value, 2),
                 "trend": analyzer.trend,
                 "rsi": round(analyzer.rsi, 1),
@@ -1057,11 +1061,16 @@ class MarketAgent:
                 link_style = "color: #388bfd; text-decoration: none; font-weight: bold;"
                 badge_style = f"color: {badge_color}; border: 1px solid {badge_color}; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block; white-space: nowrap; font-size: 12px;"
 
+                # Dollar-based values
+                amount_invested = item.get('amount_invested', 0)
+                current_value = item.get('current_value', 0)
+                gain_loss_dollars = item.get('gain_loss_dollars', current_value - amount_invested)
+
                 row = "<tr>"
                 row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
-                row += f'<td style="{cell_style}">{item.get("shares", 0):.2f} @ ${item["cost_basis"]}</td>'
-                row += f'<td style="{cell_style}">${item["price"]}</td>'
-                row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]:+.1f}%</td>'
+                row += f'<td style="{cell_style}">${amount_invested:.2f}</td>'
+                row += f'<td style="{cell_style}">${current_value:.2f}</td>'
+                row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]:+.1f}% (${gain_loss_dollars:+.2f})</td>'
                 row += f'<td style="{cell_style}"><span style="{badge_style}">{item["signal"]}</span></td>'
                 
                 # Action/Reasoning
@@ -1162,8 +1171,8 @@ class MarketAgent:
                                         <thead>
                                             <tr>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Asset</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Position</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Price</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Invested</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Current</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">P/L</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Signal</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Action</th>
