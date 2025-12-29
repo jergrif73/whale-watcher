@@ -879,93 +879,101 @@
         
         // ============ Dashboard Rendering ============
         function renderDashboard(data) {
-            document.getElementById('timestamp').textContent = `Last updated: ${data.generated_at}`;
+            try {
+                document.getElementById('timestamp').textContent = `Last updated: ${data.generated_at}`;
+            } catch(e) { console.error('Timestamp error:', e); }
             
             // Summary
-            if (data.summary) {
-                document.getElementById('portfolio-value').textContent = `$${data.summary.total_current.toLocaleString()}`;
-                document.getElementById('portfolio-change').textContent = `${data.summary.position_count} positions`;
-                
-                const plClass = data.summary.total_gain_loss >= 0 ? 'positive' : 'negative';
-                document.getElementById('total-pl').textContent = `$${data.summary.total_gain_loss.toFixed(2)}`;
-                document.getElementById('total-pl').className = `value ${plClass}`;
-                document.getElementById('total-pl-pct').textContent = `${data.summary.total_gain_loss_pct >= 0 ? '+' : ''}${data.summary.total_gain_loss_pct.toFixed(2)}%`;
-                document.getElementById('total-pl-pct').className = `change ${plClass}`;
-                
-                // Risk level
-                const risk = data.summary.avg_risk_score || 50;
-                const riskLabel = risk < 40 ? 'LOW' : risk < 60 ? 'MEDIUM' : 'HIGH';
-                const riskClass = risk < 40 ? 'risk-low' : risk < 60 ? 'risk-medium' : 'risk-high';
-                document.getElementById('risk-level').textContent = riskLabel;
-                document.getElementById('risk-level').className = `value ${riskClass}`;
-                document.getElementById('risk-score').textContent = `Score: ${Math.round(risk)}`;
-            }
+            try {
+                if (data.summary) {
+                    document.getElementById('portfolio-value').textContent = `$${data.summary.total_current.toLocaleString()}`;
+                    document.getElementById('portfolio-change').textContent = `${data.summary.position_count} positions`;
+                    
+                    const plClass = data.summary.total_gain_loss >= 0 ? 'positive' : 'negative';
+                    document.getElementById('total-pl').textContent = `$${data.summary.total_gain_loss.toFixed(2)}`;
+                    document.getElementById('total-pl').className = `value ${plClass}`;
+                    document.getElementById('total-pl-pct').textContent = `${data.summary.total_gain_loss_pct >= 0 ? '+' : ''}${data.summary.total_gain_loss_pct.toFixed(2)}%`;
+                    document.getElementById('total-pl-pct').className = `change ${plClass}`;
+                    
+                    // Risk level
+                    const risk = data.summary.avg_risk_score || 50;
+                    const riskLabel = risk < 40 ? 'LOW' : risk < 60 ? 'MEDIUM' : 'HIGH';
+                    const riskClass = risk < 40 ? 'risk-low' : risk < 60 ? 'risk-medium' : 'risk-high';
+                    document.getElementById('risk-level').textContent = riskLabel;
+                    document.getElementById('risk-level').className = `value ${riskClass}`;
+                    document.getElementById('risk-score').textContent = `Score: ${Math.round(risk)}`;
+                }
+            } catch(e) { console.error('Summary error:', e); }
             
             // Benchmarks
-            if (data.benchmarks) {
-                if (data.benchmarks.SPY) {
-                    document.getElementById('spy-price').textContent = `$${data.benchmarks.SPY.current}`;
-                    const spyClass = data.benchmarks.SPY.change_pct >= 0 ? 'positive' : 'negative';
-                    document.getElementById('spy-change').textContent = `${data.benchmarks.SPY.change_pct >= 0 ? '+' : ''}${data.benchmarks.SPY.change_pct}%`;
-                    document.getElementById('spy-change').className = `change ${spyClass}`;
+            try {
+                if (data.benchmarks) {
+                    if (data.benchmarks.SPY) {
+                        document.getElementById('spy-price').textContent = `$${data.benchmarks.SPY.current}`;
+                        const spyClass = data.benchmarks.SPY.change_pct >= 0 ? 'positive' : 'negative';
+                        document.getElementById('spy-change').textContent = `${data.benchmarks.SPY.change_pct >= 0 ? '+' : ''}${data.benchmarks.SPY.change_pct}%`;
+                        document.getElementById('spy-change').className = `change ${spyClass}`;
+                    }
+                    if (data.benchmarks.QQQ) {
+                        document.getElementById('qqq-price').textContent = `$${data.benchmarks.QQQ.current}`;
+                        const qqqClass = data.benchmarks.QQQ.change_pct >= 0 ? 'positive' : 'negative';
+                        document.getElementById('qqq-change').textContent = `${data.benchmarks.QQQ.change_pct >= 0 ? '+' : ''}${data.benchmarks.QQQ.change_pct}%`;
+                        document.getElementById('qqq-change').className = `change ${qqqClass}`;
+                    }
                 }
-                if (data.benchmarks.QQQ) {
-                    document.getElementById('qqq-price').textContent = `$${data.benchmarks.QQQ.current}`;
-                    const qqqClass = data.benchmarks.QQQ.change_pct >= 0 ? 'positive' : 'negative';
-                    document.getElementById('qqq-change').textContent = `${data.benchmarks.QQQ.change_pct >= 0 ? '+' : ''}${data.benchmarks.QQQ.change_pct}%`;
-                    document.getElementById('qqq-change').className = `change ${qqqClass}`;
-                }
-            }
+            } catch(e) { console.error('Benchmark error:', e); }
             
-            renderPortfolioTable(data.portfolio);
-            renderWatchlistTable(data.watchlist);
-            renderAllocationChart(data.portfolio);
-            renderActivityLog(data.recent_signals);
+            try { renderPortfolioTable(data.portfolio); } catch(e) { console.error('Portfolio error:', e); }
+            try { renderWatchlistTable(data.watchlist); } catch(e) { console.error('Watchlist error:', e); }
+            try { renderAllocationChart(data.portfolio); } catch(e) { console.error('Chart error:', e); }
+            try { renderActivityLog(data.recent_signals); } catch(e) { console.error('Activity error:', e); }
             
             // NEW: Render analytics sections
             if (data.analytics) {
-                renderPerformanceStats(data.analytics.performance);
-                renderBenchmarkComparison(data.analytics.benchmark_comparison);
-                renderDividendInfo(data.analytics.dividends);
-                renderCategoryBreakdown(data.analytics.performance?.categories);
-                renderAlerts(data.analytics.all_alerts, data.analytics.entry_alerts);
-                renderTaxLots(data.analytics.tax_lots);
-                renderPositionSizing(data.analytics.position_sizing);
-                renderDCASuggestions(data.analytics.dca?.suggestions);
+                try { renderPerformanceStats(data.analytics.performance); } catch(e) { console.error('Performance error:', e); }
+                try { renderBenchmarkComparison(data.analytics.benchmark_comparison); } catch(e) { console.error('Benchmark comp error:', e); }
+                try { renderDividendInfo(data.analytics.dividends); } catch(e) { console.error('Dividend error:', e); }
+                try { renderCategoryBreakdown(data.analytics.performance?.categories); } catch(e) { console.error('Category error:', e); }
+                try { renderAlerts(data.analytics.all_alerts, data.analytics.entry_alerts); } catch(e) { console.error('Alerts error:', e); }
+                try { renderTaxLots(data.analytics.tax_lots); } catch(e) { console.error('Tax error:', e); }
+                try { renderPositionSizing(data.analytics.position_sizing); } catch(e) { console.error('Sizing error:', e); }
+                try { renderDCASuggestions(data.analytics.dca?.suggestions); } catch(e) { console.error('DCA error:', e); }
             }
             
             // Settings display
-            if (data.settings) {
-                const s = data.settings;
-                const tiers = s.profit_tiers || [15, 25, 40, 60];
-                document.getElementById('settings-info').innerHTML = `
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-                        <div>
-                            <strong>Profit Targets:</strong><br>
-                            Tier 1: +${tiers[0]}% (trim 25%)<br>
-                            Tier 2: +${tiers[1]}% (trim 25%)<br>
-                            Tier 3: +${tiers[2]}% (trim 25%)<br>
-                            Tier 4: +${tiers[3]}% (sell most)
+            try {
+                if (data.settings) {
+                    const s = data.settings;
+                    const tiers = s.profit_tiers || [15, 25, 40, 60];
+                    document.getElementById('settings-info').innerHTML = `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                            <div>
+                                <strong>Profit Targets:</strong><br>
+                                Tier 1: +${tiers[0]}% (trim 25%)<br>
+                                Tier 2: +${tiers[1]}% (trim 25%)<br>
+                                Tier 3: +${tiers[2]}% (trim 25%)<br>
+                                Tier 4: +${tiers[3]}% (sell most)
+                            </div>
+                            <div>
+                                <strong>Stop Losses:</strong><br>
+                                Soft Stop: ${s.stop_loss_soft || -8}%<br>
+                                Hard Stop: ${s.stop_loss_hard || -15}%<br>
+                                Trailing: ${s.trailing_stop || 12}% from peak
+                            </div>
+                            <div>
+                                <strong>Timing:</strong><br>
+                                Settling Period: ${s.settling_days || 3} days<br>
+                                Min Hold for Add: 7 days
+                            </div>
+                            <div>
+                                <strong>Position Sizing:</strong><br>
+                                Max Position: ${s.max_position_pct || 10}%<br>
+                                Risk Per Trade: ${s.risk_per_trade_pct || 2}%
+                            </div>
                         </div>
-                        <div>
-                            <strong>Stop Losses:</strong><br>
-                            Soft Stop: ${s.stop_loss_soft || -8}%<br>
-                            Hard Stop: ${s.stop_loss_hard || -15}%<br>
-                            Trailing: ${s.trailing_stop || 12}% from peak
-                        </div>
-                        <div>
-                            <strong>Timing:</strong><br>
-                            Settling Period: ${s.settling_days || 3} days<br>
-                            Min Hold for Add: 7 days
-                        </div>
-                        <div>
-                            <strong>Position Sizing:</strong><br>
-                            Max Position: ${s.max_position_pct || 10}%<br>
-                            Risk Per Trade: ${s.risk_per_trade_pct || 2}%
-                        </div>
-                    </div>
-                `;
-            }
+                    `;
+                }
+            } catch(e) { console.error('Settings error:', e); }
         }
         
         function renderPortfolioTable(portfolio) {
@@ -1361,7 +1369,7 @@
                     </tbody>
                 </table>
                 <div style="padding: 12px 16px; font-size: 12px; color: var(--text-secondary);">
-                    Based on ${MAX_POSITION_PCT || 10}% max position size and ${RISK_PER_TRADE_PCT || 2}% max risk per trade
+                    Based on 10% max position size and 2% max risk per trade
                 </div>
             `;
         }
