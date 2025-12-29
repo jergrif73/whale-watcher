@@ -601,17 +601,15 @@
                 </div>
                 <div class="form-group">
                     <label>Ticker Symbol</label>
-                    <input type="text" id="trade-ticker" placeholder="NVDA, BTC, etc." style="text-transform: uppercase;">
+                    <input type="text" id="trade-ticker" placeholder="NVDA, BTC, etc." style="text-transform: uppercase;" onblur="fetchCurrentPrice()">
+                    <small id="price-display" style="color: var(--text-secondary); display: block; margin-top: 4px;"></small>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Amount ($)</label>
-                        <input type="number" id="trade-amount" step="0.01" placeholder="100.00">
-                    </div>
-                    <div class="form-group">
-                        <label>Stock Price at Purchase ($)</label>
-                        <input type="number" id="trade-price" step="0.01" placeholder="Current price when you bought">
-                    </div>
+                <div class="form-group">
+                    <label>Amount ($)</label>
+                    <input type="number" id="trade-amount" step="0.01" placeholder="20.00">
+                    <small style="color: var(--text-secondary); display: block; margin-top: 4px;">
+                        Current stock price will be fetched automatically
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Date/Time (optional - defaults to now)</label>
@@ -825,10 +823,11 @@
                 const plClass = item.gain_loss_pct >= 0 ? 'positive' : 'negative';
                 const signalClass = getSignalClass(item.color);
                 
-                // Pure dollar values
+                // Dollar and share values
                 const amountInvested = item.amount_invested || 0;
                 const currentValue = item.current_value || 0;
                 const gainLossDollars = item.gain_loss_dollars || (currentValue - amountInvested);
+                const shares = item.shares || 0;
                 
                 const heldDays = item.holding_days !== null ? formatDuration(item.holding_days) : '—';
                 const entryDate = formatDate(item.first_buy_date);
@@ -841,9 +840,12 @@
                     <tr>
                         <td>
                             <a href="${yahooUrl}" target="_blank" class="ticker">${item.symbol}</a>
+                            <span class="entry-date">${shares.toFixed(4)} shares</span>
+                        </td>
+                        <td>
+                            $${amountInvested.toFixed(2)}
                             <span class="entry-date">${entryDate}</span>
                         </td>
-                        <td>$${amountInvested.toFixed(2)}</td>
                         <td>$${currentValue.toFixed(2)}</td>
                         <td class="${plClass}">
                             ${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%
@@ -961,7 +963,7 @@
             const container = document.getElementById('trade-history');
             
             if (!trades || trades.length === 0) {
-                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No trades logged yet.</div>';
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No trades logged yet. Click "+ Buy" to add your first trade.</div>';
                 return;
             }
             
@@ -972,10 +974,10 @@
                 const dateTime = formatDateTime(trade.date);
                 const yahooUrl = getYahooUrl(trade.ticker, trade.ticker);
                 
-                // Get amount - support both formats
-                const amount = trade.amount_invested !== undefined 
-                    ? trade.amount_invested 
-                    : (trade.price * (trade.shares || 1));
+                // Get amount and shares
+                const amount = trade.amount || trade.amount_invested || 0;
+                const shares = trade.shares || 0;
+                const price = trade.price_at_purchase || trade.price || 0;
                 
                 return `
                     <div class="trade-history-item">
@@ -983,6 +985,7 @@
                             <span class="${actionClass}" style="font-weight: 600;">${trade.action}</span>
                             <a href="${yahooUrl}" target="_blank" class="ticker">${trade.ticker}</a>
                             <span style="color: var(--text-secondary);">$${amount.toFixed(2)}</span>
+                            <span style="color: var(--text-secondary); font-size: 11px;">(${shares.toFixed(4)} shares @ $${price.toFixed(2)})</span>
                             ${trade.notes ? `<span style="color: var(--text-secondary); font-size: 11px;"> — ${trade.notes}</span>` : ''}
                         </div>
                         <div style="text-align: right;">
@@ -1127,20 +1130,85 @@
             return await response.json();
         }
         
+        // ============ Price Fetching ============
+        let cachedPrice = null;
+        let cachedTicker = null;
+        
+        async function fetchCurrentPrice() {
+            const ticker = document.getElementById('trade-ticker').value.trim().toUpperCase();
+            const priceDisplay = document.getElementById('price-display');
+            
+            if (!ticker) {
+                priceDisplay.textContent = '';
+                cachedPrice = null;
+                cachedTicker = null;
+                return;
+            }
+            
+            // Check if it's crypto
+            const cryptoSymbols = ['BTC', 'ETH', 'SOL', 'FET', 'RNDR', 'DOGE', 'PEPE'];
+            const yf_ticker = cryptoSymbols.includes(ticker) ? `${ticker}-USD` : ticker;
+            
+            priceDisplay.textContent = 'Fetching price...';
+            
+            try {
+                // Use Yahoo Finance API via a proxy or direct fetch
+                const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${yf_ticker}?interval=1d&range=1d`);
+                const data = await response.json();
+                
+                if (data.chart && data.chart.result && data.chart.result[0]) {
+                    const price = data.chart.result[0].meta.regularMarketPrice;
+                    cachedPrice = price;
+                    cachedTicker = ticker;
+                    priceDisplay.innerHTML = `Current price: <strong>$${price.toFixed(2)}</strong>`;
+                } else {
+                    priceDisplay.textContent = '⚠️ Could not fetch price - will try on submit';
+                    cachedPrice = null;
+                }
+            } catch (err) {
+                console.error('Price fetch error:', err);
+                priceDisplay.textContent = '⚠️ Could not fetch price - will try on submit';
+                cachedPrice = null;
+            }
+        }
+        
         // ============ Trade Submission ============
         async function submitTrade() {
             const action = document.getElementById('trade-action').value;
             const ticker = document.getElementById('trade-ticker').value.trim().toUpperCase();
             const amount = parseFloat(document.getElementById('trade-amount').value);
-            const price = parseFloat(document.getElementById('trade-price').value);
             const datetime = document.getElementById('trade-datetime').value;
             const notes = document.getElementById('trade-notes').value.trim();
             
             if (!ticker) return showStatus('trade-status', 'Please enter a ticker symbol', 'error');
-            if (!amount || amount <= 0) return showStatus('trade-status', 'Please enter a valid amount invested', 'error');
-            if (!price || price <= 0) return showStatus('trade-status', 'Please enter a valid stock price', 'error');
+            if (!amount || amount <= 0) return showStatus('trade-status', 'Please enter a valid amount', 'error');
             
-            showStatus('trade-status', 'Saving trade...', 'success');
+            showStatus('trade-status', 'Fetching current price...', 'success');
+            
+            // Get price - use cached if same ticker, otherwise fetch
+            let price = cachedPrice;
+            if (!price || cachedTicker !== ticker) {
+                try {
+                    const cryptoSymbols = ['BTC', 'ETH', 'SOL', 'FET', 'RNDR', 'DOGE', 'PEPE'];
+                    const yf_ticker = cryptoSymbols.includes(ticker) ? `${ticker}-USD` : ticker;
+                    
+                    const response = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${yf_ticker}?interval=1d&range=1d`);
+                    const data = await response.json();
+                    
+                    if (data.chart && data.chart.result && data.chart.result[0]) {
+                        price = data.chart.result[0].meta.regularMarketPrice;
+                    } else {
+                        return showStatus('trade-status', '❌ Could not fetch stock price. Check ticker symbol.', 'error');
+                    }
+                } catch (err) {
+                    return showStatus('trade-status', '❌ Could not fetch stock price. Check ticker symbol.', 'error');
+                }
+            }
+            
+            // Calculate fractional shares
+            const shares = amount / price;
+            
+            showStatus('trade-status', `Saving trade... ($${amount} = ${shares.toFixed(4)} shares @ $${price.toFixed(2)})`, 'success');
             
             try {
                 let fileData = await getFileFromGitHub(TRADE_JOURNAL_PATH);
@@ -1154,8 +1222,9 @@
                     id: generateId(),
                     ticker: ticker.replace('-USD', ''),
                     action: action,
-                    amount_invested: amount,
+                    amount: amount,
                     price_at_purchase: price,
+                    shares: shares,
                     date: tradeDate,
                     notes: notes
                 };
@@ -1166,20 +1235,22 @@
                     TRADE_JOURNAL_PATH, 
                     journal, 
                     sha, 
-                    `📒 ${action} $${amount} ${ticker} @ $${price}/share`
+                    `📒 ${action} $${amount} ${ticker} (${shares.toFixed(4)} shares @ $${price.toFixed(2)})`
                 );
                 
-                showStatus('trade-status', `✅ ${action} logged! Run workflow to update dashboard.`, 'success');
+                showStatus('trade-status', `✅ ${action} logged! $${amount} = ${shares.toFixed(4)} shares. Run workflow to update.`, 'success');
                 
                 document.getElementById('trade-ticker').value = '';
                 document.getElementById('trade-amount').value = '';
-                document.getElementById('trade-price').value = '';
                 document.getElementById('trade-notes').value = '';
+                document.getElementById('price-display').textContent = '';
+                cachedPrice = null;
+                cachedTicker = null;
                 
                 currentTradeJournal = journal;
                 renderTradeHistory(journal.trades);
                 
-                setTimeout(closeModal, 2000);
+                setTimeout(closeModal, 2500);
                 
             } catch (err) {
                 console.error(err);
