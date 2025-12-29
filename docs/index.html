@@ -492,6 +492,97 @@
             padding: 8px;
         }
         
+        /* AI Insights Styles */
+        .ai-badge {
+            font-size: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+        
+        .ai-insight-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--blue);
+        }
+        
+        .ai-insight-card.bullish {
+            border-left-color: var(--green-light);
+        }
+        
+        .ai-insight-card.bearish {
+            border-left-color: var(--red-light);
+        }
+        
+        .ai-insight-card.neutral {
+            border-left-color: var(--text-secondary);
+        }
+        
+        .ai-ticker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .ai-ticker-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .sentiment-badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .sentiment-bullish {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--green-light);
+        }
+        
+        .sentiment-bearish {
+            background: rgba(248, 81, 73, 0.2);
+            color: var(--red-light);
+        }
+        
+        .sentiment-neutral {
+            background: rgba(139, 148, 158, 0.2);
+            color: var(--text-secondary);
+        }
+        
+        .ai-summary {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .ai-headlines {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .ai-headline-item {
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .ai-headline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ai-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+        
         /* Loading State */
         .loading {
             text-align: center;
@@ -696,6 +787,14 @@
         <div class="section">
             <div class="section-header">💵 DCA Opportunities</div>
             <div id="dca-section">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- NEW: AI Research Insights -->
+        <div class="section" id="ai-insights-section" style="display: none;">
+            <div class="section-header">🤖 AI Research Insights <span class="ai-badge">Powered by Alpha Vantage</span></div>
+            <div id="ai-insights-content">
                 <div class="loading">Loading...</div>
             </div>
         </div>
@@ -939,6 +1038,9 @@
                 try { renderPositionSizing(data.analytics.position_sizing); } catch(e) { console.error('Sizing error:', e); }
                 try { renderDCASuggestions(data.analytics.dca?.suggestions); } catch(e) { console.error('DCA error:', e); }
             }
+            
+            // NEW: Render AI Insights (only shows if deep analysis was run)
+            try { renderAIInsights(data.ai_insights, data.deep_analysis_enabled); } catch(e) { console.error('AI Insights error:', e); }
             
             // Settings display
             try {
@@ -1392,6 +1494,55 @@
                     </div>
                 </div>
             `).join('');
+        }
+        
+        function renderAIInsights(aiInsights, deepAnalysisEnabled) {
+            const section = document.getElementById('ai-insights-section');
+            const container = document.getElementById('ai-insights-content');
+            
+            // Only show section if deep analysis was enabled
+            if (!deepAnalysisEnabled || !aiInsights || Object.keys(aiInsights).length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            
+            const tickers = Object.keys(aiInsights);
+            
+            container.innerHTML = tickers.map(ticker => {
+                const insight = aiInsights[ticker];
+                const sentimentClass = insight.sentiment_label.toLowerCase();
+                const badgeClass = `sentiment-${sentimentClass}`;
+                
+                // Format headlines
+                const headlinesHtml = insight.headlines && insight.headlines.length > 0 
+                    ? `<div class="ai-headlines">
+                        <strong>Recent Headlines:</strong>
+                        ${insight.headlines.slice(0, 3).map(h => `
+                            <div class="ai-headline-item">
+                                📰 ${h.title} <span style="opacity: 0.6;">(${h.source})</span>
+                            </div>
+                        `).join('')}
+                       </div>`
+                    : '';
+                
+                return `
+                    <div class="ai-insight-card ${sentimentClass}">
+                        <div class="ai-ticker-header">
+                            <span class="ai-ticker-name">${ticker}</span>
+                            <span class="sentiment-badge ${badgeClass}">
+                                ${insight.sentiment_label} (${(insight.sentiment_score * 100).toFixed(0)}%)
+                            </span>
+                        </div>
+                        <div class="ai-summary">${insight.ai_summary}</div>
+                        ${headlinesHtml}
+                        <div class="ai-meta">
+                            📊 Based on ${insight.news_count} articles • Updated: ${formatDate(insight.last_updated)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
         
         // ============ Modal Functions ============
