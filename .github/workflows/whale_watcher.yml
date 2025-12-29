@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '0 4,16 * * *'
   workflow_dispatch:
+    inputs:
+      deep_analysis:
+        description: '🔍 Run AI Deep Analysis (uses Alpha Vantage API)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -34,6 +40,8 @@ jobs:
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
           RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
           IS_MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+          DEEP_ANALYSIS: ${{ inputs.deep_analysis }}
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
         run: |
           python whale_watcher_agent.py
 
@@ -44,20 +52,36 @@ jobs:
           echo "=== docs/data ==="
           ls -la docs/data/
 
+      - name: Verify JSON was generated
+        run: |
+          echo "=== Checking generated files ==="
+          cat docs/data/dashboard.json | head -50
+          echo "..."
+          echo "=== Portfolio section ==="
+          cat docs/data/dashboard.json | grep -A 20 '"portfolio"'
+
       - name: Commit and Push changes
         run: |
           git config --global user.name "actions-user"
           git config --global user.email "action@github.com"
           
-          # Stage all updated files
-          git add index.html
-          git add docs/data/dashboard.json
-          git add docs/data/signals.json || true
+          # Force add all data files (even if .gitignore might block)
+          git add -f index.html
+          git add -f docs/data/dashboard.json
+          git add -f docs/data/signals.json || true
+          git add -f docs/data/trade_journal.json || true
+          
+          # Show what's staged
+          echo "=== Staged changes ==="
+          git diff --staged --name-only
           
           # Commit and push
           if git diff --staged --quiet; then
-            echo "No changes to commit."
+            echo "No changes to commit - this is unexpected!"
+            echo "Checking file status:"
+            git status
           else
             git commit -m "📊 Update dashboard data [skip ci]"
             git push origin HEAD:${{ github.ref }}
+            echo "✅ Changes pushed successfully"
           fi
