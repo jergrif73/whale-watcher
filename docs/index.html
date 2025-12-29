@@ -1,85 +1,1161 @@
-
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>Whale Watcher Report</title>
-        </head>
-        <body style="margin: 0; padding: 0; background-color: #0d1117;">
-            <!-- OUTER WRAPPER TABLE (Forces Dark Background) -->
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#0d1117" style="background-color: #0d1117; color: #e6edf3;">
-                <tr>
-                    <td align="center" style="padding: 20px 10px;">
-                        
-                        <!-- MAIN CONTAINER TABLE -->
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #e6edf3;">
-                            
-                            <!-- HEADER -->
-                            <tr>
-                                <td align="center" style="padding-bottom: 20px; border-bottom: 2px solid #30363d;">
-                                    <h1 style="margin: 0; font-size: 24px; color: #e6edf3;">🐳 Whale Watcher</h1>
-                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #8b949e;">Data: 2025-12-28 22:14:55 | Generated: 2025-12-28 22:14:55 UTC</p>
-                                </td>
-                            </tr>
-
-                            <!-- PORTFOLIO SECTION -->
-                            <tr>
-                                <td style="padding-top: 30px;">
-                                    <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">💰 Your Holdings</h3>
-                                    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Asset</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Entry</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Price</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">P/L</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Signal</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Intel</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <!-- WATCHLIST SECTION -->
-                            <tr>
-                                <td style="padding-top: 30px;">
-                                    <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">⚡ Watchlist</h3>
-                                    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Ticker</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Price</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Trend</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">RSI</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Signal</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px; text-transform: uppercase;">Intel</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            
-                            <!-- FOOTER -->
-                            <tr>
-                                <td align="center" style="padding-top: 40px; padding-bottom: 20px; color: #8b949e; font-size: 12px;">
-                                    <p>Generated by Whale Watcher Agent.</p>
-                                    <p>Markets are volatile. DYOR.</p>
-                                    <p style="font-size: 10px; color: #30363d;">File ID: 2025-12-28 22:14:55 UTC</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <!-- FILE_UPDATED: 2025-12-28 22:14:55 UTC -->
-        </body>
-        </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐳 Whale Watcher Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --green: #238636;
+            --green-light: #3fb950;
+            --red: #da3633;
+            --red-light: #f85149;
+            --blue: #388bfd;
+            --purple: #a371f7;
+            --orange: #d29922;
+        }
         
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn:hover {
+            background: var(--border-color);
+        }
+        
+        .btn-primary {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        .btn-primary:hover {
+            background: var(--green-light);
+        }
+        
+        .btn-sell {
+            background: var(--red);
+            border-color: var(--red);
+        }
+        
+        .btn-sell:hover {
+            background: var(--red-light);
+        }
+        
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .summary-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .summary-card .label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .summary-card .value {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .summary-card .change {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .positive { color: var(--green-light); }
+        .negative { color: var(--red-light); }
+        
+        /* Tables */
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .ticker {
+            font-weight: 600;
+            color: var(--blue);
+        }
+        
+        .signal {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .signal-green { background: rgba(35, 134, 54, 0.2); color: var(--green-light); }
+        .signal-red { background: rgba(218, 54, 51, 0.2); color: var(--red-light); }
+        .signal-blue { background: rgba(56, 139, 253, 0.2); color: var(--blue); }
+        .signal-purple { background: rgba(163, 113, 247, 0.2); color: var(--purple); }
+        .signal-orange { background: rgba(210, 153, 34, 0.2); color: var(--orange); }
+        .signal-gray { background: rgba(139, 148, 158, 0.2); color: var(--text-secondary); }
+        
+        .trend-up { color: var(--green-light); }
+        .trend-down { color: var(--red-light); }
+        
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .chart-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .chart-card h3 {
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Activity Log */
+        .activity-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .form-actions .btn {
+            flex: 1;
+            justify-content: center;
+        }
+        
+        /* Trade History */
+        .trade-history-item {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+        
+        .trade-history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .trade-buy { color: var(--green-light); }
+        .trade-sell { color: var(--red-light); }
+        
+        /* Token Setup */
+        .token-notice {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--orange);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        
+        .token-notice a {
+            color: var(--blue);
+        }
+        
+        /* Status messages */
+        .status-msg {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .status-success {
+            background: rgba(35, 134, 54, 0.2);
+            border: 1px solid var(--green);
+            color: var(--green-light);
+        }
+        
+        .status-error {
+            background: rgba(218, 54, 51, 0.2);
+            border: 1px solid var(--red);
+            color: var(--red-light);
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: var(--red-light);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .hide-mobile {
+                display: none;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🐳 Whale Watcher</h1>
+                <div class="timestamp" id="timestamp">Loading...</div>
+            </div>
+            <div class="header-buttons">
+                <button class="btn btn-primary" onclick="openTradeModal('BUY')">+ Buy</button>
+                <button class="btn btn-sell" onclick="openTradeModal('SELL')">− Sell</button>
+                <button class="btn" onclick="openSettingsModal()">⚙️</button>
+                <button class="btn" onclick="loadData()">↻</button>
+            </div>
+        </header>
+        
+        <!-- Summary Cards -->
+        <div class="summary-grid" id="summary-cards">
+            <div class="summary-card">
+                <div class="label">Portfolio Value</div>
+                <div class="value" id="portfolio-value">—</div>
+                <div class="change" id="portfolio-change">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">Total P/L</div>
+                <div class="value" id="total-pl">—</div>
+                <div class="change" id="total-pl-pct">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">SPY (7d)</div>
+                <div class="value" id="spy-price">—</div>
+                <div class="change" id="spy-change">—</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">QQQ (7d)</div>
+                <div class="value" id="qqq-price">—</div>
+                <div class="change" id="qqq-change">—</div>
+            </div>
+        </div>
+        
+        <!-- Portfolio Table -->
+        <div class="section">
+            <div class="section-header">
+                <span>💼 Your Positions</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th>Shares</th>
+                        <th>Avg Cost</th>
+                        <th>Current</th>
+                        <th>P/L</th>
+                        <th class="hide-mobile">Held</th>
+                        <th>Signal</th>
+                    </tr>
+                </thead>
+                <tbody id="portfolio-table">
+                    <tr><td colspan="7" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Watchlist Table -->
+        <div class="section">
+            <div class="section-header">
+                <span>👀 Watchlist</span>
+                <button class="btn" onclick="openWatchlistModal()" style="padding: 4px 12px; font-size: 12px;">+ Add</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                        <th>Trend</th>
+                        <th>RSI</th>
+                        <th class="hide-mobile">Day</th>
+                        <th class="hide-mobile">Week</th>
+                        <th>Signal</th>
+                    </tr>
+                </thead>
+                <tbody id="watchlist-table">
+                    <tr><td colspan="7" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Charts & Activity -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Portfolio Allocation</h3>
+                <canvas id="allocation-chart"></canvas>
+            </div>
+            <div class="section" style="margin-bottom: 0;">
+                <div class="section-header">📋 Recent Activity</div>
+                <div id="activity-log">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trade History -->
+        <div class="section">
+            <div class="section-header">📒 Trade History</div>
+            <div id="trade-history">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- Settings Info -->
+        <div class="section">
+            <div class="section-header">⚙️ Current Settings</div>
+            <div id="settings-info" style="padding: 16px; color: var(--text-secondary); font-size: 14px;">
+                Loading...
+            </div>
+        </div>
+    </div>
+
+    <!-- Trade Modal -->
+    <div class="modal-overlay" id="trade-modal">
+        <div class="modal">
+            <h2 id="trade-modal-title">📈 Log Trade</h2>
+            <div id="trade-status"></div>
+            
+            <div id="token-setup" style="display: none;">
+                <div class="token-notice">
+                    <strong>⚠️ First-time setup required</strong><br><br>
+                    To log trades, you need a GitHub Personal Access Token:<br>
+                    1. Go to <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Token Settings</a><br>
+                    2. Give it a name (e.g., "Whale Watcher")<br>
+                    3. Select scope: <strong>repo</strong> (full control)<br>
+                    4. Generate and paste below<br><br>
+                    <em>Token is stored only in your browser.</em>
+                </div>
+                <div class="form-group">
+                    <label>GitHub Token</label>
+                    <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxx">
+                </div>
+                <div class="form-actions">
+                    <button class="btn" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveToken()">Save Token</button>
+                </div>
+            </div>
+            
+            <div id="trade-form-container">
+                <div class="form-group">
+                    <label>Action</label>
+                    <select id="trade-action">
+                        <option value="BUY">BUY</option>
+                        <option value="SELL">SELL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ticker Symbol</label>
+                    <input type="text" id="trade-ticker" placeholder="NVDA, BTC, etc." style="text-transform: uppercase;">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" id="trade-price" step="0.01" placeholder="185.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Shares/Units</label>
+                        <input type="number" id="trade-shares" step="0.0001" placeholder="10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <input type="text" id="trade-notes" placeholder="RSI dip entry, profit taking, etc.">
+                </div>
+                <div class="form-actions">
+                    <button class="btn" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" id="submit-trade-btn" onclick="submitTrade()">Log Trade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Watchlist Modal -->
+    <div class="modal-overlay" id="watchlist-modal">
+        <div class="modal">
+            <h2>👀 Add to Watchlist</h2>
+            <div id="watchlist-status"></div>
+            <div class="form-group">
+                <label>Ticker Symbol</label>
+                <input type="text" id="watchlist-ticker" placeholder="AAPL" style="text-transform: uppercase;">
+            </div>
+            <div class="form-actions">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addToWatchlist()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal">
+            <h2>⚙️ Settings</h2>
+            <div class="form-group">
+                <label>GitHub Token</label>
+                <input type="password" id="settings-token" placeholder="ghp_xxxxxxxxxxxx">
+                <small style="color: var(--text-secondary); display: block; margin-top: 4px;">
+                    Stored locally in your browser only
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Repository</label>
+                <input type="text" id="settings-repo" placeholder="username/whale-watcher">
+            </div>
+            <div class="form-actions">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn" onclick="clearToken()" style="color: var(--red-light);">Clear Token</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const GITHUB_REPO = localStorage.getItem('ww_repo') || 'jergrif73/whale-watcher';
+        const TRADE_JOURNAL_PATH = 'docs/data/trade_journal.json';
+        
+        let allocationChart = null;
+        let currentTradeJournal = null;
+        
+        // ============ Data Loading ============
+        async function loadData() {
+            try {
+                const response = await fetch('data/dashboard.json');
+                if (!response.ok) throw new Error('Data not found');
+                const data = await response.json();
+                renderDashboard(data);
+                
+                // Also load trade journal
+                await loadTradeJournal();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('timestamp').textContent = 'Error loading data';
+                document.getElementById('portfolio-table').innerHTML = 
+                    '<tr><td colspan="7" class="error">Could not load data. Run the workflow first.</td></tr>';
+            }
+        }
+        
+        async function loadTradeJournal() {
+            try {
+                const response = await fetch('data/trade_journal.json');
+                if (response.ok) {
+                    currentTradeJournal = await response.json();
+                    renderTradeHistory(currentTradeJournal.trades || []);
+                }
+            } catch (e) {
+                console.log('No trade journal found');
+            }
+        }
+        
+        // ============ Dashboard Rendering ============
+        function renderDashboard(data) {
+            document.getElementById('timestamp').textContent = `Last updated: ${data.generated_at}`;
+            
+            // Summary
+            if (data.summary) {
+                document.getElementById('portfolio-value').textContent = `$${data.summary.total_current.toLocaleString()}`;
+                document.getElementById('portfolio-change').textContent = `${data.summary.position_count} positions`;
+                
+                const plClass = data.summary.total_gain_loss >= 0 ? 'positive' : 'negative';
+                document.getElementById('total-pl').textContent = `$${data.summary.total_gain_loss.toFixed(2)}`;
+                document.getElementById('total-pl').className = `value ${plClass}`;
+                document.getElementById('total-pl-pct').textContent = `${data.summary.total_gain_loss_pct >= 0 ? '+' : ''}${data.summary.total_gain_loss_pct.toFixed(2)}%`;
+                document.getElementById('total-pl-pct').className = `change ${plClass}`;
+            }
+            
+            // Benchmarks
+            if (data.benchmarks) {
+                if (data.benchmarks.SPY) {
+                    document.getElementById('spy-price').textContent = `$${data.benchmarks.SPY.current}`;
+                    const spyClass = data.benchmarks.SPY.change_pct >= 0 ? 'positive' : 'negative';
+                    document.getElementById('spy-change').textContent = `${data.benchmarks.SPY.change_pct >= 0 ? '+' : ''}${data.benchmarks.SPY.change_pct}%`;
+                    document.getElementById('spy-change').className = `change ${spyClass}`;
+                }
+                if (data.benchmarks.QQQ) {
+                    document.getElementById('qqq-price').textContent = `$${data.benchmarks.QQQ.current}`;
+                    const qqqClass = data.benchmarks.QQQ.change_pct >= 0 ? 'positive' : 'negative';
+                    document.getElementById('qqq-change').textContent = `${data.benchmarks.QQQ.change_pct >= 0 ? '+' : ''}${data.benchmarks.QQQ.change_pct}%`;
+                    document.getElementById('qqq-change').className = `change ${qqqClass}`;
+                }
+            }
+            
+            renderPortfolioTable(data.portfolio);
+            renderWatchlistTable(data.watchlist);
+            renderAllocationChart(data.portfolio);
+            renderActivityLog(data.recent_signals);
+            
+            if (data.settings) {
+                document.getElementById('settings-info').innerHTML = `
+                    <b>Profit Target:</b> +${data.settings.profit_target}% | 
+                    <b>Stop Loss:</b> ${data.settings.stop_loss}% | 
+                    <b>Settling Period:</b> ${data.settings.settling_days} days
+                `;
+            }
+        }
+        
+        function renderPortfolioTable(portfolio) {
+            const tbody = document.getElementById('portfolio-table');
+            
+            if (!portfolio || portfolio.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-secondary);">No positions. Click "+ Buy" to log a trade.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = portfolio.map(item => {
+                const plClass = item.gain_loss_pct >= 0 ? 'positive' : 'negative';
+                const signalClass = getSignalClass(item.color);
+                const shares = item.shares ? item.shares.toFixed(2) : '—';
+                const costBasis = item.cost_basis || item.entry_price || 0;
+                const heldDays = item.holding_days !== null ? formatDuration(item.holding_days) : '—';
+                
+                return `
+                    <tr>
+                        <td class="ticker">${item.symbol}</td>
+                        <td>${shares}</td>
+                        <td>$${costBasis.toFixed(2)}</td>
+                        <td>$${item.price}</td>
+                        <td class="${plClass}">${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%</td>
+                        <td class="hide-mobile">${heldDays}</td>
+                        <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function renderWatchlistTable(watchlist) {
+            const tbody = document.getElementById('watchlist-table');
+            
+            if (!watchlist || watchlist.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color: var(--text-secondary);">No watchlist items.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = watchlist.map(item => {
+                const trendClass = item.trend === 'UP' ? 'trend-up' : 'trend-down';
+                const trendIcon = item.trend === 'UP' ? '📈' : '📉';
+                const dayClass = item.daily_change >= 0 ? 'positive' : 'negative';
+                const weekClass = item.weekly_change >= 0 ? 'positive' : 'negative';
+                const signalClass = getSignalClass(item.color);
+                
+                return `
+                    <tr>
+                        <td class="ticker">${item.symbol}</td>
+                        <td>$${item.price}</td>
+                        <td class="${trendClass}">${trendIcon}</td>
+                        <td>${item.rsi}</td>
+                        <td class="hide-mobile ${dayClass}">${item.daily_change >= 0 ? '+' : ''}${item.daily_change}%</td>
+                        <td class="hide-mobile ${weekClass}">${item.weekly_change >= 0 ? '+' : ''}${item.weekly_change}%</td>
+                        <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function renderAllocationChart(portfolio) {
+            if (!portfolio || portfolio.length === 0) return;
+            
+            const ctx = document.getElementById('allocation-chart').getContext('2d');
+            
+            if (allocationChart) {
+                allocationChart.destroy();
+            }
+            
+            const labels = portfolio.map(p => p.symbol);
+            const values = portfolio.map(p => (p.shares || 1) * p.price);
+            const colors = [
+                '#388bfd', '#3fb950', '#a371f7', '#d29922', '#f85149',
+                '#79c0ff', '#56d364', '#bc8cff', '#e3b341', '#ff7b72'
+            ];
+            
+            allocationChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors.slice(0, portfolio.length),
+                        borderColor: '#0d1117',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#8b949e',
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderActivityLog(signals) {
+            const container = document.getElementById('activity-log');
+            
+            if (!signals || signals.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No recent activity.</div>';
+                return;
+            }
+            
+            container.innerHTML = signals.slice(0, 10).map(signal => {
+                const time = signal.timestamp ? signal.timestamp.substring(5, 16).replace('T', ' ') : '';
+                const actionClass = signal.action.includes('SELL') || signal.action.includes('STOP') ? 'negative' : 
+                                   signal.action.includes('BUY') ? 'positive' : '';
+                
+                return `
+                    <div class="activity-item">
+                        <div class="activity-info">
+                            <span class="ticker">${signal.ticker}</span>
+                            <span class="${actionClass}">${signal.action}</span>
+                            <span style="color: var(--text-secondary);">@ $${signal.price}</span>
+                        </div>
+                        <span class="activity-time">${time}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderTradeHistory(trades) {
+            const container = document.getElementById('trade-history');
+            
+            if (!trades || trades.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No trades logged yet.</div>';
+                return;
+            }
+            
+            // Show newest first
+            const sorted = [...trades].reverse();
+            
+            container.innerHTML = sorted.slice(0, 15).map(trade => {
+                const actionClass = trade.action === 'BUY' ? 'trade-buy' : 'trade-sell';
+                const date = trade.date ? trade.date.substring(0, 10) : '';
+                const total = (trade.price * trade.shares).toFixed(2);
+                
+                return `
+                    <div class="trade-history-item">
+                        <div>
+                            <span class="${actionClass}" style="font-weight: 600;">${trade.action}</span>
+                            <span class="ticker">${trade.ticker}</span>
+                            <span style="color: var(--text-secondary);">${trade.shares} @ $${trade.price}</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <div>$${total}</div>
+                            <div class="activity-time">${date}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ============ Modal Functions ============
+        function openTradeModal(action = 'BUY') {
+            const token = localStorage.getItem('ww_token');
+            
+            document.getElementById('trade-modal').classList.add('active');
+            document.getElementById('trade-action').value = action;
+            document.getElementById('trade-modal-title').textContent = action === 'BUY' ? '📈 Log Buy' : '📉 Log Sell';
+            document.getElementById('trade-status').innerHTML = '';
+            
+            // Show token setup if no token
+            if (!token) {
+                document.getElementById('token-setup').style.display = 'block';
+                document.getElementById('trade-form-container').style.display = 'none';
+            } else {
+                document.getElementById('token-setup').style.display = 'none';
+                document.getElementById('trade-form-container').style.display = 'block';
+            }
+            
+            // Update button color
+            const btn = document.getElementById('submit-trade-btn');
+            btn.className = action === 'BUY' ? 'btn btn-primary' : 'btn btn-sell';
+            btn.textContent = action === 'BUY' ? 'Log Buy' : 'Log Sell';
+        }
+        
+        function openWatchlistModal() {
+            const token = localStorage.getItem('ww_token');
+            if (!token) {
+                openTradeModal('BUY'); // Will show token setup
+                return;
+            }
+            document.getElementById('watchlist-modal').classList.add('active');
+            document.getElementById('watchlist-status').innerHTML = '';
+        }
+        
+        function openSettingsModal() {
+            document.getElementById('settings-modal').classList.add('active');
+            document.getElementById('settings-token').value = localStorage.getItem('ww_token') || '';
+            document.getElementById('settings-repo').value = localStorage.getItem('ww_repo') || 'jergrif73/whale-watcher';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+        
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+        });
+        
+        // ============ Token Management ============
+        function saveToken() {
+            const token = document.getElementById('github-token').value.trim();
+            if (!token) {
+                alert('Please enter a token');
+                return;
+            }
+            localStorage.setItem('ww_token', token);
+            document.getElementById('token-setup').style.display = 'none';
+            document.getElementById('trade-form-container').style.display = 'block';
+        }
+        
+        function saveSettings() {
+            const token = document.getElementById('settings-token').value.trim();
+            const repo = document.getElementById('settings-repo').value.trim();
+            
+            if (token) localStorage.setItem('ww_token', token);
+            if (repo) localStorage.setItem('ww_repo', repo);
+            
+            closeModal();
+            alert('Settings saved!');
+        }
+        
+        function clearToken() {
+            localStorage.removeItem('ww_token');
+            closeModal();
+            alert('Token cleared');
+        }
+        
+        // ============ GitHub API Functions ============
+        async function getFileFromGitHub(path) {
+            const token = localStorage.getItem('ww_token');
+            const repo = localStorage.getItem('ww_repo') || GITHUB_REPO;
+            
+            const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            
+            if (!response.ok) {
+                if (response.status === 404) return null;
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const content = atob(data.content);
+            return { content: JSON.parse(content), sha: data.sha };
+        }
+        
+        async function saveFileToGitHub(path, content, sha, message) {
+            const token = localStorage.getItem('ww_token');
+            const repo = localStorage.getItem('ww_repo') || GITHUB_REPO;
+            
+            const body = {
+                message: message,
+                content: btoa(JSON.stringify(content, null, 2)),
+                branch: 'main'
+            };
+            
+            if (sha) body.sha = sha;
+            
+            const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.message || `GitHub API error: ${response.status}`);
+            }
+            
+            return await response.json();
+        }
+        
+        // ============ Trade Submission ============
+        async function submitTrade() {
+            const action = document.getElementById('trade-action').value;
+            const ticker = document.getElementById('trade-ticker').value.trim().toUpperCase();
+            const price = parseFloat(document.getElementById('trade-price').value);
+            const shares = parseFloat(document.getElementById('trade-shares').value);
+            const notes = document.getElementById('trade-notes').value.trim();
+            
+            // Validation
+            if (!ticker) return showStatus('trade-status', 'Please enter a ticker symbol', 'error');
+            if (!price || price <= 0) return showStatus('trade-status', 'Please enter a valid price', 'error');
+            if (!shares || shares <= 0) return showStatus('trade-status', 'Please enter valid shares', 'error');
+            
+            showStatus('trade-status', 'Saving trade...', 'success');
+            
+            try {
+                // Get current file
+                let fileData = await getFileFromGitHub(TRADE_JOURNAL_PATH);
+                let journal = fileData ? fileData.content : { trades: [], watchlist: [] };
+                let sha = fileData ? fileData.sha : null;
+                
+                // Add new trade
+                const trade = {
+                    id: generateId(),
+                    ticker: ticker.replace('-USD', ''),
+                    action: action,
+                    price: price,
+                    shares: shares,
+                    date: new Date().toISOString(),
+                    notes: notes
+                };
+                
+                journal.trades.push(trade);
+                
+                // Save
+                await saveFileToGitHub(
+                    TRADE_JOURNAL_PATH, 
+                    journal, 
+                    sha, 
+                    `📒 ${action} ${shares} ${ticker} @ $${price}`
+                );
+                
+                showStatus('trade-status', `✅ ${action} logged! Run workflow to update dashboard.`, 'success');
+                
+                // Clear form
+                document.getElementById('trade-ticker').value = '';
+                document.getElementById('trade-price').value = '';
+                document.getElementById('trade-shares').value = '';
+                document.getElementById('trade-notes').value = '';
+                
+                // Refresh trade history display
+                currentTradeJournal = journal;
+                renderTradeHistory(journal.trades);
+                
+                // Close after delay
+                setTimeout(closeModal, 2000);
+                
+            } catch (err) {
+                console.error(err);
+                showStatus('trade-status', `❌ Error: ${err.message}`, 'error');
+            }
+        }
+        
+        async function addToWatchlist() {
+            const ticker = document.getElementById('watchlist-ticker').value.trim().toUpperCase();
+            
+            if (!ticker) return showStatus('watchlist-status', 'Please enter a ticker', 'error');
+            
+            showStatus('watchlist-status', 'Adding...', 'success');
+            
+            try {
+                let fileData = await getFileFromGitHub(TRADE_JOURNAL_PATH);
+                let journal = fileData ? fileData.content : { trades: [], watchlist: [] };
+                let sha = fileData ? fileData.sha : null;
+                
+                if (!journal.watchlist.includes(ticker)) {
+                    journal.watchlist.push(ticker);
+                    
+                    await saveFileToGitHub(
+                        TRADE_JOURNAL_PATH,
+                        journal,
+                        sha,
+                        `👀 Add ${ticker} to watchlist`
+                    );
+                    
+                    showStatus('watchlist-status', `✅ ${ticker} added! Run workflow to see data.`, 'success');
+                } else {
+                    showStatus('watchlist-status', `${ticker} already in watchlist`, 'error');
+                }
+                
+                document.getElementById('watchlist-ticker').value = '';
+                setTimeout(closeModal, 1500);
+                
+            } catch (err) {
+                showStatus('watchlist-status', `❌ Error: ${err.message}`, 'error');
+            }
+        }
+        
+        // ============ Helpers ============
+        function showStatus(elementId, message, type) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = `<div class="status-msg status-${type}">${message}</div>`;
+        }
+        
+        function generateId() {
+            return Math.random().toString(36).substring(2, 10);
+        }
+        
+        function getSignalClass(color) {
+            const map = {
+                'green': 'signal-green',
+                'red': 'signal-red',
+                'blue': 'signal-blue',
+                'purple': 'signal-purple',
+                'orange': 'signal-orange',
+                'gray': 'signal-gray',
+                'black': 'signal-gray'
+            };
+            return map[color] || 'signal-gray';
+        }
+        
+        function stripEmoji(text) {
+            return text.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').trim();
+        }
+        
+        function formatDuration(days) {
+            if (days === 0) return 'Today';
+            if (days < 7) return `${days}d`;
+            if (days < 30) return `${Math.floor(days/7)}w`;
+            if (days < 365) return `${Math.floor(days/30)}mo`;
+            return `${Math.floor(days/365)}y`;
+        }
+        
+        // ============ Initialize ============
+        loadData();
+        setInterval(loadData, 5 * 60 * 1000); // Refresh every 5 min
+    </script>
+</body>
+</html>
