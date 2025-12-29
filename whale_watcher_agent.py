@@ -49,6 +49,18 @@ RSI_EXTREME_OVERSOLD = 25
 RSI_EXTREME_OVERBOUGHT = 80
 VOLUME_SPIKE_RATIO = 2.5  # Volume > 2.5x average is notable
 
+# --- POSITION SIZING SETTINGS ---
+DEFAULT_PORTFOLIO_SIZE = 1000  # Default portfolio size for sizing calc
+MAX_POSITION_PCT = 10.0        # Max % of portfolio in single position
+RISK_PER_TRADE_PCT = 2.0       # Max % of portfolio to risk per trade
+
+# --- TAX SETTINGS ---
+SHORT_TERM_DAYS = 365          # Days to hold for long-term capital gains
+LONG_TERM_BUFFER_DAYS = 14     # Alert X days before long-term eligibility
+
+# --- DCA SETTINGS ---
+DCA_DEFAULT_FREQUENCY = "weekly"  # weekly, biweekly, monthly
+
 WHALE_KEYWORDS = [
     "Public Investment Fund", "PIF", "Norges", "NBIM", "Abu Dhabi Investment", "ADIA", 
     "Mubadala", "Qatar Investment", "QIA", "Elliott", "Pershing Square", "Ackman", 
@@ -172,12 +184,498 @@ class TradeJournal:
     def is_owned(self, ticker):
         """Check if ticker is currently owned"""
         pos = self.get_position(ticker)
-        return pos is not None and pos['amount_invested'] > 0
+        return pos is not None and pos.get('amount', 0) > 0
     
     def get_ticker_trades(self, ticker):
         """Get all trades for a specific ticker"""
         clean = ticker.upper().replace("-USD", "")
         return [t for t in self.trades if t['ticker'] == clean]
+
+
+# ============================================================================
+# NEW FEATURE CLASSES
+# ============================================================================
+
+class DCATracker:
+    """Track Dollar Cost Averaging schedules and performance"""
+    
+    def __init__(self, journal):
+        self.journal = journal
+        self.schedules = journal.dca_schedules if hasattr(journal, 'dca_schedules') else []
+    
+    def analyze_dca_performance(self, ticker, trades):
+        """Analyze DCA performance for a ticker"""
+        buy_trades = [t for t in trades if t['action'] == 'BUY']
+        if len(buy_trades) < 2:
+            return None
+        
+        # Calculate average cost via DCA
+        total_invested = sum(t.get('amount', 0) for t in buy_trades)
+        
+        # Get buy dates and amounts
+        buys = []
+        for t in buy_trades:
+            buys.append({
+                'date': t['date'],
+                'amount': t.get('amount', 0)
+            })
+        
+        # Calculate time between buys
+        if len(buys) >= 2:
+            dates = sorted([datetime.fromisoformat(b['date'].replace('Z', '+00:00')) if 'T' in b['date'] 
+                           else datetime.strptime(b['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc) 
+                           for b in buys])
+            intervals = [(dates[i+1] - dates[i]).days for i in range(len(dates)-1)]
+            avg_interval = sum(intervals) / len(intervals) if intervals else 0
+        else:
+            avg_interval = 0
+        
+        return {
+            'ticker': ticker,
+            'total_buys': len(buy_trades),
+            'total_invested': total_invested,
+            'avg_buy_amount': total_invested / len(buy_trades) if buy_trades else 0,
+            'avg_interval_days': round(avg_interval, 1),
+            'first_buy': min(t['date'] for t in buy_trades),
+            'last_buy': max(t['date'] for t in buy_trades),
+            'consistency': 'Regular' if 0 < avg_interval <= 35 else 'Irregular'
+        }
+    
+    def get_dca_suggestions(self, portfolio_data, watchlist_data):
+        """Suggest good DCA candidates based on volatility and trend"""
+        suggestions = []
+        
+        all_items = portfolio_data + watchlist_data
+        for item in all_items:
+            # Good DCA candidates: uptrend, not overbought, reasonable volatility
+            if item.get('trend') == 'UP' and item.get('rsi', 50) < 65:
+                score = 0
+                reasons = []
+                
+                if item.get('rsi', 50) < 40:
+                    score += 30
+                    reasons.append("RSI in buy zone")
+                if item.get('trend') == 'UP':
+                    score += 20
+                    reasons.append("Uptrend")
+                if item.get('vol_pattern') == 'ACCUMULATION':
+                    score += 25
+                    reasons.append("Accumulation pattern")
+                
+                if score >= 40:
+                    suggestions.append({
+                        'ticker': item['symbol'],
+                        'score': score,
+                        'reasons': reasons,
+                        'current_price': item['price'],
+                        'rsi': item.get('rsi', 0)
+                    })
+        
+        return sorted(suggestions, key=lambda x: x['score'], reverse=True)[:5]
+
+
+class PerformanceAnalyzer:
+    """Analyze trading performance and attribution"""
+    
+    def __init__(self, journal, portfolio_data):
+        self.journal = journal
+        self.portfolio_data = portfolio_data
+    
+    def calculate_stats(self):
+        """Calculate overall performance statistics"""
+        all_trades = self.journal.trades
+        
+        if not all_trades:
+            return self._empty_stats()
+        
+        # Group trades by ticker
+        by_ticker = {}
+        for trade in all_trades:
+            ticker = trade['ticker']
+            if ticker not in by_ticker:
+                by_ticker[ticker] = []
+            by_ticker[ticker].append(trade)
+        
+        # Calculate win/loss for closed positions and current P/L for open
+        winners = 0
+        losers = 0
+        total_gain = 0
+        total_loss = 0
+        
+        # Check portfolio for current P/L
+        for item in self.portfolio_data:
+            pnl = item.get('gain_loss_pct', 0)
+            if pnl > 0:
+                winners += 1
+                total_gain += item.get('gain_loss_dollars', 0)
+            elif pnl < 0:
+                losers += 1
+                total_loss += abs(item.get('gain_loss_dollars', 0))
+        
+        total_positions = winners + losers
+        win_rate = (winners / total_positions * 100) if total_positions > 0 else 0
+        
+        # Calculate by category
+        categories = self._categorize_performance()
+        
+        return {
+            'total_trades': len(all_trades),
+            'total_positions': total_positions,
+            'winners': winners,
+            'losers': losers,
+            'win_rate': round(win_rate, 1),
+            'total_gain': round(total_gain, 2),
+            'total_loss': round(total_loss, 2),
+            'net_pnl': round(total_gain - total_loss, 2),
+            'avg_win': round(total_gain / winners, 2) if winners > 0 else 0,
+            'avg_loss': round(total_loss / losers, 2) if losers > 0 else 0,
+            'profit_factor': round(total_gain / total_loss, 2) if total_loss > 0 else float('inf'),
+            'categories': categories
+        }
+    
+    def _categorize_performance(self):
+        """Break down performance by asset category"""
+        crypto = ['BTC', 'ETH', 'SOL', 'DOGE', 'PEPE', 'FET', 'RNDR']
+        etfs = ['SPY', 'QQQ', 'SOXL', 'TQQQ']
+        
+        categories = {
+            'crypto': {'count': 0, 'pnl': 0, 'invested': 0},
+            'etf': {'count': 0, 'pnl': 0, 'invested': 0},
+            'stock': {'count': 0, 'pnl': 0, 'invested': 0}
+        }
+        
+        for item in self.portfolio_data:
+            ticker = item['symbol']
+            pnl = item.get('gain_loss_dollars', 0)
+            invested = item.get('amount_invested', 0)
+            
+            if ticker in crypto:
+                cat = 'crypto'
+            elif ticker in etfs:
+                cat = 'etf'
+            else:
+                cat = 'stock'
+            
+            categories[cat]['count'] += 1
+            categories[cat]['pnl'] += pnl
+            categories[cat]['invested'] += invested
+        
+        # Calculate return % for each category
+        for cat in categories:
+            if categories[cat]['invested'] > 0:
+                categories[cat]['return_pct'] = round(
+                    categories[cat]['pnl'] / categories[cat]['invested'] * 100, 1
+                )
+            else:
+                categories[cat]['return_pct'] = 0
+        
+        return categories
+    
+    def _empty_stats(self):
+        return {
+            'total_trades': 0,
+            'total_positions': 0,
+            'winners': 0,
+            'losers': 0,
+            'win_rate': 0,
+            'total_gain': 0,
+            'total_loss': 0,
+            'net_pnl': 0,
+            'avg_win': 0,
+            'avg_loss': 0,
+            'profit_factor': 0,
+            'categories': {}
+        }
+
+
+class TaxLotTracker:
+    """Track tax lots and alert for long-term holding opportunities"""
+    
+    def __init__(self, journal):
+        self.journal = journal
+    
+    def analyze_tax_lots(self, portfolio_data):
+        """Analyze tax lots for each position"""
+        tax_lots = []
+        
+        for item in portfolio_data:
+            ticker = item['symbol']
+            holding_days = item.get('holding_days', 0) or 0
+            
+            days_to_long_term = SHORT_TERM_DAYS - holding_days
+            
+            if holding_days >= SHORT_TERM_DAYS:
+                status = "LONG_TERM"
+                alert = None
+            elif days_to_long_term <= LONG_TERM_BUFFER_DAYS:
+                status = "ALMOST_LONG"
+                alert = f"Hold {days_to_long_term} more days for long-term rate!"
+            else:
+                status = "SHORT_TERM"
+                alert = f"{days_to_long_term} days until long-term eligible"
+            
+            tax_lots.append({
+                'ticker': ticker,
+                'holding_days': holding_days,
+                'status': status,
+                'days_to_long_term': max(0, days_to_long_term),
+                'alert': alert,
+                'gain_loss_pct': item.get('gain_loss_pct', 0),
+                'gain_loss_dollars': item.get('gain_loss_dollars', 0)
+            })
+        
+        return tax_lots
+    
+    def get_tax_alerts(self, tax_lots):
+        """Get important tax-related alerts"""
+        alerts = []
+        
+        for lot in tax_lots:
+            # Alert if close to long-term and in profit
+            if lot['status'] == 'ALMOST_LONG' and lot['gain_loss_pct'] > 0:
+                alerts.append({
+                    'ticker': lot['ticker'],
+                    'type': 'HOLD_FOR_LONG_TERM',
+                    'message': f"⏰ {lot['ticker']}: {lot['alert']} (currently +{lot['gain_loss_pct']}%)",
+                    'priority': 'high'
+                })
+            
+            # Warning if selling short-term gain
+            elif lot['status'] == 'SHORT_TERM' and lot['gain_loss_pct'] > 20:
+                alerts.append({
+                    'ticker': lot['ticker'],
+                    'type': 'SHORT_TERM_GAIN_WARNING',
+                    'message': f"💸 {lot['ticker']}: Selling now = short-term tax on +{lot['gain_loss_pct']}% gain",
+                    'priority': 'medium'
+                })
+        
+        return alerts
+
+
+class DividendTracker:
+    """Track dividend income and yields"""
+    
+    # Known dividend stocks and approximate annual yields
+    DIVIDEND_STOCKS = {
+        'MSFT': 0.7, 'AAPL': 0.5, 'GOOGL': 0, 'META': 0.4,
+        'JPM': 2.3, 'BAC': 2.4, 'WFC': 2.5,
+        'KO': 3.0, 'PEP': 2.7, 'JNJ': 2.9,
+        'SPY': 1.3, 'QQQ': 0.5, 'VTI': 1.4,
+        'T': 6.5, 'VZ': 6.3,
+        'O': 5.5, 'SCHD': 3.5
+    }
+    
+    def __init__(self, portfolio_data):
+        self.portfolio = portfolio_data
+    
+    def calculate_dividend_income(self):
+        """Calculate estimated annual dividend income"""
+        total_div_income = 0
+        dividend_positions = []
+        
+        for item in self.portfolio:
+            ticker = item['symbol']
+            current_value = item.get('current_value', 0)
+            div_yield = self.DIVIDEND_STOCKS.get(ticker, 0) / 100
+            
+            if div_yield > 0:
+                annual_income = current_value * div_yield
+                dividend_positions.append({
+                    'ticker': ticker,
+                    'value': round(current_value, 2),
+                    'yield_pct': self.DIVIDEND_STOCKS.get(ticker, 0),
+                    'annual_income': round(annual_income, 2),
+                    'monthly_income': round(annual_income / 12, 2)
+                })
+                total_div_income += annual_income
+        
+        return {
+            'total_annual': round(total_div_income, 2),
+            'total_monthly': round(total_div_income / 12, 2),
+            'positions': dividend_positions,
+            'yield_on_portfolio': round(
+                total_div_income / sum(p['value'] for p in dividend_positions) * 100, 2
+            ) if dividend_positions else 0
+        }
+
+
+class BenchmarkComparison:
+    """Compare portfolio performance against benchmarks"""
+    
+    def __init__(self, portfolio_data, benchmark_data):
+        self.portfolio = portfolio_data
+        self.benchmarks = benchmark_data
+    
+    def compare(self):
+        """Compare portfolio to SPY and QQQ"""
+        if not self.portfolio:
+            return {'vs_spy': 0, 'vs_qqq': 0, 'alpha': 0}
+        
+        # Calculate portfolio return
+        total_invested = sum(p.get('amount_invested', 0) for p in self.portfolio)
+        total_current = sum(p.get('current_value', 0) for p in self.portfolio)
+        portfolio_return = ((total_current - total_invested) / total_invested * 100) if total_invested > 0 else 0
+        
+        spy_return = self.benchmarks.get('SPY', {}).get('change_pct', 0)
+        qqq_return = self.benchmarks.get('QQQ', {}).get('change_pct', 0)
+        
+        return {
+            'portfolio_return': round(portfolio_return, 2),
+            'spy_return': spy_return,
+            'qqq_return': qqq_return,
+            'vs_spy': round(portfolio_return - spy_return, 2),
+            'vs_qqq': round(portfolio_return - qqq_return, 2),
+            'beating_spy': portfolio_return > spy_return,
+            'beating_qqq': portfolio_return > qqq_return,
+            'alpha': round(portfolio_return - ((spy_return + qqq_return) / 2), 2)
+        }
+
+
+class PriceAlertManager:
+    """Manage price alerts for watchlist items"""
+    
+    def __init__(self, journal):
+        self.alerts = journal.price_alerts if hasattr(journal, 'price_alerts') else []
+    
+    def check_alerts(self, watchlist_data, portfolio_data):
+        """Check if any price alerts have triggered"""
+        triggered = []
+        all_items = {item['symbol']: item for item in watchlist_data + portfolio_data}
+        
+        for alert in self.alerts:
+            ticker = alert['ticker']
+            if ticker not in all_items:
+                continue
+            
+            current_price = all_items[ticker]['price']
+            target_price = alert.get('target_price', 0)
+            direction = alert.get('direction', 'below')
+            
+            if direction == 'below' and current_price <= target_price:
+                triggered.append({
+                    'ticker': ticker,
+                    'type': 'PRICE_BELOW',
+                    'target': target_price,
+                    'current': current_price,
+                    'message': f"🎯 {ticker} dropped to ${current_price} (target: ${target_price})"
+                })
+            elif direction == 'above' and current_price >= target_price:
+                triggered.append({
+                    'ticker': ticker,
+                    'type': 'PRICE_ABOVE',
+                    'target': target_price,
+                    'current': current_price,
+                    'message': f"🚀 {ticker} reached ${current_price} (target: ${target_price})"
+                })
+        
+        return triggered
+    
+    def generate_entry_alerts(self, watchlist_data):
+        """Generate entry point alerts based on technicals"""
+        entry_alerts = []
+        
+        for item in watchlist_data:
+            ticker = item['symbol']
+            rsi = item.get('rsi', 50)
+            price = item['price']
+            support = item.get('support', 0)
+            
+            # RSI-based entry
+            if rsi <= RSI_OVERSOLD:
+                entry_alerts.append({
+                    'ticker': ticker,
+                    'type': 'RSI_OVERSOLD',
+                    'price': price,
+                    'rsi': rsi,
+                    'message': f"📉 {ticker} RSI at {rsi} - oversold entry zone"
+                })
+            
+            # Support-based entry
+            elif support > 0 and price <= support * 1.02:
+                entry_alerts.append({
+                    'ticker': ticker,
+                    'type': 'NEAR_SUPPORT',
+                    'price': price,
+                    'support': support,
+                    'message': f"🛡️ {ticker} near support ${support:.2f} - potential entry"
+                })
+            
+            # Volume spike with dip
+            elif item.get('vol_ratio', 1) > 2 and item.get('daily_change', 0) < -3:
+                entry_alerts.append({
+                    'ticker': ticker,
+                    'type': 'VOLUME_DIP',
+                    'price': price,
+                    'message': f"📊 {ticker} high volume dip - watch for reversal"
+                })
+        
+        return entry_alerts
+
+
+class PositionSizer:
+    """Calculate optimal position sizes based on risk"""
+    
+    def __init__(self, portfolio_value, risk_per_trade=RISK_PER_TRADE_PCT, max_position=MAX_POSITION_PCT):
+        self.portfolio_value = portfolio_value
+        self.risk_per_trade = risk_per_trade / 100
+        self.max_position = max_position / 100
+    
+    def calculate_position_size(self, entry_price, stop_loss_price):
+        """Calculate position size based on risk"""
+        if entry_price <= 0 or stop_loss_price <= 0:
+            return {'error': 'Invalid prices'}
+        
+        # Risk per share
+        risk_per_share = abs(entry_price - stop_loss_price)
+        risk_pct = risk_per_share / entry_price
+        
+        # Max $ to risk
+        max_risk_dollars = self.portfolio_value * self.risk_per_trade
+        
+        # Position size based on risk
+        risk_based_size = max_risk_dollars / risk_per_share if risk_per_share > 0 else 0
+        risk_based_dollars = risk_based_size * entry_price
+        
+        # Cap at max position size
+        max_position_dollars = self.portfolio_value * self.max_position
+        
+        recommended_dollars = min(risk_based_dollars, max_position_dollars)
+        
+        return {
+            'entry_price': entry_price,
+            'stop_loss': stop_loss_price,
+            'risk_per_share': round(risk_per_share, 2),
+            'risk_pct': round(risk_pct * 100, 1),
+            'max_risk_dollars': round(max_risk_dollars, 2),
+            'recommended_amount': round(recommended_dollars, 2),
+            'recommended_pct': round(recommended_dollars / self.portfolio_value * 100, 1),
+            'potential_loss': round(recommended_dollars * risk_pct, 2)
+        }
+    
+    def suggest_sizes(self, watchlist_data):
+        """Suggest position sizes for watchlist items"""
+        suggestions = []
+        
+        for item in watchlist_data:
+            ticker = item['symbol']
+            price = item['price']
+            support = item.get('support', price * 0.9)
+            
+            # Use support as stop loss, or -10% if no support
+            stop_loss = max(support, price * 0.9)
+            
+            sizing = self.calculate_position_size(price, stop_loss)
+            
+            suggestions.append({
+                'ticker': ticker,
+                'current_price': price,
+                'suggested_stop': round(stop_loss, 2),
+                'suggested_amount': sizing['recommended_amount'],
+                'risk_if_stopped': sizing['potential_loss'],
+                'position_pct': sizing['recommended_pct']
+            })
+        
+        return suggestions
 
 
 class TechnicalAnalyzer:
@@ -1015,6 +1513,54 @@ class MarketAgent:
             "avg_risk_score": round(avg_risk_score, 0)
         }
         
+        # =============================================
+        # NEW ANALYTICS
+        # =============================================
+        print("\n--- 📊 RUNNING ANALYTICS ---")
+        
+        # 1. DCA Analysis
+        dca_tracker = DCATracker(self.journal)
+        dca_analysis = {}
+        for ticker in positions.keys():
+            trades = self.journal.get_ticker_trades(ticker)
+            dca_data = dca_tracker.analyze_dca_performance(ticker, trades)
+            if dca_data:
+                dca_analysis[ticker] = dca_data
+        dca_suggestions = dca_tracker.get_dca_suggestions(portfolio_data, watchlist_data)
+        print(f"   DCA: Analyzed {len(dca_analysis)} positions, {len(dca_suggestions)} suggestions")
+        
+        # 5. Performance Attribution
+        perf_analyzer = PerformanceAnalyzer(self.journal, portfolio_data)
+        performance_stats = perf_analyzer.calculate_stats()
+        print(f"   Performance: {performance_stats['win_rate']}% win rate, ${performance_stats['net_pnl']} net P/L")
+        
+        # 6. Tax Lot Tracking
+        tax_tracker = TaxLotTracker(self.journal)
+        tax_lots = tax_tracker.analyze_tax_lots(portfolio_data)
+        tax_alerts = tax_tracker.get_tax_alerts(tax_lots)
+        print(f"   Tax: {len(tax_lots)} lots tracked, {len(tax_alerts)} alerts")
+        
+        # 7. Dividend Tracking
+        div_tracker = DividendTracker(portfolio_data)
+        dividend_data = div_tracker.calculate_dividend_income()
+        print(f"   Dividends: ${dividend_data['total_annual']}/yr estimated")
+        
+        # 8. Benchmark Comparison
+        benchmark_comp = BenchmarkComparison(portfolio_data, benchmarks)
+        benchmark_analysis = benchmark_comp.compare()
+        print(f"   Benchmark: {benchmark_analysis['portfolio_return']}% vs SPY {benchmark_analysis['spy_return']}%")
+        
+        # 4 & 9. Entry Point Optimizer & Price Alerts
+        alert_manager = PriceAlertManager(self.journal)
+        entry_alerts = alert_manager.generate_entry_alerts(watchlist_data)
+        print(f"   Entry Alerts: {len(entry_alerts)} opportunities")
+        
+        # 10. Position Sizing
+        portfolio_value = total_current if total_current > 0 else DEFAULT_PORTFOLIO_SIZE
+        sizer = PositionSizer(portfolio_value)
+        sizing_suggestions = sizer.suggest_sizes(watchlist_data[:10])  # Top 10 watchlist
+        print(f"   Position Sizing: {len(sizing_suggestions)} suggestions")
+        
         # Signals
         existing_signals = []
         signals_file = "docs/data/signals.json"
@@ -1026,7 +1572,10 @@ class MarketAgent:
         
         all_signals = self.recent_signals + existing_signals
         all_signals = all_signals[:20]
-            
+        
+        # Combine all alerts
+        all_alerts = tax_alerts + entry_alerts
+        
         return {
             "generated_at": self.timestamp,
             "portfolio": portfolio_data,
@@ -1035,12 +1584,31 @@ class MarketAgent:
             "summary": summary,
             "recent_signals": all_signals,
             "trade_history": self.journal.trades[-10:],
+            
+            # NEW ANALYTICS DATA
+            "analytics": {
+                "dca": {
+                    "positions": dca_analysis,
+                    "suggestions": dca_suggestions
+                },
+                "performance": performance_stats,
+                "tax_lots": tax_lots,
+                "tax_alerts": tax_alerts,
+                "dividends": dividend_data,
+                "benchmark_comparison": benchmark_analysis,
+                "entry_alerts": entry_alerts,
+                "position_sizing": sizing_suggestions,
+                "all_alerts": all_alerts
+            },
+            
             "settings": {
                 "profit_tiers": [PROFIT_TIER_1, PROFIT_TIER_2, PROFIT_TIER_3, PROFIT_TIER_4],
                 "stop_loss_soft": STOP_LOSS_SOFT,
                 "stop_loss_hard": STOP_LOSS_HARD,
                 "trailing_stop": TRAILING_STOP_PCT,
-                "settling_days": SETTLING_PERIOD_DAYS
+                "settling_days": SETTLING_PERIOD_DAYS,
+                "max_position_pct": MAX_POSITION_PCT,
+                "risk_per_trade_pct": RISK_PER_TRADE_PCT
             }
         }
 
