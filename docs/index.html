@@ -107,7 +107,7 @@
         /* Summary Cards */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -188,6 +188,11 @@
         .ticker {
             font-weight: 600;
             color: var(--blue);
+            text-decoration: none;
+        }
+        
+        .ticker:hover {
+            text-decoration: underline;
         }
         
         .signal {
@@ -206,6 +211,19 @@
         
         .trend-up { color: var(--green-light); }
         .trend-down { color: var(--red-light); }
+        
+        /* Entry info styling */
+        .entry-info {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .entry-date {
+            display: block;
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
         
         /* Charts */
         .charts-grid {
@@ -286,17 +304,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 24px;
-            cursor: pointer;
         }
         
         .form-group {
@@ -393,6 +400,11 @@
             color: var(--red-light);
         }
         
+        /* Risk indicator */
+        .risk-low { color: var(--green-light); }
+        .risk-medium { color: var(--orange); }
+        .risk-high { color: var(--red-light); }
+        
         /* Loading State */
         .loading {
             text-align: center;
@@ -458,6 +470,11 @@
                 <div class="change" id="total-pl-pct">—</div>
             </div>
             <div class="summary-card">
+                <div class="label">Risk Level</div>
+                <div class="value" id="risk-level">—</div>
+                <div class="change" id="risk-score">—</div>
+            </div>
+            <div class="summary-card">
                 <div class="label">SPY (7d)</div>
                 <div class="value" id="spy-price">—</div>
                 <div class="change" id="spy-change">—</div>
@@ -473,17 +490,18 @@
         <div class="section">
             <div class="section-header">
                 <span>💼 Your Positions</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Click ticker for Yahoo Finance</span>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Asset</th>
-                        <th>Shares</th>
-                        <th>Avg Cost</th>
+                        <th>Entry</th>
                         <th>Current</th>
                         <th>P/L</th>
                         <th class="hide-mobile">Held</th>
                         <th>Signal</th>
+                        <th class="hide-mobile">Action</th>
                     </tr>
                 </thead>
                 <tbody id="portfolio-table">
@@ -523,7 +541,7 @@
                 <canvas id="allocation-chart"></canvas>
             </div>
             <div class="section" style="margin-bottom: 0;">
-                <div class="section-header">📋 Recent Activity</div>
+                <div class="section-header">📋 Recent Signals</div>
                 <div id="activity-log">
                     <div class="loading">Loading...</div>
                 </div>
@@ -540,7 +558,7 @@
         
         <!-- Settings Info -->
         <div class="section">
-            <div class="section-header">⚙️ Current Settings</div>
+            <div class="section-header">⚙️ Trading Rules</div>
             <div id="settings-info" style="padding: 16px; color: var(--text-secondary); font-size: 14px;">
                 Loading...
             </div>
@@ -594,6 +612,10 @@
                         <label>Shares/Units</label>
                         <input type="number" id="trade-shares" step="0.0001" placeholder="10">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label>Date/Time (optional - defaults to now)</label>
+                    <input type="datetime-local" id="trade-datetime">
                 </div>
                 <div class="form-group">
                     <label>Notes (optional)</label>
@@ -654,6 +676,40 @@
         let allocationChart = null;
         let currentTradeJournal = null;
         
+        // Helper: Get Yahoo Finance URL
+        function getYahooUrl(symbol, yf_symbol) {
+            const ticker = yf_symbol || symbol;
+            return `https://finance.yahoo.com/quote/${ticker}`;
+        }
+        
+        // Helper: Format date for display
+        function formatDate(dateStr) {
+            if (!dateStr) return '—';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+            } catch {
+                return '—';
+            }
+        }
+        
+        // Helper: Format datetime for display
+        function formatDateTime(dateStr) {
+            if (!dateStr) return '—';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: '2-digit',
+                    hour: 'numeric',
+                    minute: '2-digit'
+                });
+            } catch {
+                return '—';
+            }
+        }
+        
         // ============ Data Loading ============
         async function loadData() {
             try {
@@ -662,7 +718,6 @@
                 const data = await response.json();
                 renderDashboard(data);
                 
-                // Also load trade journal
                 await loadTradeJournal();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -698,6 +753,14 @@
                 document.getElementById('total-pl').className = `value ${plClass}`;
                 document.getElementById('total-pl-pct').textContent = `${data.summary.total_gain_loss_pct >= 0 ? '+' : ''}${data.summary.total_gain_loss_pct.toFixed(2)}%`;
                 document.getElementById('total-pl-pct').className = `change ${plClass}`;
+                
+                // Risk level
+                const risk = data.summary.avg_risk_score || 50;
+                const riskLabel = risk < 40 ? 'LOW' : risk < 60 ? 'MEDIUM' : 'HIGH';
+                const riskClass = risk < 40 ? 'risk-low' : risk < 60 ? 'risk-medium' : 'risk-high';
+                document.getElementById('risk-level').textContent = riskLabel;
+                document.getElementById('risk-level').className = `value ${riskClass}`;
+                document.getElementById('risk-score').textContent = `Score: ${Math.round(risk)}`;
             }
             
             // Benchmarks
@@ -721,11 +784,31 @@
             renderAllocationChart(data.portfolio);
             renderActivityLog(data.recent_signals);
             
+            // Settings display
             if (data.settings) {
+                const s = data.settings;
+                const tiers = s.profit_tiers || [15, 25, 40, 60];
                 document.getElementById('settings-info').innerHTML = `
-                    <b>Profit Target:</b> +${data.settings.profit_target}% | 
-                    <b>Stop Loss:</b> ${data.settings.stop_loss}% | 
-                    <b>Settling Period:</b> ${data.settings.settling_days} days
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                        <div>
+                            <strong>Profit Targets:</strong><br>
+                            Tier 1: +${tiers[0]}% (trim 25%)<br>
+                            Tier 2: +${tiers[1]}% (trim 25%)<br>
+                            Tier 3: +${tiers[2]}% (trim 25%)<br>
+                            Tier 4: +${tiers[3]}% (sell most)
+                        </div>
+                        <div>
+                            <strong>Stop Losses:</strong><br>
+                            Soft Stop: ${s.stop_loss_soft || -8}%<br>
+                            Hard Stop: ${s.stop_loss_hard || -15}%<br>
+                            Trailing: ${s.trailing_stop || 12}% from peak
+                        </div>
+                        <div>
+                            <strong>Timing:</strong><br>
+                            Settling Period: ${s.settling_days || 3} days<br>
+                            Min Hold for Add: 7 days
+                        </div>
+                    </div>
                 `;
             }
         }
@@ -744,16 +827,27 @@
                 const shares = item.shares ? item.shares.toFixed(2) : '—';
                 const costBasis = item.cost_basis || item.entry_price || 0;
                 const heldDays = item.holding_days !== null ? formatDuration(item.holding_days) : '—';
+                const entryDate = formatDate(item.first_buy_date);
+                const yahooUrl = getYahooUrl(item.symbol, item.yf_symbol);
+                
+                // Get reasoning if available
+                const reasoning = item.reasoning && item.reasoning.length > 0 ? item.reasoning[0] : '';
                 
                 return `
                     <tr>
-                        <td class="ticker">${item.symbol}</td>
-                        <td>${shares}</td>
-                        <td>$${costBasis.toFixed(2)}</td>
+                        <td>
+                            <a href="${yahooUrl}" target="_blank" class="ticker">${item.symbol}</a>
+                            <span class="entry-date">${shares} shares</span>
+                        </td>
+                        <td>
+                            $${costBasis.toFixed(2)}
+                            <span class="entry-date">${entryDate}</span>
+                        </td>
                         <td>$${item.price}</td>
                         <td class="${plClass}">${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%</td>
                         <td class="hide-mobile">${heldDays}</td>
                         <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
+                        <td class="hide-mobile entry-info">${reasoning}</td>
                     </tr>
                 `;
             }).join('');
@@ -773,10 +867,11 @@
                 const dayClass = item.daily_change >= 0 ? 'positive' : 'negative';
                 const weekClass = item.weekly_change >= 0 ? 'positive' : 'negative';
                 const signalClass = getSignalClass(item.color);
+                const yahooUrl = getYahooUrl(item.symbol, item.yf_symbol);
                 
                 return `
                     <tr>
-                        <td class="ticker">${item.symbol}</td>
+                        <td><a href="${yahooUrl}" target="_blank" class="ticker">${item.symbol}</a></td>
                         <td>$${item.price}</td>
                         <td class="${trendClass}">${trendIcon}</td>
                         <td>${item.rsi}</td>
@@ -834,19 +929,20 @@
             const container = document.getElementById('activity-log');
             
             if (!signals || signals.length === 0) {
-                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No recent activity.</div>';
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No recent signals.</div>';
                 return;
             }
             
             container.innerHTML = signals.slice(0, 10).map(signal => {
-                const time = signal.timestamp ? signal.timestamp.substring(5, 16).replace('T', ' ') : '';
+                const time = signal.timestamp ? formatDateTime(signal.timestamp) : '';
                 const actionClass = signal.action.includes('SELL') || signal.action.includes('STOP') ? 'negative' : 
                                    signal.action.includes('BUY') ? 'positive' : '';
+                const yahooUrl = getYahooUrl(signal.ticker, signal.ticker);
                 
                 return `
                     <div class="activity-item">
                         <div class="activity-info">
-                            <span class="ticker">${signal.ticker}</span>
+                            <a href="${yahooUrl}" target="_blank" class="ticker">${signal.ticker}</a>
                             <span class="${actionClass}">${signal.action}</span>
                             <span style="color: var(--text-secondary);">@ $${signal.price}</span>
                         </div>
@@ -864,24 +960,25 @@
                 return;
             }
             
-            // Show newest first
             const sorted = [...trades].reverse();
             
-            container.innerHTML = sorted.slice(0, 15).map(trade => {
+            container.innerHTML = sorted.slice(0, 20).map(trade => {
                 const actionClass = trade.action === 'BUY' ? 'trade-buy' : 'trade-sell';
-                const date = trade.date ? trade.date.substring(0, 10) : '';
+                const dateTime = formatDateTime(trade.date);
                 const total = (trade.price * trade.shares).toFixed(2);
+                const yahooUrl = getYahooUrl(trade.ticker, trade.ticker);
                 
                 return `
                     <div class="trade-history-item">
                         <div>
                             <span class="${actionClass}" style="font-weight: 600;">${trade.action}</span>
-                            <span class="ticker">${trade.ticker}</span>
+                            <a href="${yahooUrl}" target="_blank" class="ticker">${trade.ticker}</a>
                             <span style="color: var(--text-secondary);">${trade.shares} @ $${trade.price}</span>
+                            ${trade.notes ? `<span style="color: var(--text-secondary); font-size: 11px;"> — ${trade.notes}</span>` : ''}
                         </div>
                         <div style="text-align: right;">
                             <div>$${total}</div>
-                            <div class="activity-time">${date}</div>
+                            <div class="activity-time">${dateTime}</div>
                         </div>
                     </div>
                 `;
@@ -897,7 +994,11 @@
             document.getElementById('trade-modal-title').textContent = action === 'BUY' ? '📈 Log Buy' : '📉 Log Sell';
             document.getElementById('trade-status').innerHTML = '';
             
-            // Show token setup if no token
+            // Set default datetime to now
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('trade-datetime').value = now.toISOString().slice(0, 16);
+            
             if (!token) {
                 document.getElementById('token-setup').style.display = 'block';
                 document.getElementById('trade-form-container').style.display = 'none';
@@ -906,7 +1007,6 @@
                 document.getElementById('trade-form-container').style.display = 'block';
             }
             
-            // Update button color
             const btn = document.getElementById('submit-trade-btn');
             btn.className = action === 'BUY' ? 'btn btn-primary' : 'btn btn-sell';
             btn.textContent = action === 'BUY' ? 'Log Buy' : 'Log Sell';
@@ -915,7 +1015,7 @@
         function openWatchlistModal() {
             const token = localStorage.getItem('ww_token');
             if (!token) {
-                openTradeModal('BUY'); // Will show token setup
+                openTradeModal('BUY');
                 return;
             }
             document.getElementById('watchlist-modal').classList.add('active');
@@ -932,7 +1032,6 @@
             document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
         }
         
-        // Close modal on overlay click
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) closeModal();
@@ -1026,9 +1125,9 @@
             const ticker = document.getElementById('trade-ticker').value.trim().toUpperCase();
             const price = parseFloat(document.getElementById('trade-price').value);
             const shares = parseFloat(document.getElementById('trade-shares').value);
+            const datetime = document.getElementById('trade-datetime').value;
             const notes = document.getElementById('trade-notes').value.trim();
             
-            // Validation
             if (!ticker) return showStatus('trade-status', 'Please enter a ticker symbol', 'error');
             if (!price || price <= 0) return showStatus('trade-status', 'Please enter a valid price', 'error');
             if (!shares || shares <= 0) return showStatus('trade-status', 'Please enter valid shares', 'error');
@@ -1036,25 +1135,25 @@
             showStatus('trade-status', 'Saving trade...', 'success');
             
             try {
-                // Get current file
                 let fileData = await getFileFromGitHub(TRADE_JOURNAL_PATH);
                 let journal = fileData ? fileData.content : { trades: [], watchlist: [] };
                 let sha = fileData ? fileData.sha : null;
                 
-                // Add new trade
+                // Use provided datetime or current time
+                const tradeDate = datetime ? new Date(datetime).toISOString() : new Date().toISOString();
+                
                 const trade = {
                     id: generateId(),
                     ticker: ticker.replace('-USD', ''),
                     action: action,
                     price: price,
                     shares: shares,
-                    date: new Date().toISOString(),
+                    date: tradeDate,
                     notes: notes
                 };
                 
                 journal.trades.push(trade);
                 
-                // Save
                 await saveFileToGitHub(
                     TRADE_JOURNAL_PATH, 
                     journal, 
@@ -1064,17 +1163,14 @@
                 
                 showStatus('trade-status', `✅ ${action} logged! Run workflow to update dashboard.`, 'success');
                 
-                // Clear form
                 document.getElementById('trade-ticker').value = '';
                 document.getElementById('trade-price').value = '';
                 document.getElementById('trade-shares').value = '';
                 document.getElementById('trade-notes').value = '';
                 
-                // Refresh trade history display
                 currentTradeJournal = journal;
                 renderTradeHistory(journal.trades);
                 
-                // Close after delay
                 setTimeout(closeModal, 2000);
                 
             } catch (err) {
@@ -1147,6 +1243,7 @@
         
         function formatDuration(days) {
             if (days === 0) return 'Today';
+            if (days === 1) return '1d';
             if (days < 7) return `${days}d`;
             if (days < 30) return `${Math.floor(days/7)}w`;
             if (days < 365) return `${Math.floor(days/30)}mo`;
@@ -1155,7 +1252,7 @@
         
         // ============ Initialize ============
         loadData();
-        setInterval(loadData, 5 * 60 * 1000); // Refresh every 5 min
+        setInterval(loadData, 5 * 60 * 1000);
     </script>
 </body>
 </html>
