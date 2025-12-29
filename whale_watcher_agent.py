@@ -5,6 +5,7 @@ import numpy as np
 import os
 import json
 import uuid
+import requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
@@ -15,6 +16,11 @@ SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 is_manual_env = os.environ.get("IS_MANUAL_RUN", "false").lower()
 IS_MANUAL = is_manual_env == "true"
+
+# --- AI DEEP ANALYSIS SETTINGS ---
+deep_analysis_env = os.environ.get("DEEP_ANALYSIS", "false").lower()
+DEEP_ANALYSIS = deep_analysis_env == "true"
+ALPHA_VANTAGE_KEY = os.environ.get("ALPHA_VANTAGE_KEY", "")
 
 EMAIL_SUBJECT_BASE = "Market Intelligence Report"
 
@@ -676,6 +682,196 @@ class PositionSizer:
             })
         
         return suggestions
+
+
+class AIResearchAgent:
+    """AI-powered stock research using Alpha Vantage news & sentiment API
+    
+    Only runs when DEEP_ANALYSIS is enabled to conserve API calls.
+    Free tier: 25 calls/day
+    """
+    
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://www.alphavantage.co/query"
+        self.calls_made = 0
+        self.max_calls = 20  # Leave buffer for free tier
+    
+    def can_make_call(self):
+        """Check if we have API budget remaining"""
+        return self.api_key and self.calls_made < self.max_calls
+    
+    def get_news_sentiment(self, ticker):
+        """Fetch news and sentiment for a ticker from Alpha Vantage"""
+        if not self.can_make_call():
+            return None
+        
+        try:
+            params = {
+                'function': 'NEWS_SENTIMENT',
+                'tickers': ticker,
+                'limit': 10,
+                'apikey': self.api_key
+            }
+            
+            response = requests.get(self.base_url, params=params, timeout=15)
+            self.calls_made += 1
+            
+            if response.status_code != 200:
+                print(f"      ⚠️ Alpha Vantage API error: {response.status_code}")
+                return None
+            
+            data = response.json()
+            
+            # Check for API limit message
+            if 'Note' in data or 'Information' in data:
+                print(f"      ⚠️ Alpha Vantage: {data.get('Note', data.get('Information', 'Rate limited'))}")
+                return None
+            
+            return self._parse_sentiment_data(ticker, data)
+            
+        except Exception as e:
+            print(f"      ⚠️ Error fetching news for {ticker}: {e}")
+            return None
+    
+    def _parse_sentiment_data(self, ticker, data):
+        """Parse Alpha Vantage sentiment response into structured data"""
+        feed = data.get('feed', [])
+        
+        if not feed:
+            return {
+                'ticker': ticker,
+                'news_count': 0,
+                'sentiment_score': 0,
+                'sentiment_label': 'NEUTRAL',
+                'headlines': [],
+                'ai_summary': 'No recent news found.',
+                'last_updated': datetime.now(timezone.utc).isoformat()
+            }
+        
+        # Extract relevant news for this ticker
+        headlines = []
+        sentiment_scores = []
+        
+        for article in feed[:10]:
+            # Find sentiment specific to our ticker
+            ticker_sentiments = article.get('ticker_sentiment', [])
+            ticker_score = 0
+            
+            for ts in ticker_sentiments:
+                if ts.get('ticker', '').upper() == ticker.upper():
+                    ticker_score = float(ts.get('ticker_sentiment_score', 0))
+                    break
+            
+            # Use overall sentiment if ticker-specific not found
+            if ticker_score == 0:
+                ticker_score = float(article.get('overall_sentiment_score', 0))
+            
+            sentiment_scores.append(ticker_score)
+            
+            headlines.append({
+                'title': article.get('title', '')[:100],
+                'source': article.get('source', ''),
+                'time': article.get('time_published', ''),
+                'sentiment': ticker_score
+            })
+        
+        # Calculate average sentiment
+        avg_sentiment = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0
+        
+        # Classify sentiment
+        if avg_sentiment >= 0.15:
+            label = 'BULLISH'
+        elif avg_sentiment <= -0.15:
+            label = 'BEARISH'
+        else:
+            label = 'NEUTRAL'
+        
+        # Generate AI summary based on news
+        ai_summary = self._generate_summary(ticker, headlines, avg_sentiment, label)
+        
+        return {
+            'ticker': ticker,
+            'news_count': len(headlines),
+            'sentiment_score': round(avg_sentiment, 3),
+            'sentiment_label': label,
+            'headlines': headlines[:5],  # Top 5 headlines
+            'ai_summary': ai_summary,
+            'last_updated': datetime.now(timezone.utc).isoformat()
+        }
+    
+    def _generate_summary(self, ticker, headlines, sentiment_score, sentiment_label):
+        """Generate an AI-style summary based on news data"""
+        if not headlines:
+            return f"No recent news coverage for {ticker}."
+        
+        # Extract key themes from headlines
+        headline_text = ' '.join([h['title'].lower() for h in headlines])
+        
+        # Simple keyword detection for themes
+        themes = []
+        if any(word in headline_text for word in ['earnings', 'revenue', 'profit', 'quarter']):
+            themes.append('earnings activity')
+        if any(word in headline_text for word in ['upgrade', 'downgrade', 'rating', 'analyst']):
+            themes.append('analyst coverage')
+        if any(word in headline_text for word in ['deal', 'acquisition', 'merger', 'partnership']):
+            themes.append('M&A/partnerships')
+        if any(word in headline_text for word in ['launch', 'new product', 'release', 'announce']):
+            themes.append('product news')
+        if any(word in headline_text for word in ['sec', 'regulation', 'lawsuit', 'investigation']):
+            themes.append('regulatory concerns')
+        if any(word in headline_text for word in ['ai', 'artificial intelligence', 'machine learning']):
+            themes.append('AI developments')
+        if any(word in headline_text for word in ['crypto', 'bitcoin', 'blockchain']):
+            themes.append('crypto exposure')
+        
+        theme_str = ', '.join(themes) if themes else 'general market activity'
+        
+        # Build summary
+        sentiment_desc = {
+            'BULLISH': 'positive momentum with favorable coverage',
+            'BEARISH': 'negative pressure with concerning headlines', 
+            'NEUTRAL': 'mixed signals with balanced coverage'
+        }
+        
+        news_recency = headlines[0]['time'][:10] if headlines else 'recently'
+        
+        summary = f"{ticker} showing {sentiment_desc[sentiment_label]}. "
+        summary += f"Recent focus: {theme_str}. "
+        summary += f"News sentiment score: {sentiment_score:.2f} ({sentiment_label}). "
+        summary += f"Based on {len(headlines)} articles as of {news_recency}."
+        
+        return summary
+    
+    def analyze_portfolio(self, tickers):
+        """Analyze multiple tickers and return AI insights"""
+        results = {}
+        
+        print(f"\n--- 🤖 AI DEEP ANALYSIS ({len(tickers)} tickers) ---")
+        
+        if not self.api_key:
+            print("   ⚠️ No Alpha Vantage API key configured")
+            return results
+        
+        for ticker in tickers:
+            if not self.can_make_call():
+                print(f"   ⚠️ API budget exhausted ({self.calls_made}/{self.max_calls})")
+                break
+            
+            clean_ticker = ticker.upper().replace('-USD', '')
+            print(f"   🔍 Analyzing {clean_ticker}...", end=' ')
+            
+            result = self.get_news_sentiment(clean_ticker)
+            
+            if result:
+                results[clean_ticker] = result
+                print(f"{result['sentiment_label']} ({result['news_count']} articles)")
+            else:
+                print("No data")
+        
+        print(f"   ✅ AI Analysis complete. API calls used: {self.calls_made}/{self.max_calls}")
+        
+        return results
 
 
 class TechnicalAnalyzer:
@@ -1561,6 +1757,26 @@ class MarketAgent:
         sizing_suggestions = sizer.suggest_sizes(watchlist_data[:10])  # Top 10 watchlist
         print(f"   Position Sizing: {len(sizing_suggestions)} suggestions")
         
+        # AI DEEP ANALYSIS (only when manually triggered)
+        ai_insights = {}
+        if DEEP_ANALYSIS and ALPHA_VANTAGE_KEY:
+            print("\n--- 🤖 AI DEEP ANALYSIS ENABLED ---")
+            ai_agent = AIResearchAgent(ALPHA_VANTAGE_KEY)
+            
+            # Analyze portfolio positions first (priority)
+            portfolio_tickers = [item['symbol'] for item in portfolio_data]
+            
+            # Then top watchlist items (up to API budget)
+            watchlist_tickers = [item['symbol'] for item in watchlist_data[:10]]
+            
+            # Combine, portfolio first
+            all_tickers = portfolio_tickers + [t for t in watchlist_tickers if t not in portfolio_tickers]
+            
+            ai_insights = ai_agent.analyze_portfolio(all_tickers)
+            print(f"   🤖 AI insights generated for {len(ai_insights)} tickers")
+        elif DEEP_ANALYSIS:
+            print("\n--- ⚠️ DEEP ANALYSIS requested but no ALPHA_VANTAGE_KEY ---")
+        
         # Signals
         existing_signals = []
         signals_file = "docs/data/signals.json"
@@ -1578,12 +1794,16 @@ class MarketAgent:
         
         return {
             "generated_at": self.timestamp,
+            "deep_analysis_enabled": DEEP_ANALYSIS,
             "portfolio": portfolio_data,
             "watchlist": watchlist_data,
             "benchmarks": benchmarks,
             "summary": summary,
             "recent_signals": all_signals,
             "trade_history": self.journal.trades[-10:],
+            
+            # AI INSIGHTS (only populated when deep analysis runs)
+            "ai_insights": ai_insights,
             
             # NEW ANALYTICS DATA
             "analytics": {
