@@ -115,12 +115,12 @@ class TradeJournal:
         return trade
     
     def get_positions(self):
-        """Calculate current positions from trade history - FRACTIONAL SHARE TRACKING
+        """Calculate current positions from trade history - PURE DOLLAR TRACKING
         
-        Each position tracks:
-        - total_invested: Total $ put in
-        - shares: Fractional shares owned (amount / price_at_purchase)
-        - avg_price: Weighted average purchase price
+        Trade journal stores: ticker, amount, date
+        System looks up historical price for that date
+        
+        NO price_at_purchase in trade - system fetches it automatically
         """
         positions = {}
         
@@ -129,9 +129,8 @@ class TradeJournal:
             
             if ticker not in positions:
                 positions[ticker] = {
-                    'total_invested': 0,
-                    'shares': 0,
-                    'avg_price': 0,
+                    'amount': 0,
+                    'buy_date': None,
                     'first_buy_date': None,
                     'last_buy_date': None,
                     'buy_count': 0,
@@ -142,54 +141,27 @@ class TradeJournal:
             pos['trades'].append(trade)
             
             if trade['action'] == 'BUY':
-                # Support multiple field name formats
                 amount = trade.get('amount', trade.get('amount_invested', 0))
-                shares = trade.get('shares', 0)
-                price = trade.get('price_at_purchase', trade.get('price', 0))
-                
-                # If shares not provided, calculate from amount/price
-                if shares == 0 and price > 0:
-                    shares = amount / price
-                
-                # Update position
-                pos['total_invested'] += amount
-                pos['shares'] += shares
-                
-                # Recalculate average price
-                if pos['shares'] > 0:
-                    pos['avg_price'] = pos['total_invested'] / pos['shares']
-                
+                pos['amount'] += amount
                 pos['last_buy_date'] = trade['date']
                 pos['buy_count'] += 1
                 if pos['first_buy_date'] is None:
                     pos['first_buy_date'] = trade['date']
+                    pos['buy_date'] = trade['date']  # Use first buy date for price lookup
                     
             elif trade['action'] == 'SELL':
-                # For sells, reduce shares proportionally
                 sell_amount = trade.get('amount', trade.get('amount_invested', 0))
-                sell_shares = trade.get('shares', 0)
+                pos['amount'] = max(0, pos['amount'] - sell_amount)
                 
-                # If shares not provided, calculate what portion is being sold
-                if sell_shares == 0 and pos['total_invested'] > 0:
-                    sell_ratio = min(sell_amount / pos['total_invested'], 1.0)
-                    sell_shares = pos['shares'] * sell_ratio
-                
-                pos['shares'] -= sell_shares
-                pos['total_invested'] -= sell_amount
-                
-                # If fully sold out, reset
-                if pos['shares'] <= 0 or pos['total_invested'] <= 0:
-                    pos['shares'] = 0
-                    pos['total_invested'] = 0
-                    pos['avg_price'] = 0
+                if pos['amount'] <= 0:
+                    pos['amount'] = 0
+                    pos['buy_date'] = None
                     pos['first_buy_date'] = None
                     pos['last_buy_date'] = None
                     pos['buy_count'] = 0
-                else:
-                    pos['avg_price'] = pos['total_invested'] / pos['shares']
         
         # Filter to only active positions
-        active = {k: v for k, v in positions.items() if v['shares'] > 0}
+        active = {k: v for k, v in positions.items() if v['amount'] > 0}
         return active
     
     def get_position(self, ticker):
@@ -299,11 +271,14 @@ class TechnicalAnalyzer:
 
 
 class PositionAnalyzer:
-    """Analyzes owned positions and generates trading signals - FRACTIONAL SHARE TRACKING
+    """Analyzes owned positions - PURE DOLLAR TRACKING
     
-    Model: You invest $X when stock is at $Y/share
-           You own X/Y fractional shares
-           Current value = shares × current_price
+    Model: 
+    - You invest $X on a specific date
+    - System looks up stock price on that date
+    - Current value = $X × (current_price / price_on_buy_date)
+    
+    PURE DOLLARS - no shares, no manual price entry
     """
     
     def __init__(self, ticker, position, df):
@@ -315,19 +290,23 @@ class PositionAnalyzer:
         # Current market price
         self.current_price = df['Close'].iloc[-1]
         
-        # Position data - fractional shares
-        self.total_invested = position.get('total_invested', position.get('amount_invested', 0))
-        self.shares = position.get('shares', 0)
-        self.avg_price = position.get('avg_price', position.get('price_at_purchase', 0))
+        # Amount invested (dollars)
+        self.amount = position.get('amount', 0)
         
-        # Current value = shares × current price
-        self.current_value = self.shares * self.current_price
+        # Get historical price from purchase date
+        self.price_at_purchase = self._get_price_on_date(position.get('buy_date') or position.get('first_buy_date'))
+        
+        # Current value = amount × (current_price / price_at_purchase)
+        if self.price_at_purchase > 0:
+            self.current_value = self.amount * (self.current_price / self.price_at_purchase)
+        else:
+            self.current_value = self.amount
         
         self.holding_days = self._calc_holding_days()
         
-        # P/L calculations
-        self.gain_loss_dollars = self.current_value - self.total_invested
-        self.gain_loss_pct = (self.gain_loss_dollars / self.total_invested) * 100 if self.total_invested > 0 else 0
+        # P/L calculations - PURE DOLLAR
+        self.gain_loss_dollars = self.current_value - self.amount
+        self.gain_loss_pct = (self.gain_loss_dollars / self.amount) * 100 if self.amount > 0 else 0
         
         # Peak tracking (for trailing stop)
         self.peak_since_buy = self._get_peak_since_buy()
@@ -351,6 +330,35 @@ class PositionAnalyzer:
             self.weekly_change = ((self.current_price - df['Close'].iloc[-7]) / df['Close'].iloc[-7]) * 100
         else:
             self.weekly_change = 0
+    
+    def _get_price_on_date(self, date_str):
+        """Get the stock price on a specific date from historical data"""
+        if not date_str:
+            return self.current_price
+        
+        try:
+            # Parse date - handle multiple formats
+            if 'T' in str(date_str):
+                # ISO format: 2025-12-26T10:00:00Z
+                buy_date = datetime.fromisoformat(str(date_str).replace('Z', '+00:00')).date()
+            else:
+                # Simple date: 2025-12-26
+                buy_date = datetime.strptime(str(date_str)[:10], '%Y-%m-%d').date()
+            
+            # Look for price on or near that date in our historical data
+            for idx in self.df.index:
+                idx_date = idx.date() if hasattr(idx, 'date') else idx
+                if idx_date >= buy_date:
+                    return self.df.loc[idx, 'Close']
+            
+            # If date is before our data range, use earliest available
+            if len(self.df) > 0:
+                return self.df['Close'].iloc[0]
+            
+            return self.current_price
+        except Exception as e:
+            print(f"      Warning: Could not get historical price for {date_str}: {e}")
+            return self.current_price
     
     def _calc_holding_days(self):
         """Calculate days since first purchase"""
@@ -852,13 +860,16 @@ class MarketAgent:
             return None
 
     def fetch_data_for_position(self, ticker, position):
-        """Fetch data for an owned position - FRACTIONAL SHARE TRACKING"""
+        """Fetch data for an owned position - PURE DOLLAR TRACKING
+        
+        Uses purchase date to look up historical price automatically
+        """
         try:
             stock = yf.Ticker(ticker)
             df = stock.history(period="3mo")
             if len(df) < 2: return None
             
-            # Use PositionAnalyzer for comprehensive analysis
+            # Use PositionAnalyzer - it will look up historical price from date
             analyzer = PositionAnalyzer(ticker, position, df)
             signal_data = analyzer.generate_signal()
             
@@ -869,7 +880,7 @@ class MarketAgent:
                     ticker.replace("-USD", ""),
                     signal_data['action'] or "ALERT",
                     analyzer.current_price,
-                    analyzer.avg_price,
+                    analyzer.price_at_purchase,
                     analyzer.gain_loss_pct,
                     analyzer.holding_days,
                     "; ".join(signal_data['reasoning'][:2])
@@ -888,17 +899,15 @@ class MarketAgent:
             whale_intel = self.check_whale_intel(stock, ticker)
             clean_ticker = ticker.replace("-USD", "")
             
-            print(f"   [OWNED] {clean_ticker}: ${analyzer.total_invested:.2f} invested ({analyzer.shares:.4f} shares) | "
-                  f"Now ${analyzer.current_value:.2f} | P/L: {analyzer.gain_loss_pct:.1f}% (${analyzer.gain_loss_dollars:.2f}) | "
+            print(f"   [OWNED] {clean_ticker}: ${analyzer.amount:.2f} → ${analyzer.current_value:.2f} | "
+                  f"P/L: {analyzer.gain_loss_pct:.1f}% (${analyzer.gain_loss_dollars:+.2f}) | "
                   f"{analyzer.holding_days}d | Risk: {signal_data['risk_score']}")
 
             return {
                 "symbol": clean_ticker,
                 "yf_symbol": ticker,
                 "price": round(analyzer.current_price, 2),
-                "avg_price": round(analyzer.avg_price, 2),
-                "shares": round(analyzer.shares, 6),
-                "amount_invested": round(analyzer.total_invested, 2),
+                "amount_invested": round(analyzer.amount, 2),
                 "current_value": round(analyzer.current_value, 2),
                 "trend": analyzer.trend,
                 "rsi": round(analyzer.rsi, 1),
