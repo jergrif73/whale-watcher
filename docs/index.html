@@ -405,6 +405,93 @@
         .risk-medium { color: var(--orange); }
         .risk-high { color: var(--red-light); }
         
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+        
+        .analytics-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border);
+        }
+        
+        .analytics-card h4 {
+            margin: 0 0 12px 0;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .alert-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+        
+        .alert-high {
+            border-left: 3px solid var(--red-light);
+        }
+        
+        .alert-medium {
+            border-left: 3px solid var(--orange);
+        }
+        
+        .alert-low {
+            border-left: 3px solid var(--blue);
+        }
+        
+        .tax-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .tax-long { background: var(--green-light); color: var(--bg-primary); }
+        .tax-almost { background: var(--orange); color: var(--bg-primary); }
+        .tax-short { background: var(--text-secondary); color: var(--bg-primary); }
+        
+        .sizing-table {
+            width: 100%;
+            font-size: 13px;
+        }
+        
+        .sizing-table td {
+            padding: 8px;
+        }
+        
         /* Loading State */
         .loading {
             text-align: center;
@@ -552,6 +639,63 @@
         <div class="section">
             <div class="section-header">📒 Trade History</div>
             <div id="trade-history">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- NEW: Analytics Dashboard -->
+        <div class="section">
+            <div class="section-header">📊 Analytics Dashboard</div>
+            
+            <!-- Performance Stats -->
+            <div class="analytics-grid" id="analytics-content">
+                <div class="analytics-card">
+                    <h4>📈 Performance</h4>
+                    <div id="performance-stats">Loading...</div>
+                </div>
+                <div class="analytics-card">
+                    <h4>📊 vs Benchmarks</h4>
+                    <div id="benchmark-comparison">Loading...</div>
+                </div>
+                <div class="analytics-card">
+                    <h4>💰 Dividends</h4>
+                    <div id="dividend-info">Loading...</div>
+                </div>
+                <div class="analytics-card">
+                    <h4>📋 Category Breakdown</h4>
+                    <div id="category-breakdown">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW: Alerts & Opportunities -->
+        <div class="section">
+            <div class="section-header">🎯 Alerts & Entry Opportunities</div>
+            <div id="alerts-section">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- NEW: Tax Lot Tracking -->
+        <div class="section">
+            <div class="section-header">📑 Tax Lot Status</div>
+            <div id="tax-lots-section">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- NEW: Position Sizing -->
+        <div class="section">
+            <div class="section-header">🎯 Position Sizing Suggestions</div>
+            <div id="sizing-section">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- NEW: DCA Suggestions -->
+        <div class="section">
+            <div class="section-header">💵 DCA Opportunities</div>
+            <div id="dca-section">
                 <div class="loading">Loading...</div>
             </div>
         </div>
@@ -778,6 +922,18 @@
             renderAllocationChart(data.portfolio);
             renderActivityLog(data.recent_signals);
             
+            // NEW: Render analytics sections
+            if (data.analytics) {
+                renderPerformanceStats(data.analytics.performance);
+                renderBenchmarkComparison(data.analytics.benchmark_comparison);
+                renderDividendInfo(data.analytics.dividends);
+                renderCategoryBreakdown(data.analytics.performance?.categories);
+                renderAlerts(data.analytics.all_alerts, data.analytics.entry_alerts);
+                renderTaxLots(data.analytics.tax_lots);
+                renderPositionSizing(data.analytics.position_sizing);
+                renderDCASuggestions(data.analytics.dca?.suggestions);
+            }
+            
             // Settings display
             if (data.settings) {
                 const s = data.settings;
@@ -801,6 +957,11 @@
                             <strong>Timing:</strong><br>
                             Settling Period: ${s.settling_days || 3} days<br>
                             Min Hold for Add: 7 days
+                        </div>
+                        <div>
+                            <strong>Position Sizing:</strong><br>
+                            Max Position: ${s.max_position_pct || 10}%<br>
+                            Risk Per Trade: ${s.risk_per_trade_pct || 2}%
                         </div>
                     </div>
                 `;
@@ -988,6 +1149,241 @@
                     </div>
                 `;
             }).join('');
+        }
+        
+        // ============ NEW: Analytics Rendering Functions ============
+        
+        function renderPerformanceStats(stats) {
+            const container = document.getElementById('performance-stats');
+            if (!stats) {
+                container.innerHTML = '<div style="color: var(--text-secondary);">No data yet</div>';
+                return;
+            }
+            
+            const winRateClass = stats.win_rate >= 50 ? 'positive' : 'negative';
+            const netClass = stats.net_pnl >= 0 ? 'positive' : 'negative';
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Win Rate</span>
+                    <span class="stat-value ${winRateClass}">${stats.win_rate}%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Winners / Losers</span>
+                    <span class="stat-value">${stats.winners} / ${stats.losers}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Net P/L</span>
+                    <span class="stat-value ${netClass}">$${stats.net_pnl.toFixed(2)}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Avg Win / Loss</span>
+                    <span class="stat-value">$${stats.avg_win} / $${stats.avg_loss}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Profit Factor</span>
+                    <span class="stat-value">${stats.profit_factor === Infinity ? '∞' : stats.profit_factor}</span>
+                </div>
+            `;
+        }
+        
+        function renderBenchmarkComparison(data) {
+            const container = document.getElementById('benchmark-comparison');
+            if (!data) {
+                container.innerHTML = '<div style="color: var(--text-secondary);">No data yet</div>';
+                return;
+            }
+            
+            const portClass = data.portfolio_return >= 0 ? 'positive' : 'negative';
+            const vsSpyClass = data.vs_spy >= 0 ? 'positive' : 'negative';
+            const vsQqqClass = data.vs_qqq >= 0 ? 'positive' : 'negative';
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Your Return</span>
+                    <span class="stat-value ${portClass}">${data.portfolio_return >= 0 ? '+' : ''}${data.portfolio_return}%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">SPY Return</span>
+                    <span class="stat-value">${data.spy_return >= 0 ? '+' : ''}${data.spy_return}%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">vs SPY</span>
+                    <span class="stat-value ${vsSpyClass}">${data.vs_spy >= 0 ? '+' : ''}${data.vs_spy}% ${data.beating_spy ? '✅' : '❌'}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">vs QQQ</span>
+                    <span class="stat-value ${vsQqqClass}">${data.vs_qqq >= 0 ? '+' : ''}${data.vs_qqq}% ${data.beating_qqq ? '✅' : '❌'}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Alpha</span>
+                    <span class="stat-value">${data.alpha >= 0 ? '+' : ''}${data.alpha}%</span>
+                </div>
+            `;
+        }
+        
+        function renderDividendInfo(data) {
+            const container = document.getElementById('dividend-info');
+            if (!data || data.total_annual === 0) {
+                container.innerHTML = '<div style="color: var(--text-secondary);">No dividend stocks in portfolio</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Annual Income</span>
+                    <span class="stat-value positive">$${data.total_annual.toFixed(2)}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Monthly Income</span>
+                    <span class="stat-value">$${data.total_monthly.toFixed(2)}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Portfolio Yield</span>
+                    <span class="stat-value">${data.yield_on_portfolio}%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Dividend Stocks</span>
+                    <span class="stat-value">${data.positions.length}</span>
+                </div>
+            `;
+        }
+        
+        function renderCategoryBreakdown(categories) {
+            const container = document.getElementById('category-breakdown');
+            if (!categories) {
+                container.innerHTML = '<div style="color: var(--text-secondary);">No data yet</div>';
+                return;
+            }
+            
+            let html = '';
+            for (const [cat, data] of Object.entries(categories)) {
+                if (data.count > 0) {
+                    const retClass = data.return_pct >= 0 ? 'positive' : 'negative';
+                    const emoji = cat === 'crypto' ? '₿' : cat === 'etf' ? '📊' : '📈';
+                    html += `
+                        <div class="stat-row">
+                            <span class="stat-label">${emoji} ${cat.toUpperCase()} (${data.count})</span>
+                            <span class="stat-value ${retClass}">${data.return_pct >= 0 ? '+' : ''}${data.return_pct}%</span>
+                        </div>
+                    `;
+                }
+            }
+            container.innerHTML = html || '<div style="color: var(--text-secondary);">No categories</div>';
+        }
+        
+        function renderAlerts(allAlerts, entryAlerts) {
+            const container = document.getElementById('alerts-section');
+            const alerts = [...(allAlerts || []), ...(entryAlerts || [])];
+            
+            if (alerts.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No alerts at this time 👍</div>';
+                return;
+            }
+            
+            container.innerHTML = alerts.slice(0, 10).map(alert => {
+                const priorityClass = alert.priority === 'high' ? 'alert-high' : 
+                                     alert.priority === 'medium' ? 'alert-medium' : 'alert-low';
+                return `
+                    <div class="alert-item ${priorityClass}">
+                        <span>${alert.message}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderTaxLots(taxLots) {
+            const container = document.getElementById('tax-lots-section');
+            if (!taxLots || taxLots.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No positions to track</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <table class="sizing-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Held</th>
+                            <th>Status</th>
+                            <th>P/L</th>
+                            <th class="hide-mobile">Days to Long-Term</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${taxLots.map(lot => {
+                            const statusClass = lot.status === 'LONG_TERM' ? 'tax-long' : 
+                                               lot.status === 'ALMOST_LONG' ? 'tax-almost' : 'tax-short';
+                            const plClass = lot.gain_loss_pct >= 0 ? 'positive' : 'negative';
+                            return `
+                                <tr>
+                                    <td><strong>${lot.ticker}</strong></td>
+                                    <td>${lot.holding_days}d</td>
+                                    <td><span class="tax-status ${statusClass}">${lot.status.replace('_', ' ')}</span></td>
+                                    <td class="${plClass}">${lot.gain_loss_pct >= 0 ? '+' : ''}${lot.gain_loss_pct}%</td>
+                                    <td class="hide-mobile">${lot.days_to_long_term > 0 ? lot.days_to_long_term + ' days' : '✅'}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        function renderPositionSizing(suggestions) {
+            const container = document.getElementById('sizing-section');
+            if (!suggestions || suggestions.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">Add items to watchlist for sizing suggestions</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <table class="sizing-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Price</th>
+                            <th>Suggested $</th>
+                            <th>Stop Loss</th>
+                            <th class="hide-mobile">Risk if Stopped</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${suggestions.slice(0, 8).map(s => `
+                            <tr>
+                                <td><strong>${s.ticker}</strong></td>
+                                <td>$${s.current_price.toFixed(2)}</td>
+                                <td class="positive">$${s.suggested_amount.toFixed(0)}</td>
+                                <td>$${s.suggested_stop.toFixed(2)}</td>
+                                <td class="hide-mobile negative">-$${s.risk_if_stopped.toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div style="padding: 12px 16px; font-size: 12px; color: var(--text-secondary);">
+                    Based on ${MAX_POSITION_PCT || 10}% max position size and ${RISK_PER_TRADE_PCT || 2}% max risk per trade
+                </div>
+            `;
+        }
+        
+        function renderDCASuggestions(suggestions) {
+            const container = document.getElementById('dca-section');
+            if (!suggestions || suggestions.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; color: var(--text-secondary);">No DCA opportunities at this time</div>';
+                return;
+            }
+            
+            container.innerHTML = suggestions.map(s => `
+                <div class="alert-item alert-low">
+                    <div>
+                        <strong>${s.ticker}</strong> @ $${s.current_price.toFixed(2)}
+                        <span style="color: var(--text-secondary); margin-left: 8px;">RSI: ${s.rsi.toFixed(0)}</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">
+                        ${s.reasons.join(', ')}
+                    </div>
+                </div>
+            `).join('');
         }
         
         // ============ Modal Functions ============
