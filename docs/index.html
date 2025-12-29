@@ -496,8 +496,8 @@
                 <thead>
                     <tr>
                         <th>Asset</th>
-                        <th>Entry</th>
-                        <th>Current</th>
+                        <th>Invested</th>
+                        <th>Current Value</th>
                         <th>P/L</th>
                         <th class="hide-mobile">Held</th>
                         <th>Signal</th>
@@ -605,12 +605,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Price ($)</label>
-                        <input type="number" id="trade-price" step="0.01" placeholder="185.00">
+                        <label>Amount ($)</label>
+                        <input type="number" id="trade-amount" step="0.01" placeholder="100.00">
                     </div>
                     <div class="form-group">
-                        <label>Shares/Units</label>
-                        <input type="number" id="trade-shares" step="0.0001" placeholder="10">
+                        <label>Stock Price at Purchase ($)</label>
+                        <input type="number" id="trade-price" step="0.01" placeholder="Current price when you bought">
                     </div>
                 </div>
                 <div class="form-group">
@@ -824,8 +824,12 @@
             tbody.innerHTML = portfolio.map(item => {
                 const plClass = item.gain_loss_pct >= 0 ? 'positive' : 'negative';
                 const signalClass = getSignalClass(item.color);
-                const shares = item.shares ? item.shares.toFixed(2) : '—';
-                const costBasis = item.cost_basis || item.entry_price || 0;
+                
+                // Pure dollar values
+                const amountInvested = item.amount_invested || 0;
+                const currentValue = item.current_value || 0;
+                const gainLossDollars = item.gain_loss_dollars || (currentValue - amountInvested);
+                
                 const heldDays = item.holding_days !== null ? formatDuration(item.holding_days) : '—';
                 const entryDate = formatDate(item.first_buy_date);
                 const yahooUrl = getYahooUrl(item.symbol, item.yf_symbol);
@@ -837,14 +841,14 @@
                     <tr>
                         <td>
                             <a href="${yahooUrl}" target="_blank" class="ticker">${item.symbol}</a>
-                            <span class="entry-date">${shares} shares</span>
-                        </td>
-                        <td>
-                            $${costBasis.toFixed(2)}
                             <span class="entry-date">${entryDate}</span>
                         </td>
-                        <td>$${item.price}</td>
-                        <td class="${plClass}">${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%</td>
+                        <td>$${amountInvested.toFixed(2)}</td>
+                        <td>$${currentValue.toFixed(2)}</td>
+                        <td class="${plClass}">
+                            ${item.gain_loss_pct >= 0 ? '+' : ''}${item.gain_loss_pct}%
+                            <span class="entry-date ${plClass}">(${gainLossDollars >= 0 ? '+' : ''}$${gainLossDollars.toFixed(2)})</span>
+                        </td>
                         <td class="hide-mobile">${heldDays}</td>
                         <td><span class="signal ${signalClass}">${stripEmoji(item.signal)}</span></td>
                         <td class="hide-mobile entry-info">${reasoning}</td>
@@ -893,7 +897,8 @@
             }
             
             const labels = portfolio.map(p => p.symbol);
-            const values = portfolio.map(p => (p.shares || 1) * p.price);
+            // Use current_value for dollar-based tracking
+            const values = portfolio.map(p => p.current_value || p.amount_invested || 0);
             const colors = [
                 '#388bfd', '#3fb950', '#a371f7', '#d29922', '#f85149',
                 '#79c0ff', '#56d364', '#bc8cff', '#e3b341', '#ff7b72'
@@ -965,19 +970,22 @@
             container.innerHTML = sorted.slice(0, 20).map(trade => {
                 const actionClass = trade.action === 'BUY' ? 'trade-buy' : 'trade-sell';
                 const dateTime = formatDateTime(trade.date);
-                const total = (trade.price * trade.shares).toFixed(2);
                 const yahooUrl = getYahooUrl(trade.ticker, trade.ticker);
+                
+                // Get amount - support both formats
+                const amount = trade.amount_invested !== undefined 
+                    ? trade.amount_invested 
+                    : (trade.price * (trade.shares || 1));
                 
                 return `
                     <div class="trade-history-item">
                         <div>
                             <span class="${actionClass}" style="font-weight: 600;">${trade.action}</span>
                             <a href="${yahooUrl}" target="_blank" class="ticker">${trade.ticker}</a>
-                            <span style="color: var(--text-secondary);">${trade.shares} @ $${trade.price}</span>
+                            <span style="color: var(--text-secondary);">$${amount.toFixed(2)}</span>
                             ${trade.notes ? `<span style="color: var(--text-secondary); font-size: 11px;"> — ${trade.notes}</span>` : ''}
                         </div>
                         <div style="text-align: right;">
-                            <div>$${total}</div>
                             <div class="activity-time">${dateTime}</div>
                         </div>
                     </div>
@@ -1123,14 +1131,14 @@
         async function submitTrade() {
             const action = document.getElementById('trade-action').value;
             const ticker = document.getElementById('trade-ticker').value.trim().toUpperCase();
+            const amount = parseFloat(document.getElementById('trade-amount').value);
             const price = parseFloat(document.getElementById('trade-price').value);
-            const shares = parseFloat(document.getElementById('trade-shares').value);
             const datetime = document.getElementById('trade-datetime').value;
             const notes = document.getElementById('trade-notes').value.trim();
             
             if (!ticker) return showStatus('trade-status', 'Please enter a ticker symbol', 'error');
-            if (!price || price <= 0) return showStatus('trade-status', 'Please enter a valid price', 'error');
-            if (!shares || shares <= 0) return showStatus('trade-status', 'Please enter valid shares', 'error');
+            if (!amount || amount <= 0) return showStatus('trade-status', 'Please enter a valid amount invested', 'error');
+            if (!price || price <= 0) return showStatus('trade-status', 'Please enter a valid stock price', 'error');
             
             showStatus('trade-status', 'Saving trade...', 'success');
             
@@ -1146,8 +1154,8 @@
                     id: generateId(),
                     ticker: ticker.replace('-USD', ''),
                     action: action,
-                    price: price,
-                    shares: shares,
+                    amount_invested: amount,
+                    price_at_purchase: price,
                     date: tradeDate,
                     notes: notes
                 };
@@ -1158,14 +1166,14 @@
                     TRADE_JOURNAL_PATH, 
                     journal, 
                     sha, 
-                    `📒 ${action} ${shares} ${ticker} @ $${price}`
+                    `📒 ${action} $${amount} ${ticker} @ $${price}/share`
                 );
                 
                 showStatus('trade-status', `✅ ${action} logged! Run workflow to update dashboard.`, 'success');
                 
                 document.getElementById('trade-ticker').value = '';
+                document.getElementById('trade-amount').value = '';
                 document.getElementById('trade-price').value = '';
-                document.getElementById('trade-shares').value = '';
                 document.getElementById('trade-notes').value = '';
                 
                 currentTradeJournal = journal;
