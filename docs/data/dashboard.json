@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-01 04:39:14",
+  "generated_at": "2026-01-01 16:12:50",
   "deep_analysis_enabled": false,
   "portfolio": [
     {
@@ -20,7 +20,7 @@
       ],
       "risk_score": 75,
       "whale_intel": "",
-      "holding_days": 5,
+      "holding_days": 6,
       "gain_loss_pct": -6.4,
       "gain_loss_dollars": -3.18,
       "daily_change": -3.8,
@@ -206,7 +206,7 @@
       ],
       "risk_score": 67,
       "whale_intel": "",
-      "holding_days": 5,
+      "holding_days": 6,
       "gain_loss_pct": -4.5,
       "gain_loss_dollars": -0.89,
       "daily_change": -1.3,
@@ -2815,29 +2815,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 87439.81,
+      "price": 87848.09,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 57.04,
+      "rsi": 63.56,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.1,
-      "weekly_change": 0.24,
-      "vol_ratio": 1.0877604535622245,
+      "daily_change": 0.4,
+      "weekly_change": 0.63,
+      "vol_ratio": 0.7484339665932668,
       "vol_pattern": "NEUTRAL",
       "support": 84436.31,
-      "resistance": 92747.93,
+      "resistance": 90647.57,
       "price_history": [
-        {
-          "date": "2025-12-02",
-          "close": 91350.2,
-          "volume": 78546798211
-        },
         {
           "date": "2025-12-03",
           "close": 93527.8,
@@ -2979,9 +2974,14 @@
           "volume": 35586356225
         },
         {
+          "date": "2025-12-31",
+          "close": 87508.83,
+          "volume": 33830210616
+        },
+        {
           "date": "2026-01-01",
-          "close": 87439.81,
-          "volume": 32897241088
+          "close": 87848.09,
+          "volume": 23681619968
         }
       ],
       "is_owned": false
@@ -2989,29 +2989,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2972.4,
+      "price": 2983.45,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 68.38,
+      "rsi": 69.6,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.0,
-      "weekly_change": 2.37,
-      "vol_ratio": 1.0021510153704942,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 0.6,
+      "weekly_change": 1.97,
+      "vol_ratio": 0.6976660510114512,
+      "vol_pattern": "NEUTRAL",
       "support": 2777.12,
-      "resistance": 3265.37,
+      "resistance": 3175.12,
       "price_history": [
-        {
-          "date": "2025-12-02",
-          "close": 2997.94,
-          "volume": 26593645111
-        },
         {
           "date": "2025-12-03",
           "close": 3191.57,
@@ -3153,9 +3148,14 @@
           "volume": 18816704381
         },
         {
+          "date": "2025-12-31",
+          "close": 2967.04,
+          "volume": 16451891101
+        },
+        {
           "date": "2026-01-01",
-          "close": 2972.4,
-          "volume": 15907139584
+          "close": 2983.45,
+          "volume": 11441985536
         }
       ],
       "is_owned": false
@@ -3163,29 +3163,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 124.9,
+      "price": 124.67,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 53.43,
+      "rsi": 61.08,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.0,
-      "weekly_change": 4.13,
-      "vol_ratio": 1.181178294428706,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 0.1,
+      "weekly_change": 2.02,
+      "vol_ratio": 0.9966516582207531,
+      "vol_pattern": "NEUTRAL",
       "support": 117.32,
-      "resistance": 139.99,
+      "resistance": 134.72,
       "price_history": [
-        {
-          "date": "2025-12-02",
-          "close": 138.67,
-          "volume": 6173683503
-        },
         {
           "date": "2025-12-03",
           "close": 144.9,
@@ -3327,9 +3322,14 @@
           "volume": 3096711898
         },
         {
+          "date": "2025-12-31",
+          "close": 124.48,
+          "volume": 3627228070
+        },
+        {
           "date": "2026-01-01",
-          "close": 124.9,
-          "volume": 3431182080
+          "close": 124.67,
+          "volume": 3023847424
         }
       ],
       "is_owned": false
@@ -3337,29 +3337,24 @@
     {
       "symbol": "FET",
       "yf_symbol": "FET-USD",
-      "price": 0.2,
+      "price": 0.21,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 46.77,
+      "rsi": 58.23,
       "signal": "\ud83d\udcc9 DISTRIBUTION",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -4.5,
-      "weekly_change": -1.69,
-      "vol_ratio": 0.811819030164179,
+      "daily_change": 5.1,
+      "weekly_change": -1.03,
+      "vol_ratio": 0.9243874986806104,
       "vol_pattern": "DISTRIBUTION",
       "support": 0.19,
       "resistance": 0.25,
       "price_history": [
-        {
-          "date": "2025-12-02",
-          "close": 0.26,
-          "volume": 140410433
-        },
         {
           "date": "2025-12-03",
           "close": 0.26,
@@ -3501,9 +3496,14 @@
           "volume": 40222894
         },
         {
-          "date": "2026-01-01",
+          "date": "2025-12-31",
           "close": 0.2,
-          "volume": 41596064
+          "volume": 41070025
+        },
+        {
+          "date": "2026-01-01",
+          "close": 0.21,
+          "volume": 46929992
         }
       ],
       "is_owned": false
@@ -3516,24 +3516,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 38.89,
-      "signal": "\ud83d\udc40 SUPPORT BUY",
-      "color": "green",
+      "rsi": 53.25,
+      "signal": "NEUTRAL",
+      "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -4.3,
-      "weekly_change": -4.48,
-      "vol_ratio": 1.3139948582386085,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 6.3,
+      "weekly_change": 2.2,
+      "vol_ratio": 1.560510064498264,
+      "vol_pattern": "NEUTRAL",
       "support": 0.12,
       "resistance": 0.14,
       "price_history": [
-        {
-          "date": "2025-12-02",
-          "close": 0.15,
-          "volume": 1442143940
-        },
         {
           "date": "2025-12-03",
           "close": 0.15,
@@ -3675,9 +3670,14 @@
           "volume": 915801292
         },
         {
+          "date": "2025-12-31",
+          "close": 0.12,
+          "volume": 1037180935
+        },
+        {
           "date": "2026-01-01",
           "close": 0.12,
-          "volume": 1080836480
+          "volume": 1342096000
         }
       ],
       "is_owned": false
@@ -3704,6 +3704,27 @@
     "avg_risk_score": 71.0
   },
   "recent_signals": [
+    {
+      "timestamp": "2026-01-01T16:12:51.923839+00:00",
+      "ticker": "MSTR",
+      "action": "BUY_SIGNAL",
+      "price": "151.95",
+      "notes": "RSI oversold: 22.29"
+    },
+    {
+      "timestamp": "2026-01-01T16:12:52.254698+00:00",
+      "ticker": "COIN",
+      "action": "BUY_SIGNAL",
+      "price": "226.14",
+      "notes": "RSI oversold: 15.4"
+    },
+    {
+      "timestamp": "2026-01-01T16:12:54.322383+00:00",
+      "ticker": "AVGO",
+      "action": "BUY_SIGNAL",
+      "price": "346.1",
+      "notes": "RSI oversold: 23.23"
+    },
     {
       "timestamp": "2026-01-01T04:39:15.989289+00:00",
       "ticker": "MSTR",
@@ -3822,27 +3843,6 @@
       "action": "BUY_SIGNAL",
       "price": "155.39",
       "notes": "RSI oversold: 28.15"
-    },
-    {
-      "timestamp": "2025-12-30T04:30:06.819270+00:00",
-      "ticker": "COIN",
-      "action": "BUY_SIGNAL",
-      "price": "233.77",
-      "notes": "RSI oversold: 20.5"
-    },
-    {
-      "timestamp": "2025-12-29T23:34:44.722457+00:00",
-      "ticker": "MSTR",
-      "action": "BUY_SIGNAL",
-      "price": "155.39",
-      "notes": "RSI oversold: 28.15"
-    },
-    {
-      "timestamp": "2025-12-29T23:34:45.038201+00:00",
-      "ticker": "COIN",
-      "action": "BUY_SIGNAL",
-      "price": "233.77",
-      "notes": "RSI oversold: 20.5"
     }
   ],
   "trade_history": [
@@ -3928,19 +3928,19 @@
     "tax_lots": [
       {
         "ticker": "MARA",
-        "holding_days": 5,
+        "holding_days": 6,
         "status": "SHORT_TERM",
-        "days_to_long_term": 360,
-        "alert": "360 days until long-term eligible",
+        "days_to_long_term": 359,
+        "alert": "359 days until long-term eligible",
         "gain_loss_pct": -6.4,
         "gain_loss_dollars": -3.18
       },
       {
         "ticker": "SMCI",
-        "holding_days": 5,
+        "holding_days": 6,
         "status": "SHORT_TERM",
-        "days_to_long_term": 360,
-        "alert": "360 days until long-term eligible",
+        "days_to_long_term": 359,
+        "alert": "359 days until long-term eligible",
         "gain_loss_pct": -4.5,
         "gain_loss_dollars": -0.89
       }
