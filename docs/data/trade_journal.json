@@ -4,8 +4,8 @@
       "id": "001",
       "ticker": "SMCI",
       "action": "BUY",
-      "amount_invested": 20.00,
-      "price_at_purchase": 20.00,
+      "amount_invested": 20,
+      "price_at_purchase": 20,
       "date": "2025-12-26T10:00:00Z",
       "notes": "Initial position"
     },
@@ -13,11 +13,41 @@
       "id": "002",
       "ticker": "MARA",
       "action": "BUY",
-      "amount_invested": 50.00,
-      "price_at_purchase": 50.00,
+      "amount_invested": 50,
+      "price_at_purchase": 50,
       "date": "2025-12-26T10:00:00Z",
       "notes": "Initial position"
+    },
+    {
+      "id": "gopw8umj",
+      "ticker": "COIN",
+      "action": "BUY",
+      "amount": 25,
+      "date": "2026-01-05",
+      "notes": ""
     }
   ],
-  "watchlist": ["MSTR", "COIN", "TSLA", "PLTR", "NVDA", "AMD", "AVGO", "META", "GOOGL", "MSFT", "SOXL", "TQQQ", "SPY", "QQQ", "BTC", "ETH", "SOL", "FET", "RNDR", "DOGE", "PEPE"]
+  "watchlist": [
+    "MSTR",
+    "COIN",
+    "TSLA",
+    "PLTR",
+    "NVDA",
+    "AMD",
+    "AVGO",
+    "META",
+    "GOOGL",
+    "MSFT",
+    "SOXL",
+    "TQQQ",
+    "SPY",
+    "QQQ",
+    "BTC",
+    "ETH",
+    "SOL",
+    "FET",
+    "RNDR",
+    "DOGE",
+    "PEPE"
+  ]
 }
