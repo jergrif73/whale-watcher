@@ -6,6 +6,7 @@ import os
 import json
 import uuid
 import requests
+import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
@@ -853,10 +854,14 @@ class AIResearchAgent:
             print("   ⚠️ No Alpha Vantage API key configured")
             return results
         
-        for ticker in tickers:
+        for i, ticker in enumerate(tickers):
             if not self.can_make_call():
                 print(f"   ⚠️ API budget exhausted ({self.calls_made}/{self.max_calls})")
                 break
+            
+            # Rate limiting: Alpha Vantage free tier requires 1 second between calls
+            if i > 0:
+                time.sleep(1.5)  # 1.5 seconds to be safe
             
             clean_ticker = ticker.upper().replace('-USD', '')
             print(f"   🔍 Analyzing {clean_ticker}...", end=' ')
