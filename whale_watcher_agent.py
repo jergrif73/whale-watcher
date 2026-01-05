@@ -336,7 +336,7 @@ class PerformanceAnalyzer:
             'net_pnl': round(total_gain - total_loss, 2),
             'avg_win': round(total_gain / winners, 2) if winners > 0 else 0,
             'avg_loss': round(total_loss / losers, 2) if losers > 0 else 0,
-            'profit_factor': round(total_gain / total_loss, 2) if total_loss > 0 else float('inf'),
+            'profit_factor': round(total_gain / total_loss, 2) if total_loss > 0 else 999,
             'categories': categories
         }
     
