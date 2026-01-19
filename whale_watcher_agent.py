@@ -1096,11 +1096,11 @@ class PositionAnalyzer:
                 if idx_date >= buy_date:
                     return self.df.loc[idx, 'Close']
             
-            # If date is before our data range, use earliest available
-            if len(self.df) > 0:
-                return self.df['Close'].iloc[0]
-            
+            # If we get here, buy_date is AFTER all dates in our data
+            # This means it's a very recent purchase (today or yesterday)
+            # Use current price since that's the closest we have
             return self.current_price
+            
         except Exception as e:
             print(f"      Warning: Could not get historical price for {date_str}: {e}")
             return self.current_price
