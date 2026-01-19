@@ -139,7 +139,9 @@ class TradeJournal:
         Trade journal stores: ticker, amount, date
         System looks up historical price for that date
         
-        NO price_at_purchase in trade - system fetches it automatically
+        Tracks individual LOTS for proper gain calculation:
+        - Each buy is a separate lot with its own date
+        - Gains calculated per-lot then summed
         """
         positions = {}
         
@@ -149,7 +151,7 @@ class TradeJournal:
             if ticker not in positions:
                 positions[ticker] = {
                     'amount': 0,
-                    'buy_date': None,
+                    'lots': [],  # Each lot: {'amount': $, 'date': 'YYYY-MM-DD'}
                     'first_buy_date': None,
                     'last_buy_date': None,
                     'buy_count': 0,
@@ -164,17 +166,39 @@ class TradeJournal:
                 pos['amount'] += amount
                 pos['last_buy_date'] = trade['date']
                 pos['buy_count'] += 1
+                
+                # Add as separate lot for proper gain tracking
+                pos['lots'].append({
+                    'amount': amount,
+                    'date': trade['date']
+                })
+                
                 if pos['first_buy_date'] is None:
                     pos['first_buy_date'] = trade['date']
-                    pos['buy_date'] = trade['date']  # Use first buy date for price lookup
                     
             elif trade['action'] == 'SELL':
                 sell_amount = trade.get('amount', trade.get('amount_invested', 0))
                 pos['amount'] = max(0, pos['amount'] - sell_amount)
                 
+                # Remove from lots (FIFO - first in, first out)
+                remaining_to_sell = sell_amount
+                new_lots = []
+                for lot in pos['lots']:
+                    if remaining_to_sell <= 0:
+                        new_lots.append(lot)
+                    elif lot['amount'] <= remaining_to_sell:
+                        remaining_to_sell -= lot['amount']
+                        # Lot fully sold, don't add to new_lots
+                    else:
+                        # Partial lot sale
+                        lot['amount'] -= remaining_to_sell
+                        remaining_to_sell = 0
+                        new_lots.append(lot)
+                pos['lots'] = new_lots
+                
                 if pos['amount'] <= 0:
                     pos['amount'] = 0
-                    pos['buy_date'] = None
+                    pos['lots'] = []
                     pos['first_buy_date'] = None
                     pos['last_buy_date'] = None
                     pos['buy_count'] = 0
@@ -970,14 +994,15 @@ class TechnicalAnalyzer:
 
 
 class PositionAnalyzer:
-    """Analyzes owned positions - PURE DOLLAR TRACKING
+    """Analyzes owned positions - PURE DOLLAR TRACKING WITH LOT SUPPORT
     
     Model: 
-    - You invest $X on a specific date
-    - System looks up stock price on that date
-    - Current value = $X × (current_price / price_on_buy_date)
+    - You invest $X on a specific date (each buy is a separate "lot")
+    - System looks up stock price on each lot's date
+    - Current value = sum of each lot's: $amount × (current_price / price_on_lot_date)
     
     PURE DOLLARS - no shares, no manual price entry
+    Properly tracks multiple purchases at different dates!
     """
     
     def __init__(self, ticker, position, df):
@@ -989,17 +1014,38 @@ class PositionAnalyzer:
         # Current market price
         self.current_price = df['Close'].iloc[-1]
         
-        # Amount invested (dollars)
+        # Amount invested (total dollars)
         self.amount = position.get('amount', 0)
         
-        # Get historical price from purchase date
-        self.price_at_purchase = self._get_price_on_date(position.get('buy_date') or position.get('first_buy_date'))
+        # Calculate current value from LOTS (each lot tracks its own date)
+        lots = position.get('lots', [])
         
-        # Current value = amount × (current_price / price_at_purchase)
-        if self.price_at_purchase > 0:
-            self.current_value = self.amount * (self.current_price / self.price_at_purchase)
+        if lots:
+            # Calculate current value for each lot, then sum
+            total_current_value = 0
+            for lot in lots:
+                lot_amount = lot.get('amount', 0)
+                lot_date = lot.get('date')
+                lot_price = self._get_price_on_date(lot_date)
+                
+                if lot_price > 0:
+                    lot_current_value = lot_amount * (self.current_price / lot_price)
+                else:
+                    lot_current_value = lot_amount
+                
+                total_current_value += lot_current_value
+            
+            self.current_value = total_current_value
+            # For display purposes, use weighted average price
+            self.price_at_purchase = self.amount * self.current_price / self.current_value if self.current_value > 0 else self.current_price
         else:
-            self.current_value = self.amount
+            # Fallback for old data without lots - use first_buy_date
+            self.price_at_purchase = self._get_price_on_date(position.get('buy_date') or position.get('first_buy_date'))
+            
+            if self.price_at_purchase > 0:
+                self.current_value = self.amount * (self.current_price / self.price_at_purchase)
+            else:
+                self.current_value = self.amount
         
         self.holding_days = self._calc_holding_days()
         
@@ -1632,7 +1678,8 @@ class MarketAgent:
                 "is_owned": True,
                 "first_buy_date": position['first_buy_date'],
                 "last_buy_date": position['last_buy_date'],
-                "buy_count": position.get('buy_count', 1)
+                "buy_count": position.get('buy_count', 1),
+                "lots": position.get('lots', [])
             }
         except Exception as e:
             print(f"   [ERROR] {ticker}: {e}")
