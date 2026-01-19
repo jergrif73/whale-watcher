@@ -1,5 +1,22 @@
 [
   {
+    "timestamp": "2026-01-19T17:50:10.431263+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "11.36",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "12.87",
+    "gain_loss_pct": "-11.7",
+    "holding_days": "24"
+  },
+  {
+    "timestamp": "2026-01-19T17:50:16.594150+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.13",
+    "notes": "RSI oversold: 25.12"
+  },
+  {
     "timestamp": "2026-01-19T16:14:37.368903+00:00",
     "ticker": "DOGE",
     "action": "BUY_SIGNAL",
@@ -124,19 +141,5 @@
     "action": "BUY_SIGNAL",
     "price": "157.16",
     "notes": "RSI oversold: 29.21"
-  },
-  {
-    "timestamp": "2026-01-05T04:47:37.826290+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "236.53",
-    "notes": "RSI oversold: 28.35"
-  },
-  {
-    "timestamp": "2026-01-05T04:47:39.512391+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "347.62",
-    "notes": "RSI oversold: 25.51"
   }
 ]
