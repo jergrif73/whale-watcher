@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-01-20T16:19:42.779173+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "232.17",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-8.9"
+  },
+  {
+    "timestamp": "2026-01-20T16:19:50.293129+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.24",
+    "notes": "RSI oversold: 27.88"
+  },
+  {
+    "timestamp": "2026-01-20T16:19:50.646977+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.13",
+    "notes": "RSI oversold: 23.79"
+  },
+  {
     "timestamp": "2026-01-20T04:36:34.286440+00:00",
     "ticker": "DOGE",
     "action": "BUY_SIGNAL",
@@ -120,26 +143,5 @@
     "action": "SUPPORT_BUY",
     "price": "468.78",
     "notes": "Near support $465.95"
-  },
-  {
-    "timestamp": "2026-01-13T04:30:31.920631+00:00",
-    "ticker": "MSFT",
-    "action": "SUPPORT_BUY",
-    "price": "477.18",
-    "notes": "Near support $469.50"
-  },
-  {
-    "timestamp": "2026-01-12T04:40:46.876168+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.31",
-    "notes": "Major move: 10.2%"
-  },
-  {
-    "timestamp": "2026-01-08T04:29:36.373890+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "431.41",
-    "notes": "RSI oversold: 28.01"
   }
 ]
