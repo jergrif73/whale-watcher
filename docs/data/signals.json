@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-01-22T04:38:45.039801+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "226.93",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-11.0"
+  },
+  {
     "timestamp": "2026-01-21T16:21:23.845458+00:00",
     "ticker": "COIN",
     "action": "EVALUATE",
@@ -140,12 +149,5 @@
     "action": "ALERT",
     "price": "61.01",
     "notes": "Major move: 10.2%"
-  },
-  {
-    "timestamp": "2026-01-15T16:19:52.583753+00:00",
-    "ticker": "MSFT",
-    "action": "BUY_SIGNAL",
-    "price": "460.83",
-    "notes": "RSI oversold: 25.02"
   }
 ]
