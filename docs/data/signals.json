@@ -1,5 +1,21 @@
 [
   {
+    "timestamp": "2026-01-22T16:19:04.423614+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "225.1",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-11.7"
+  },
+  {
+    "timestamp": "2026-01-22T16:19:10.159227+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.24",
+    "notes": "RSI oversold: 28.61"
+  },
+  {
     "timestamp": "2026-01-22T04:38:45.039801+00:00",
     "ticker": "COIN",
     "action": "EVALUATE",
@@ -135,19 +151,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.13",
     "notes": "RSI oversold: 28.05"
-  },
-  {
-    "timestamp": "2026-01-16T04:30:47.441526+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "438.57",
-    "notes": "RSI oversold: 28.54"
-  },
-  {
-    "timestamp": "2026-01-15T16:48:37.005638+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "61.01",
-    "notes": "Major move: 10.2%"
   }
 ]
