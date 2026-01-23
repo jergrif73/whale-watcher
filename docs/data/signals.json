@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-01-23T04:33:37.763446+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "223.14",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-12.5"
+  },
+  {
     "timestamp": "2026-01-22T16:19:04.423614+00:00",
     "ticker": "COIN",
     "action": "EVALUATE",
@@ -144,12 +153,5 @@
     "action": "ALERT",
     "price": "0.24",
     "notes": "Major move: -11.9%"
-  },
-  {
-    "timestamp": "2026-01-19T04:41:53.311292+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.13",
-    "notes": "RSI oversold: 28.05"
   }
 ]
