@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-01-25T04:42:46.546189+00:00",
+    "ticker": "BTC",
+    "action": "SUPPORT_BUY",
+    "price": "88947.05",
+    "notes": "Near support $87231.57"
+  },
+  {
+    "timestamp": "2026-01-25T04:42:47.124699+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.23",
+    "notes": "RSI oversold: 27.66"
+  },
+  {
     "timestamp": "2026-01-24T16:10:57.430879+00:00",
     "ticker": "FET",
     "action": "BUY_SIGNAL",
@@ -138,22 +152,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.13",
     "notes": "RSI oversold: 24.61"
-  },
-  {
-    "timestamp": "2026-01-19T17:57:51.656140+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.13",
-    "notes": "RSI oversold: 25.17"
-  },
-  {
-    "timestamp": "2026-01-19T17:50:10.431263+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "11.36",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "12.87",
-    "gain_loss_pct": "-11.7",
-    "holding_days": "24"
   }
 ]
