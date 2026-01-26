@@ -1,5 +1,35 @@
 [
   {
+    "timestamp": "2026-01-26T04:45:55.629366+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "216.95",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-14.9"
+  },
+  {
+    "timestamp": "2026-01-26T04:46:00.007036+00:00",
+    "ticker": "BTC",
+    "action": "SUPPORT_BUY",
+    "price": "87699.61",
+    "notes": "Near support $86537.63"
+  },
+  {
+    "timestamp": "2026-01-26T04:46:00.183449+00:00",
+    "ticker": "ETH",
+    "action": "SUPPORT_BUY",
+    "price": "2862.44",
+    "notes": "Near support $2815.30"
+  },
+  {
+    "timestamp": "2026-01-26T04:46:00.520515+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.22",
+    "notes": "RSI oversold: 18.9"
+  },
+  {
     "timestamp": "2026-01-25T16:11:34.689633+00:00",
     "ticker": "BTC",
     "action": "SUPPORT_BUY",
@@ -122,35 +152,5 @@
     "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
     "entry_price": "254.92",
     "gain_loss_pct": "-10.7"
-  },
-  {
-    "timestamp": "2026-01-21T04:35:45.025770+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.24",
-    "notes": "RSI oversold: 28.12"
-  },
-  {
-    "timestamp": "2026-01-21T04:35:46.078844+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.13",
-    "notes": "RSI oversold: 23.96"
-  },
-  {
-    "timestamp": "2026-01-20T16:19:42.779173+00:00",
-    "ticker": "COIN",
-    "action": "EVALUATE",
-    "price": "232.17",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-8.9"
-  },
-  {
-    "timestamp": "2026-01-20T16:19:50.293129+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.24",
-    "notes": "RSI oversold: 27.88"
   }
 ]
