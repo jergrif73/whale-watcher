@@ -1,5 +1,31 @@
 [
   {
+    "timestamp": "2026-01-27T04:37:59.517163+00:00",
+    "ticker": "MARA",
+    "action": "SELL_HALF",
+    "price": "9.98",
+    "notes": "Dropped 13.7% from peak $11.57; Consider selling to protect remaining profits",
+    "entry_price": "9.96",
+    "gain_loss_pct": "0.2",
+    "holding_days": "31"
+  },
+  {
+    "timestamp": "2026-01-27T04:37:59.859148+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "213.48",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-16.3"
+  },
+  {
+    "timestamp": "2026-01-27T04:38:05.019168+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.22",
+    "notes": "RSI oversold: 23.26"
+  },
+  {
     "timestamp": "2026-01-26T16:18:11.649190+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -127,30 +153,5 @@
     "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
     "entry_price": "254.92",
     "gain_loss_pct": "-11.7"
-  },
-  {
-    "timestamp": "2026-01-22T16:19:10.159227+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.24",
-    "notes": "RSI oversold: 28.61"
-  },
-  {
-    "timestamp": "2026-01-22T04:38:45.039801+00:00",
-    "ticker": "COIN",
-    "action": "EVALUATE",
-    "price": "226.93",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-11.0"
-  },
-  {
-    "timestamp": "2026-01-21T16:21:23.845458+00:00",
-    "ticker": "COIN",
-    "action": "EVALUATE",
-    "price": "227.8",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-10.6"
   }
 ]
