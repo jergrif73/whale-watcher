@@ -1,5 +1,63 @@
 [
   {
+    "timestamp": "2026-01-30T05:02:26.492273+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "199.18",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-21.9"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:27.825949+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "151.86",
+    "notes": "RSI oversold: 17.65"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:29.031277+00:00",
+    "ticker": "META",
+    "action": "ALERT",
+    "price": "738.31",
+    "notes": "Major move: 10.4%"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:31.129456+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "82798.31",
+    "notes": "RSI oversold: 18.69"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:31.314096+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2751.9",
+    "notes": "RSI oversold: 24.27"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:31.495280+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "115.49",
+    "notes": "RSI oversold: 25.95"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:31.678369+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.21",
+    "notes": "RSI oversold: 20.19"
+  },
+  {
+    "timestamp": "2026-01-30T05:02:31.925829+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.11",
+    "notes": "RSI oversold: 22.62"
+  },
+  {
     "timestamp": "2026-01-29T20:33:19.247697+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -86,63 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "150.07",
     "notes": "RSI oversold: 16.87"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:50.497942+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "687.94",
-    "notes": "Near support $676.57"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:51.412905+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "84494.19",
-    "notes": "RSI oversold: 20.38"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:51.794723+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2808.21",
-    "notes": "RSI oversold: 25.58"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:52.104456+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "117.5",
-    "notes": "RSI oversold: 26.92"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:52.407841+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.21",
-    "notes": "RSI oversold: 20.28"
-  },
-  {
-    "timestamp": "2026-01-29T16:27:53.048876+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.12",
-    "notes": "RSI oversold: 23.06"
-  },
-  {
-    "timestamp": "2026-01-29T04:59:47.352065+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "209.43",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-17.8"
-  },
-  {
-    "timestamp": "2026-01-29T04:59:49.100063+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "157.35",
-    "notes": "RSI oversold: 17.96"
   }
 ]
