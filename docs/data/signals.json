@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-02-01T16:14:37.430551+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "77160.09",
+    "notes": "RSI oversold: 15.8"
+  },
+  {
+    "timestamp": "2026-02-01T16:14:37.638818+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2298.8",
+    "notes": "RSI oversold: 17.01"
+  },
+  {
+    "timestamp": "2026-02-01T16:14:37.828860+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "101.85",
+    "notes": "RSI oversold: 19.91"
+  },
+  {
+    "timestamp": "2026-02-01T16:14:38.037137+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.19",
+    "notes": "RSI oversold: 19.19"
+  },
+  {
+    "timestamp": "2026-02-01T16:14:38.294536+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.1",
+    "notes": "RSI oversold: 21.41"
+  },
+  {
     "timestamp": "2026-02-01T05:17:56.813929+00:00",
     "ticker": "BTC",
     "action": "BUY_SIGNAL",
@@ -103,42 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.11",
     "notes": "RSI oversold: 23.54"
-  },
-  {
-    "timestamp": "2026-01-30T16:23:54.433883+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "195.26",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-23.4"
-  },
-  {
-    "timestamp": "2026-01-30T16:23:55.896865+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "148.43",
-    "notes": "RSI oversold: 14.94"
-  },
-  {
-    "timestamp": "2026-01-30T16:23:59.616381+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "82763.02",
-    "notes": "RSI oversold: 18.68"
-  },
-  {
-    "timestamp": "2026-01-30T16:23:59.794536+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2717.12",
-    "notes": "RSI oversold: 23.98"
-  },
-  {
-    "timestamp": "2026-01-30T16:23:59.976624+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "116.73",
-    "notes": "RSI oversold: 22.97"
   }
 ]
