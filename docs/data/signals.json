@@ -1,5 +1,42 @@
 [
   {
+    "timestamp": "2026-02-02T16:22:03.738492+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "190.59",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-25.2"
+  },
+  {
+    "timestamp": "2026-02-02T16:22:18.551148+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "79143.26",
+    "notes": "RSI oversold: 23.56"
+  },
+  {
+    "timestamp": "2026-02-02T16:22:18.859828+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2382.85",
+    "notes": "RSI oversold: 23.9"
+  },
+  {
+    "timestamp": "2026-02-02T16:22:19.216903+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "105.34",
+    "notes": "RSI oversold: 27.01"
+  },
+  {
+    "timestamp": "2026-02-02T16:22:20.567279+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.19",
+    "notes": "RSI oversold: 25.17"
+  },
+  {
     "timestamp": "2026-02-02T05:18:47.663552+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -105,40 +142,5 @@
     "action": "ALERT",
     "price": "105.0",
     "notes": "Major move: -10.5%"
-  },
-  {
-    "timestamp": "2026-02-01T05:17:57.960466+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.19",
-    "notes": "RSI oversold: 16.18"
-  },
-  {
-    "timestamp": "2026-02-01T05:17:58.541267+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.1",
-    "notes": "RSI oversold: 19.29"
-  },
-  {
-    "timestamp": "2026-01-31T16:12:48.686445+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "80790.64",
-    "notes": "RSI oversold: 17.36"
-  },
-  {
-    "timestamp": "2026-01-31T16:12:49.043746+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2514.8",
-    "notes": "RSI oversold: 19.47"
-  },
-  {
-    "timestamp": "2026-01-31T16:12:49.233580+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "107.58",
-    "notes": "RSI oversold: 19.91"
   }
 ]
