@@ -1,5 +1,84 @@
 [
   {
+    "timestamp": "2026-02-05T16:31:27.076231+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "7.57",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-24.0",
+    "holding_days": "41"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:27.331515+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "155.28",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-39.1"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:27.674535+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "404.04",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "456.66",
+    "gain_loss_pct": "-11.5"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:27.933145+00:00",
+    "ticker": "PLTR",
+    "action": "EVALUATE",
+    "price": "132.76",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "146.59",
+    "gain_loss_pct": "-9.4"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:28.475981+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "114.64",
+    "notes": "Major move: -11.2%"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:32.478407+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "68077.56",
+    "notes": "RSI oversold: 14.5"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:32.702873+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1985.33",
+    "notes": "RSI oversold: 18.63"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:32.956991+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "85.42",
+    "notes": "RSI oversold: 17.85"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:33.190303+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.16",
+    "notes": "RSI oversold: 17.04"
+  },
+  {
+    "timestamp": "2026-02-05T16:31:33.511566+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.09",
+    "notes": "RSI oversold: 21.29"
+  },
+  {
     "timestamp": "2026-02-05T05:10:40.426605+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -75,82 +154,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.17",
     "notes": "RSI oversold: 18.55"
-  },
-  {
-    "timestamp": "2026-02-05T05:10:46.174907+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.1",
-    "notes": "RSI oversold: 23.47"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:37.362198+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.39",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-15.9",
-    "holding_days": "40"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:37.791678+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "170.24",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-33.2"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:38.294817+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "416.21",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "456.66",
-    "gain_loss_pct": "-8.9"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:39.160509+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "124.5",
-    "notes": "RSI oversold: 18.45"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:39.986881+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "203.95",
-    "notes": "Major move: -15.8%"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:41.299557+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "54.1",
-    "notes": "Major move: -11.6%"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:43.067228+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "73975.73",
-    "notes": "RSI oversold: 18.32"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:46.061343+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2131.18",
-    "notes": "RSI oversold: 20.16"
-  },
-  {
-    "timestamp": "2026-02-04T16:31:46.285051+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "92.31",
-    "notes": "RSI oversold: 19.55"
   }
 ]
