@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-02-07T16:14:54.330884+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "69240.37",
+    "notes": "RSI oversold: 27.54"
+  },
+  {
+    "timestamp": "2026-02-07T16:14:54.708866+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2042.54",
+    "notes": "RSI oversold: 26.82"
+  },
+  {
+    "timestamp": "2026-02-07T16:14:55.141552+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "87.0",
+    "notes": "RSI oversold: 25.7"
+  },
+  {
+    "timestamp": "2026-02-07T16:14:55.496754+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.17",
+    "notes": "RSI oversold: 27.76"
+  },
+  {
     "timestamp": "2026-02-07T04:59:23.561555+00:00",
     "ticker": "BTC",
     "action": "ALERT",
@@ -120,39 +148,5 @@
     "entry_price": "9.96",
     "gain_loss_pct": "-32.5",
     "holding_days": "41"
-  },
-  {
-    "timestamp": "2026-02-06T05:09:16.710119+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "146.12",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-42.7"
-  },
-  {
-    "timestamp": "2026-02-06T05:09:17.292970+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "393.67",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "456.66",
-    "gain_loss_pct": "-13.8"
-  },
-  {
-    "timestamp": "2026-02-06T05:09:17.833667+00:00",
-    "ticker": "PLTR",
-    "action": "EVALUATE",
-    "price": "130.01",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "146.59",
-    "gain_loss_pct": "-11.3"
-  },
-  {
-    "timestamp": "2026-02-06T05:09:18.577552+00:00",
-    "ticker": "MSTR",
-    "action": "ALERT",
-    "price": "106.99",
-    "notes": "Major move: -17.1%"
   }
 ]
