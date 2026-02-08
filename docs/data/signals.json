@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-02-08T05:19:07.717654+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "69327.76",
+    "notes": "RSI oversold: 27.59"
+  },
+  {
+    "timestamp": "2026-02-08T05:19:07.992484+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2085.31",
+    "notes": "RSI oversold: 27.93"
+  },
+  {
+    "timestamp": "2026-02-08T05:19:08.287095+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "87.41",
+    "notes": "RSI oversold: 25.83"
+  },
+  {
+    "timestamp": "2026-02-08T05:19:08.591196+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.16",
+    "notes": "RSI oversold: 27.33"
+  },
+  {
     "timestamp": "2026-02-07T16:14:54.330884+00:00",
     "ticker": "BTC",
     "action": "BUY_SIGNAL",
@@ -117,36 +145,5 @@
     "action": "ALERT",
     "price": "2024.84",
     "notes": "Major move: 11.2%"
-  },
-  {
-    "timestamp": "2026-02-06T16:29:44.955851+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "85.8",
-    "notes": "RSI oversold: 24.21"
-  },
-  {
-    "timestamp": "2026-02-06T16:29:45.412127+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.17",
-    "notes": "Major move: 12.4%"
-  },
-  {
-    "timestamp": "2026-02-06T16:29:46.142020+00:00",
-    "ticker": "DOGE",
-    "action": "ALERT",
-    "price": "0.1",
-    "notes": "Major move: 11.9%"
-  },
-  {
-    "timestamp": "2026-02-06T05:09:16.176015+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "6.73",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-32.5",
-    "holding_days": "41"
   }
 ]
