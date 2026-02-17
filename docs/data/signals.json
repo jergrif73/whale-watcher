@@ -1,5 +1,49 @@
 [
   {
+    "timestamp": "2026-02-17T05:15:54.994554+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "7.92",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-20.5",
+    "holding_days": "52"
+  },
+  {
+    "timestamp": "2026-02-17T05:15:55.468501+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "164.32",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-35.5"
+  },
+  {
+    "timestamp": "2026-02-17T05:15:56.043552+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "401.32",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "456.66",
+    "gain_loss_pct": "-12.1"
+  },
+  {
+    "timestamp": "2026-02-17T05:15:56.514641+00:00",
+    "ticker": "PLTR",
+    "action": "EVALUATE",
+    "price": "131.41",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "146.59",
+    "gain_loss_pct": "-10.4"
+  },
+  {
+    "timestamp": "2026-02-17T05:16:00.140294+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "305.72",
+    "notes": "RSI oversold: 23.43"
+  },
+  {
     "timestamp": "2026-02-16T16:28:43.139445+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -126,44 +170,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-35.9"
-  },
-  {
-    "timestamp": "2026-02-13T16:30:00.759530+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "399.65",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "456.66",
-    "gain_loss_pct": "-12.5"
-  },
-  {
-    "timestamp": "2026-02-13T16:30:01.118007+00:00",
-    "ticker": "PLTR",
-    "action": "EVALUATE",
-    "price": "130.44",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "146.59",
-    "gain_loss_pct": "-11.0"
-  },
-  {
-    "timestamp": "2026-02-13T16:30:03.596184+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "305.44",
-    "notes": "RSI oversold: 23.3"
-  },
-  {
-    "timestamp": "2026-02-13T16:30:05.842792+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2051.87",
-    "notes": "RSI oversold: 29.58"
-  },
-  {
-    "timestamp": "2026-02-13T16:30:06.044446+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "83.62",
-    "notes": "RSI oversold: 26.05"
   }
 ]
