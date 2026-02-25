@@ -1,5 +1,63 @@
 [
   {
+    "timestamp": "2026-02-25T05:17:32.426907+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.05",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-19.2",
+    "holding_days": "60"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:32.859207+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "162.03",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-36.4"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:33.341295+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "389.0",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-14.6"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:33.670459+00:00",
+    "ticker": "PLTR",
+    "action": "EVALUATE",
+    "price": "128.84",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "146.59",
+    "gain_loss_pct": "-12.1"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:36.731344+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "639.3",
+    "notes": "RSI oversold: 28.73"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:37.087153+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "310.9",
+    "notes": "RSI oversold: 25.42"
+  },
+  {
+    "timestamp": "2026-02-25T05:17:38.791449+00:00",
+    "ticker": "SPY",
+    "action": "SUPPORT_BUY",
+    "price": "687.35",
+    "notes": "Near support $675.78"
+  },
+  {
     "timestamp": "2026-02-24T16:51:49.342751+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -110,61 +168,5 @@
     "action": "BUY_SIGNAL",
     "price": "196.6",
     "notes": "RSI oversold: 26.56"
-  },
-  {
-    "timestamp": "2026-02-24T05:16:00.226986+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "637.25",
-    "notes": "RSI oversold: 24.55"
-  },
-  {
-    "timestamp": "2026-02-24T05:16:00.595308+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "311.49",
-    "notes": "RSI oversold: 24.03"
-  },
-  {
-    "timestamp": "2026-02-24T05:16:02.218294+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "682.39",
-    "notes": "Near support $675.78"
-  },
-  {
-    "timestamp": "2026-02-24T05:16:02.769144+00:00",
-    "ticker": "QQQ",
-    "action": "SUPPORT_BUY",
-    "price": "601.41",
-    "notes": "Near support $593.34"
-  },
-  {
-    "timestamp": "2026-02-23T16:40:30.561079+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "7.84",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-21.3",
-    "holding_days": "59"
-  },
-  {
-    "timestamp": "2026-02-23T16:40:30.949771+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "163.9",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-35.7"
-  },
-  {
-    "timestamp": "2026-02-23T16:40:31.440202+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "386.77",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-15.1"
   }
 ]
