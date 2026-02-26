@@ -1,5 +1,54 @@
 [
   {
+    "timestamp": "2026-02-26T16:42:36.226424+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.45",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-15.2",
+    "holding_days": "62"
+  },
+  {
+    "timestamp": "2026-02-26T16:42:36.558901+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "182.34",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-28.5"
+  },
+  {
+    "timestamp": "2026-02-26T16:42:36.946999+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "400.15",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-12.2"
+  },
+  {
+    "timestamp": "2026-02-26T16:42:39.469827+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "306.57",
+    "notes": "RSI oversold: 28.9"
+  },
+  {
+    "timestamp": "2026-02-26T16:42:39.919244+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "64.61",
+    "notes": "Major move: -10.1%"
+  },
+  {
+    "timestamp": "2026-02-26T16:42:40.934975+00:00",
+    "ticker": "SPY",
+    "action": "SUPPORT_BUY",
+    "price": "687.45",
+    "notes": "Near support $675.78"
+  },
+  {
     "timestamp": "2026-02-26T05:14:13.438897+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -112,56 +161,5 @@
     "action": "ALERT",
     "price": "0.1",
     "notes": "Major move: 11.9%"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:32.426907+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.05",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-19.2",
-    "holding_days": "60"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:32.859207+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "162.03",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-36.4"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:33.341295+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "389.0",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-14.6"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:33.670459+00:00",
-    "ticker": "PLTR",
-    "action": "EVALUATE",
-    "price": "128.84",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "146.59",
-    "gain_loss_pct": "-12.1"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:36.731344+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "639.3",
-    "notes": "RSI oversold: 28.73"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:37.087153+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "310.9",
-    "notes": "RSI oversold: 25.42"
   }
 ]
