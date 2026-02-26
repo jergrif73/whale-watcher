@@ -1,5 +1,56 @@
 [
   {
+    "timestamp": "2026-02-26T05:14:13.438897+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.57",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-14.0",
+    "holding_days": "61"
+  },
+  {
+    "timestamp": "2026-02-26T05:14:13.683672+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "183.94",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-27.8"
+  },
+  {
+    "timestamp": "2026-02-26T05:14:14.002976+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "400.6",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-12.1"
+  },
+  {
+    "timestamp": "2026-02-26T05:14:14.273742+00:00",
+    "ticker": "PLTR",
+    "action": "EVALUATE",
+    "price": "134.19",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "146.59",
+    "gain_loss_pct": "-8.5"
+  },
+  {
+    "timestamp": "2026-02-26T05:14:18.645366+00:00",
+    "ticker": "ETH",
+    "action": "ALERT",
+    "price": "2062.34",
+    "notes": "Major move: 11.3%"
+  },
+  {
+    "timestamp": "2026-02-26T05:14:18.841700+00:00",
+    "ticker": "SOL",
+    "action": "ALERT",
+    "price": "87.87",
+    "notes": "Major move: 11.2%"
+  },
+  {
     "timestamp": "2026-02-25T16:55:40.671844+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -112,56 +163,5 @@
     "action": "BUY_SIGNAL",
     "price": "310.9",
     "notes": "RSI oversold: 25.42"
-  },
-  {
-    "timestamp": "2026-02-25T05:17:38.791449+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "687.35",
-    "notes": "Near support $675.78"
-  },
-  {
-    "timestamp": "2026-02-24T16:51:49.342751+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "7.76",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-22.2",
-    "holding_days": "60"
-  },
-  {
-    "timestamp": "2026-02-24T16:51:49.748229+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "157.9",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-38.1"
-  },
-  {
-    "timestamp": "2026-02-24T16:51:50.153513+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "386.5",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-15.2"
-  },
-  {
-    "timestamp": "2026-02-24T16:51:50.470345+00:00",
-    "ticker": "PLTR",
-    "action": "EVALUATE",
-    "price": "128.9",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "146.59",
-    "gain_loss_pct": "-12.1"
-  },
-  {
-    "timestamp": "2026-02-24T16:51:52.785054+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "638.82",
-    "notes": "RSI oversold: 28.45"
   }
 ]
