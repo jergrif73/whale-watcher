@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-03-02T05:09:21.050464+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.94",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-10.3",
+    "holding_days": "65"
+  },
+  {
+    "timestamp": "2026-03-02T05:09:21.410682+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "175.85",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-31.0"
+  },
+  {
+    "timestamp": "2026-03-02T05:09:21.711983+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "392.74",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-13.8"
+  },
+  {
     "timestamp": "2026-02-28T16:12:39.317897+00:00",
     "ticker": "FET",
     "action": "BUY_SIGNAL",
@@ -142,28 +170,5 @@
     "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
     "entry_price": "455.62",
     "gain_loss_pct": "-12.1"
-  },
-  {
-    "timestamp": "2026-02-26T05:14:14.273742+00:00",
-    "ticker": "PLTR",
-    "action": "EVALUATE",
-    "price": "134.19",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "146.59",
-    "gain_loss_pct": "-8.5"
-  },
-  {
-    "timestamp": "2026-02-26T05:14:18.645366+00:00",
-    "ticker": "ETH",
-    "action": "ALERT",
-    "price": "2062.34",
-    "notes": "Major move: 11.3%"
-  },
-  {
-    "timestamp": "2026-02-26T05:14:18.841700+00:00",
-    "ticker": "SOL",
-    "action": "ALERT",
-    "price": "87.87",
-    "notes": "Major move: 11.2%"
   }
 ]
