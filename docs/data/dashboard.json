@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-03-02 05:09:20",
+  "generated_at": "2026-03-02 16:28:11",
   "deep_analysis_enabled": false,
   "portfolio": [
     {
       "symbol": "COIN",
       "yf_symbol": "COIN",
-      "price": 175.85,
+      "price": 183.37,
       "amount_invested": 25,
-      "current_value": 17.25,
+      "current_value": 17.98,
       "trend": "SIDEWAYS",
-      "rsi": 55.1,
-      "signal": "\ud83d\uded1 STOP LOSS -31.0%",
+      "rsi": 57.3,
+      "signal": "\ud83d\uded1 STOP LOSS -28.1%",
       "color": "red",
       "action": "SELL_ALL",
       "priority": 100,
@@ -21,22 +21,17 @@
       "risk_score": 72,
       "whale_intel": "",
       "holding_days": null,
-      "gain_loss_pct": -31.0,
-      "gain_loss_dollars": -7.75,
-      "daily_change": -2.9,
-      "weekly_change": 5.97,
-      "vol_ratio": 0.69,
+      "gain_loss_pct": -28.1,
+      "gain_loss_dollars": -7.02,
+      "daily_change": 4.3,
+      "weekly_change": 7.01,
+      "vol_ratio": 0.38,
       "vol_pattern": "ACCUMULATION",
       "peak_since_buy": 263.07,
-      "drawdown_from_peak": -33.2,
+      "drawdown_from_peak": -30.3,
       "support": 139.36,
-      "resistance": 198.96,
+      "resistance": 190.94,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 239.28,
-          "volume": 12098900
-        },
         {
           "date": "2026-01-16",
           "close": 241.15,
@@ -181,6 +176,11 @@
           "date": "2026-02-27",
           "close": 175.85,
           "volume": 11408400
+        },
+        {
+          "date": "2026-03-02",
+          "close": 183.37,
+          "volume": 5864830
         }
       ],
       "is_owned": true,
@@ -195,209 +195,14 @@
       ]
     },
     {
-      "symbol": "MARA",
-      "yf_symbol": "MARA",
-      "price": 8.94,
-      "amount_invested": 100,
-      "current_value": 89.72,
-      "trend": "SIDEWAYS",
-      "rsi": 58.9,
-      "signal": "\u26a0\ufe0f LOSS -10.3%",
-      "color": "red",
-      "action": "EVALUATE",
-      "priority": 75,
-      "reasoning": [
-        "Approaching stop loss at -15.0%"
-      ],
-      "risk_score": 72,
-      "whale_intel": "",
-      "holding_days": 65,
-      "gain_loss_pct": -10.3,
-      "gain_loss_dollars": -10.28,
-      "daily_change": 5.8,
-      "weekly_change": 12.31,
-      "vol_ratio": 2.47,
-      "vol_pattern": "ACCUMULATION",
-      "peak_since_buy": 11.57,
-      "drawdown_from_peak": -22.7,
-      "support": 6.66,
-      "resistance": 9.84,
-      "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 10.66,
-          "volume": 47808200
-        },
-        {
-          "date": "2026-01-16",
-          "close": 11.36,
-          "volume": 51948100
-        },
-        {
-          "date": "2026-01-20",
-          "close": 10.37,
-          "volume": 45896100
-        },
-        {
-          "date": "2026-01-21",
-          "close": 10.56,
-          "volume": 43023400
-        },
-        {
-          "date": "2026-01-22",
-          "close": 10.29,
-          "volume": 42011200
-        },
-        {
-          "date": "2026-01-23",
-          "close": 10.5,
-          "volume": 46881200
-        },
-        {
-          "date": "2026-01-26",
-          "close": 9.98,
-          "volume": 39545100
-        },
-        {
-          "date": "2026-01-27",
-          "close": 10.52,
-          "volume": 38581200
-        },
-        {
-          "date": "2026-01-28",
-          "close": 10.37,
-          "volume": 36791300
-        },
-        {
-          "date": "2026-01-29",
-          "close": 9.86,
-          "volume": 39218800
-        },
-        {
-          "date": "2026-01-30",
-          "close": 9.5,
-          "volume": 37390600
-        },
-        {
-          "date": "2026-02-02",
-          "close": 9.12,
-          "volume": 48414800
-        },
-        {
-          "date": "2026-02-03",
-          "close": 9.05,
-          "volume": 53722600
-        },
-        {
-          "date": "2026-02-04",
-          "close": 8.28,
-          "volume": 54008100
-        },
-        {
-          "date": "2026-02-05",
-          "close": 6.73,
-          "volume": 80158300
-        },
-        {
-          "date": "2026-02-06",
-          "close": 8.24,
-          "volume": 82353100
-        },
-        {
-          "date": "2026-02-09",
-          "close": 8.06,
-          "volume": 67741600
-        },
-        {
-          "date": "2026-02-10",
-          "close": 7.66,
-          "volume": 45953200
-        },
-        {
-          "date": "2026-02-11",
-          "close": 7.56,
-          "volume": 49265200
-        },
-        {
-          "date": "2026-02-12",
-          "close": 7.25,
-          "volume": 38590500
-        },
-        {
-          "date": "2026-02-13",
-          "close": 7.92,
-          "volume": 50848000
-        },
-        {
-          "date": "2026-02-17",
-          "close": 7.51,
-          "volume": 41177900
-        },
-        {
-          "date": "2026-02-18",
-          "close": 7.5,
-          "volume": 31304600
-        },
-        {
-          "date": "2026-02-19",
-          "close": 7.96,
-          "volume": 36294000
-        },
-        {
-          "date": "2026-02-20",
-          "close": 7.97,
-          "volume": 37531000
-        },
-        {
-          "date": "2026-02-23",
-          "close": 7.88,
-          "volume": 33052500
-        },
-        {
-          "date": "2026-02-24",
-          "close": 8.05,
-          "volume": 37255100
-        },
-        {
-          "date": "2026-02-25",
-          "close": 8.57,
-          "volume": 57452200
-        },
-        {
-          "date": "2026-02-26",
-          "close": 8.45,
-          "volume": 51112000
-        },
-        {
-          "date": "2026-02-27",
-          "close": 8.94,
-          "volume": 102256100
-        }
-      ],
-      "is_owned": true,
-      "first_buy_date": "2025-12-26T10:00:00Z",
-      "last_buy_date": "2026-01-19",
-      "buy_count": 2,
-      "lots": [
-        {
-          "amount": 50,
-          "date": "2025-12-26T10:00:00Z"
-        },
-        {
-          "amount": 50,
-          "date": "2026-01-19"
-        }
-      ]
-    },
-    {
       "symbol": "MSFT",
       "yf_symbol": "MSFT",
-      "price": 392.74,
+      "price": 396.99,
       "amount_invested": 25,
-      "current_value": 21.55,
+      "current_value": 21.78,
       "trend": "DOWN",
-      "rsi": 44.8,
-      "signal": "\u26a0\ufe0f LOSS -13.8%",
+      "rsi": 37.8,
+      "signal": "\u26a0\ufe0f LOSS -12.9%",
       "color": "red",
       "action": "EVALUATE",
       "priority": 75,
@@ -405,25 +210,20 @@
         "Approaching stop loss at -15.0%",
         "Downtrend - consider cutting losses"
       ],
-      "risk_score": 72,
+      "risk_score": 82,
       "whale_intel": "",
       "holding_days": null,
-      "gain_loss_pct": -13.8,
-      "gain_loss_dollars": -3.45,
-      "daily_change": -2.2,
-      "weekly_change": -1.44,
-      "vol_ratio": 1.48,
+      "gain_loss_pct": -12.9,
+      "gain_loss_dollars": -3.22,
+      "daily_change": 1.1,
+      "weekly_change": -0.06,
+      "vol_ratio": 0.36,
       "vol_pattern": "ACCUMULATION",
       "peak_since_buy": 482.64,
-      "drawdown_from_peak": -18.6,
+      "drawdown_from_peak": -17.7,
       "support": 381.71,
-      "resistance": 438.6,
+      "resistance": 429.76,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 455.62,
-          "volume": 23225800
-        },
         {
           "date": "2026-01-16",
           "close": 458.81,
@@ -568,6 +368,11 @@
           "date": "2026-02-27",
           "close": 392.74,
           "volume": 51276300
+        },
+        {
+          "date": "2026-03-02",
+          "close": 396.99,
+          "volume": 12893635
         }
       ],
       "is_owned": true,
@@ -582,39 +387,229 @@
       ]
     },
     {
+      "symbol": "MARA",
+      "yf_symbol": "MARA",
+      "price": 9.65,
+      "amount_invested": 100,
+      "current_value": 96.84,
+      "trend": "SIDEWAYS",
+      "rsi": 67.8,
+      "signal": "\ud83d\udc8e HOLD -3.2%",
+      "color": "blue",
+      "action": "HOLD",
+      "priority": 10,
+      "reasoning": [
+        "Minor loss - within tolerance"
+      ],
+      "risk_score": 57,
+      "whale_intel": "",
+      "holding_days": 66,
+      "gain_loss_pct": -3.2,
+      "gain_loss_dollars": -3.16,
+      "daily_change": 7.9,
+      "weekly_change": 21.07,
+      "vol_ratio": 0.65,
+      "vol_pattern": "ACCUMULATION",
+      "peak_since_buy": 11.57,
+      "drawdown_from_peak": -16.6,
+      "support": 6.66,
+      "resistance": 9.84,
+      "price_history": [
+        {
+          "date": "2026-01-16",
+          "close": 11.36,
+          "volume": 51948100
+        },
+        {
+          "date": "2026-01-20",
+          "close": 10.37,
+          "volume": 45896100
+        },
+        {
+          "date": "2026-01-21",
+          "close": 10.56,
+          "volume": 43023400
+        },
+        {
+          "date": "2026-01-22",
+          "close": 10.29,
+          "volume": 42011200
+        },
+        {
+          "date": "2026-01-23",
+          "close": 10.5,
+          "volume": 46881200
+        },
+        {
+          "date": "2026-01-26",
+          "close": 9.98,
+          "volume": 39545100
+        },
+        {
+          "date": "2026-01-27",
+          "close": 10.52,
+          "volume": 38581200
+        },
+        {
+          "date": "2026-01-28",
+          "close": 10.37,
+          "volume": 36791300
+        },
+        {
+          "date": "2026-01-29",
+          "close": 9.86,
+          "volume": 39218800
+        },
+        {
+          "date": "2026-01-30",
+          "close": 9.5,
+          "volume": 37390600
+        },
+        {
+          "date": "2026-02-02",
+          "close": 9.12,
+          "volume": 48414800
+        },
+        {
+          "date": "2026-02-03",
+          "close": 9.05,
+          "volume": 53722600
+        },
+        {
+          "date": "2026-02-04",
+          "close": 8.28,
+          "volume": 54008100
+        },
+        {
+          "date": "2026-02-05",
+          "close": 6.73,
+          "volume": 80158300
+        },
+        {
+          "date": "2026-02-06",
+          "close": 8.24,
+          "volume": 82353100
+        },
+        {
+          "date": "2026-02-09",
+          "close": 8.06,
+          "volume": 67741600
+        },
+        {
+          "date": "2026-02-10",
+          "close": 7.66,
+          "volume": 45953200
+        },
+        {
+          "date": "2026-02-11",
+          "close": 7.56,
+          "volume": 49265200
+        },
+        {
+          "date": "2026-02-12",
+          "close": 7.25,
+          "volume": 38590500
+        },
+        {
+          "date": "2026-02-13",
+          "close": 7.92,
+          "volume": 50848000
+        },
+        {
+          "date": "2026-02-17",
+          "close": 7.51,
+          "volume": 41177900
+        },
+        {
+          "date": "2026-02-18",
+          "close": 7.5,
+          "volume": 31304600
+        },
+        {
+          "date": "2026-02-19",
+          "close": 7.96,
+          "volume": 36294000
+        },
+        {
+          "date": "2026-02-20",
+          "close": 7.97,
+          "volume": 37531000
+        },
+        {
+          "date": "2026-02-23",
+          "close": 7.88,
+          "volume": 33052500
+        },
+        {
+          "date": "2026-02-24",
+          "close": 8.05,
+          "volume": 37255100
+        },
+        {
+          "date": "2026-02-25",
+          "close": 8.57,
+          "volume": 57452200
+        },
+        {
+          "date": "2026-02-26",
+          "close": 8.45,
+          "volume": 51112000
+        },
+        {
+          "date": "2026-02-27",
+          "close": 8.94,
+          "volume": 102256100
+        },
+        {
+          "date": "2026-03-02",
+          "close": 9.65,
+          "volume": 31241148
+        }
+      ],
+      "is_owned": true,
+      "first_buy_date": "2025-12-26T10:00:00Z",
+      "last_buy_date": "2026-01-19",
+      "buy_count": 2,
+      "lots": [
+        {
+          "amount": 50,
+          "date": "2025-12-26T10:00:00Z"
+        },
+        {
+          "amount": 50,
+          "date": "2026-01-19"
+        }
+      ]
+    },
+    {
       "symbol": "PLTR",
       "yf_symbol": "PLTR",
-      "price": 137.19,
+      "price": 144.47,
       "amount_invested": 25,
-      "current_value": 23.4,
+      "current_value": 24.64,
       "trend": "SIDEWAYS",
-      "rsi": 51.5,
-      "signal": "\ud83d\udc40 WATCH -6.4%",
-      "color": "orange",
-      "action": "MONITOR",
-      "priority": 30,
+      "rsi": 51.8,
+      "signal": "\ud83d\udc8e HOLD -1.4%",
+      "color": "blue",
+      "action": "HOLD",
+      "priority": 10,
       "reasoning": [
-        "Position in warning zone"
+        "Minor loss - within tolerance"
       ],
-      "risk_score": 55,
+      "risk_score": 50,
       "whale_intel": "",
       "holding_days": null,
-      "gain_loss_pct": -6.4,
-      "gain_loss_dollars": -1.6,
-      "daily_change": 0.9,
-      "weekly_change": 1.71,
-      "vol_ratio": 1.13,
+      "gain_loss_pct": -1.4,
+      "gain_loss_dollars": -0.36,
+      "daily_change": 5.3,
+      "weekly_change": 6.82,
+      "vol_ratio": 0.7,
       "vol_pattern": "ACCUMULATION",
       "peak_since_buy": 165.08,
-      "drawdown_from_peak": -16.9,
+      "drawdown_from_peak": -12.5,
       "support": 126.23,
       "resistance": 165.08,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 177.07,
-          "volume": 31109200
-        },
         {
           "date": "2026-01-16",
           "close": 170.96,
@@ -759,6 +754,11 @@
           "date": "2026-02-27",
           "close": 137.19,
           "volume": 59265800
+        },
+        {
+          "date": "2026-03-02",
+          "close": 144.47,
+          "volume": 35803445
         }
       ],
       "is_owned": true,
@@ -777,29 +777,24 @@
     {
       "symbol": "MSTR",
       "yf_symbol": "MSTR",
-      "price": 129.5,
+      "price": 137.84,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 46.11,
+      "rsi": 49.6,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -2.9,
-      "weekly_change": 0.04,
-      "vol_ratio": 0.7308485344028975,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": 6.4,
+      "weekly_change": 5.18,
+      "vol_ratio": 0.5979328201828112,
+      "vol_pattern": "ACCUMULATION",
       "support": 104.17,
-      "resistance": 151.15,
+      "resistance": 147.88,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 170.91,
-          "volume": 21486500
-        },
         {
           "date": "2026-01-16",
           "close": 173.71,
@@ -944,6 +939,11 @@
           "date": "2026-02-27",
           "close": 129.5,
           "volume": 13979700
+        },
+        {
+          "date": "2026-03-02",
+          "close": 137.84,
+          "volume": 11019866
         }
       ],
       "is_owned": false
@@ -951,29 +951,24 @@
     {
       "symbol": "TSLA",
       "yf_symbol": "TSLA",
-      "price": 402.51,
+      "price": 400.3,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 44.7,
-      "signal": "\ud83d\udcc9 DISTRIBUTION",
-      "color": "orange",
+      "rsi": 38.97,
+      "signal": "NEUTRAL",
+      "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.5,
-      "weekly_change": -2.23,
-      "vol_ratio": 1.0053807208019112,
-      "vol_pattern": "DISTRIBUTION",
+      "daily_change": -0.5,
+      "weekly_change": -2.8,
+      "vol_ratio": 0.42498314708275153,
+      "vol_pattern": "NEUTRAL",
       "support": 387.53,
-      "resistance": 439.88,
+      "resistance": 436.35,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 438.57,
-          "volume": 49465800
-        },
         {
           "date": "2026-01-16",
           "close": 437.5,
@@ -1118,6 +1113,11 @@
           "date": "2026-02-27",
           "close": 402.51,
           "volume": 56760900
+        },
+        {
+          "date": "2026-03-02",
+          "close": 400.3,
+          "volume": 23773502
         }
       ],
       "is_owned": false
@@ -1125,29 +1125,24 @@
     {
       "symbol": "NVDA",
       "yf_symbol": "NVDA",
-      "price": 177.19,
+      "price": 180.78,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 41.1,
+      "rsi": 39.74,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -4.2,
-      "weekly_change": -5.7,
-      "vol_ratio": 1.599005796516508,
+      "daily_change": 2.0,
+      "weekly_change": -4.76,
+      "vol_ratio": 0.4562323684549654,
       "vol_pattern": "NEUTRAL",
       "support": 171.03,
       "resistance": 197.63,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 187.05,
-          "volume": 206188600
-        },
         {
           "date": "2026-01-16",
           "close": 186.23,
@@ -1292,6 +1287,11 @@
           "date": "2026-02-27",
           "close": 177.19,
           "volume": 310523200
+        },
+        {
+          "date": "2026-03-02",
+          "close": 180.78,
+          "volume": 94101001
         }
       ],
       "is_owned": false
@@ -1299,29 +1299,24 @@
     {
       "symbol": "AMD",
       "yf_symbol": "AMD",
-      "price": 200.21,
+      "price": 194.74,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 43.87,
+      "rsi": 33.65,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.7,
-      "weekly_change": -1.55,
-      "vol_ratio": 0.824064746512044,
-      "vol_pattern": "NEUTRAL",
-      "support": 190.72,
+      "daily_change": -2.7,
+      "weekly_change": -2.7,
+      "vol_ratio": 0.44480526144831606,
+      "vol_pattern": "ACCUMULATION",
+      "support": 190.0,
       "resistance": 252.65,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 227.92,
-          "volume": 55270200
-        },
         {
           "date": "2026-01-16",
           "close": 231.83,
@@ -1466,6 +1461,11 @@
           "date": "2026-02-27",
           "close": 200.21,
           "volume": 31232400
+        },
+        {
+          "date": "2026-03-02",
+          "close": 194.74,
+          "volume": 16816112
         }
       ],
       "is_owned": false
@@ -1473,29 +1473,24 @@
     {
       "symbol": "AVGO",
       "yf_symbol": "AVGO",
-      "price": 319.55,
+      "price": 314.07,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 40.63,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 27.3,
+      "signal": "\u2705 BUY DIP",
+      "color": "green",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.7,
-      "weekly_change": -4.32,
-      "vol_ratio": 1.3721860928007892,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -1.7,
+      "weekly_change": -5.59,
+      "vol_ratio": 0.33456230414724547,
+      "vol_pattern": "ACCUMULATION",
       "support": 295.3,
       "resistance": 352.34,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 343.02,
-          "volume": 22218800
-        },
         {
           "date": "2026-01-16",
           "close": 351.71,
@@ -1640,6 +1635,11 @@
           "date": "2026-02-27",
           "close": 319.55,
           "volume": 27934100
+        },
+        {
+          "date": "2026-03-02",
+          "close": 314.07,
+          "volume": 7009097
         }
       ],
       "is_owned": false
@@ -1647,29 +1647,24 @@
     {
       "symbol": "META",
       "yf_symbol": "META",
-      "price": 648.18,
+      "price": 650.67,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 44.33,
+      "rsi": 37.21,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.3,
-      "weekly_change": 0.53,
-      "vol_ratio": 1.310812675920853,
+      "daily_change": 0.4,
+      "weekly_change": -0.76,
+      "vol_ratio": 0.2800190586902888,
       "vol_pattern": "ACCUMULATION",
       "support": 628.15,
-      "resistance": 732.17,
+      "resistance": 721.3,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 620.8,
-          "volume": 13076100
-        },
         {
           "date": "2026-01-16",
           "close": 620.25,
@@ -1814,6 +1809,11 @@
           "date": "2026-02-27",
           "close": 648.18,
           "volume": 15670700
+        },
+        {
+          "date": "2026-03-02",
+          "close": 650.67,
+          "volume": 3367512
         }
       ],
       "is_owned": false
@@ -1821,29 +1821,24 @@
     {
       "symbol": "GOOGL",
       "yf_symbol": "GOOGL",
-      "price": 311.76,
+      "price": 304.55,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 39.66,
+      "rsi": 33.36,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.4,
-      "weekly_change": 2.94,
-      "vol_ratio": 1.2502703598879343,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -2.3,
+      "weekly_change": -3.31,
+      "vol_ratio": 0.3023527193870633,
+      "vol_pattern": "ACCUMULATION",
       "support": 296.25,
       "resistance": 349.0,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 332.78,
-          "volume": 28442400
-        },
         {
           "date": "2026-01-16",
           "close": 330.0,
@@ -1988,6 +1983,11 @@
           "date": "2026-02-27",
           "close": 311.76,
           "volume": 44568300
+        },
+        {
+          "date": "2026-03-02",
+          "close": 304.55,
+          "volume": 10681405
         }
       ],
       "is_owned": false
@@ -1995,29 +1995,24 @@
     {
       "symbol": "SOXL",
       "yf_symbol": "SOXL",
-      "price": 62.77,
+      "price": 60.22,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 51.43,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 44.68,
+      "signal": "\ud83d\udc40 UPTREND DIP",
+      "color": "blue",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -3.9,
-      "weekly_change": -3.77,
-      "vol_ratio": 0.9269503690957479,
+      "daily_change": -4.1,
+      "weekly_change": -10.27,
+      "vol_ratio": 0.6341476485381359,
       "vol_pattern": "ACCUMULATION",
       "support": 49.33,
       "resistance": 72.36,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 58.08,
-          "volume": 89664300
-        },
         {
           "date": "2026-01-16",
           "close": 60.75,
@@ -2162,6 +2157,11 @@
           "date": "2026-02-27",
           "close": 62.77,
           "volume": 69890000
+        },
+        {
+          "date": "2026-03-02",
+          "close": 60.22,
+          "volume": 46481228
         }
       ],
       "is_owned": false
@@ -2169,29 +2169,24 @@
     {
       "symbol": "TQQQ",
       "yf_symbol": "TQQQ",
-      "price": 49.52,
+      "price": 48.76,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 46.73,
+      "rsi": 40.65,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.1,
-      "weekly_change": 1.41,
-      "vol_ratio": 0.9554217378788166,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -1.5,
+      "weekly_change": -2.61,
+      "vol_ratio": 0.5615101360241614,
+      "vol_pattern": "ACCUMULATION",
       "support": 46.42,
       "resistance": 55.76,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 54.38,
-          "volume": 90483000
-        },
         {
           "date": "2026-01-16",
           "close": 54.14,
@@ -2336,6 +2331,11 @@
           "date": "2026-02-27",
           "close": 49.52,
           "volume": 93427300
+        },
+        {
+          "date": "2026-03-02",
+          "close": 48.76,
+          "volume": 52789915
         }
       ],
       "is_owned": false
@@ -2343,29 +2343,24 @@
     {
       "symbol": "SPY",
       "yf_symbol": "SPY",
-      "price": 685.99,
+      "price": 683.27,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 45.61,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 39.76,
+      "signal": "\ud83d\udc40 SUPPORT BUY",
+      "color": "green",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.5,
-      "weekly_change": 0.22,
-      "vol_ratio": 1.012116396716511,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -0.4,
+      "weekly_change": -0.89,
+      "vol_ratio": 0.41351528301711415,
+      "vol_pattern": "ACCUMULATION",
       "support": 675.78,
       "resistance": 697.14,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 692.24,
-          "volume": 77862000
-        },
         {
           "date": "2026-01-16",
           "close": 691.66,
@@ -2510,6 +2505,11 @@
           "date": "2026-02-27",
           "close": 685.99,
           "volume": 83105100
+        },
+        {
+          "date": "2026-03-02",
+          "close": 683.27,
+          "volume": 32476593
         }
       ],
       "is_owned": false
@@ -2517,29 +2517,24 @@
     {
       "symbol": "QQQ",
       "yf_symbol": "QQQ",
-      "price": 607.29,
+      "price": 604.24,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 48.26,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 42.38,
+      "signal": "\ud83d\udc40 SUPPORT BUY",
+      "color": "green",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.3,
-      "weekly_change": 0.63,
-      "vol_ratio": 0.9860507140792186,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -0.5,
+      "weekly_change": -0.75,
+      "vol_ratio": 0.46856050900795343,
+      "vol_pattern": "ACCUMULATION",
       "support": 593.34,
       "resistance": 629.98,
       "price_history": [
-        {
-          "date": "2026-01-15",
-          "close": 621.78,
-          "volume": 53934900
-        },
         {
           "date": "2026-01-16",
           "close": 621.26,
@@ -2684,6 +2679,11 @@
           "date": "2026-02-27",
           "close": 607.29,
           "volume": 68012000
+        },
+        {
+          "date": "2026-03-02",
+          "close": 604.24,
+          "volume": 31692238
         }
       ],
       "is_owned": false
@@ -2691,29 +2691,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 66628.29,
+      "price": 69558.63,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 43.0,
+      "rsi": 51.78,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.5,
-      "weekly_change": 3.11,
-      "vol_ratio": 0.9997309573676656,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 5.8,
+      "weekly_change": 8.55,
+      "vol_ratio": 1.3297827551132058,
+      "vol_pattern": "NEUTRAL",
       "support": 62553.19,
       "resistance": 70939.29,
       "price_history": [
-        {
-          "date": "2026-01-31",
-          "close": 78621.12,
-          "volume": 70479259159
-        },
         {
           "date": "2026-02-01",
           "close": 76974.45,
@@ -2855,9 +2850,14 @@
           "volume": 42041497112
         },
         {
+          "date": "2026-03-01",
+          "close": 65738.1,
+          "volume": 40733141929
+        },
+        {
           "date": "2026-03-02",
-          "close": 66628.29,
-          "volume": 38589394944
+          "close": 69558.63,
+          "volume": 52558061568
         }
       ],
       "is_owned": false
@@ -2865,29 +2865,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 1965.53,
+      "price": 2063.74,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 49.96,
+      "rsi": 54.66,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.0,
-      "weekly_change": 5.93,
-      "vol_ratio": 1.0720364820695043,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 6.4,
+      "weekly_change": 11.37,
+      "vol_ratio": 1.2640554411635982,
+      "vol_pattern": "NEUTRAL",
       "support": 1804.11,
       "resistance": 2145.51,
       "price_history": [
-        {
-          "date": "2026-01-31",
-          "close": 2445.09,
-          "volume": 47569532203
-        },
         {
           "date": "2026-02-01",
           "close": 2267.96,
@@ -3029,9 +3024,14 @@
           "volume": 21675923669
         },
         {
+          "date": "2026-03-01",
+          "close": 1939.07,
+          "volume": 23649071468
+        },
+        {
           "date": "2026-03-02",
-          "close": 1965.53,
-          "volume": 21030903808
+          "close": 2063.74,
+          "volume": 25590308864
         }
       ],
       "is_owned": false
@@ -3039,29 +3039,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 84.17,
+      "price": 89.73,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 47.39,
+      "rsi": 53.98,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.2,
-      "weekly_change": 8.25,
-      "vol_ratio": 1.0646824103715262,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 7.4,
+      "weekly_change": 13.53,
+      "vol_ratio": 1.2835001813417417,
+      "vol_pattern": "NEUTRAL",
       "support": 76.02,
       "resistance": 91.08,
       "price_history": [
-        {
-          "date": "2026-01-31",
-          "close": 105.44,
-          "volume": 9542017060
-        },
         {
           "date": "2026-02-01",
           "close": 100.85,
@@ -3203,9 +3198,14 @@
           "volume": 4761528427
         },
         {
+          "date": "2026-03-01",
+          "close": 83.58,
+          "volume": 4665364489
+        },
+        {
           "date": "2026-03-02",
-          "close": 84.17,
-          "volume": 4040670208
+          "close": 89.73,
+          "volume": 5099307008
         }
       ],
       "is_owned": false
@@ -3213,29 +3213,24 @@
     {
       "symbol": "FET",
       "yf_symbol": "FET-USD",
-      "price": 0.15,
+      "price": 0.16,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 32.39,
+      "rsi": 40.03,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -3.6,
-      "weekly_change": -1.66,
-      "vol_ratio": 1.4497404813868187,
+      "daily_change": 5.5,
+      "weekly_change": 3.92,
+      "vol_ratio": 1.4135254449643702,
       "vol_pattern": "NEUTRAL",
       "support": 0.14,
       "resistance": 0.18,
       "price_history": [
-        {
-          "date": "2026-01-31",
-          "close": 0.19,
-          "volume": 96533131
-        },
         {
           "date": "2026-02-01",
           "close": 0.18,
@@ -3377,9 +3372,14 @@
           "volume": 128001113
         },
         {
-          "date": "2026-03-02",
+          "date": "2026-03-01",
           "close": 0.15,
-          "volume": 97525008
+          "volume": 102632640
+        },
+        {
+          "date": "2026-03-02",
+          "close": 0.16,
+          "volume": 104716592
         }
       ],
       "is_owned": false
@@ -3387,29 +3387,24 @@
     {
       "symbol": "DOGE",
       "yf_symbol": "DOGE-USD",
-      "price": 0.09,
+      "price": 0.1,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 35.4,
+      "rsi": 44.97,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.2,
-      "weekly_change": 0.37,
-      "vol_ratio": 1.097601711849578,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 5.7,
+      "weekly_change": 6.24,
+      "vol_ratio": 1.207990446894559,
+      "vol_pattern": "NEUTRAL",
       "support": 0.09,
       "resistance": 0.12,
       "price_history": [
-        {
-          "date": "2026-01-31",
-          "close": 0.1,
-          "volume": 2644125762
-        },
         {
           "date": "2026-02-01",
           "close": 0.1,
@@ -3551,9 +3546,14 @@
           "volume": 1541167339
         },
         {
-          "date": "2026-03-02",
+          "date": "2026-03-01",
           "close": 0.09,
-          "volume": 1118092160
+          "volume": 1305707878
+        },
+        {
+          "date": "2026-03-02",
+          "close": 0.1,
+          "volume": 1291554816
         }
       ],
       "is_owned": false
@@ -3561,25 +3561,64 @@
   ],
   "benchmarks": {
     "SPY": {
-      "current": 685.99,
-      "change_pct": 0.22,
+      "current": 683.31,
+      "change_pct": -0.89,
       "period_days": 7
     },
     "QQQ": {
-      "current": 607.29,
-      "change_pct": 0.63,
+      "current": 604.26,
+      "change_pct": -0.75,
       "period_days": 7
     }
   },
   "summary": {
     "total_invested": 175,
-    "total_current": 151.92,
-    "total_gain_loss": -23.08,
-    "total_gain_loss_pct": -13.19,
+    "total_current": 161.24,
+    "total_gain_loss": -13.76,
+    "total_gain_loss_pct": -7.86,
     "position_count": 4,
-    "avg_risk_score": 68.0
+    "avg_risk_score": 65.0
   },
   "recent_signals": [
+    {
+      "timestamp": "2026-03-02T16:28:12.462182+00:00",
+      "ticker": "COIN",
+      "action": "SELL_ALL",
+      "price": "183.37",
+      "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+      "entry_price": "254.92",
+      "gain_loss_pct": "-28.1"
+    },
+    {
+      "timestamp": "2026-03-02T16:28:13.066898+00:00",
+      "ticker": "MSFT",
+      "action": "EVALUATE",
+      "price": "396.99",
+      "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+      "entry_price": "455.62",
+      "gain_loss_pct": "-12.9"
+    },
+    {
+      "timestamp": "2026-03-02T16:28:16.416784+00:00",
+      "ticker": "AVGO",
+      "action": "BUY_SIGNAL",
+      "price": "314.07",
+      "notes": "RSI oversold: 27.3"
+    },
+    {
+      "timestamp": "2026-03-02T16:28:19.602071+00:00",
+      "ticker": "SPY",
+      "action": "SUPPORT_BUY",
+      "price": "683.27",
+      "notes": "Near support $675.78"
+    },
+    {
+      "timestamp": "2026-03-02T16:28:20.291063+00:00",
+      "ticker": "QQQ",
+      "action": "SUPPORT_BUY",
+      "price": "604.24",
+      "notes": "Near support $593.34"
+    },
     {
       "timestamp": "2026-03-02T05:09:21.050464+00:00",
       "ticker": "MARA",
@@ -3709,48 +3748,6 @@
       "action": "BUY_SIGNAL",
       "price": "306.57",
       "notes": "RSI oversold: 28.9"
-    },
-    {
-      "timestamp": "2026-02-26T16:42:39.919244+00:00",
-      "ticker": "SOXL",
-      "action": "ALERT",
-      "price": "64.61",
-      "notes": "Major move: -10.1%"
-    },
-    {
-      "timestamp": "2026-02-26T16:42:40.934975+00:00",
-      "ticker": "SPY",
-      "action": "SUPPORT_BUY",
-      "price": "687.45",
-      "notes": "Near support $675.78"
-    },
-    {
-      "timestamp": "2026-02-26T05:14:13.438897+00:00",
-      "ticker": "MARA",
-      "action": "EVALUATE",
-      "price": "8.57",
-      "notes": "Approaching stop loss at -15.0%",
-      "entry_price": "9.96",
-      "gain_loss_pct": "-14.0",
-      "holding_days": "61"
-    },
-    {
-      "timestamp": "2026-02-26T05:14:13.683672+00:00",
-      "ticker": "COIN",
-      "action": "SELL_ALL",
-      "price": "183.94",
-      "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-      "entry_price": "254.92",
-      "gain_loss_pct": "-27.8"
-    },
-    {
-      "timestamp": "2026-02-26T05:14:14.002976+00:00",
-      "ticker": "MSFT",
-      "action": "EVALUATE",
-      "price": "400.6",
-      "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-      "entry_price": "455.62",
-      "gain_loss_pct": "-12.1"
     }
   ],
   "trade_history": [
@@ -3852,8 +3849,8 @@
             "Uptrend",
             "Accumulation pattern"
           ],
-          "current_price": 62.77,
-          "rsi": 51.43
+          "current_price": 60.22,
+          "rsi": 44.68
         }
       ]
     },
@@ -3864,10 +3861,10 @@
       "losers": 4,
       "win_rate": 0.0,
       "total_gain": 0,
-      "total_loss": 23.08,
-      "net_pnl": -23.08,
+      "total_loss": 13.76,
+      "net_pnl": -13.76,
       "avg_win": 0,
-      "avg_loss": 5.77,
+      "avg_loss": 3.44,
       "profit_factor": 0.0,
       "categories": {
         "crypto": {
@@ -3884,9 +3881,9 @@
         },
         "stock": {
           "count": 4,
-          "pnl": -23.080000000000002,
+          "pnl": -13.76,
           "invested": 175,
-          "return_pct": -13.2
+          "return_pct": -7.9
         }
       }
     },
@@ -3897,17 +3894,8 @@
         "status": "SHORT_TERM",
         "days_to_long_term": 365,
         "alert": "365 days until long-term eligible",
-        "gain_loss_pct": -31.0,
-        "gain_loss_dollars": -7.75
-      },
-      {
-        "ticker": "MARA",
-        "holding_days": 65,
-        "status": "SHORT_TERM",
-        "days_to_long_term": 300,
-        "alert": "300 days until long-term eligible",
-        "gain_loss_pct": -10.3,
-        "gain_loss_dollars": -10.28
+        "gain_loss_pct": -28.1,
+        "gain_loss_dollars": -7.02
       },
       {
         "ticker": "MSFT",
@@ -3915,8 +3903,17 @@
         "status": "SHORT_TERM",
         "days_to_long_term": 365,
         "alert": "365 days until long-term eligible",
-        "gain_loss_pct": -13.8,
-        "gain_loss_dollars": -3.45
+        "gain_loss_pct": -12.9,
+        "gain_loss_dollars": -3.22
+      },
+      {
+        "ticker": "MARA",
+        "holding_days": 66,
+        "status": "SHORT_TERM",
+        "days_to_long_term": 299,
+        "alert": "299 days until long-term eligible",
+        "gain_loss_pct": -3.2,
+        "gain_loss_dollars": -3.16
       },
       {
         "ticker": "PLTR",
@@ -3924,8 +3921,8 @@
         "status": "SHORT_TERM",
         "days_to_long_term": 365,
         "alert": "365 days until long-term eligible",
-        "gain_loss_pct": -6.4,
-        "gain_loss_dollars": -1.6
+        "gain_loss_pct": -1.4,
+        "gain_loss_dollars": -0.36
       }
     ],
     "tax_alerts": [],
@@ -3935,7 +3932,7 @@
       "positions": [
         {
           "ticker": "MSFT",
-          "value": 21.55,
+          "value": 21.78,
           "yield_pct": 0.7,
           "annual_income": 0.15,
           "monthly_income": 0.01
@@ -3944,127 +3941,141 @@
       "yield_on_portfolio": 0.7
     },
     "benchmark_comparison": {
-      "portfolio_return": -13.19,
-      "spy_return": 0.22,
-      "qqq_return": 0.63,
-      "vs_spy": -13.41,
-      "vs_qqq": -13.82,
+      "portfolio_return": -7.86,
+      "spy_return": -0.89,
+      "qqq_return": -0.75,
+      "vs_spy": -6.97,
+      "vs_qqq": -7.11,
       "beating_spy": "False",
       "beating_qqq": "False",
-      "alpha": -13.61
+      "alpha": -7.04
     },
     "entry_alerts": [
       {
+        "ticker": "AVGO",
+        "type": "RSI_OVERSOLD",
+        "price": 314.07,
+        "rsi": 27.3,
+        "message": "\ud83d\udcc9 AVGO RSI at 27.3 - oversold entry zone"
+      },
+      {
         "ticker": "SPY",
         "type": "NEAR_SUPPORT",
-        "price": 685.99,
+        "price": 683.27,
         "support": 675.78,
         "message": "\ud83d\udee1\ufe0f SPY near support $675.78 - potential entry"
       },
       {
-        "ticker": "DOGE",
+        "ticker": "QQQ",
         "type": "NEAR_SUPPORT",
-        "price": 0.09,
-        "support": 0.09,
-        "message": "\ud83d\udee1\ufe0f DOGE near support $0.09 - potential entry"
+        "price": 604.24,
+        "support": 593.34,
+        "message": "\ud83d\udee1\ufe0f QQQ near support $593.34 - potential entry"
       }
     ],
     "position_sizing": [
       {
         "ticker": "MSTR",
-        "current_price": 129.5,
-        "suggested_stop": 116.55,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 1.52,
+        "current_price": 137.84,
+        "suggested_stop": 124.06,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 1.61,
         "position_pct": 10.0
       },
       {
         "ticker": "TSLA",
-        "current_price": 402.51,
+        "current_price": 400.3,
         "suggested_stop": 387.53,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.57,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.51,
         "position_pct": 10.0
       },
       {
         "ticker": "NVDA",
-        "current_price": 177.19,
+        "current_price": 180.78,
         "suggested_stop": 171.03,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.53,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.87,
         "position_pct": 10.0
       },
       {
         "ticker": "AMD",
-        "current_price": 200.21,
-        "suggested_stop": 190.72,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.72,
+        "current_price": 194.74,
+        "suggested_stop": 190.0,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.39,
         "position_pct": 10.0
       },
       {
         "ticker": "AVGO",
-        "current_price": 319.55,
+        "current_price": 314.07,
         "suggested_stop": 295.3,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 1.15,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.96,
         "position_pct": 10.0
       },
       {
         "ticker": "META",
-        "current_price": 648.18,
+        "current_price": 650.67,
         "suggested_stop": 628.15,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.47,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.56,
         "position_pct": 10.0
       },
       {
         "ticker": "GOOGL",
-        "current_price": 311.76,
+        "current_price": 304.55,
         "suggested_stop": 296.25,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.76,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.44,
         "position_pct": 10.0
       },
       {
         "ticker": "SOXL",
-        "current_price": 62.77,
-        "suggested_stop": 56.49,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 1.52,
+        "current_price": 60.22,
+        "suggested_stop": 54.2,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 1.61,
         "position_pct": 10.0
       },
       {
         "ticker": "TQQQ",
-        "current_price": 49.52,
+        "current_price": 48.76,
         "suggested_stop": 46.42,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.95,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.77,
         "position_pct": 10.0
       },
       {
         "ticker": "SPY",
-        "current_price": 685.99,
+        "current_price": 683.27,
         "suggested_stop": 675.78,
-        "suggested_amount": 15.19,
-        "risk_if_stopped": 0.23,
+        "suggested_amount": 16.12,
+        "risk_if_stopped": 0.18,
         "position_pct": 10.0
       }
     ],
     "all_alerts": [
       {
+        "ticker": "AVGO",
+        "type": "RSI_OVERSOLD",
+        "price": 314.07,
+        "rsi": 27.3,
+        "message": "\ud83d\udcc9 AVGO RSI at 27.3 - oversold entry zone"
+      },
+      {
         "ticker": "SPY",
         "type": "NEAR_SUPPORT",
-        "price": 685.99,
+        "price": 683.27,
         "support": 675.78,
         "message": "\ud83d\udee1\ufe0f SPY near support $675.78 - potential entry"
       },
       {
-        "ticker": "DOGE",
+        "ticker": "QQQ",
         "type": "NEAR_SUPPORT",
-        "price": 0.09,
-        "support": 0.09,
-        "message": "\ud83d\udee1\ufe0f DOGE near support $0.09 - potential entry"
+        "price": 604.24,
+        "support": 593.34,
+        "message": "\ud83d\udee1\ufe0f QQQ near support $593.34 - potential entry"
       }
     ]
   },
