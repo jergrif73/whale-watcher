@@ -1,5 +1,37 @@
 [
   {
+    "timestamp": "2026-03-03T05:08:25.611392+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "185.24",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-27.3"
+  },
+  {
+    "timestamp": "2026-03-03T05:08:26.015976+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "398.55",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-12.5"
+  },
+  {
+    "timestamp": "2026-03-03T05:08:28.382343+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "318.82",
+    "notes": "RSI oversold: 29.42"
+  },
+  {
+    "timestamp": "2026-03-03T05:08:30.686051+00:00",
+    "ticker": "SPY",
+    "action": "SUPPORT_BUY",
+    "price": "686.38",
+    "notes": "Near support $675.78"
+  },
+  {
     "timestamp": "2026-03-02T16:28:12.462182+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -132,40 +164,5 @@
     "action": "BUY_SIGNAL",
     "price": "307.38",
     "notes": "RSI oversold: 29.3"
-  },
-  {
-    "timestamp": "2026-02-26T16:42:36.226424+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.45",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-15.2",
-    "holding_days": "62"
-  },
-  {
-    "timestamp": "2026-02-26T16:42:36.558901+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "182.34",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-28.5"
-  },
-  {
-    "timestamp": "2026-02-26T16:42:36.946999+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "400.15",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.2"
-  },
-  {
-    "timestamp": "2026-02-26T16:42:39.469827+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "306.57",
-    "notes": "RSI oversold: 28.9"
   }
 ]
