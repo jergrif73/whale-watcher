@@ -1,5 +1,68 @@
 [
   {
+    "timestamp": "2026-03-04T05:02:33.990556+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.66",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-13.1",
+    "holding_days": "67"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:34.593922+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "182.36",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-28.5"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:35.096778+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "403.93",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-11.3"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:36.775772+00:00",
+    "ticker": "TSLA",
+    "action": "BUY_SIGNAL",
+    "price": "392.43",
+    "notes": "RSI oversold: 29.2"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:38.338280+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "313.84",
+    "notes": "RSI oversold: 28.73"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:39.847500+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "53.42",
+    "notes": "Major move: -14.9%"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:41.176994+00:00",
+    "ticker": "SPY",
+    "action": "SUPPORT_BUY",
+    "price": "680.33",
+    "notes": "Near support $669.66"
+  },
+  {
+    "timestamp": "2026-03-04T05:02:41.814778+00:00",
+    "ticker": "QQQ",
+    "action": "SUPPORT_BUY",
+    "price": "601.58",
+    "notes": "Near support $591.87"
+  },
+  {
     "timestamp": "2026-03-03T16:32:00.668877+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -93,70 +156,5 @@
     "action": "BUY_SIGNAL",
     "price": "318.82",
     "notes": "RSI oversold: 29.42"
-  },
-  {
-    "timestamp": "2026-03-03T05:08:30.686051+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "686.38",
-    "notes": "Near support $675.78"
-  },
-  {
-    "timestamp": "2026-03-02T16:28:12.462182+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "183.37",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-28.1"
-  },
-  {
-    "timestamp": "2026-03-02T16:28:13.066898+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "396.99",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.9"
-  },
-  {
-    "timestamp": "2026-03-02T16:28:16.416784+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "314.07",
-    "notes": "RSI oversold: 27.3"
-  },
-  {
-    "timestamp": "2026-03-02T16:28:19.602071+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "683.27",
-    "notes": "Near support $675.78"
-  },
-  {
-    "timestamp": "2026-03-02T16:28:20.291063+00:00",
-    "ticker": "QQQ",
-    "action": "SUPPORT_BUY",
-    "price": "604.24",
-    "notes": "Near support $593.34"
-  },
-  {
-    "timestamp": "2026-03-02T05:09:21.050464+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.94",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-10.3",
-    "holding_days": "65"
-  },
-  {
-    "timestamp": "2026-03-02T05:09:21.410682+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "175.85",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-31.0"
   }
 ]
