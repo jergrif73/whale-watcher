@@ -1,5 +1,54 @@
 [
   {
+    "timestamp": "2026-03-05T17:51:13.752833+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.52",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-14.4",
+    "holding_days": "69"
+  },
+  {
+    "timestamp": "2026-03-05T17:51:14.004555+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "202.34",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-20.6"
+  },
+  {
+    "timestamp": "2026-03-05T17:51:14.341662+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "409.71",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-10.1"
+  },
+  {
+    "timestamp": "2026-03-05T17:51:16.740289+00:00",
+    "ticker": "GOOGL",
+    "action": "SUPPORT_BUY",
+    "price": "298.97",
+    "notes": "Near support $296.25"
+  },
+  {
+    "timestamp": "2026-03-05T17:51:17.865606+00:00",
+    "ticker": "SPY",
+    "action": "SUPPORT_BUY",
+    "price": "676.4",
+    "notes": "Near support $669.66"
+  },
+  {
+    "timestamp": "2026-03-05T17:51:18.221383+00:00",
+    "ticker": "QQQ",
+    "action": "SUPPORT_BUY",
+    "price": "603.09",
+    "notes": "Near support $591.87"
+  },
+  {
     "timestamp": "2026-03-05T05:07:36.850138+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -111,54 +160,5 @@
     "action": "SUPPORT_BUY",
     "price": "601.58",
     "notes": "Near support $591.87"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:00.668877+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.95",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-10.1",
-    "holding_days": "67"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:01.138740+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "181.93",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-28.6"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:01.658904+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "399.43",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.3"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:03.293756+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "391.38",
-    "notes": "RSI oversold: 28.81"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:04.624201+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "310.85",
-    "notes": "RSI oversold: 27.42"
-  },
-  {
-    "timestamp": "2026-03-03T16:32:05.270073+00:00",
-    "ticker": "GOOGL",
-    "action": "SUPPORT_BUY",
-    "price": "300.55",
-    "notes": "Near support $296.25"
   }
 ]
