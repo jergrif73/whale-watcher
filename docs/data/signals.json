@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-09T16:43:37.505721+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.48",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-14.8",
+    "holding_days": "73"
+  },
+  {
+    "timestamp": "2026-03-09T16:43:38.030261+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "197.1",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-22.7"
+  },
+  {
+    "timestamp": "2026-03-09T16:43:38.540048+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "407.64",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-10.5"
+  },
+  {
+    "timestamp": "2026-03-09T16:43:44.846753+00:00",
+    "ticker": "QQQ",
+    "action": "SUPPORT_BUY",
+    "price": "601.71",
+    "notes": "Near support $591.34"
+  },
+  {
     "timestamp": "2026-03-09T05:14:26.917634+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -131,40 +166,5 @@
     "action": "SUPPORT_BUY",
     "price": "300.88",
     "notes": "Near support $296.25"
-  },
-  {
-    "timestamp": "2026-03-06T05:04:08.886398+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "681.31",
-    "notes": "Near support $669.66"
-  },
-  {
-    "timestamp": "2026-03-05T17:51:13.752833+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.52",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-14.4",
-    "holding_days": "69"
-  },
-  {
-    "timestamp": "2026-03-05T17:51:14.004555+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "202.34",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-20.6"
-  },
-  {
-    "timestamp": "2026-03-05T17:51:14.341662+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "409.71",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-10.1"
   }
 ]
