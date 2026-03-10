@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-10T05:03:46.811740+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.66",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-13.1",
+    "holding_days": "73"
+  },
+  {
+    "timestamp": "2026-03-10T05:03:47.132609+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "199.79",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-21.6"
+  },
+  {
+    "timestamp": "2026-03-10T05:03:47.465832+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "409.41",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-10.1"
+  },
+  {
+    "timestamp": "2026-03-10T05:03:50.148162+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "53.32",
+    "notes": "Major move: 11.3%"
+  },
+  {
     "timestamp": "2026-03-09T16:43:37.505721+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -131,40 +166,5 @@
     "action": "SUPPORT_BUY",
     "price": "674.4",
     "notes": "Near support $669.66"
-  },
-  {
-    "timestamp": "2026-03-06T05:04:02.560406+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.77",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-12.0",
-    "holding_days": "69"
-  },
-  {
-    "timestamp": "2026-03-06T05:04:03.030450+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "205.71",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-19.3"
-  },
-  {
-    "timestamp": "2026-03-06T05:04:03.495540+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "410.68",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-9.9"
-  },
-  {
-    "timestamp": "2026-03-06T05:04:06.974070+00:00",
-    "ticker": "GOOGL",
-    "action": "SUPPORT_BUY",
-    "price": "300.88",
-    "notes": "Near support $296.25"
   }
 ]
