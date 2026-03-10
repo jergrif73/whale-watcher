@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-10T16:43:03.100939+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.62",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-13.4",
+    "holding_days": "74"
+  },
+  {
+    "timestamp": "2026-03-10T16:43:03.452008+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "198.74",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-22.0"
+  },
+  {
+    "timestamp": "2026-03-10T16:43:03.785138+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "407.45",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-10.6"
+  },
+  {
+    "timestamp": "2026-03-10T16:43:10.004032+00:00",
+    "ticker": "DOGE",
+    "action": "ALERT",
+    "price": "0.1",
+    "notes": "Major move: 10.2%"
+  },
+  {
     "timestamp": "2026-03-10T05:03:46.811740+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -134,37 +169,5 @@
     "entry_price": "9.96",
     "gain_loss_pct": "-17.9",
     "holding_days": "70"
-  },
-  {
-    "timestamp": "2026-03-06T16:24:50.664619+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "197.78",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-22.4"
-  },
-  {
-    "timestamp": "2026-03-06T16:24:50.990513+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "412.16",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-9.5"
-  },
-  {
-    "timestamp": "2026-03-06T16:24:53.616009+00:00",
-    "ticker": "GOOGL",
-    "action": "SUPPORT_BUY",
-    "price": "299.32",
-    "notes": "Near support $295.18"
-  },
-  {
-    "timestamp": "2026-03-06T16:24:54.948621+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "674.4",
-    "notes": "Near support $669.66"
   }
 ]
