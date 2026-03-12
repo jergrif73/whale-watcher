@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-03-12T05:09:40.976519+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.55",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-14.2",
+    "holding_days": "75"
+  },
+  {
+    "timestamp": "2026-03-12T05:09:41.518264+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "198.63",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-22.1"
+  },
+  {
+    "timestamp": "2026-03-12T05:09:41.933370+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "404.88",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-11.1"
+  },
+  {
     "timestamp": "2026-03-11T16:36:42.193153+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -152,31 +180,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "455.62",
     "gain_loss_pct": "-10.5"
-  },
-  {
-    "timestamp": "2026-03-09T16:43:44.846753+00:00",
-    "ticker": "QQQ",
-    "action": "SUPPORT_BUY",
-    "price": "601.71",
-    "notes": "Near support $591.34"
-  },
-  {
-    "timestamp": "2026-03-09T05:14:26.917634+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.01",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-19.6",
-    "holding_days": "72"
-  },
-  {
-    "timestamp": "2026-03-09T05:14:27.392649+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "197.22",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-22.6"
   }
 ]
