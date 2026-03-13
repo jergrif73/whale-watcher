@@ -1,5 +1,47 @@
 [
   {
+    "timestamp": "2026-03-13T05:07:17.621431+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.76",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-12.1",
+    "holding_days": "76"
+  },
+  {
+    "timestamp": "2026-03-13T05:07:17.949669+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "193.23",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-24.2"
+  },
+  {
+    "timestamp": "2026-03-13T05:07:18.273805+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "401.86",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-11.8"
+  },
+  {
+    "timestamp": "2026-03-13T05:07:21.167117+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "50.28",
+    "notes": "Major move: -10.4%"
+  },
+  {
+    "timestamp": "2026-03-13T05:07:23.667410+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.19",
+    "notes": "Major move: 17.5%"
+  },
+  {
     "timestamp": "2026-03-12T16:45:20.535378+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -138,47 +180,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "455.62",
     "gain_loss_pct": "-10.6"
-  },
-  {
-    "timestamp": "2026-03-10T16:43:10.004032+00:00",
-    "ticker": "DOGE",
-    "action": "ALERT",
-    "price": "0.1",
-    "notes": "Major move: 10.2%"
-  },
-  {
-    "timestamp": "2026-03-10T05:03:46.811740+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.66",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-13.1",
-    "holding_days": "73"
-  },
-  {
-    "timestamp": "2026-03-10T05:03:47.132609+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "199.79",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-21.6"
-  },
-  {
-    "timestamp": "2026-03-10T05:03:47.465832+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "409.41",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-10.1"
-  },
-  {
-    "timestamp": "2026-03-10T05:03:50.148162+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "53.32",
-    "notes": "Major move: 11.3%"
   }
 ]
