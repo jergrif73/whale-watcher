@@ -1,5 +1,30 @@
 [
   {
+    "timestamp": "2026-03-16T05:44:37.159116+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "195.53",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-23.3"
+  },
+  {
+    "timestamp": "2026-03-16T05:44:37.474024+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "395.55",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-13.2"
+  },
+  {
+    "timestamp": "2026-03-16T05:44:42.475918+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.2",
+    "notes": "Major move: 12.1%"
+  },
+  {
     "timestamp": "2026-03-15T16:16:58.113676+00:00",
     "ticker": "FET",
     "action": "ALERT",
@@ -144,34 +169,6 @@
     "ticker": "COIN",
     "action": "SELL_ALL",
     "price": "196.59",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-22.9"
-  },
-  {
-    "timestamp": "2026-03-11T16:36:43.296908+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "403.41",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-11.5"
-  },
-  {
-    "timestamp": "2026-03-11T05:05:32.751769+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.57",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-14.0",
-    "holding_days": "74"
-  },
-  {
-    "timestamp": "2026-03-11T05:05:33.051571+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "196.52",
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-22.9"
