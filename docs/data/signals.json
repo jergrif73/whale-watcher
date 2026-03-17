@@ -1,5 +1,23 @@
 [
   {
+    "timestamp": "2026-03-17T16:52:07.751185+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "207.02",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-18.8"
+  },
+  {
+    "timestamp": "2026-03-17T16:52:08.073316+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "399.65",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-12.3"
+  },
+  {
     "timestamp": "2026-03-17T05:16:23.011744+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -147,24 +165,5 @@
     "action": "ALERT",
     "price": "0.19",
     "notes": "Major move: 17.5%"
-  },
-  {
-    "timestamp": "2026-03-12T16:45:20.535378+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.59",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-13.8",
-    "holding_days": "76"
-  },
-  {
-    "timestamp": "2026-03-12T16:45:20.854270+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "195.87",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-23.2"
   }
 ]
