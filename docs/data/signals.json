@@ -1,5 +1,23 @@
 [
   {
+    "timestamp": "2026-03-18T05:20:08.268624+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "210.23",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-17.5"
+  },
+  {
+    "timestamp": "2026-03-18T05:20:08.612339+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "399.41",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-12.3"
+  },
+  {
     "timestamp": "2026-03-17T16:52:07.751185+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -151,19 +169,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "455.62",
     "gain_loss_pct": "-11.8"
-  },
-  {
-    "timestamp": "2026-03-13T05:07:21.167117+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "50.28",
-    "notes": "Major move: -10.4%"
-  },
-  {
-    "timestamp": "2026-03-13T05:07:23.667410+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.19",
-    "notes": "Major move: 17.5%"
   }
 ]
