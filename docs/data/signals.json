@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-19T05:17:44.796158+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.92",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-10.5",
+    "holding_days": "82"
+  },
+  {
+    "timestamp": "2026-03-19T05:17:45.179840+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "202.29",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-20.6"
+  },
+  {
+    "timestamp": "2026-03-19T05:17:45.558238+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "391.79",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-14.0"
+  },
+  {
+    "timestamp": "2026-03-19T05:17:49.409107+00:00",
+    "ticker": "SPY",
+    "action": "BUY_SIGNAL",
+    "price": "661.43",
+    "notes": "RSI oversold: 29.21"
+  },
+  {
     "timestamp": "2026-03-18T16:46:42.479870+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -137,37 +172,5 @@
     "action": "ALERT",
     "price": "0.2",
     "notes": "Major move: 12.1%"
-  },
-  {
-    "timestamp": "2026-03-15T16:16:58.113676+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.2",
-    "notes": "Major move: 13.3%"
-  },
-  {
-    "timestamp": "2026-03-13T16:23:53.569906+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "197.09",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-22.7"
-  },
-  {
-    "timestamp": "2026-03-13T16:23:54.410966+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "396.7",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.9"
-  },
-  {
-    "timestamp": "2026-03-13T16:23:58.217979+00:00",
-    "ticker": "META",
-    "action": "SUPPORT_BUY",
-    "price": "618.35",
-    "notes": "Near support $615.16"
   }
 ]
