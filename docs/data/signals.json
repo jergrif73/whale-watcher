@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-19T16:43:14.281568+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.99",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-9.7",
+    "holding_days": "83"
+  },
+  {
+    "timestamp": "2026-03-19T16:43:14.923499+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "196.42",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-22.9"
+  },
+  {
+    "timestamp": "2026-03-19T16:43:15.410724+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "388.96",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-14.6"
+  },
+  {
+    "timestamp": "2026-03-19T16:43:21.029001+00:00",
+    "ticker": "SPY",
+    "action": "BUY_SIGNAL",
+    "price": "658.07",
+    "notes": "RSI oversold: 29.19"
+  },
+  {
     "timestamp": "2026-03-19T05:17:44.796158+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -140,37 +175,5 @@
     "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
     "entry_price": "455.62",
     "gain_loss_pct": "-12.4"
-  },
-  {
-    "timestamp": "2026-03-16T16:48:59.903906+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.24",
-    "notes": "Major move: 22.3%"
-  },
-  {
-    "timestamp": "2026-03-16T05:44:37.159116+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "195.53",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-23.3"
-  },
-  {
-    "timestamp": "2026-03-16T05:44:37.474024+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "395.55",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-13.2"
-  },
-  {
-    "timestamp": "2026-03-16T05:44:42.475918+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.2",
-    "notes": "Major move: 12.1%"
   }
 ]
