@@ -1,5 +1,61 @@
 [
   {
+    "timestamp": "2026-03-20T16:28:14.652140+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.84",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-11.3",
+    "holding_days": "84"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:14.988327+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "200.58",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-21.3"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:15.303366+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "384.77",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-15.6"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:18.116832+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "595.51",
+    "notes": "RSI oversold: 28.6"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:19.170621+00:00",
+    "ticker": "TQQQ",
+    "action": "SUPPORT_BUY",
+    "price": "44.22",
+    "notes": "Near support $43.78"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:19.618459+00:00",
+    "ticker": "SPY",
+    "action": "BUY_SIGNAL",
+    "price": "653.25",
+    "notes": "RSI oversold: 26.84"
+  },
+  {
+    "timestamp": "2026-03-20T16:28:20.073946+00:00",
+    "ticker": "QQQ",
+    "action": "SUPPORT_BUY",
+    "price": "586.84",
+    "notes": "Near support $584.97"
+  },
+  {
     "timestamp": "2026-03-20T05:10:34.261425+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -112,68 +168,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-20.6"
-  },
-  {
-    "timestamp": "2026-03-18T16:46:43.619487+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "393.17",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-13.7"
-  },
-  {
-    "timestamp": "2026-03-18T05:20:08.268624+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "210.23",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-17.5"
-  },
-  {
-    "timestamp": "2026-03-18T05:20:08.612339+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "399.41",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.3"
-  },
-  {
-    "timestamp": "2026-03-17T16:52:07.751185+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "207.02",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-18.8"
-  },
-  {
-    "timestamp": "2026-03-17T16:52:08.073316+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "399.65",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.3"
-  },
-  {
-    "timestamp": "2026-03-17T05:16:23.011744+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "203.32",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-20.2"
-  },
-  {
-    "timestamp": "2026-03-17T05:16:23.295613+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "399.95",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-12.2"
   }
 ]
