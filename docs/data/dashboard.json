@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-21 04:59:42",
+  "generated_at": "2026-03-21 16:14:35",
   "deep_analysis_enabled": false,
   "portfolio": [
     {
@@ -19,7 +19,7 @@
       ],
       "risk_score": 100,
       "whale_intel": "",
-      "holding_days": 84,
+      "holding_days": 85,
       "gain_loss_pct": -15.1,
       "gain_loss_dollars": -15.1,
       "daily_change": -8.2,
@@ -374,7 +374,7 @@
         {
           "date": "2026-03-20",
           "close": 197.5,
-          "volume": 11875432
+          "volume": 11875764
         }
       ],
       "is_owned": true,
@@ -1293,7 +1293,7 @@
       "gain_loss_pct": 0,
       "daily_change": -1.9,
       "weekly_change": 1.82,
-      "vol_ratio": 1.1060761569839237,
+      "vol_ratio": 1.1060914277936185,
       "vol_pattern": "ACCUMULATION",
       "support": 188.22,
       "resistance": 216.71,
@@ -1446,7 +1446,7 @@
         {
           "date": "2026-03-20",
           "close": 201.33,
-          "volume": 32666267
+          "volume": 32666718
         }
       ],
       "is_owned": false
@@ -1467,7 +1467,7 @@
       "gain_loss_pct": 0,
       "daily_change": -2.9,
       "weekly_change": -7.58,
-      "vol_ratio": 1.2159251370795447,
+      "vol_ratio": 1.2080608191436777,
       "vol_pattern": "DISTRIBUTION",
       "support": 307.2,
       "resistance": 353.14,
@@ -1620,7 +1620,7 @@
         {
           "date": "2026-03-20",
           "close": 310.51,
-          "volume": 37022063
+          "volume": 36782613
         }
       ],
       "is_owned": false
@@ -2672,29 +2672,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 70633.6,
+      "price": 70593.27,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 57.46,
+      "rsi": 60.49,
       "signal": "\ud83d\udcc9 DISTRIBUTION",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.0,
-      "weekly_change": -0.82,
-      "vol_ratio": 0.7843956328703455,
+      "daily_change": 0.1,
+      "weekly_change": -3.02,
+      "vol_ratio": 0.5703122398074961,
       "vol_pattern": "DISTRIBUTION",
-      "support": 65076.73,
+      "support": 65303.14,
       "resistance": 75988.4,
       "price_history": [
-        {
-          "date": "2026-02-19",
-          "close": 66957.52,
-          "volume": 31492987019
-        },
         {
           "date": "2026-02-20",
           "close": 68005.42,
@@ -2836,9 +2831,14 @@
           "volume": 44631433398
         },
         {
+          "date": "2026-03-20",
+          "close": 70522.59,
+          "volume": 38299078407
+        },
+        {
           "date": "2026-03-21",
-          "close": 70633.6,
-          "volume": 35100790784
+          "close": 70593.27,
+          "volume": 24625137664
         }
       ],
       "is_owned": false
@@ -2846,29 +2846,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2151.64,
+      "price": 2153.03,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 62.63,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 63.56,
+      "signal": "\ud83d\udcc9 DISTRIBUTION",
+      "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.7,
-      "weekly_change": 2.6,
-      "vol_ratio": 0.7187288333710745,
-      "vol_pattern": "NEUTRAL",
-      "support": 1909.1,
+      "daily_change": 0.3,
+      "weekly_change": -1.12,
+      "vol_ratio": 0.47689078668104673,
+      "vol_pattern": "DISTRIBUTION",
+      "support": 1915.3,
       "resistance": 2384.47,
       "price_history": [
-        {
-          "date": "2026-02-19",
-          "close": 1948.2,
-          "volume": 17380103826
-        },
         {
           "date": "2026-02-20",
           "close": 1969.02,
@@ -3010,9 +3005,14 @@
           "volume": 24090913749
         },
         {
+          "date": "2026-03-20",
+          "close": 2146.5,
+          "volume": 17970488517
+        },
+        {
           "date": "2026-03-21",
-          "close": 2151.64,
-          "volume": 16771274752
+          "close": 2153.03,
+          "volume": 10861878272
         }
       ],
       "is_owned": false
@@ -3020,29 +3020,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 90.26,
+      "price": 89.86,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 60.54,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 63.6,
+      "signal": "\ud83d\udcc9 DISTRIBUTION",
+      "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.5,
-      "weekly_change": 2.48,
-      "vol_ratio": 0.695799112380451,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": 0.0,
+      "weekly_change": -2.59,
+      "vol_ratio": 0.5218335902382799,
+      "vol_pattern": "DISTRIBUTION",
       "support": 80.71,
       "resistance": 97.42,
       "price_history": [
-        {
-          "date": "2026-02-19",
-          "close": 82.39,
-          "volume": 2887552822
-        },
         {
           "date": "2026-02-20",
           "close": 84.64,
@@ -3184,9 +3179,14 @@
           "volume": 3654219084
         },
         {
+          "date": "2026-03-20",
+          "close": 89.85,
+          "volume": 3090719128
+        },
+        {
           "date": "2026-03-21",
-          "close": 90.26,
-          "volume": 2918403328
+          "close": 89.86,
+          "volume": 2123452032
         }
       ],
       "is_owned": false
@@ -3199,24 +3199,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 77.51,
+      "rsi": 79.23,
       "signal": "\ud83d\udcca OVERBOUGHT",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 6.2,
-      "weekly_change": 25.94,
-      "vol_ratio": 0.9476956621468042,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": 0.3,
+      "weekly_change": 15.2,
+      "vol_ratio": 0.7989437108464139,
+      "vol_pattern": "ACCUMULATION",
       "support": 0.14,
       "resistance": 0.25,
       "price_history": [
-        {
-          "date": "2026-02-19",
-          "close": 0.16,
-          "volume": 34520717
-        },
         {
           "date": "2026-02-20",
           "close": 0.17,
@@ -3358,9 +3353,14 @@
           "volume": 140185000
         },
         {
+          "date": "2026-03-20",
+          "close": 0.23,
+          "volume": 175522951
+        },
+        {
           "date": "2026-03-21",
           "close": 0.23,
-          "volume": 163316592
+          "volume": 141292880
         }
       ],
       "is_owned": false
@@ -3373,24 +3373,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 55.6,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 57.97,
+      "signal": "\ud83d\udcc9 DISTRIBUTION",
+      "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.2,
-      "weekly_change": -1.42,
-      "vol_ratio": 0.4730191760244207,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": 0.3,
+      "weekly_change": -2.97,
+      "vol_ratio": 0.3684969008186603,
+      "vol_pattern": "DISTRIBUTION",
       "support": 0.09,
       "resistance": 0.1,
       "price_history": [
-        {
-          "date": "2026-02-19",
-          "close": 0.1,
-          "volume": 800628206
-        },
         {
           "date": "2026-02-20",
           "close": 0.1,
@@ -3532,9 +3527,14 @@
           "volume": 959041027
         },
         {
+          "date": "2026-03-20",
+          "close": 0.09,
+          "volume": 760919548
+        },
+        {
           "date": "2026-03-21",
           "close": 0.09,
-          "volume": 700313024
+          "volume": 499858848
         }
       ],
       "is_owned": false
@@ -3869,10 +3869,10 @@
     "tax_lots": [
       {
         "ticker": "MARA",
-        "holding_days": 84,
+        "holding_days": 85,
         "status": "SHORT_TERM",
-        "days_to_long_term": 281,
-        "alert": "281 days until long-term eligible",
+        "days_to_long_term": 280,
+        "alert": "280 days until long-term eligible",
         "gain_loss_pct": -15.1,
         "gain_loss_dollars": -15.1
       },
