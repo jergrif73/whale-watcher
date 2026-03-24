@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-24T16:47:11.340138+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.36",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-16.1",
+    "holding_days": "88"
+  },
+  {
+    "timestamp": "2026-03-24T16:47:11.958234+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "181.99",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-28.6"
+  },
+  {
+    "timestamp": "2026-03-24T16:47:12.613480+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "373.73",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.0"
+  },
+  {
+    "timestamp": "2026-03-24T16:47:16.682534+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "596.05",
+    "notes": "RSI oversold: 24.68"
+  },
+  {
     "timestamp": "2026-03-24T05:17:51.592852+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -138,35 +173,5 @@
     "action": "BUY_SIGNAL",
     "price": "595.51",
     "notes": "RSI oversold: 28.6"
-  },
-  {
-    "timestamp": "2026-03-20T16:28:19.170621+00:00",
-    "ticker": "TQQQ",
-    "action": "SUPPORT_BUY",
-    "price": "44.22",
-    "notes": "Near support $43.78"
-  },
-  {
-    "timestamp": "2026-03-20T16:28:19.618459+00:00",
-    "ticker": "SPY",
-    "action": "BUY_SIGNAL",
-    "price": "653.25",
-    "notes": "RSI oversold: 26.84"
-  },
-  {
-    "timestamp": "2026-03-20T16:28:20.073946+00:00",
-    "ticker": "QQQ",
-    "action": "SUPPORT_BUY",
-    "price": "586.84",
-    "notes": "Near support $584.97"
-  },
-  {
-    "timestamp": "2026-03-20T05:10:34.261425+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "202.91",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-20.4"
   }
 ]
