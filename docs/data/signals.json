@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-03-25T16:50:51.523986+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.26",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-17.1",
+    "holding_days": "89"
+  },
+  {
+    "timestamp": "2026-03-25T16:50:52.026246+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "184.11",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-27.8"
+  },
+  {
+    "timestamp": "2026-03-25T16:50:52.415589+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "370.8",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.6"
+  },
+  {
+    "timestamp": "2026-03-25T16:50:55.230817+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "598.66",
+    "notes": "RSI oversold: 28.42"
+  },
+  {
     "timestamp": "2026-03-25T05:18:10.085931+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -138,40 +173,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "455.62",
     "gain_loss_pct": "-16.0"
-  },
-  {
-    "timestamp": "2026-03-23T05:24:57.482108+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.46",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-15.1",
-    "holding_days": "86"
-  },
-  {
-    "timestamp": "2026-03-23T05:24:57.864656+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "197.5",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-22.5"
-  },
-  {
-    "timestamp": "2026-03-23T05:24:58.280698+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "381.85",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-16.2"
-  },
-  {
-    "timestamp": "2026-03-23T05:25:00.743950+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "593.66",
-    "notes": "RSI oversold: 28.21"
   }
 ]
