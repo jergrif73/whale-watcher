@@ -1,5 +1,47 @@
 [
   {
+    "timestamp": "2026-03-26T16:50:21.772449+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.8",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "9.96",
+    "gain_loss_pct": "-11.7",
+    "holding_days": "90"
+  },
+  {
+    "timestamp": "2026-03-26T16:50:22.193894+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "172.51",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-32.3"
+  },
+  {
+    "timestamp": "2026-03-26T16:50:22.534851+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "368.41",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-19.1"
+  },
+  {
+    "timestamp": "2026-03-26T16:50:24.777397+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "553.14",
+    "notes": "RSI oversold: 22.28"
+  },
+  {
+    "timestamp": "2026-03-26T16:50:25.482242+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "50.63",
+    "notes": "Major move: -11.2%"
+  },
+  {
     "timestamp": "2026-03-26T05:26:35.066947+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -129,49 +171,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-28.6"
-  },
-  {
-    "timestamp": "2026-03-24T16:47:12.613480+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "373.73",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-18.0"
-  },
-  {
-    "timestamp": "2026-03-24T16:47:16.682534+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "596.05",
-    "notes": "RSI oversold: 24.68"
-  },
-  {
-    "timestamp": "2026-03-24T05:17:51.592852+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "8.91",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "9.96",
-    "gain_loss_pct": "-10.6",
-    "holding_days": "87"
-  },
-  {
-    "timestamp": "2026-03-24T05:17:51.888543+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "200.62",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-21.3"
-  },
-  {
-    "timestamp": "2026-03-24T05:17:52.174352+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "383.0",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-15.9"
   }
 ]
