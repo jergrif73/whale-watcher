@@ -1,5 +1,110 @@
 [
   {
+    "timestamp": "2026-03-31T05:29:48.794510+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "7.8",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.63",
+    "gain_loss_pct": "-19.0",
+    "holding_days": "94"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:49.066125+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "160.79",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-36.9"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:49.448446+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "358.96",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-21.2"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:50.720657+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "165.17",
+    "notes": "RSI oversold: 26.06"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:51.345127+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "293.41",
+    "notes": "RSI oversold: 21.92"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:51.766419+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "536.38",
+    "notes": "RSI oversold: 19.7"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:52.018769+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "273.5",
+    "notes": "RSI oversold: 20.7"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:52.380439+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "40.62",
+    "notes": "Major move: -12.9%"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:52.738486+00:00",
+    "ticker": "TQQQ",
+    "action": "BUY_SIGNAL",
+    "price": "37.89",
+    "notes": "RSI oversold: 21.91"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:53.259642+00:00",
+    "ticker": "SPY",
+    "action": "BUY_SIGNAL",
+    "price": "631.97",
+    "notes": "RSI oversold: 23.3"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:53.652318+00:00",
+    "ticker": "QQQ",
+    "action": "BUY_SIGNAL",
+    "price": "558.28",
+    "notes": "RSI oversold: 21.95"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:54.043585+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2063.45",
+    "notes": "RSI oversold: 29.46"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:54.237784+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "83.09",
+    "notes": "RSI oversold: 28.62"
+  },
+  {
+    "timestamp": "2026-03-31T05:29:54.754794+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.09",
+    "notes": "RSI oversold: 29.24"
+  },
+  {
     "timestamp": "2026-03-30T16:43:41.875166+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -47,110 +152,5 @@
     "action": "BUY_SIGNAL",
     "price": "537.77",
     "notes": "RSI oversold: 20.28"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:45.324985+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "274.62",
-    "notes": "RSI oversold: 21.4"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:45.771139+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "41.58",
-    "notes": "Major move: -10.8%"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:46.149572+00:00",
-    "ticker": "TQQQ",
-    "action": "BUY_SIGNAL",
-    "price": "38.69",
-    "notes": "RSI oversold: 22.8"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:46.555041+00:00",
-    "ticker": "SPY",
-    "action": "BUY_SIGNAL",
-    "price": "635.51",
-    "notes": "RSI oversold: 25.27"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:46.923939+00:00",
-    "ticker": "QQQ",
-    "action": "BUY_SIGNAL",
-    "price": "562.19",
-    "notes": "RSI oversold: 22.97"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:47.363375+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2062.12",
-    "notes": "RSI oversold: 29.33"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:30.338842+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.02",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.91",
-    "gain_loss_pct": "-19.1",
-    "holding_days": "93"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:30.885948+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "161.14",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-36.8"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:31.373876+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "356.77",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-21.7"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:34.364621+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "300.68",
-    "notes": "RSI oversold: 23.0"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:34.751524+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "525.72",
-    "notes": "RSI oversold: 18.01"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:35.150046+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "274.34",
-    "notes": "RSI oversold: 21.95"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:36.718396+00:00",
-    "ticker": "TQQQ",
-    "action": "BUY_SIGNAL",
-    "price": "38.78",
-    "notes": "RSI oversold: 22.95"
-  },
-  {
-    "timestamp": "2026-03-30T05:53:37.372290+00:00",
-    "ticker": "SPY",
-    "action": "BUY_SIGNAL",
-    "price": "634.09",
-    "notes": "RSI oversold: 23.6"
   }
 ]
