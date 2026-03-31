@@ -1,5 +1,54 @@
 [
   {
+    "timestamp": "2026-03-31T16:44:19.256937+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "7.95",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "9.63",
+    "gain_loss_pct": "-17.4",
+    "holding_days": "95"
+  },
+  {
+    "timestamp": "2026-03-31T16:44:19.805315+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "171.98",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-32.5"
+  },
+  {
+    "timestamp": "2026-03-31T16:44:20.375794+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "367.2",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-19.4"
+  },
+  {
+    "timestamp": "2026-03-31T16:44:24.080270+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "564.89",
+    "notes": "RSI oversold: 29.77"
+  },
+  {
+    "timestamp": "2026-03-31T16:44:25.234531+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "46.57",
+    "notes": "Major move: 14.6%"
+  },
+  {
+    "timestamp": "2026-03-31T16:44:28.530648+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "81.85",
+    "notes": "RSI oversold: 27.94"
+  },
+  {
     "timestamp": "2026-03-31T05:29:48.794510+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -103,54 +152,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.09",
     "notes": "RSI oversold: 29.24"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:41.875166+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.02",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.82",
-    "gain_loss_pct": "-18.3",
-    "holding_days": "94"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:42.191928+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "163.2",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-36.0"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:42.569935+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "361.0",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-20.8"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:43.950485+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "166.7",
-    "notes": "RSI oversold: 27.07"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:44.651225+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "293.77",
-    "notes": "RSI oversold: 22.01"
-  },
-  {
-    "timestamp": "2026-03-30T16:43:44.930209+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "537.77",
-    "notes": "RSI oversold: 20.28"
   }
 ]
