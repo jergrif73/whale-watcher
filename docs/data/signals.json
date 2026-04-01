@@ -1,5 +1,47 @@
 [
   {
+    "timestamp": "2026-04-01T05:49:24.831016+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.16",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "10.13",
+    "gain_loss_pct": "-19.5",
+    "holding_days": "95"
+  },
+  {
+    "timestamp": "2026-04-01T05:49:25.138681+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "174.61",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-31.5"
+  },
+  {
+    "timestamp": "2026-04-01T05:49:25.403672+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "370.17",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.8"
+  },
+  {
+    "timestamp": "2026-04-01T05:49:28.814812+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "47.91",
+    "notes": "Major move: 17.9%"
+  },
+  {
+    "timestamp": "2026-04-01T05:49:29.315285+00:00",
+    "ticker": "TQQQ",
+    "action": "ALERT",
+    "price": "41.68",
+    "notes": "Major move: 10.0%"
+  },
+  {
     "timestamp": "2026-03-31T16:44:19.256937+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -117,40 +159,5 @@
     "action": "BUY_SIGNAL",
     "price": "37.89",
     "notes": "RSI oversold: 21.91"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:53.259642+00:00",
-    "ticker": "SPY",
-    "action": "BUY_SIGNAL",
-    "price": "631.97",
-    "notes": "RSI oversold: 23.3"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:53.652318+00:00",
-    "ticker": "QQQ",
-    "action": "BUY_SIGNAL",
-    "price": "558.28",
-    "notes": "RSI oversold: 21.95"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:54.043585+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2063.45",
-    "notes": "RSI oversold: 29.46"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:54.237784+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "83.09",
-    "notes": "RSI oversold: 28.62"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:54.754794+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.09",
-    "notes": "RSI oversold: 29.24"
   }
 ]
