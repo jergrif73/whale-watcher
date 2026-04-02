@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-04-02T16:42:03.125649+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.11",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "10.13",
+    "gain_loss_pct": "-20.0",
+    "holding_days": "97"
+  },
+  {
+    "timestamp": "2026-04-02T16:42:03.442379+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "171.22",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-32.8"
+  },
+  {
+    "timestamp": "2026-04-02T16:42:03.770617+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "370.76",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.6"
+  },
+  {
     "timestamp": "2026-04-02T05:26:29.552743+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -145,29 +173,5 @@
     "action": "BUY_SIGNAL",
     "price": "564.89",
     "notes": "RSI oversold: 29.77"
-  },
-  {
-    "timestamp": "2026-03-31T16:44:25.234531+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "46.57",
-    "notes": "Major move: 14.6%"
-  },
-  {
-    "timestamp": "2026-03-31T16:44:28.530648+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "81.85",
-    "notes": "RSI oversold: 27.94"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:48.794510+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "7.8",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "9.63",
-    "gain_loss_pct": "-19.0",
-    "holding_days": "94"
   }
 ]
