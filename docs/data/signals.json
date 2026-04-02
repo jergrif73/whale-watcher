@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-04-02T05:26:29.552743+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.04",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "10.13",
+    "gain_loss_pct": "-20.7",
+    "holding_days": "96"
+  },
+  {
+    "timestamp": "2026-04-02T05:26:30.065317+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "172.99",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-32.1"
+  },
+  {
+    "timestamp": "2026-04-02T05:26:30.502358+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "369.37",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.9"
+  },
+  {
+    "timestamp": "2026-04-02T05:26:39.704815+00:00",
+    "ticker": "DOGE",
+    "action": "SUPPORT_BUY",
+    "price": "0.09",
+    "notes": "Near support $0.09"
+  },
+  {
     "timestamp": "2026-04-01T16:42:01.473008+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -134,37 +169,5 @@
     "entry_price": "9.63",
     "gain_loss_pct": "-19.0",
     "holding_days": "94"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:49.066125+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "160.79",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-36.9"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:49.448446+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "358.96",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-21.2"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:50.720657+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "165.17",
-    "notes": "RSI oversold: 26.06"
-  },
-  {
-    "timestamp": "2026-03-31T05:29:51.345127+00:00",
-    "ticker": "AVGO",
-    "action": "BUY_SIGNAL",
-    "price": "293.41",
-    "notes": "RSI oversold: 21.92"
   }
 ]
