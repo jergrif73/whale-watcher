@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-04-03T16:25:28.507485+00:00",
+    "ticker": "MARA",
+    "action": "SELL_ALL",
+    "price": "8.71",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "10.48",
+    "gain_loss_pct": "-16.9",
+    "holding_days": "98"
+  },
+  {
+    "timestamp": "2026-04-03T16:25:28.815063+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "171.46",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "254.92",
+    "gain_loss_pct": "-32.7"
+  },
+  {
+    "timestamp": "2026-04-03T16:25:29.122154+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "373.46",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.0"
+  },
+  {
     "timestamp": "2026-04-03T05:27:31.807622+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -150,28 +178,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-31.5"
-  },
-  {
-    "timestamp": "2026-04-01T05:49:25.403672+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "370.17",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-18.8"
-  },
-  {
-    "timestamp": "2026-04-01T05:49:28.814812+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "47.91",
-    "notes": "Major move: 17.9%"
-  },
-  {
-    "timestamp": "2026-04-01T05:49:29.315285+00:00",
-    "ticker": "TQQQ",
-    "action": "ALERT",
-    "price": "41.68",
-    "notes": "Major move: 10.0%"
   }
 ]
