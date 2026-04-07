@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-04-07T05:31:04.222336+00:00",
+    "ticker": "MARA",
+    "action": "EVALUATE",
+    "price": "8.85",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "10.22",
+    "gain_loss_pct": "-13.4",
+    "holding_days": "101"
+  },
+  {
+    "timestamp": "2026-04-07T05:31:04.497739+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "174.79",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "245.93",
+    "gain_loss_pct": "-28.9"
+  },
+  {
+    "timestamp": "2026-04-07T05:31:04.800429+00:00",
+    "ticker": "MSFT",
+    "action": "SELL_ALL",
+    "price": "372.88",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-18.2"
+  },
+  {
+    "timestamp": "2026-04-07T05:31:09.124864+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "79.77",
+    "notes": "RSI oversold: 24.21"
+  },
+  {
     "timestamp": "2026-04-06T16:33:00.707624+00:00",
     "ticker": "MARA",
     "action": "EVALUATE",
@@ -143,42 +178,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-32.8"
-  },
-  {
-    "timestamp": "2026-04-02T16:42:03.770617+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "370.76",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-18.6"
-  },
-  {
-    "timestamp": "2026-04-02T05:26:29.552743+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.04",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "10.13",
-    "gain_loss_pct": "-20.7",
-    "holding_days": "96"
-  },
-  {
-    "timestamp": "2026-04-02T05:26:30.065317+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "172.99",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "254.92",
-    "gain_loss_pct": "-32.1"
-  },
-  {
-    "timestamp": "2026-04-02T05:26:30.502358+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "369.37",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-18.9"
   }
 ]
