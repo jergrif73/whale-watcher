@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-04-08T05:41:55.244211+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "nan",
+    "notes": "RSI oversold: 29.78"
+  },
+  {
+    "timestamp": "2026-04-08T05:41:59.865036+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.25",
+    "notes": "Major move: 10.4%"
+  },
+  {
     "timestamp": "2026-04-07T16:42:50.502615+00:00",
     "ticker": "MARA",
     "action": "SELL_ALL",
@@ -157,24 +171,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "254.92",
     "gain_loss_pct": "-32.7"
-  },
-  {
-    "timestamp": "2026-04-03T16:25:29.122154+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "373.46",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-18.0"
-  },
-  {
-    "timestamp": "2026-04-03T05:27:31.807622+00:00",
-    "ticker": "MARA",
-    "action": "SELL_ALL",
-    "price": "8.71",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "10.48",
-    "gain_loss_pct": "-16.9",
-    "holding_days": "97"
   }
 ]
