@@ -1,5 +1,23 @@
 [
   {
+    "timestamp": "2026-04-14T16:53:01.060374+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "186.01",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "255.86",
+    "gain_loss_pct": "-27.3"
+  },
+  {
+    "timestamp": "2026-04-14T16:53:01.429455+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "394.15",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-13.5"
+  },
+  {
     "timestamp": "2026-04-14T05:53:26.650824+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -158,19 +176,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "455.62",
     "gain_loss_pct": "-16.9"
-  },
-  {
-    "timestamp": "2026-04-08T16:49:07.970136+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "67.05",
-    "notes": "Major move: 18.6%"
-  },
-  {
-    "timestamp": "2026-04-08T05:41:55.244211+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "nan",
-    "notes": "RSI oversold: 29.78"
   }
 ]
