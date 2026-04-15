@@ -1,5 +1,23 @@
 [
   {
+    "timestamp": "2026-04-15T05:53:05.553886+00:00",
+    "ticker": "COIN",
+    "action": "SELL_ALL",
+    "price": "184.41",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "239.28",
+    "gain_loss_pct": "-22.9"
+  },
+  {
+    "timestamp": "2026-04-15T05:53:05.854084+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "393.11",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "455.62",
+    "gain_loss_pct": "-13.7"
+  },
+  {
     "timestamp": "2026-04-14T16:53:01.060374+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -158,23 +176,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "455.62",
     "gain_loss_pct": "-18.3"
-  },
-  {
-    "timestamp": "2026-04-08T16:49:01.228114+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "179.22",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "245.59",
-    "gain_loss_pct": "-27.0"
-  },
-  {
-    "timestamp": "2026-04-08T16:49:01.664524+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "378.52",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-16.9"
   }
 ]
