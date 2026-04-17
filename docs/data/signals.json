@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-04-17T14:50:14.935296+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "172.05",
+    "notes": "Major move: 15.5%"
+  },
+  {
     "timestamp": "2026-04-17T07:25:04.249787+00:00",
     "ticker": "COIN",
     "action": "EVALUATE",
@@ -167,14 +174,5 @@
     "entry_price": "10.51",
     "gain_loss_pct": "-9.2",
     "holding_days": "107"
-  },
-  {
-    "timestamp": "2026-04-13T06:07:17.700081+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "167.85",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "242.98",
-    "gain_loss_pct": "-30.9"
   }
 ]
