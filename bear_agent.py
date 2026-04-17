@@ -65,7 +65,7 @@ class BearAgent:
         try:
             msg = self.client.messages.create(
                 model=self.model,
-                max_tokens=1024,
+                max_tokens=2048,
                 messages=[{"role": "user", "content": prompt}],
             )
             text = "".join(block.text for block in msg.content if hasattr(block, "text"))
