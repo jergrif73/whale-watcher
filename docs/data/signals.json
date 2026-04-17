@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-04-17T16:39:57.621981+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "169.7",
+    "notes": "Major move: 13.9%"
+  },
+  {
     "timestamp": "2026-04-17T14:50:14.935296+00:00",
     "ticker": "MSTR",
     "action": "ALERT",
@@ -164,15 +171,5 @@
     "action": "BUY_SIGNAL",
     "price": "133.35",
     "notes": "RSI oversold: 28.7"
-  },
-  {
-    "timestamp": "2026-04-13T06:07:17.362354+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "9.54",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "10.51",
-    "gain_loss_pct": "-9.2",
-    "holding_days": "107"
   }
 ]
