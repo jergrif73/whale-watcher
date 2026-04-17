@@ -7,6 +7,11 @@ import json
 import uuid
 import requests
 import time
+import io
+import base64
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
@@ -989,8 +994,24 @@ class TechnicalAnalyzer:
             pattern = "DISTRIBUTION"
         else:
             pattern = "NEUTRAL"
-        
+
         return vol_ratio, pattern
+
+    @staticmethod
+    def _build_sparkline_png(prices):
+        """Return a base64 PNG data URI of a 400x120 sparkline for the given price list."""
+        fig, ax = plt.subplots(figsize=(4, 1.2), facecolor='#0d1117')
+        ax.set_facecolor('#0d1117')
+        ax.plot(prices, color='#58a6ff', linewidth=1.5, solid_capstyle='round')
+        ax.axis('off')
+        fig.tight_layout(pad=0)
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png', dpi=100, bbox_inches='tight',
+                    facecolor='#0d1117', edgecolor='none')
+        plt.close(fig)
+        buf.seek(0)
+        b64 = base64.b64encode(buf.read()).decode('ascii')
+        return f"data:image/png;base64,{b64}"
 
 
 class PositionAnalyzer:
@@ -1643,7 +1664,9 @@ class MarketAgent:
             
             whale_intel = self.check_whale_intel(stock, ticker)
             clean_ticker = ticker.replace("-USD", "")
-            
+
+            sparkline_b64 = TechnicalAnalyzer._build_sparkline_png(df['Close'].tolist())
+
             print(f"   [OWNED] {clean_ticker}: ${analyzer.amount:.2f} → ${analyzer.current_value:.2f} | "
                   f"P/L: {analyzer.gain_loss_pct:.1f}% (${analyzer.gain_loss_dollars:+.2f}) | "
                   f"{analyzer.holding_days}d | Risk: {signal_data['risk_score']}")
@@ -1679,7 +1702,8 @@ class MarketAgent:
                 "first_buy_date": position['first_buy_date'],
                 "last_buy_date": position['last_buy_date'],
                 "buy_count": position.get('buy_count', 1),
-                "lots": position.get('lots', [])
+                "lots": position.get('lots', []),
+                "sparkline_b64": sparkline_b64
             }
         except Exception as e:
             print(f"   [ERROR] {ticker}: {e}")
@@ -1915,17 +1939,26 @@ class MarketAgent:
                 current_value = item.get('current_value', 0)
                 gain_loss_dollars = item.get('gain_loss_dollars', current_value - amount_invested)
 
+                # Action/Reasoning
+                reasoning = item.get('reasoning', [])
+                action_text = reasoning[0] if reasoning else ""
+
+                sparkline_html = ""
+                sparkline_b64 = item.get('sparkline_b64', '')
+                if sparkline_b64:
+                    sparkline_html = (
+                        f'<img src="{sparkline_b64}" alt="3mo chart" '
+                        f'style="display:block;max-width:100%;width:160px;height:48px;" />'
+                    )
+
                 row = "<tr>"
                 row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
                 row += f'<td style="{cell_style}">${amount_invested:.2f}</td>'
                 row += f'<td style="{cell_style}">${current_value:.2f}</td>'
                 row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]:+.1f}% (${gain_loss_dollars:+.2f})</td>'
                 row += f'<td style="{cell_style}"><span style="{badge_style}">{item["signal"]}</span></td>'
-                
-                # Action/Reasoning
-                reasoning = item.get('reasoning', [])
-                action_text = reasoning[0] if reasoning else ""
                 row += f'<td style="{cell_style} font-size: 12px; color: #8b949e;">{action_text}</td>'
+                row += f'<td style="{cell_style}">{sparkline_html}</td>'
                 row += "</tr>"
                 html_rows += row
             return html_rows
@@ -2025,6 +2058,7 @@ class MarketAgent:
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">P/L</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Signal</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Action</th>
+                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">3mo Chart</th>
                                             </tr>
                                         </thead>
                                         <tbody>
