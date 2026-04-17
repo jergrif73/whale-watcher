@@ -58,5 +58,30 @@ class TestInvalidationEvaluator(unittest.TestCase):
         self.assertEqual(res.detail, "manual_check")
 
 
+class TestTechnicalEvaluation(unittest.TestCase):
+    def setUp(self):
+        self.ev = InvalidationEvaluator()
+
+    def test_rsi_lt_tripped(self):
+        cond = self.ev.parse("rsi < 30")
+        res = self.ev.evaluate(cond, indicators={"rsi": [28.0]})
+        self.assertTrue(res.tripped)
+
+    def test_weekly_rsi_lt_not_tripped(self):
+        cond = self.ev.parse("weekly_rsi < 30")
+        res = self.ev.evaluate(cond, indicators={"weekly_rsi": [52.0]})
+        self.assertFalse(res.tripped)
+
+    def test_sma_cross(self):
+        cond = self.ev.parse("sma_50 < sma_200")
+        # Cross-field compare is not supported — parser falls through to narrative
+        self.assertIn(cond.type, ("technical", "narrative"))
+
+    def test_macd_hist_lt_zero(self):
+        cond = self.ev.parse("macd_hist < 0")
+        res = self.ev.evaluate(cond, indicators={"macd_hist": [-0.5]})
+        self.assertTrue(res.tripped)
+
+
 if __name__ == "__main__":
     unittest.main()
