@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+from thesis_manager import ThesisManager
 
 # --- CONFIGURATION ---
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
@@ -1026,11 +1029,12 @@ class PositionAnalyzer:
     Properly tracks multiple purchases at different dates!
     """
     
-    def __init__(self, ticker, position, df):
+    def __init__(self, ticker, position, df, market_agent=None):
         self.ticker = ticker
         self.position = position
         self.df = df
         self.ta = TechnicalAnalyzer()
+        self.market_agent = market_agent
         
         # Current market price
         self.current_price = df['Close'].iloc[-1]
@@ -1208,6 +1212,29 @@ class PositionAnalyzer:
         
         return max(0, min(100, score))
     
+    def _active_thesis(self):
+        """Return the active thesis dict for this ticker, or None."""
+        mgr = getattr(self.market_agent, "thesis_manager", None) if self.market_agent else None
+        if mgr is None:
+            return None
+        sym = (self.position.get("ticker") or self.position.get("symbol")
+               or self.ticker.replace("-USD", ""))
+        return mgr.get_active(sym)
+
+    def _hold_signal_while_thesis_active(self, thesis, risk_score):
+        return {
+            "signal": f"🧠 THESIS +{self.gain_loss_pct:.1f}%" if self.gain_loss_pct >= 0
+                      else f"🧠 THESIS {self.gain_loss_pct:.1f}%",
+            "color": "purple",
+            "action": "HOLD",
+            "priority": 25,
+            "reasoning": [
+                f"Stop-loss signal suppressed — active thesis: {thesis['thesis'][:80]}",
+                "See 'Active Theses' section for invalidation criteria",
+            ],
+            "risk_score": risk_score,
+        }
+
     def generate_signal(self):
         """Generate comprehensive trading signal for owned position"""
         is_settling = self.holding_days is not None and self.holding_days <= SETTLING_PERIOD_DAYS
@@ -1257,9 +1284,17 @@ class PositionAnalyzer:
             }
         
         # === SELL SIGNALS (Priority Order) ===
-        
-        # 1. HARD STOP LOSS - Highest priority
+
+        # Thesis override: an active thesis suppresses the recurring
+        # stop-loss alert. Invalidation is checked separately at the
+        # MarketAgent level; tripping flips status -> invalidated and
+        # the next run generates the normal stop-loss signal.
+        _active_thesis = self._active_thesis()
+
+        # 1. HARD STOP LOSS - Highest priority (unless thesis active)
         if self.gain_loss_pct <= STOP_LOSS_HARD:
+            if _active_thesis:
+                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"🛑 STOP LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "SELL_ALL"
@@ -1340,8 +1375,10 @@ class PositionAnalyzer:
             reasoning.append("Volume pattern suggests selling pressure")
             reasoning.append("Watch for breakdown")
         
-        # 10. SOFT STOP LOSS
+        # 10. SOFT STOP LOSS (suppressed if active thesis)
         elif self.gain_loss_pct <= STOP_LOSS_SOFT:
+            if _active_thesis:
+                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"⚠️ LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "EVALUATE"
@@ -1450,12 +1487,48 @@ class PositionAnalyzer:
         }
 
 
+def evaluate_thesis_invalidations(thesis_manager, market_data: dict) -> list:
+    """Evaluate every active thesis against current market data.
+
+    market_data: dict keyed by ticker; each value has 'closes' list and optional
+    'indicators' dict. Trips status -> 'invalidated' on any auto condition match.
+
+    Returns list of (thesis_id, tripped_condition, detail) for alerting.
+    """
+    from invalidation_evaluator import InvalidationEvaluator
+    ev = InvalidationEvaluator()
+    tripped = []
+    for t in list(thesis_manager.list_all()):
+        if t["status"] != "active":
+            continue
+        ticker_data = market_data.get(t["ticker"])
+        if not ticker_data:
+            continue
+        for crit in t["invalidation_criteria"]:
+            if not crit.get("auto"):
+                continue
+            cond = ev.parse(crit["condition"])
+            result = ev.evaluate(
+                cond,
+                closes=ticker_data.get("closes"),
+                indicators=ticker_data.get("indicators", {}),
+            )
+            if result.tripped:
+                thesis_manager.set_status(t["id"], "invalidated")
+                tripped.append((t["id"], crit["condition"], result.detail))
+                break
+    return tripped
+
+
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         self.has_critical_news = False
         self.recent_signals = []
         self.journal = TradeJournal()
+        # Thesis layer (Phase 1)
+        theses_path = Path("docs/data/theses.json")
+        self.thesis_manager = ThesisManager(theses_path) if theses_path.exists() else None
 
     def log_signal(self, ticker, action, price, entry_price=None, gain_loss_pct=None, holding_days=None, notes=""):
         """Log a trading signal for the activity feed"""
@@ -1662,7 +1735,7 @@ class MarketAgent:
             if len(df) < 2: return None
             
             # Use PositionAnalyzer - it will look up historical price from date
-            analyzer = PositionAnalyzer(ticker, position, df)
+            analyzer = PositionAnalyzer(ticker, position, df, market_agent=self)
             signal_data = analyzer.generate_signal()
             
             # Check for critical signals
@@ -1894,6 +1967,17 @@ class MarketAgent:
         # Combine all alerts
         all_alerts = tax_alerts + entry_alerts
 
+        # Thesis invalidation sweep (Phase 1) — price-only for now
+        if self.thesis_manager is not None:
+            market_data = {}
+            for item in portfolio_data:
+                sym = item.get("symbol")
+                if sym:
+                    market_data[sym] = {"closes": [item.get("current_price", 0)]}
+            tripped = evaluate_thesis_invalidations(self.thesis_manager, market_data)
+            for tid, cond, detail in tripped:
+                print(f"   🚨 Thesis {tid} invalidated: {cond} ({detail})")
+
         # Aggregate whale activity across portfolio + watchlist so the user
         # always has a clear "what did we actually detect today" section.
         whale_activity = []
@@ -2119,6 +2203,14 @@ class MarketAgent:
             '</td></tr>'
         )
 
+        # Active Theses section (Phase 1) — empty string if no active theses
+        if self.thesis_manager is not None:
+            current_prices = {p.get("symbol"): p.get("current_price")
+                              for p in data.get("portfolio", []) if p.get("symbol")}
+            active_theses_html = self.thesis_manager.render_email_section(current_prices)
+        else:
+            active_theses_html = ""
+
         # Benchmark cells (SPY & QQQ 7-day change) — falls back gracefully if missing
         benchmarks = data.get('benchmarks', {}) or {}
         def _bench_cell(ticker):
@@ -2182,6 +2274,8 @@ class MarketAgent:
                             </tr>
 
                             {whale_section_html}
+
+                            {active_theses_html}
 
                             <tr>
                                 <td style="padding-top: 30px;">
