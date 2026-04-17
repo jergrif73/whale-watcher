@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+from thesis_manager import ThesisManager
 
 # --- CONFIGURATION ---
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
@@ -1456,6 +1459,9 @@ class MarketAgent:
         self.has_critical_news = False
         self.recent_signals = []
         self.journal = TradeJournal()
+        # Thesis layer (Phase 1)
+        theses_path = Path("docs/data/theses.json")
+        self.thesis_manager = ThesisManager(theses_path) if theses_path.exists() else None
 
     def log_signal(self, ticker, action, price, entry_price=None, gain_loss_pct=None, holding_days=None, notes=""):
         """Log a trading signal for the activity feed"""
