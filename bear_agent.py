@@ -32,7 +32,19 @@ PRE-MORTEM BY AUTHOR: {pre_mortem}
 
 
 UNVERIFIED_RE = re.compile(r"\[UNVERIFIED\][^.\n]*[.\n]", re.IGNORECASE)
-MINIMUM_LINE_RE = re.compile(r"^\s*Minimum[^\n]*", re.IGNORECASE | re.MULTILINE)
+# Matches the "Minimum price/event..." line whether it's plain, markdown-headed
+# (## Minimum...), or bolded (**Minimum...**). Also captures the next non-empty
+# line as the actual falsifiable content, since models frequently put the
+# heading on one line and the falsifiable statement on the next.
+MINIMUM_LINE_RE = re.compile(
+    r"^[ \t#*_]*Minimum[^\n]*(?:\n+[ \t*_>-]*([^\n]+))?",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def _clean_markdown(s: str) -> str:
+    """Strip common markdown markers so stored bear_floor reads clean in email."""
+    return re.sub(r"[*_#]+", "", s).strip(" \t:-")
 
 
 def parse_bear_response(text: str) -> dict:
@@ -41,7 +53,14 @@ def parse_bear_response(text: str) -> dict:
         return {"red_team_critique": "", "unverified_claims": [], "bear_floor": None}
     unverified = [m.group(0).strip() for m in UNVERIFIED_RE.finditer(text)]
     floor_match = MINIMUM_LINE_RE.search(text)
-    floor = floor_match.group(0).strip() if floor_match else None
+    floor = None
+    if floor_match:
+        header = _clean_markdown(floor_match.group(0).split("\n")[0])
+        body = floor_match.group(1)
+        if body:
+            floor = f"{header}: {_clean_markdown(body)}"
+        else:
+            floor = header
     return {
         "red_team_critique": text.strip(),
         "unverified_claims": unverified,

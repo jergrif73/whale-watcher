@@ -27,6 +27,20 @@ class TestParseBearResponse(unittest.TestCase):
         parsed = parse_bear_response(SAMPLE_RESPONSE)
         self.assertIn("$140", parsed["bear_floor"])
 
+    def test_extracts_bear_floor_from_markdown_heading(self):
+        markdown_response = """
+Some critique content.
+
+## Minimum price/event that would prove the thesis-holder wrong
+**COIN closes below $140 on weekly basis AND Q4 transaction revenue prints down >20% YoY — either condition alone falsifies the linkage.**
+"""
+        parsed = parse_bear_response(markdown_response)
+        self.assertIsNotNone(parsed["bear_floor"])
+        self.assertIn("Minimum", parsed["bear_floor"])
+        self.assertIn("$140", parsed["bear_floor"])
+        self.assertNotIn("**", parsed["bear_floor"])
+        self.assertNotIn("##", parsed["bear_floor"])
+
     def test_empty_response_returns_defaults(self):
         parsed = parse_bear_response("")
         self.assertEqual(parsed["red_team_critique"], "")
