@@ -1029,11 +1029,12 @@ class PositionAnalyzer:
     Properly tracks multiple purchases at different dates!
     """
     
-    def __init__(self, ticker, position, df):
+    def __init__(self, ticker, position, df, market_agent=None):
         self.ticker = ticker
         self.position = position
         self.df = df
         self.ta = TechnicalAnalyzer()
+        self.market_agent = market_agent
         
         # Current market price
         self.current_price = df['Close'].iloc[-1]
@@ -1211,6 +1212,29 @@ class PositionAnalyzer:
         
         return max(0, min(100, score))
     
+    def _active_thesis(self):
+        """Return the active thesis dict for this ticker, or None."""
+        mgr = getattr(self.market_agent, "thesis_manager", None) if self.market_agent else None
+        if mgr is None:
+            return None
+        sym = (self.position.get("ticker") or self.position.get("symbol")
+               or self.ticker.replace("-USD", ""))
+        return mgr.get_active(sym)
+
+    def _hold_signal_while_thesis_active(self, thesis, risk_score):
+        return {
+            "signal": f"🧠 THESIS +{self.gain_loss_pct:.1f}%" if self.gain_loss_pct >= 0
+                      else f"🧠 THESIS {self.gain_loss_pct:.1f}%",
+            "color": "purple",
+            "action": "HOLD",
+            "priority": 25,
+            "reasoning": [
+                f"Stop-loss signal suppressed — active thesis: {thesis['thesis'][:80]}",
+                "See 'Active Theses' section for invalidation criteria",
+            ],
+            "risk_score": risk_score,
+        }
+
     def generate_signal(self):
         """Generate comprehensive trading signal for owned position"""
         is_settling = self.holding_days is not None and self.holding_days <= SETTLING_PERIOD_DAYS
@@ -1260,9 +1284,17 @@ class PositionAnalyzer:
             }
         
         # === SELL SIGNALS (Priority Order) ===
-        
-        # 1. HARD STOP LOSS - Highest priority
+
+        # Thesis override: an active thesis suppresses the recurring
+        # stop-loss alert. Invalidation is checked separately at the
+        # MarketAgent level; tripping flips status -> invalidated and
+        # the next run generates the normal stop-loss signal.
+        _active_thesis = self._active_thesis()
+
+        # 1. HARD STOP LOSS - Highest priority (unless thesis active)
         if self.gain_loss_pct <= STOP_LOSS_HARD:
+            if _active_thesis:
+                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"🛑 STOP LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "SELL_ALL"
@@ -1343,8 +1375,10 @@ class PositionAnalyzer:
             reasoning.append("Volume pattern suggests selling pressure")
             reasoning.append("Watch for breakdown")
         
-        # 10. SOFT STOP LOSS
+        # 10. SOFT STOP LOSS (suppressed if active thesis)
         elif self.gain_loss_pct <= STOP_LOSS_SOFT:
+            if _active_thesis:
+                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"⚠️ LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "EVALUATE"
@@ -1668,7 +1702,7 @@ class MarketAgent:
             if len(df) < 2: return None
             
             # Use PositionAnalyzer - it will look up historical price from date
-            analyzer = PositionAnalyzer(ticker, position, df)
+            analyzer = PositionAnalyzer(ticker, position, df, market_agent=self)
             signal_data = analyzer.generate_signal()
             
             # Check for critical signals
