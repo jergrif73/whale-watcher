@@ -1,1 +1,55 @@
-{"theses": [], "version": 1}
+{
+  "theses": [
+    {
+      "id": "coin-2026-04-17",
+      "ticker": "COIN",
+      "created": "2026-04-17",
+      "author": "jeremiah",
+      "thesis": "COIN's revenue scales with BTC trading volume, and BTC is in the accumulation phase of the post-halving cycle. Sell signals triggered by 5-day stop-loss don't account for the multi-month base-building pattern that preceded every previous cycle breakout.",
+      "enter_tag": "",
+      "conviction": 7,
+      "pre_mortem": "If BTC fails to reclaim its prior cycle high by end of Q3 2026, or if COIN's quarterly trading volume drops more than 30% YoY, the halving-cycle thesis is wrong.",
+      "invalidation_criteria": [
+        {
+          "type": "price",
+          "condition": "close < 140 for 5 sessions",
+          "auto": true
+        },
+        {
+          "type": "technical",
+          "condition": "weekly_rsi < 30",
+          "auto": true
+        }
+      ],
+      "red_team_critique": "# Short-Seller Rebuttal: COIN Long Thesis\n\n## Top 3 Reasons This Thesis Is Wrong (ranked by probability)\n\n### 1. The \"post-halving accumulation\" pattern is a sample size of three, not a law.\nFour-cycle pattern-matching on BTC is statistical noise dressed as signal. Each prior cycle occurred under radically different liquidity regimes (ZIRP, retail mania, no ETF competition). The author is curve-fitting. COIN's revenue is no longer a clean BTC-volume proxy either \u2014 spot ETF approval in Jan 2024 structurally redirected institutional flow to BlackRock/Fidelity at ~10bps vs COIN's retail take rate.\n- **30d confirm:** COIN spot market share prints below 50% on Kaiko/CCData feeds\n- **90d confirm:** Q earnings show transaction revenue down QoQ while BTC price is flat-to-up (decoupling)\n- **180d confirm:** ETF AUM growth exceeds COIN custody AUM growth by >2x\n\n### 2. The invalidation levels are set to never trigger until the damage is done.\n\"Close < 140 for 5 sessions AND weekly RSI < 30\" is a compound condition requiring a ~50%+ drawdown from typical recent ranges plus an extreme oversold weekly read. By the time both fire, the holder is down catastrophically. This is a rationalization, not a stop.\n- **30d confirm:** COIN draws down 15\u201325% without triggering either leg\n- **90d confirm:** Stock trades in 140\u2013180 range with weekly RSI 35\u201345, thesis \"still intact\" per author\n- **180d confirm:** Realized drawdown from entry exceeds 30% before invalidation fires\n\n### 3. Regulatory and competitive margin compression is the dominant variable, not BTC price.\nTake rates on retail transactions have been compressing for six quarters. Robinhood, Kraken IPO overhang, and zero-fee ETF competition squeeze the unit economic that made COIN a levered BTC play in 2021. Even if BTC rallies, revenue per dollar of volume is structurally lower.\n- **30d confirm:** Any competitor fee cut or Robinhood crypto MAU acceleration data\n- **90d confirm:** COIN transaction take rate prints below 1.40% (vs ~1.5\u20131.7% historical retail)\n- **180d confirm:** Subscription & Services revenue fails to offset transaction decline, total rev down YoY\n\n## Unverified Claims Flagged\n- **[UNVERIFIED]** \"BTC is in the accumulation phase of the post-halving cycle\" \u2014 this is a narrative construct, not a measurable state in any filing or on-chain metric with consensus definition.\n- **[UNVERIFIED]** \"Multi-month base-building pattern \u2026 preceded every previous cycle breakout\" \u2014 selection bias; author does not define \"base,\" \"breakout,\" or cycle boundaries.\n- **[UNVERIFIED]** Implicit claim that COIN rev",
+      "unverified_claims": [
+        "[UNVERIFIED]** \"BTC is in the accumulation phase of the post-halving cycle\" \u2014 this is a narrative construct, not a measurable state in any filing or on-chain metric with consensus definition.",
+        "[UNVERIFIED]** \"Multi-month base-building pattern \u2026 preceded every previous cycle breakout\" \u2014 selection bias; author does not define \"base,\" \"breakout,\" or cycle boundaries."
+      ],
+      "bear_agent_model": "claude-opus-4-7",
+      "bear_agent_run_at": "2026-04-17T15:12:06.112824+00:00",
+      "status": "active",
+      "review_date": "2026-10-14",
+      "review_checkpoints": {
+        "30d": {
+          "due": "2026-05-17",
+          "completed": false,
+          "verdict": null
+        },
+        "90d": {
+          "due": "2026-07-16",
+          "completed": false,
+          "verdict": null
+        },
+        "180d": {
+          "due": "2026-10-14",
+          "completed": false,
+          "verdict": null
+        }
+      },
+      "override_events": [],
+      "outcome": null
+    }
+  ],
+  "version": 1
+}
