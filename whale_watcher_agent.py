@@ -1967,13 +1967,21 @@ class MarketAgent:
         # Combine all alerts
         all_alerts = tax_alerts + entry_alerts
 
-        # Thesis invalidation sweep (Phase 1) — price-only for now
+        # Thesis invalidation sweep — price + technical (Phase 2)
         if self.thesis_manager is not None:
             market_data = {}
             for item in portfolio_data:
                 sym = item.get("symbol")
-                if sym:
-                    market_data[sym] = {"closes": [item.get("current_price", 0)]}
+                if not sym:
+                    continue
+                market_data[sym] = {
+                    "closes": item.get("recent_closes") or [item.get("price", 0)],
+                    "indicators": {
+                        "rsi": [item["rsi"]] if item.get("rsi") is not None else [],
+                        "weekly_rsi": [item["weekly_rsi"]] if item.get("weekly_rsi") is not None else [],
+                        "macd_hist": [item["macd_hist"]] if item.get("macd_hist") is not None else [],
+                    },
+                }
             tripped = evaluate_thesis_invalidations(self.thesis_manager, market_data)
             for tid, cond, detail in tripped:
                 print(f"   🚨 Thesis {tid} invalidated: {cond} ({detail})")

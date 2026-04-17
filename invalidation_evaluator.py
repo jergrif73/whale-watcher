@@ -87,8 +87,21 @@ class InvalidationEvaluator:
                 )
             return EvalResult(tripped=False, detail=f"close={window[-1]}")
         if cond.type == "technical":
-            # Phase 2 implements this; Phase 1 treats as not-yet-evaluable
-            return EvalResult(tripped=False, detail="technical_deferred_to_phase_2")
+            if not indicators or cond.lhs not in indicators:
+                return EvalResult(tripped=False, detail="no_indicator")
+            series = indicators[cond.lhs]
+            if not series:
+                return EvalResult(tripped=False, detail="empty_series")
+            window = series[-cond.duration_sessions:]
+            if len(window) < cond.duration_sessions:
+                return EvalResult(tripped=False, detail="insufficient_history")
+            all_breach = all(self._compare(v, cond.op, cond.threshold) for v in window)
+            if all_breach:
+                return EvalResult(
+                    tripped=True,
+                    detail=f"{cond.lhs}={window[-1]} {cond.op} {cond.threshold}",
+                )
+            return EvalResult(tripped=False, detail=f"{cond.lhs}={window[-1]}")
         return EvalResult(tripped=False, detail="unknown_type")
 
     @staticmethod

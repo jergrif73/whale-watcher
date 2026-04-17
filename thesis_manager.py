@@ -113,6 +113,24 @@ class ThesisManager:
                 return
         raise KeyError(thesis_id)
 
+    def update_critique(self, thesis_id: str, critique: dict) -> None:
+        """Persist bear-agent output onto an existing thesis."""
+        for t in self._data["theses"]:
+            if t["id"] == thesis_id:
+                t["red_team_critique"] = critique.get("red_team_critique", "")
+                t["unverified_claims"] = critique.get("unverified_claims", [])
+                t["bear_agent_model"] = critique.get("bear_agent_model", "")
+                t["bear_agent_run_at"] = critique.get("bear_agent_run_at", "")
+                if critique.get("bear_floor"):
+                    t["invalidation_criteria"].append({
+                        "type": "bear_floor",
+                        "condition": critique["bear_floor"],
+                        "auto": False,
+                    })
+                self._save()
+                return
+        raise KeyError(thesis_id)
+
     def append_override_event(self, thesis_id: str, signal: str, price: float, date: str) -> None:
         for t in self._data["theses"]:
             if t["id"] == thesis_id:

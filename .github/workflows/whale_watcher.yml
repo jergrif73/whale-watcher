@@ -29,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas lxml requests matplotlib
+          pip install yfinance pandas numpy lxml requests matplotlib anthropic
 
       - name: Debug - List Files Before
         run: ls -R
@@ -42,6 +42,7 @@ jobs:
           IS_MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
           DEEP_ANALYSIS: ${{ inputs.deep_analysis }}
           ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python whale_watcher_agent.py
 

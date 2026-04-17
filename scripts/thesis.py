@@ -24,6 +24,10 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 # allow running from repo root
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -34,6 +38,7 @@ THESES_PATH = REPO_ROOT / "docs" / "data" / "theses.json"
 
 
 def cmd_add(args: argparse.Namespace) -> int:
+    import os
     mgr = ThesisManager(THESES_PATH)
     if mgr.get_active(args.ticker):
         print(f"Error: active thesis already exists for {args.ticker.upper()}", file=sys.stderr)
@@ -47,8 +52,31 @@ def cmd_add(args: argparse.Namespace) -> int:
         pre_mortem=args.pre_mortem,
         created=today,
     )
-    print(f"OK - thesis {t['id']} saved")
-    print(f"   {len(t['invalidation_criteria'])} invalidation conditions")
+    print(f"OK - thesis {t['id']} saved ({len(t['invalidation_criteria'])} conditions)")
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("   ⚠ ANTHROPIC_API_KEY not set — skipping bear critique")
+        print(f"   review_date: {t['review_date']}")
+        return 0
+    print("   Running bear-agent critique (fresh session)…")
+    try:
+        from bear_agent import BearAgent
+        agent = BearAgent(api_key=api_key)
+        critique = agent.critique(
+            thesis=args.thesis,
+            invalidation_as_text="; ".join(args.invalidation),
+            pre_mortem=args.pre_mortem,
+        )
+        if critique.get("error"):
+            print(f"   ⚠ Bear agent failed: {critique['error']} — thesis saved without critique")
+        else:
+            mgr.update_critique(t["id"], critique)
+            print(f"   ✓ Bear critique saved ({len(critique['unverified_claims'])} unverified claims flagged)")
+            if critique.get("bear_floor"):
+                print(f"   ✓ Bear floor added: {critique['bear_floor'][:80]}")
+    except RuntimeError as e:
+        print(f"   ⚠ {e}")
     print(f"   review_date: {t['review_date']}")
     return 0
 
