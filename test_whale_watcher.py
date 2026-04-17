@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from whale_watcher_agent import MarketAgent
+from whale_watcher_agent import MarketAgent, TechnicalAnalyzer
 import json
 from datetime import datetime, timedelta
 
@@ -97,6 +97,18 @@ class TestMarketAgent(unittest.TestCase):
         self.assertIn("NVDA", report)
         self.assertIn("MSTR", report)
         print("\n✅ TEST PASSED: Logic is sound. No API keys were used.")
+
+    def test_sparkline_png_is_valid(self):
+        """_build_sparkline_png must return a data URI whose base64 payload starts with the PNG magic bytes."""
+        prices = [100.0 + i * 0.5 for i in range(63)]  # ~3 months of daily prices
+        data_uri = TechnicalAnalyzer._build_sparkline_png(prices)
+        self.assertTrue(data_uri.startswith("data:image/png;base64,"),
+                        "data URI must have PNG MIME prefix")
+        b64_payload = data_uri.split(",", 1)[1]
+        # PNG magic bytes base64-encode to "iVBORw0KGgo" at the start of the stream
+        self.assertTrue(b64_payload.startswith("iVBORw0KGgo"),
+                        f"PNG magic bytes not found; got prefix: {b64_payload[:20]!r}")
+        print("\n✅ TEST PASSED: sparkline PNG magic bytes confirmed.")
 
 if __name__ == '__main__':
     unittest.main()
