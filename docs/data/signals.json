@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-04-17T05:56:15.627795+00:00",
+    "ticker": "COIN",
+    "action": "EVALUATE",
+    "price": "199.83",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "227.73",
+    "gain_loss_pct": "-12.3"
+  },
+  {
     "timestamp": "2026-04-16T17:00:30.911943+00:00",
     "ticker": "COIN",
     "action": "SELL_ALL",
@@ -166,15 +175,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "455.62",
     "gain_loss_pct": "-18.6"
-  },
-  {
-    "timestamp": "2026-04-10T16:37:59.659214+00:00",
-    "ticker": "MARA",
-    "action": "EVALUATE",
-    "price": "9.43",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "10.51",
-    "gain_loss_pct": "-10.3",
-    "holding_days": "105"
   }
 ]
