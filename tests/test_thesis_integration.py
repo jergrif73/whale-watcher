@@ -62,5 +62,39 @@ class TestStopLossSuppression(unittest.TestCase):
         self.assertIsNone(analyzer._active_thesis())
 
 
+class TestInvalidationTripTransitionsStatus(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name) / "theses.json"
+        self.path.write_text(json.dumps({"theses": [], "version": 1}))
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_price_invalidation_trips_to_invalidated(self):
+        from whale_watcher_agent import evaluate_thesis_invalidations
+        mgr = ThesisManager(self.path)
+        mgr.add(
+            ticker="COIN", thesis="x", invalidation=["close < 140"],
+            conviction=7, pre_mortem="y", created="2026-04-17",
+        )
+        market_data = {"COIN": {"closes": [135.0]}}
+        tripped = evaluate_thesis_invalidations(mgr, market_data)
+        self.assertEqual(len(tripped), 1)
+        self.assertEqual(mgr.list_all()[0]["status"], "invalidated")
+
+    def test_price_not_tripped_stays_active(self):
+        from whale_watcher_agent import evaluate_thesis_invalidations
+        mgr = ThesisManager(self.path)
+        mgr.add(
+            ticker="COIN", thesis="x", invalidation=["close < 140"],
+            conviction=7, pre_mortem="y", created="2026-04-17",
+        )
+        market_data = {"COIN": {"closes": [199.83]}}
+        tripped = evaluate_thesis_invalidations(mgr, market_data)
+        self.assertEqual(tripped, [])
+        self.assertEqual(mgr.list_all()[0]["status"], "active")
+
+
 if __name__ == "__main__":
     unittest.main()

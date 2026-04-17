@@ -1487,6 +1487,39 @@ class PositionAnalyzer:
         }
 
 
+def evaluate_thesis_invalidations(thesis_manager, market_data: dict) -> list:
+    """Evaluate every active thesis against current market data.
+
+    market_data: dict keyed by ticker; each value has 'closes' list and optional
+    'indicators' dict. Trips status -> 'invalidated' on any auto condition match.
+
+    Returns list of (thesis_id, tripped_condition, detail) for alerting.
+    """
+    from invalidation_evaluator import InvalidationEvaluator
+    ev = InvalidationEvaluator()
+    tripped = []
+    for t in list(thesis_manager.list_all()):
+        if t["status"] != "active":
+            continue
+        ticker_data = market_data.get(t["ticker"])
+        if not ticker_data:
+            continue
+        for crit in t["invalidation_criteria"]:
+            if not crit.get("auto"):
+                continue
+            cond = ev.parse(crit["condition"])
+            result = ev.evaluate(
+                cond,
+                closes=ticker_data.get("closes"),
+                indicators=ticker_data.get("indicators", {}),
+            )
+            if result.tripped:
+                thesis_manager.set_status(t["id"], "invalidated")
+                tripped.append((t["id"], crit["condition"], result.detail))
+                break
+    return tripped
+
+
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
@@ -1933,6 +1966,17 @@ class MarketAgent:
         
         # Combine all alerts
         all_alerts = tax_alerts + entry_alerts
+
+        # Thesis invalidation sweep (Phase 1) — price-only for now
+        if self.thesis_manager is not None:
+            market_data = {}
+            for item in portfolio_data:
+                sym = item.get("symbol")
+                if sym:
+                    market_data[sym] = {"closes": [item.get("current_price", 0)]}
+            tripped = evaluate_thesis_invalidations(self.thesis_manager, market_data)
+            for tid, cond, detail in tripped:
+                print(f"   🚨 Thesis {tid} invalidated: {cond} ({detail})")
 
         # Aggregate whale activity across portfolio + watchlist so the user
         # always has a clear "what did we actually detect today" section.
