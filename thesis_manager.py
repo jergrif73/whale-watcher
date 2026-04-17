@@ -119,3 +119,56 @@ class ThesisManager:
                 t["override_events"].append({"date": date, "signal": signal, "price": price})
                 self._save()
                 return
+
+    # -- Email rendering --
+
+    def render_email_section(self, current_prices: dict) -> str:
+        """Return an HTML fragment (wrapped in <tr><td>...) for the
+        'Active Theses' email section. Empty string when no active theses.
+        """
+        actives = [t for t in self._data["theses"] if t["status"] == "active"]
+        if not actives:
+            return ""
+        rows = []
+        for t in actives:
+            sym = t["ticker"]
+            price = current_prices.get(sym)
+            price_txt = f"${price:.2f}" if price else "?"
+            conds_html = ""
+            for crit in t["invalidation_criteria"]:
+                icon = "●" if crit["auto"] else "⚠"
+                manual_tag = (' <span style="color:#d29922">(manual check)</span>'
+                              if not crit["auto"] else "")
+                conds_html += (
+                    f'<li style="color:#8b949e;font-size:12px;">{icon} '
+                    f'{crit["condition"]}{manual_tag}</li>'
+                )
+            critique_html = ""
+            if t.get("red_team_critique"):
+                critique_html = (
+                    '<details style="margin-top:8px;color:#8b949e;font-size:12px;">'
+                    '<summary style="cursor:pointer;color:#58a6ff;">▼ Bear critique (fresh-session)</summary>'
+                    '<div style="padding:8px;background:#0d1117;border-left:2px solid #f85149;">'
+                    f'{t["red_team_critique"]}</div></details>'
+                )
+            rows.append(
+                '<tr><td style="padding:12px;border-bottom:1px solid #30363d;">'
+                f'<div><strong style="color:#58a6ff;">{sym}</strong> '
+                f'— entered {t["created"]} · conviction {t["conviction"]}/10 '
+                f'· Current: {price_txt}</div>'
+                '<div style="margin-top:6px;padding:8px;background:#161b22;'
+                'border-left:2px solid #58a6ff;color:#e6edf3;font-size:13px;">'
+                f'{t["thesis"]}</div>'
+                f'<ul style="margin:6px 0 0 0;padding-left:20px;">{conds_html}</ul>'
+                f'{critique_html}'
+                '</td></tr>'
+            )
+        return (
+            '<tr><td style="padding-top:30px;">'
+            '<h3 style="margin:0 0 15px 0;color:#e6edf3;'
+            'border-bottom:1px solid #30363d;padding-bottom:5px;">'
+            '🧠 Active Theses</h3>'
+            '<table width="100%" cellpadding="0" cellspacing="0" '
+            f'style="border-collapse:collapse;">{"".join(rows)}</table>'
+            '</td></tr>'
+        )

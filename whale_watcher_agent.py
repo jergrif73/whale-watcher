@@ -2203,6 +2203,14 @@ class MarketAgent:
             '</td></tr>'
         )
 
+        # Active Theses section (Phase 1) — empty string if no active theses
+        if self.thesis_manager is not None:
+            current_prices = {p.get("symbol"): p.get("current_price")
+                              for p in data.get("portfolio", []) if p.get("symbol")}
+            active_theses_html = self.thesis_manager.render_email_section(current_prices)
+        else:
+            active_theses_html = ""
+
         # Benchmark cells (SPY & QQQ 7-day change) — falls back gracefully if missing
         benchmarks = data.get('benchmarks', {}) or {}
         def _bench_cell(ticker):
@@ -2266,6 +2274,8 @@ class MarketAgent:
                             </tr>
 
                             {whale_section_html}
+
+                            {active_theses_html}
 
                             <tr>
                                 <td style="padding-top: 30px;">
