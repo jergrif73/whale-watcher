@@ -1126,27 +1126,38 @@ class PositionAnalyzer:
             print(f"      Warning: Could not get historical price for {date_str}: {e}")
             return self.current_price
     
+    def _parse_buy_date(self, date_str):
+        """Parse an ISO buy date that may be either 'YYYY-MM-DD' or full
+        ISO 8601 with time (e.g. '2025-12-26T10:00:00Z'). Returns a
+        timezone-aware UTC datetime, or None if unparseable."""
+        if not date_str:
+            return None
+        try:
+            s = str(date_str)
+            if 'T' in s:
+                return datetime.fromisoformat(s.replace('Z', '+00:00'))
+            return datetime.strptime(s[:10], '%Y-%m-%d').replace(tzinfo=timezone.utc)
+        except Exception:
+            return None
+
     def _calc_holding_days(self):
         """Calculate days since first purchase"""
-        if not self.position.get('first_buy_date'):
+        buy_date = self._parse_buy_date(self.position.get('first_buy_date'))
+        if buy_date is None:
             return None
-        try:
-            buy_date = datetime.fromisoformat(self.position['first_buy_date'].replace('Z', '+00:00'))
-            return (datetime.now(timezone.utc) - buy_date).days
-        except:
-            return None
-    
+        return (datetime.now(timezone.utc) - buy_date).days
+
     def _get_peak_since_buy(self):
         """Get the highest price since purchase"""
-        if not self.position.get('first_buy_date'):
+        buy_date = self._parse_buy_date(self.position.get('first_buy_date'))
+        if buy_date is None:
             return self.current_price
         try:
-            buy_date = datetime.fromisoformat(self.position['first_buy_date'].replace('Z', '+00:00'))
             df_since_buy = self.df[self.df.index >= buy_date.strftime('%Y-%m-%d')]
             if len(df_since_buy) > 0:
                 return df_since_buy['High'].max()
             return self.current_price
-        except:
+        except Exception:
             return self.current_price
     
     def calculate_risk_score(self):
@@ -1464,18 +1475,25 @@ class MarketAgent:
         self.recent_signals.append(signal)
 
     def check_whale_intel(self, ticker_obj, symbol):
-        """Check for whale activity and insider trading"""
+        """Check for whale activity and insider trading. Falls back to
+        the latest news headline so the Intel column is never empty."""
         intel = []
+        latest_headline = ""
         try:
-            news_list = ticker_obj.news
+            news_list = ticker_obj.news or []
             for story in news_list:
-                title = story.get('title', '').lower()
+                title = story.get('title', '')
+                if not title:
+                    continue
+                if not latest_headline:
+                    latest_headline = title
+                title_lower = title.lower()
                 for whale in WHALE_KEYWORDS:
-                    if whale.lower() in title:
+                    if whale.lower() in title_lower:
                         intel.append(f"🐳 {whale}")
         except: pass
 
-        if "-" not in symbol: 
+        if "-" not in symbol:
             try:
                 insiders = ticker_obj.insider_transactions
                 if insiders is not None and not insiders.empty:
@@ -1485,9 +1503,17 @@ class MarketAgent:
                         shares = row.get('Shares', 0)
                         if "purchase" in text:
                             intel.append(f"👔 Insider Buy: {shares}")
-                            self.has_critical_news = True 
+                            self.has_critical_news = True
             except: pass
-        return " | ".join(list(set(intel)))
+
+        if intel:
+            return " | ".join(list(set(intel)))
+        if latest_headline:
+            trimmed = latest_headline.strip()
+            if len(trimmed) > 60:
+                trimmed = trimmed[:57].rstrip() + "..."
+            return f"📰 {trimmed}"
+        return ""
 
     def fetch_data_for_watchlist(self, ticker):
         """Fetch data for a watchlist item (not owned) - focus on BUY signals"""
@@ -1867,7 +1893,28 @@ class MarketAgent:
         
         # Combine all alerts
         all_alerts = tax_alerts + entry_alerts
-        
+
+        # Aggregate whale activity across portfolio + watchlist so the user
+        # always has a clear "what did we actually detect today" section.
+        whale_activity = []
+        for item in portfolio_data + watchlist_data:
+            intel = (item.get('whale_intel') or '').strip()
+            # Treat genuine whale/insider hits distinctly from the headline fallback
+            has_hit = intel and not intel.startswith("📰")
+            vol_ratio = item.get('vol_ratio') or 0
+            if has_hit:
+                whale_activity.append({
+                    "symbol": item.get('symbol'),
+                    "kind": "whale",
+                    "detail": intel
+                })
+            if vol_ratio and vol_ratio >= VOLUME_SPIKE_RATIO:
+                whale_activity.append({
+                    "symbol": item.get('symbol'),
+                    "kind": "volume",
+                    "detail": f"📊 Volume {vol_ratio:.1f}x avg"
+                })
+
         return {
             "generated_at": self.timestamp,
             "deep_analysis_enabled": DEEP_ANALYSIS,
@@ -1875,6 +1922,7 @@ class MarketAgent:
             "watchlist": watchlist_data,
             "benchmarks": benchmarks,
             "summary": summary,
+            "whale_activity": whale_activity,
             "recent_signals": all_signals,
             "trade_history": self.journal.trades[-10:],
             
@@ -1943,6 +1991,7 @@ class MarketAgent:
                 reasoning = item.get('reasoning', [])
                 action_text = reasoning[0] if reasoning else ""
 
+                # Sparkline (from feat/inline-sparklines)
                 sparkline_html = ""
                 sparkline_b64 = item.get('sparkline_b64', '')
                 if sparkline_b64:
@@ -1951,8 +2000,37 @@ class MarketAgent:
                         f'style="display:block;max-width:100%;width:160px;height:48px;" />'
                     )
 
+                # Entry date (short) + holding duration for the Asset cell
+                entry_date_short = ""
+                raw_first = item.get('first_buy_date')
+                if raw_first:
+                    try:
+                        s = str(raw_first)
+                        _dt = (datetime.fromisoformat(s.replace('Z', '+00:00'))
+                               if 'T' in s
+                               else datetime.strptime(s[:10], '%Y-%m-%d'))
+                        entry_date_short = f"{_dt.strftime('%b')} {_dt.day}, {str(_dt.year)[-2:]}"
+                    except Exception:
+                        entry_date_short = ""
+                holding_days = item.get('holding_days')
+                held_short = ""
+                if isinstance(holding_days, int) and holding_days >= 0:
+                    if holding_days >= 30:
+                        held_short = f"{holding_days // 30}mo"
+                    else:
+                        held_short = f"{holding_days}d"
+                sub_parts = [p for p in [entry_date_short, held_short] if p]
+                sub_line = " · ".join(sub_parts)
+                sub_html = (f'<div style="color: #8b949e; font-size: 11px; '
+                            f'font-weight: normal; margin-top: 2px;">{sub_line}</div>'
+                            if sub_line else "")
+
                 row = "<tr>"
-                row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
+                row += (f'<td style="{cell_style}">'
+                        f'<a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" '
+                        f'style="{link_style}" target="_blank">{item["symbol"]}</a>'
+                        f'{sub_html}'
+                        f'</td>')
                 row += f'<td style="{cell_style}">${amount_invested:.2f}</td>'
                 row += f'<td style="{cell_style}">${current_value:.2f}</td>'
                 row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]:+.1f}% (${gain_loss_dollars:+.2f})</td>'
@@ -2000,11 +2078,64 @@ class MarketAgent:
         
         summary = data.get('summary', {})
         summary_color = "#3fb950" if summary.get('total_gain_loss', 0) >= 0 else "#f85149"
-        
+
         # Risk indicator
         risk = summary.get('avg_risk_score', 50)
         risk_color = "#3fb950" if risk < 40 else "#d29922" if risk < 60 else "#f85149"
         risk_label = "LOW" if risk < 40 else "MEDIUM" if risk < 60 else "HIGH"
+
+        # Whale Activity section — always rendered so the user knows
+        # the detector ran and what it found (or didn't).
+        whale_items = data.get('whale_activity', []) or []
+        if whale_items:
+            whale_rows = ""
+            for w in whale_items[:12]:
+                sym = w.get('symbol', '')
+                kind = w.get('kind', '')
+                detail = w.get('detail', '')
+                badge_bg = "#21262d" if kind == "volume" else "#1f2a3d"
+                whale_rows += (
+                    f'<tr>'
+                    f'<td style="padding: 8px 12px; border-bottom: 1px solid #21262d; '
+                    f'color: #58a6ff; font-weight: bold; font-family: sans-serif; '
+                    f'font-size: 14px; width: 80px;">{sym}</td>'
+                    f'<td style="padding: 8px 12px; border-bottom: 1px solid #21262d; '
+                    f'background-color: {badge_bg}; color: #e6edf3; font-family: sans-serif; '
+                    f'font-size: 13px;">{detail}</td>'
+                    f'</tr>'
+                )
+            whale_body = (f'<table width="100%" cellpadding="0" cellspacing="0" '
+                          f'style="border-collapse: collapse;">{whale_rows}</table>')
+        else:
+            whale_body = ('<div style="padding: 12px; color: #8b949e; '
+                          'font-style: italic; font-size: 13px;">'
+                          'No whale activity detected in the last scan.</div>')
+        whale_section_html = (
+            '<tr><td style="padding-top: 30px;">'
+            '<h3 style="margin: 0 0 15px 0; color: #e6edf3; '
+            'border-bottom: 1px solid #30363d; padding-bottom: 5px;">'
+            '🐳 Whale Activity</h3>'
+            f'{whale_body}'
+            '</td></tr>'
+        )
+
+        # Benchmark cells (SPY & QQQ 7-day change) — falls back gracefully if missing
+        benchmarks = data.get('benchmarks', {}) or {}
+        def _bench_cell(ticker):
+            b = benchmarks.get(ticker)
+            if not b:
+                return ('<td style="color: #8b949e; font-size: 12px;">—</td>',
+                        '<td style="color: #8b949e; font-size: 18px; font-weight: bold;">—</td>')
+            pct = b.get('change_pct', 0)
+            color = "#3fb950" if pct >= 0 else "#f85149"
+            header = f'<td style="color: #8b949e; font-size: 12px;">{ticker} 7D</td>'
+            value = (f'<td style="color: #e6edf3; font-size: 18px; font-weight: bold;">'
+                     f'${b.get("current", 0)} '
+                     f'<span style="color: {color}; font-size: 13px; font-weight: normal;">'
+                     f'{pct:+.2f}%</span></td>')
+            return header, value
+        spy_header, spy_value = _bench_cell('SPY')
+        qqq_header, qqq_value = _bench_cell('QQQ')
 
         html = f"""
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -2035,17 +2166,23 @@ class MarketAgent:
                                             <td style="color: #8b949e; font-size: 12px;">CURRENT</td>
                                             <td style="color: #8b949e; font-size: 12px;">P/L</td>
                                             <td style="color: #8b949e; font-size: 12px;">RISK</td>
+                                            {spy_header}
+                                            {qqq_header}
                                         </tr>
                                         <tr>
                                             <td style="color: #e6edf3; font-size: 18px; font-weight: bold;">${summary.get('total_invested', 0):.2f}</td>
                                             <td style="color: #e6edf3; font-size: 18px; font-weight: bold;">${summary.get('total_current', 0):.2f}</td>
                                             <td style="color: {summary_color}; font-size: 18px; font-weight: bold;">{summary.get('total_gain_loss_pct', 0):+.1f}%</td>
                                             <td style="color: {risk_color}; font-size: 18px; font-weight: bold;">{risk_label}</td>
+                                            {spy_value}
+                                            {qqq_value}
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
-                            
+
+                            {whale_section_html}
+
                             <tr>
                                 <td style="padding-top: 30px;">
                                     <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">💼 Positions (sorted by urgency)</h3>
