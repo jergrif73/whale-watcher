@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19 05:51:47",
+  "generated_at": "2026-04-19 16:24:59",
   "deep_analysis_enabled": false,
   "portfolio": [
     {
@@ -19,7 +19,7 @@
       ],
       "risk_score": 50,
       "whale_intel": "",
-      "holding_days": 113,
+      "holding_days": 114,
       "gain_loss_pct": 11.9,
       "gain_loss_dollars": 11.86,
       "daily_change": 0.4,
@@ -2675,29 +2675,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 75614.3,
+      "price": 75665.68,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 72.58,
+      "rsi": 70.02,
       "signal": "\ud83d\udcca OVERBOUGHT",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -2.0,
-      "weekly_change": 6.87,
-      "vol_ratio": 0.6271961021643874,
+      "daily_change": -0.1,
+      "weekly_change": 1.59,
+      "vol_ratio": 0.6676838965439795,
       "vol_pattern": "ACCUMULATION",
       "support": 65725.26,
       "resistance": 78320.68,
       "price_history": [
-        {
-          "date": "2026-03-20",
-          "close": 70522.59,
-          "volume": 38299078407
-        },
         {
           "date": "2026-03-21",
           "close": 68711.52,
@@ -2839,9 +2834,14 @@
           "volume": 54137194839
         },
         {
+          "date": "2026-04-18",
+          "close": 75726.21,
+          "volume": 26014416776
+        },
+        {
           "date": "2026-04-19",
-          "close": 75614.3,
-          "volume": 25808857088
+          "close": 75665.68,
+          "volume": 26377893888
         }
       ],
       "is_owned": false
@@ -2849,29 +2849,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2334.11,
+      "price": 2322.8,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 65.75,
+      "rsi": 63.02,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -3.6,
-      "weekly_change": 6.47,
-      "vol_ratio": 0.7269308639748456,
+      "daily_change": -1.2,
+      "weekly_change": -2.02,
+      "vol_ratio": 0.7194043861888955,
       "vol_pattern": "NEUTRAL",
-      "support": 1979.08,
+      "support": 2011.8,
       "resistance": 2464.78,
       "price_history": [
-        {
-          "date": "2026-03-20",
-          "close": 2146.5,
-          "volume": 17970488517
-        },
         {
           "date": "2026-03-21",
           "close": 2076.69,
@@ -3013,9 +3008,14 @@
           "volume": 26467618336
         },
         {
+          "date": "2026-04-18",
+          "close": 2351.1,
+          "volume": 14400085617
+        },
+        {
           "date": "2026-04-19",
-          "close": 2334.11,
-          "volume": 14299982848
+          "close": 2322.8,
+          "volume": 13643348992
         }
       ],
       "is_owned": false
@@ -3023,29 +3023,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 85.57,
+      "price": 86.18,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
-      "trend": "DOWN",
-      "rsi": 57.06,
+      "trend": "UP",
+      "rsi": 56.74,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -3.7,
-      "weekly_change": 4.95,
-      "vol_ratio": 0.5481046660204331,
+      "daily_change": -0.0,
+      "weekly_change": -0.55,
+      "vol_ratio": 0.5927451184605255,
       "vol_pattern": "NEUTRAL",
       "support": 76.82,
       "resistance": 90.67,
       "price_history": [
-        {
-          "date": "2026-03-20",
-          "close": 89.85,
-          "volume": 3090719128
-        },
         {
           "date": "2026-03-21",
           "close": 87.47,
@@ -3187,9 +3182,14 @@
           "volume": 6454981141
         },
         {
+          "date": "2026-04-18",
+          "close": 86.2,
+          "volume": 3619028688
+        },
+        {
           "date": "2026-04-19",
-          "close": 85.57,
-          "volume": 3582380032
+          "close": 86.18,
+          "volume": 3811085824
         }
       ],
       "is_owned": false
@@ -3197,29 +3197,24 @@
     {
       "symbol": "FET",
       "yf_symbol": "FET-USD",
-      "price": 0.21,
+      "price": 0.22,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 41.5,
-      "signal": "\ud83d\udcc9 DISTRIBUTION",
-      "color": "orange",
+      "rsi": 42.79,
+      "signal": "\ud83d\udc40 UPTREND DIP",
+      "color": "blue",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -7.5,
-      "weekly_change": -7.03,
-      "vol_ratio": 1.010714105622213,
-      "vol_pattern": "DISTRIBUTION",
+      "daily_change": 0.2,
+      "weekly_change": -9.28,
+      "vol_ratio": 0.9276716772187183,
+      "vol_pattern": "NEUTRAL",
       "support": 0.21,
       "resistance": 0.26,
       "price_history": [
-        {
-          "date": "2026-03-20",
-          "close": 0.23,
-          "volume": 175522951
-        },
         {
           "date": "2026-03-21",
           "close": 0.22,
@@ -3361,9 +3356,14 @@
           "volume": 204797673
         },
         {
+          "date": "2026-04-18",
+          "close": 0.22,
+          "volume": 167250910
+        },
+        {
           "date": "2026-04-19",
-          "close": 0.21,
-          "volume": 164082912
+          "close": 0.22,
+          "volume": 148758000
         }
       ],
       "is_owned": false
@@ -3376,24 +3376,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 55.13,
+      "rsi": 54.61,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -4.6,
-      "weekly_change": 4.55,
-      "vol_ratio": 0.9047546633470789,
+      "daily_change": -0.0,
+      "weekly_change": 0.82,
+      "vol_ratio": 0.9771181926705484,
       "vol_pattern": "ACCUMULATION",
       "support": 0.09,
       "resistance": 0.1,
       "price_history": [
-        {
-          "date": "2026-03-20",
-          "close": 0.09,
-          "volume": 760919548
-        },
         {
           "date": "2026-03-21",
           "close": 0.09,
@@ -3535,9 +3530,14 @@
           "volume": 2698889767
         },
         {
+          "date": "2026-04-18",
+          "close": 0.09,
+          "volume": 1628522617
+        },
+        {
           "date": "2026-04-19",
           "close": 0.09,
-          "volume": 1558316288
+          "volume": 1701931264
         }
       ],
       "is_owned": false
@@ -3873,7 +3873,7 @@
             "Accumulation pattern"
           ],
           "current_price": 0.09,
-          "rsi": 55.13
+          "rsi": 54.61
         }
       ]
     },
@@ -3913,10 +3913,10 @@
     "tax_lots": [
       {
         "ticker": "MARA",
-        "holding_days": 113,
+        "holding_days": 114,
         "status": "SHORT_TERM",
-        "days_to_long_term": 252,
-        "alert": "252 days until long-term eligible",
+        "days_to_long_term": 251,
+        "alert": "251 days until long-term eligible",
         "gain_loss_pct": 11.9,
         "gain_loss_dollars": 11.86
       },
@@ -3965,13 +3965,6 @@
       "alpha": -0.18
     },
     "entry_alerts": [
-      {
-        "ticker": "FET",
-        "type": "NEAR_SUPPORT",
-        "price": 0.21,
-        "support": 0.21,
-        "message": "\ud83d\udee1\ufe0f FET near support $0.21 - potential entry"
-      },
       {
         "ticker": "DOGE",
         "type": "NEAR_SUPPORT",
@@ -4063,13 +4056,6 @@
       }
     ],
     "all_alerts": [
-      {
-        "ticker": "FET",
-        "type": "NEAR_SUPPORT",
-        "price": 0.21,
-        "support": 0.21,
-        "message": "\ud83d\udee1\ufe0f FET near support $0.21 - potential entry"
-      },
       {
         "ticker": "DOGE",
         "type": "NEAR_SUPPORT",
