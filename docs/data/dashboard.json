@@ -1,427 +1,37 @@
 {
-  "generated_at": "2026-04-20 06:07:05",
+  "generated_at": "2026-04-20 16:50:47",
   "deep_analysis_enabled": false,
   "portfolio": [
     {
-      "symbol": "MSFT",
-      "yf_symbol": "MSFT",
-      "price": 422.79,
-      "amount_invested": 25,
-      "current_value": 23.31,
-      "trend": "SIDEWAYS",
-      "rsi": 92.9,
-      "signal": "\ud83d\udc40 WATCH -6.8%",
-      "color": "orange",
-      "action": "MONITOR",
-      "priority": 30,
-      "reasoning": [
-        "Position in warning zone"
-      ],
-      "risk_score": 73,
-      "whale_intel": "",
-      "holding_days": 95,
-      "gain_loss_pct": -6.8,
-      "gain_loss_dollars": -1.69,
-      "daily_change": 0.6,
-      "weekly_change": 13.33,
-      "vol_ratio": 1.53,
-      "vol_pattern": "ACCUMULATION",
-      "peak_since_buy": 482.64,
-      "drawdown_from_peak": -12.4,
-      "support": 356.28,
-      "resistance": 431.58,
-      "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 408.96,
-          "volume": 31123900
-        },
-        {
-          "date": "2026-03-09",
-          "close": 409.41,
-          "volume": 30131900
-        },
-        {
-          "date": "2026-03-10",
-          "close": 405.76,
-          "volume": 31706400
-        },
-        {
-          "date": "2026-03-11",
-          "close": 404.88,
-          "volume": 25512100
-        },
-        {
-          "date": "2026-03-12",
-          "close": 401.86,
-          "volume": 27263900
-        },
-        {
-          "date": "2026-03-13",
-          "close": 395.55,
-          "volume": 26848000
-        },
-        {
-          "date": "2026-03-16",
-          "close": 399.95,
-          "volume": 27733700
-        },
-        {
-          "date": "2026-03-17",
-          "close": 399.41,
-          "volume": 26228300
-        },
-        {
-          "date": "2026-03-18",
-          "close": 391.79,
-          "volume": 25908500
-        },
-        {
-          "date": "2026-03-19",
-          "close": 389.02,
-          "volume": 25138800
-        },
-        {
-          "date": "2026-03-20",
-          "close": 381.87,
-          "volume": 50853200
-        },
-        {
-          "date": "2026-03-23",
-          "close": 383.0,
-          "volume": 29680100
-        },
-        {
-          "date": "2026-03-24",
-          "close": 372.74,
-          "volume": 42733600
-        },
-        {
-          "date": "2026-03-25",
-          "close": 371.04,
-          "volume": 31181200
-        },
-        {
-          "date": "2026-03-26",
-          "close": 365.97,
-          "volume": 36836600
-        },
-        {
-          "date": "2026-03-27",
-          "close": 356.77,
-          "volume": 37883400
-        },
-        {
-          "date": "2026-03-30",
-          "close": 358.96,
-          "volume": 44797000
-        },
-        {
-          "date": "2026-03-31",
-          "close": 370.17,
-          "volume": 45244400
-        },
-        {
-          "date": "2026-04-01",
-          "close": 369.37,
-          "volume": 29417200
-        },
-        {
-          "date": "2026-04-02",
-          "close": 373.46,
-          "volume": 24099100
-        },
-        {
-          "date": "2026-04-06",
-          "close": 372.88,
-          "volume": 16146600
-        },
-        {
-          "date": "2026-04-07",
-          "close": 372.29,
-          "volume": 21443300
-        },
-        {
-          "date": "2026-04-08",
-          "close": 374.33,
-          "volume": 33064800
-        },
-        {
-          "date": "2026-04-09",
-          "close": 373.07,
-          "volume": 30435300
-        },
-        {
-          "date": "2026-04-10",
-          "close": 370.87,
-          "volume": 28111100
-        },
-        {
-          "date": "2026-04-13",
-          "close": 384.37,
-          "volume": 35745800
-        },
-        {
-          "date": "2026-04-14",
-          "close": 393.11,
-          "volume": 37504500
-        },
-        {
-          "date": "2026-04-15",
-          "close": 411.22,
-          "volume": 45063400
-        },
-        {
-          "date": "2026-04-16",
-          "close": 420.26,
-          "volume": 41642400
-        },
-        {
-          "date": "2026-04-17",
-          "close": 422.79,
-          "volume": 47812100
-        }
-      ],
-      "is_owned": true,
-      "first_buy_date": "2026-01-15",
-      "last_buy_date": "2026-01-15",
-      "buy_count": 1,
-      "lots": [
-        {
-          "amount": 25,
-          "date": "2026-01-15"
-        }
-      ],
-      "sparkline_b64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaMAAACMCAYAAADRGMajAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAHnBJREFUeJzt3Xd4VFX+x/H39MykF0hCQiAEQklIIVQpIggoiCgKWFBXUXQV9ycrFgRRURRx17qiori2BUXRRbGxVOm9JhAIEJJAQnqdTKb+/ogEEQIJDLlJ+L6eh2d07rn3foeHZz5zzj33XJW3f7ALIYQQQkFqpQsQQgghJIyEEEIoTsJICCGE4iSMhBBCKE7CSAghhOIkjIQQQihOwkgIIYTiJIyEEEIoTsJICCGE4iSMhBBCKE7CSAghhOIkjIQQQihOwkgIIYTitEoX0NB0Jj88g6PwCu6AZ8tIio5uJ3fvMqXLEkKIK9oVEUZtB04gJPEGvII7YPAOOmObw1rJr1OicTlsClUnhBCi2YdRaNIoYsbMOuO9yqLjlOekEdC+Fxq9EWNAOOa8owpVKIQQolmHkd4rkJgxLwOQvubfZG5cQEXuYRxVZgD6T12BT3gMni3bSRgJIYSCmvUEhpixL2PwDqQ0K5mUxTMozdxbE0QAFb8HkGeLtgpVKIQQAppxGIXED6dV0iicDju7v5h8zmtC5rx0AEwtIhu4OiGEEH/ULMNI5+lPzG2zATiy/F1KM/ecs93pnpGEkRBCKKlZhlGXW2bi4dOSsuyDHPrp9Vrb1fSMgto2TGFCCCHOqdmFUcuYawnvNQaX08GeLx7Daa+qtW1F3hEATEERqNSahipRCCHEnzSrMNIafeh6x2sAHF05j+L0HedtbynJwWGtRK3R4eEf1hAlCiGEOIdmE0YqtZaYsbPw8AulIvcIqUvnXHgnlwtz/jFArhsJIYSSmkUY+UbE0/epXwjvOQaA3V9MxmmrrNO+MolBCCGU16RvetXoTUTf8CSR1zyASq3BWl7IvkVTKTq8uc7HOD29u+3lKVIIIcQFNdkwCuo8kK63zcEUFAHA8a2LSfnmOazl+fU6jvSMhBBCeU0yjLrcMpPIQRMBMBdmsW/hk+SlrLyoY50KI7nxVQghlNPkwsg3Ip7IQRNxOZ2kr/6I1KWzz1jip75O32vUBlRqcDndVKkQQoi6anITGNpd+zAAx7ctJmXxjEsKIqhewdtpt6LRGfDwC3VHiUIIIeqpSYWRMTCC0MQbADiy/D33HNTl/MP07rbuOaYQQoh6aVJh1G7Qg6jUGvJSVlF2PMVtx62QBVOFEEJRTSaMdJ7+hPe5HYDDy+e69dhmmVEnhBCKajJh1Kb/X9AaTJRk7KEgda1bj12Rnw7IMJ0QQiilSYSRWudB24ETADji5l4RnO4ZyTCdEEIoo0mEUXivsRi8gzAXZJK98we3H/+MJ76qVG4/vhBCiPNr/GGkUtNu8EMAHF35AS6nw+2nqCzIwumwo9GbMPgEu/34Qgghzq9Bw6hVj9HEjpuNRm+q8z4hcdfh2bId1ooiMjcuuCx1uZx2KgszAZnEIIQQSmjQMIroexdtBvyF6JFP1XmfdkMeAeDYb59c8g2u53PGUJ0QQogG1aBhdHjZ2wBEDnwAv7bdLtjeP6oX/pFJOGwW0tfMv6y1meVeIyGEUEyDhlFeyiqyNi1CpVYTN/5N1Fr9edu3v+7/ADi++WusZfVbjbu+ZPVuIYRQToNPYEhZPIOq0jy8Q6Npf91jtbbrMuYlWnYZhNNh58iK9y97XfJcIyGEUE6Dh5HNXMy+RVMBiBr6KN5hXc5q02nUdCIH3g/Anv/8nYrcw5e9LukZCSGEchSZ2p2zcynZO5ei1uiIu/MNVGpNzbYOw6cQNXQSAHsXPsnxzYsapKbKggxcTgdaDy/03kENck4hhBDVFLvPKHnRVGzmYvzaxBM5+K8AtBsyiegRU6q3f/MsGes+a7B6nHYrlYXHAekdCSFEQ1MsjKpK80hZ/BwA0SOm0OnmGXS+aToAB5bMIn3Vhw1ekzz1VQghlKHoCgxZm74iN2UlGp0HUb8/NO/QT69zeNk7itRjlgVThRBCEYovB7Rv4ZPYqyqA6gfmHfxxjmK1SM9ICCGUoVW6gMrCLDb8YwSmFpGc3P2zorXIc42EEEIZiocRQNmJA5SdOKB0GTVPfJUwEkKIhqX4MF1jYs4/BoDO5IvO01/haoQQ4sohYfQHTpuFyqJT07vbKluMEEJcQSSM/kQWTBVCiIYnYfQnsiyQEEI0PAmjP6mQBVOFEKLBSRj9yenp3e0UrkQIIa4cEkZ/cmqYzjcinrjxb+IZ3F7hioQQovlTefsHu5QuolFRqen+4CcEdx0KgMvpJGf3T6T9+jalmXsULk4IIZonCaNa+LVNJGro3wiJv77mvbz9q0n94VVKju1UsDIhhGh+JIwuwCu0E1FDH6FV0s2oNVocNgtb37uLgtS1SpcmhBDNhoRRHRkDI4gd9wotYwbjsJrZMnc8hYc2KF2WEEI0CzKBoY4qCzLYPu9ecvctR6M30eOvn+Mf1VPpsoQQolmQMKoHp93K9g8nkJeyCq3Bk54PL8AvMknpsoQQosmTMKonp72KbfPuJT91LVoPL3o+shDfNolKlyWEEE2ahNFFcNosbHv/HgoObURn9KHXpIX4tO6qdFlCCHHpVGqCOg0gdtxsgv8wm/iyn1YmMFw8jcGTno8sJCCqJ5WFWaye2Q+nzaJ0WUIIUW+eLaMI7z2WsJ5jMPq3AqDg0EY2vXlzg5xfwugSaT286D9tNaaAcA58/zKHf31b6ZKEEKLOWvUYTdsB9+LfrkfNe9aKIk5s+y9Hls+lsjCzQeqQMHKDVj1Gk/iXudgt5ax6vjfWsnylSxJCiAtq3ed24sa/AYDTYScvZRVZm78id+8ynHZrg9YiYeQOKhV9n/gZvzYJHFv7Kfu+fErpioQQ4ry8W3Wi7xM/o9EbObr6Iw7/+hZVpXmK1SMTGNzB5WL/t88DENF3PF4h0crWI4QQ56ExmOg2YR4avZHc5JWkfPOsokEEEkZuU5i2iZxdP6FSa+h007NKlyOEELWKHfcqXiHRWIqz2f3Zo+BSfoBMwsiNDix5CafDRnDXIQR27Kd0OUIIcZbw3rcR3msMLqeDnf/+K9byAqVLAiSM3Koi9wjHfvsEgM6jnwfVuf96vUI7ojF4NlhdQggB1d89seNeBiB16asUpm1SuKLTtEoX0Nwc+vkNwnuNxTc8lvBeY8na9CUAaq2BsB6jaXvNRHzCOpObvIKtc++86PN4+LUidtwrqLV67FUV2KsqcFjKsVdVYK0oJGvTImwVhe76WEKIJk6jN9Ftwodo9CbyUlZxeNk7Spd0BgkjN7NVFJL2y5t0Hv0cHUc+RcGhDbTufRsR/e/G4B1U065lzGAMviFUleRc1Hm63PICwXHDat0e3mss618bgdNWeVHHF0I0LzFjX8Y7NBpLcQ67Pm0c14n+SKZ2XwZqrZ6rn12HKSjijPfNhVkcWz2f0KRR+LVJIHnRNNLXzK/38f3adqPvEz/hcjpJ+eZZXE4HGg8vtAYTWoMXrbrfjMGnBZkbF7Lni8nu+ljiArxCOxJ/11t4+LeiKG0zBQfXk39wHRUn05QuTVzhfFrH0f/pZbicDja9dSuFaRuVLuks0jO6DJx2KweWvES3CfMAKDqylSMr53Fy90+4nA5cTgd+bRII6XbDRYVRp5urZ+tlbf7qnPuf3PsrvR5dROs+t1OYtrlmqFBcPsFx15Fwz7/QengBENptJKHdRgJgKTlJwcH1WEpy0Bl90Zl80Zn8ql+NvpSeSOHg0jmUHU9R8iOIZqx173EAZO/4oVEGEUjP6LIK6jwQW0UxJRm7znjfwz+MwS9tx+V0smJaAlWluXU+ZsvYIfT46+c4rJWsfuEqLMXZ52zX/rrH6DjyaRzWSta/NpyyE/sv5aOI2qhUdLj+70SPeAKA/NR1pP36Jv6RPQiM7ot/u+5odB4XPIzL6eT4tsUc/GFOgy2/Iq4Maq2ewbN2ofcKYMu7t5OXskrpks5JwkghV035Ef/IJPZ9NZVjv/27Tvuo1Br6P7MS79COpC17h9Qls87TWEWPv/6HljGDKD+Zxvo512G3lLupegHVC+Um3P0OIQnDATi66kP2f/sCLqe9po1aa8AvMonADn3QenhjMxdjM5fUvDptVbTuN56w7tWLUTpsVRxb+wlpv7wlE1CEW4TEDydp4sdYirNZMT0JXE6lSzonCSOFRA5+iC6jn6fg4Ho2vXVLnfY5tY6UtbyQVc/3xl5Zet72Os8A+k/9H0b/ME5sX8LOjx90Q+UCqq8PdbvvA7xbdcJhq2Lfl09d0nCoT+s4Ot80naBOAwCwVZaSs+tHKvKOUpmfgbkgA3N+BtZyWfdQ1E/3Bz8lOG7YhX/AKkzCSCHGgNYMenErLqeD5c/EX3BxVbXOyDXPb8DDL5SUb2ZwdNW8Op3HLzKJPpP/i1qjY9+iZzi25mN3lH/lUKnxCumAT3gMPuGx+IRVvxq8AwGwFOew/cP7KE7f4ZbTBXW6mk43Tce3ludj2asqKDi4nqMrP6Dg4Hq3nFM0X3rvIAbP2oVao2XNzP6UnzykdEm1kgkMCqkszKQ4fSd+bRMJiR9OxrrPzts+ctADePiFYs7P4NjaT+p8nuKj29n/3Uxibn2RLqOfx2GtJHv7EhxW86V9gCuAV2hHku7/8JxrDToddgpS17L7i8eoKjnptnPmH1jDuld/o2XMtfhGxGEMjMAUGIEpKAIP31C0Bk+Cuw4luOtQSjL3cnTlB5zYvgSXw+a2GkTzEdZ9NGqNlqL0HY06iEB6Ropqd+0jdL75WfJT17L57TG1ttN5BnDNC5vQGX3Y+cnDnNj6bb3P1e3+jwhNvAEAu6Wc7J0/kLXpKwoPb2509xu4g1prQKXWXHTohiTeQPxdb6E1eGKvqqA0ax+lmfsozdpHSVYy5dmpOO1Vbq76/NRaPZ7B7YnoO57w3rehNZgAsBRnk756PsfWfordUtagNYnGrd/U5fiGx7L3y6fIWPup0uWcl4SRgoyBEQyauaV6qG5qXK1rRHW5ZSaRgyZSkrGHdXOGXVR4qHUetBv0IOF9bsOzRWTN++b8YxzfspjynINYKwqxVhRhLS/EWl7YNG6YVanwCY/FOyQar9COeIVG4x0SjSmoDfYqM5vevJnSrH31OJ6ajiOfpv2wvwGQf+A3dnz8UKObTKAz+RHR7y7aXj0BD78QACry0tn8zlgqCzIUrk40Bj7hMfSfugKHrYoVz8RjMxcrXdJ5SRgprN9Tv+IbEc+eBVPIXP/FWds9g9sz4JmVqLV6Nr09hoLUtZd8Tv+onoT3GkdotxvRGb1rbWczl3B01Yek/fpWox0GSnrwE0Lirqt1e0XeUdbNHlqnHoPO5Efive/Ross1ABxePpfUJbNwOR1uq9fdVBodrZJGET3iSUxBEViKc9j8r3GUZ6fWuo/O5EdE3/GodR7VP0DKCrBWFGAtK6CqLE8eDtlMnPoRe2LH9+ycP1Hpci5IwkhhUUMm0emm6eTtX82Wf912xjaDT0uuenwppqAIclNWsvXdO9x6brXOSEjC9bSMHYLBuwV6rwD0ngHovQJQa/U17UqPp7D788cozdxT67G8QjsSFN0Pl9OBw2bBYavEabPgsFVht5RRnnPogrP/6iu02yi6TfgAp91K0dHtlGenUpZzkPLsVCzF2fSc9BWmwNZk7/iBHfMfOO+xvMO60H3ivzEFtcFhNbP7i8lkb1/i1novJ4NPS3pO+gqfsM5YywvZMvdOSo7tPKtdSMIIYsa9godPy1qPlblhAXsWPN4sh2+vFCqNjsGzdmHwDmTr3PHkJi9XuqQLkjBSmKlFW655fhNOh53lU+NqhoO0Ht70mfxffMJjqMg9woZ/3tig03o1Bk+CY4fQZcwsDN6BOB12jix/l0M/vV5zrUStNRCSOII2/e4moH3vCx7TXJBJ2fEUSo8nU3p8P8VHt2MpPnFR9al1RgbOWIsxIJzUpXNI+/n1s9r4tU2kz+QlqLX6884kbBk7hMT73kdr8KQiL53t8+5tkjcJ60x+9Hj4P/hHJmG3lLPtg3tqZtwZfFoQM/aVmuuGZdkHKUzbiN4rsPoHiHf1q8GnBQCH//cuB/77omKfRVya4LhhdH/wUyyluaycltioe/enSBg1Av2e/h++rbuy54vJZG5ciFproOcjCwmMvgpLyUk2/HOkYtcB9F6BxIyZRavuNwHVX2Kp388iIKo34b3HoveqnuLsdNjJT/0NR5UZjc4Dtc7j91cDeq8AjP5hZx3bYati2/t3k39gTb3r6jDiCaKHP465IJM1L/bHabOcs13bax4g5tYXcdiq2Pj6jZRk7D5z+8AJdLllJiq1hrz9a9j58YONfmz9fDQGE90nfkJQpwE4bBZ2fvwQWqMPXW55Ab2nP06HjcPL3iHtlzdx2q1n7R/W81YS7vkXAMlfTyN9df2XqxLKS3pgPiEJIzi8fC4HvpupdDl1ImHUCEQN+xudbnymeihu7niS7v+QkIQR2CpLf78An6x0iQTHX0/sba+eNbxTWZhFxvr/kLlxwXmnOGuNvviEdcYnLAbvsM74t+uJd2g0ZScO8NvLg+p1V7gxoDVXP/sbGr2R7R/dT87Opedtn/TAx4QkDMecf4y1s4dUDxeq1HS5dSaRA+8HIGPd5+z7auoZqyc0VWqtnsR73yMkYcQZ7xcf282e/0y+4Bp4UUMfpdOoabicTnbMf4CcXT9eznKFm+k8A7j25V2otXrWvDSQ8uwDSpdUJxJGjYBny3YMfG4DToeNE9v/S3jPMThsVWx593YKD21QurwaOpMfXW6ZSaseN5OXsoqMdZ+Tm7ziopYX0Rp9GTRzMzqTH7s+ncTxLd/Ued9T09TzU9ex+e1b63Su/k//D1NQBDm7fmTXZ38j8d73CO46FID9383kyPK59f4MjZlKraHrHf+kdZ/bcNgsHFz6GkdXvl/n4ZrYcbNpM+AvOGwWNr8zjqLDmy9zxcJd2l49gZixsyg+tpv1c2p/zExjI2HUSPSfugKf8BiAxv+LVKV2y/pW7YZMovNN0zHnZ7DmxX7nHDb6s8AOfen92GJcTgdrXxlM2Ym6/erzjUjgqse/R63VYyk5iYdvMA5rJbs+e/SCPasmS6WiZZfBlOUcrP8wr0pN0v0fEZIwHGtFERtfH0V5zsHLU6dwq1MzdC/2ETVKkceONxLZf/hC3PfV0403iMBtCy2mr56PpTgHU1AEEX3vumB7lVpDlzEvAXBs7ad1DiKAkoxd7P/2BQA8fIOpKs1j01ujm28QAbhc5CYvv7jrjS4nOz95mKIjW9F7+tPzkQUYAyMuvJ9QVHjvcfhGxOO0Wzm+7Tuly6kXCaNGImP95xQcXE/y19MvuDRQc+G0VXLo91lw7a+fjOb3FQVqE9Hv7pqpyweXzqn3+dLXzOfw8rnkpqxk/T9GUJx+9tRncZrTZmHr+3dTfjINY0A41zy/kaSJ/yao80BQqZQuT/yJT3gMseNmA3Do5zca3Y3aFyLDdEJRKrWWq2esxbNFJKk/zCbtlzfP2U7n6c/A5zag9/RvEkubNCfGgNbEjX+DoI79at6ryDtKxrrPydz4ZZP70muOtEYf+j21DM8Wbcndt5yt79/V5O4TkzASigtNGkW3+z7AVlnKqud6n/XlpvXwJv7utwmJv57SrGTWzh7SaJ/J0px5BXcgov/dhPcai87kC4DDZmH/dzNlNXglqVR0n/gJwXHDMOdnsO7VoU3y9gQZphOKy97xPSWZe9EZfWg/9NEztgV1HsiA6asJib8el9NB8tfTJIgUUn7yECnfPMuKaYns+WIyxcd2o9F5EDv2ZVpfdafS5V2xooZMIjhuGA6bhe0f3d8kgwgkjERj4HKR+v0rALS5+l48/ELRenjT9Y5/0mvSlxj9w6jIPcLGN2+mMG2TwsUKh9VM5saFrJ8zjMPLqm+Q7Xr7a4QmjVK4sitPYMd+dBz5NADJi54575JdjZ08z0g0CnkpKyk4tJHADn2IG/8mXsFRGAPCcTmdpK/+iAPfv9I0VhG/whxY8hJaozdt+t9Dwj3/wlFlJnff/5Qu64rg4RdK4r3vo1JryNy4kMwNC5Qu6ZLINSPRaPhHdueqKaenWlfkpbPni8ekN9TYqVTE3/327zdrW9j63ngKUtcpXVXzplLRZ/ISAqJ6UpK1jw3/uKHWJbGaChmmE41G0dFtNSsxpK+ez9qXB0kQNQUuF3s+f4ycXT+h0XnQ/cFP8YtMqt6mUmEMjKBl7BDaDZlEl1tflPuV3CA0cSQBUT2xVZax48MJTT6IQHpGorFRqdF6eLn9cRPi8lNr9XR/6DNadB6IzVxCRV46XiEdap5Ie0pJxm7Wvza8Sawk3SipVAyYthrv0I61rljfFEnPSDQuLqcEURPltFvZPu8+Cg9vQWfyxa9NPFqDCYetitKsZI5v/RZrRRG+EfG0u/ZhpcttskITb8Q7tCM2czHpqz9Suhy3kQkMQgi3cVjNbHn3dsJ63oq1NI+y7FTM+ek1vaCwnmNIuOcdOgyfwsk9v8p6d/WlUtNh+N8BOLJyXrP64SY9IyGEWzmqKshY+yk5u3+iIvfwGcNxx7d8Te6+5Wh0BuLGv1G96K6os9DEkad7Ras+VLoct5J/CUKIBrV34RPYKkvxj0wictBEpctpOv7YK1rxAXZLmcIFuZeEkRCiQVmKs9n/7fMAdLzhKTxbtlO2oCYitNvIZnmt6BQJIyFEg8vcsIC8/WvQ6I3E3fm6rAJ+ISo1Ha5/HGievSKQCQxCCIXsXTCFAdNXE9C+N20H3NfoHwSn1hnxbNEGa0UR1rKCej2iXqXW4N+uB8Fdh9EydjA6kz9lJ/ZTmpVMadY+So8nU56TVusxq3tF0VgripplrwgkjIQQCqkszOTAdy8Se9tsOo6ahs1cTP7BdVSVnFS6tLO06jGazjc/h4dvcM171aGUT1V5Ptaygur/Lsv//TWPqrJ8PHxDCO46hBYxg9F7+p9xTINPC4I6Daj5f4etipKMXeTs/pmcnT9SWZhZvUGlJnp4da/o6Mrm2SsCuelVCKEklYref1tMYPRVNW+Vn0yj4OB6Cg5toPDQBqpK8xQrzyu0I7FjX6mpz15VgVprQK2p/+94a3khuckrOLl3GZUFmfiEdcYnPBbv8C74hMWiM3qf0b4kYzfZO5fictjpPPo5rBVFrJrRA7ul3C2frbGRMBJCKErn6U/UkEkEdeyHT3hXVOrTl7JdTidHVrxH6vev1GtYrC60Rh/82iRgKcnFUpR1xpe8xmCiw/ApRF7zAGqNDofVzKFf3uToivdxOmzoTH4YvILQe1f/Mfi0QO8ViME7CMOp97xb4LBVkZeykpN7l1F8dFvtq06oVJgCI2jRZRAhCSMI7NAHlVpzRpPU718h7de33Pp30JhIGAkhGg2t0YeAqF4ERvclMLovvq27AlB0ZCs7Pn4IS9Fx95xIpeaqx3/A/9QaeoDNXEJlYRaVRcfxCY/F6N8KgJzdP5PyzYzTw2YNQO8VRHDcMEISRxDUsT+WkpOsnTWw2faKQMJICNGIhcQPJ278G+hMvljLC9n9+f+55REVrfuOJ+6Of+CwWXBUmdF7BZzVxpx/jORF08hNXn7J57sUGoMnLqez2T9CRcJICNGoGQMj6DZhHn5tEgA4vHwuqUtevuhhO51nAANnrEPvFUDy19NJX/0RGoMJo18YxsBwPPzDcDkdnNj2XbNYDbupkDASQjR6aq2eTqOm16zYUHRkK9s+uBdreX69j9X1jn8Q0Xc8pVnJrHt1qKwe3kjITa9CiEbPabeSsngG2+bdi81cgn+7HiT85d163yzr17YbEX3HA7Bv0VQJokZEwkgI0WSc3P0zG16/EXuVmRadryZqyKS676xSEzvuFQAyN31F0eEtl6lKcTEkjIQQTUp5dirJi54BIPqGp/CP7F6n/dr0uxvfiHhs5hIOfPfi5SxRXAQJIyFEk5O16UuOb12MWqMl4b730Rp9z9te7xVExxufBiD1h9kXda1JXF4SRkKIJmnvwiepyD2CKSCcuDv/ed62nW6ajs7kR0nGHo6t/bSBKhT1IWEkhGiSHFUV7Pj4IZx2K6GJNxDR/56zG6lUBMcNo3Wf2wDY99XT4HI2cKWiLmRqtxCiSWt7zQPE3PoiDpuF9XOupyw7lYCoXoQkjiAkfnjNSgoZ679g74IpClcraiNhJIRo8ro/9BnBXYdiKc5GpdZi8GlRs81uKSd714+kfD292a543RxIGAkhmjydZwADnlmBh18oUP14h5N7fiVn14/kH/gNp71K4QrFhUgYCSGaBa/QToR1v4mCQxsoOLjB7at8i8tLwkgIIYTiZDadEEIIxUkYCSGEUJyEkRBCCMVJGAkhhFCchJEQQgjFSRgJIYRQnISREEIIxUkYCSGEUJyEkRBCCMVJGAkhhFCchJEQQgjFSRgJIYRQnISREEIIxf0/V/UeE4rcHSsAAAAASUVORK5CYII="
-    },
-    {
-      "symbol": "COIN",
-      "yf_symbol": "COIN",
-      "price": 206.33,
-      "amount_invested": 25,
-      "current_value": 22.65,
-      "trend": "SIDEWAYS",
-      "rsi": 83.8,
-      "signal": "\ud83e\udde0 THESIS -9.4%",
-      "color": "purple",
-      "action": "HOLD",
-      "priority": 25,
-      "reasoning": [
-        "Stop-loss signal suppressed \u2014 active thesis: COIN's revenue scales with BTC trading volume, and BTC is in the accumulation ph",
-        "See 'Active Theses' section for invalidation criteria"
-      ],
-      "risk_score": 73,
-      "whale_intel": "",
-      "holding_days": 105,
-      "gain_loss_pct": -9.4,
-      "gain_loss_dollars": -2.35,
-      "daily_change": 3.3,
-      "weekly_change": 22.07,
-      "vol_ratio": 1.67,
-      "vol_pattern": "ACCUMULATION",
-      "peak_since_buy": 234.9,
-      "drawdown_from_peak": -12.2,
-      "support": 158.46,
-      "resistance": 216.05,
-      "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 197.22,
-          "volume": 11504900
-        },
-        {
-          "date": "2026-03-09",
-          "close": 199.79,
-          "volume": 12064600
-        },
-        {
-          "date": "2026-03-10",
-          "close": 196.52,
-          "volume": 10846100
-        },
-        {
-          "date": "2026-03-11",
-          "close": 198.63,
-          "volume": 9531700
-        },
-        {
-          "date": "2026-03-12",
-          "close": 193.23,
-          "volume": 7967100
-        },
-        {
-          "date": "2026-03-13",
-          "close": 195.53,
-          "volume": 12137100
-        },
-        {
-          "date": "2026-03-16",
-          "close": 203.32,
-          "volume": 13054000
-        },
-        {
-          "date": "2026-03-17",
-          "close": 210.23,
-          "volume": 11948000
-        },
-        {
-          "date": "2026-03-18",
-          "close": 202.29,
-          "volume": 12602200
-        },
-        {
-          "date": "2026-03-19",
-          "close": 202.91,
-          "volume": 9273000
-        },
-        {
-          "date": "2026-03-20",
-          "close": 197.5,
-          "volume": 13305100
-        },
-        {
-          "date": "2026-03-23",
-          "close": 200.62,
-          "volume": 12466500
-        },
-        {
-          "date": "2026-03-24",
-          "close": 181.04,
-          "volume": 20833000
-        },
-        {
-          "date": "2026-03-25",
-          "close": 181.1,
-          "volume": 10432500
-        },
-        {
-          "date": "2026-03-26",
-          "close": 173.38,
-          "volume": 9402600
-        },
-        {
-          "date": "2026-03-27",
-          "close": 161.14,
-          "volume": 12289900
-        },
-        {
-          "date": "2026-03-30",
-          "close": 160.79,
-          "volume": 11775200
-        },
-        {
-          "date": "2026-03-31",
-          "close": 174.61,
-          "volume": 12665100
-        },
-        {
-          "date": "2026-04-01",
-          "close": 172.99,
-          "volume": 8828600
-        },
-        {
-          "date": "2026-04-02",
-          "close": 171.46,
-          "volume": 8869300
-        },
-        {
-          "date": "2026-04-06",
-          "close": 174.79,
-          "volume": 7125200
-        },
-        {
-          "date": "2026-04-07",
-          "close": 175.18,
-          "volume": 7653100
-        },
-        {
-          "date": "2026-04-08",
-          "close": 175.09,
-          "volume": 9802400
-        },
-        {
-          "date": "2026-04-09",
-          "close": 169.02,
-          "volume": 10754900
-        },
-        {
-          "date": "2026-04-10",
-          "close": 167.85,
-          "volume": 7922400
-        },
-        {
-          "date": "2026-04-13",
-          "close": 174.53,
-          "volume": 7481100
-        },
-        {
-          "date": "2026-04-14",
-          "close": 184.41,
-          "volume": 10884800
-        },
-        {
-          "date": "2026-04-15",
-          "close": 195.9,
-          "volume": 11817400
-        },
-        {
-          "date": "2026-04-16",
-          "close": 199.83,
-          "volume": 11235800
-        },
-        {
-          "date": "2026-04-17",
-          "close": 206.33,
-          "volume": 15631400
-        }
-      ],
-      "is_owned": true,
-      "first_buy_date": "2026-01-05",
-      "last_buy_date": "2026-01-05",
-      "buy_count": 1,
-      "lots": [
-        {
-          "amount": 25,
-          "date": "2026-01-05"
-        }
-      ],
-      "sparkline_b64": "data:image/png;base64,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"
-    },
-    {
       "symbol": "MARA",
       "yf_symbol": "MARA",
-      "price": 11.6,
+      "price": 11.25,
       "amount_invested": 100,
-      "current_value": 111.86,
+      "current_value": 108.48,
       "trend": "UP",
-      "rsi": 89.3,
-      "signal": "\ud83d\udc8e HOLD +11.9%",
-      "color": "blue",
-      "action": "HOLD",
-      "priority": 10,
+      "rsi": 86.8,
+      "signal": "\ud83d\udcca DISTRIBUTION +8.5%",
+      "color": "orange",
+      "action": "WATCH_CLOSELY",
+      "priority": 40,
       "reasoning": [
-        "Position profitable",
-        "Trend supportive"
+        "Volume pattern suggests selling pressure",
+        "Watch for breakdown"
       ],
-      "risk_score": 50,
+      "risk_score": 67,
       "whale_intel": "",
-      "holding_days": 114,
-      "gain_loss_pct": 11.9,
-      "gain_loss_dollars": 11.86,
-      "daily_change": 0.4,
-      "weekly_change": 19.96,
-      "vol_ratio": 1.14,
-      "vol_pattern": "NEUTRAL",
+      "holding_days": 115,
+      "gain_loss_pct": 8.5,
+      "gain_loss_dollars": 8.48,
+      "daily_change": -3.0,
+      "weekly_change": 17.91,
+      "vol_ratio": 0.53,
+      "vol_pattern": "DISTRIBUTION",
       "peak_since_buy": 12.12,
-      "drawdown_from_peak": -4.3,
+      "drawdown_from_peak": -7.2,
       "support": 7.63,
       "resistance": 12.12,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 8.01,
-          "volume": 36530700
-        },
         {
           "date": "2026-03-09",
           "close": 8.66,
@@ -566,6 +176,11 @@
           "date": "2026-04-17",
           "close": 11.6,
           "volume": 52216200
+        },
+        {
+          "date": "2026-04-20",
+          "close": 11.25,
+          "volume": 24605122
         }
       ],
       "is_owned": true,
@@ -582,36 +197,416 @@
           "date": "2026-01-19"
         }
       ],
-      "sparkline_b64": "data:image/png;base64,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"
+      "sparkline_b64": "data:image/png;base64,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"
+    },
+    {
+      "symbol": "MSFT",
+      "yf_symbol": "MSFT",
+      "price": 419.1,
+      "amount_invested": 25,
+      "current_value": 23.1,
+      "trend": "SIDEWAYS",
+      "rsi": 88.4,
+      "signal": "\ud83d\udc40 WATCH -7.6%",
+      "color": "orange",
+      "action": "MONITOR",
+      "priority": 30,
+      "reasoning": [
+        "Position in warning zone"
+      ],
+      "risk_score": 73,
+      "whale_intel": "",
+      "holding_days": 95,
+      "gain_loss_pct": -7.6,
+      "gain_loss_dollars": -1.9,
+      "daily_change": -0.9,
+      "weekly_change": 13.0,
+      "vol_ratio": 0.4,
+      "vol_pattern": "ACCUMULATION",
+      "peak_since_buy": 482.64,
+      "drawdown_from_peak": -13.2,
+      "support": 356.28,
+      "resistance": 431.58,
+      "price_history": [
+        {
+          "date": "2026-03-09",
+          "close": 409.41,
+          "volume": 30131900
+        },
+        {
+          "date": "2026-03-10",
+          "close": 405.76,
+          "volume": 31706400
+        },
+        {
+          "date": "2026-03-11",
+          "close": 404.88,
+          "volume": 25512100
+        },
+        {
+          "date": "2026-03-12",
+          "close": 401.86,
+          "volume": 27263900
+        },
+        {
+          "date": "2026-03-13",
+          "close": 395.55,
+          "volume": 26848000
+        },
+        {
+          "date": "2026-03-16",
+          "close": 399.95,
+          "volume": 27733700
+        },
+        {
+          "date": "2026-03-17",
+          "close": 399.41,
+          "volume": 26228300
+        },
+        {
+          "date": "2026-03-18",
+          "close": 391.79,
+          "volume": 25908500
+        },
+        {
+          "date": "2026-03-19",
+          "close": 389.02,
+          "volume": 25138800
+        },
+        {
+          "date": "2026-03-20",
+          "close": 381.87,
+          "volume": 50853200
+        },
+        {
+          "date": "2026-03-23",
+          "close": 383.0,
+          "volume": 29680100
+        },
+        {
+          "date": "2026-03-24",
+          "close": 372.74,
+          "volume": 42733600
+        },
+        {
+          "date": "2026-03-25",
+          "close": 371.04,
+          "volume": 31181200
+        },
+        {
+          "date": "2026-03-26",
+          "close": 365.97,
+          "volume": 36836600
+        },
+        {
+          "date": "2026-03-27",
+          "close": 356.77,
+          "volume": 37883400
+        },
+        {
+          "date": "2026-03-30",
+          "close": 358.96,
+          "volume": 44797000
+        },
+        {
+          "date": "2026-03-31",
+          "close": 370.17,
+          "volume": 45244400
+        },
+        {
+          "date": "2026-04-01",
+          "close": 369.37,
+          "volume": 29417200
+        },
+        {
+          "date": "2026-04-02",
+          "close": 373.46,
+          "volume": 24099100
+        },
+        {
+          "date": "2026-04-06",
+          "close": 372.88,
+          "volume": 16146600
+        },
+        {
+          "date": "2026-04-07",
+          "close": 372.29,
+          "volume": 21443300
+        },
+        {
+          "date": "2026-04-08",
+          "close": 374.33,
+          "volume": 33064800
+        },
+        {
+          "date": "2026-04-09",
+          "close": 373.07,
+          "volume": 30435300
+        },
+        {
+          "date": "2026-04-10",
+          "close": 370.87,
+          "volume": 28111100
+        },
+        {
+          "date": "2026-04-13",
+          "close": 384.37,
+          "volume": 35745800
+        },
+        {
+          "date": "2026-04-14",
+          "close": 393.11,
+          "volume": 37504500
+        },
+        {
+          "date": "2026-04-15",
+          "close": 411.22,
+          "volume": 45063400
+        },
+        {
+          "date": "2026-04-16",
+          "close": 420.26,
+          "volume": 41642400
+        },
+        {
+          "date": "2026-04-17",
+          "close": 422.79,
+          "volume": 47812100
+        },
+        {
+          "date": "2026-04-20",
+          "close": 419.1,
+          "volume": 13590748
+        }
+      ],
+      "is_owned": true,
+      "first_buy_date": "2026-01-15",
+      "last_buy_date": "2026-01-15",
+      "buy_count": 1,
+      "lots": [
+        {
+          "amount": 25,
+          "date": "2026-01-15"
+        }
+      ],
+      "sparkline_b64": "data:image/png;base64,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"
+    },
+    {
+      "symbol": "COIN",
+      "yf_symbol": "COIN",
+      "price": 205.82,
+      "amount_invested": 25,
+      "current_value": 22.59,
+      "trend": "SIDEWAYS",
+      "rsi": 83.6,
+      "signal": "\ud83e\udde0 THESIS -9.6%",
+      "color": "purple",
+      "action": "HOLD",
+      "priority": 25,
+      "reasoning": [
+        "Stop-loss signal suppressed \u2014 active thesis: COIN's revenue scales with BTC trading volume, and BTC is in the accumulation ph",
+        "See 'Active Theses' section for invalidation criteria"
+      ],
+      "risk_score": 73,
+      "whale_intel": "",
+      "holding_days": 105,
+      "gain_loss_pct": -9.6,
+      "gain_loss_dollars": -2.41,
+      "daily_change": -0.2,
+      "weekly_change": 22.62,
+      "vol_ratio": 0.53,
+      "vol_pattern": "ACCUMULATION",
+      "peak_since_buy": 234.9,
+      "drawdown_from_peak": -12.4,
+      "support": 158.46,
+      "resistance": 216.05,
+      "price_history": [
+        {
+          "date": "2026-03-09",
+          "close": 199.79,
+          "volume": 12064600
+        },
+        {
+          "date": "2026-03-10",
+          "close": 196.52,
+          "volume": 10846100
+        },
+        {
+          "date": "2026-03-11",
+          "close": 198.63,
+          "volume": 9531700
+        },
+        {
+          "date": "2026-03-12",
+          "close": 193.23,
+          "volume": 7967100
+        },
+        {
+          "date": "2026-03-13",
+          "close": 195.53,
+          "volume": 12137100
+        },
+        {
+          "date": "2026-03-16",
+          "close": 203.32,
+          "volume": 13054000
+        },
+        {
+          "date": "2026-03-17",
+          "close": 210.23,
+          "volume": 11948000
+        },
+        {
+          "date": "2026-03-18",
+          "close": 202.29,
+          "volume": 12602200
+        },
+        {
+          "date": "2026-03-19",
+          "close": 202.91,
+          "volume": 9273000
+        },
+        {
+          "date": "2026-03-20",
+          "close": 197.5,
+          "volume": 13305100
+        },
+        {
+          "date": "2026-03-23",
+          "close": 200.62,
+          "volume": 12466500
+        },
+        {
+          "date": "2026-03-24",
+          "close": 181.04,
+          "volume": 20833000
+        },
+        {
+          "date": "2026-03-25",
+          "close": 181.1,
+          "volume": 10432500
+        },
+        {
+          "date": "2026-03-26",
+          "close": 173.38,
+          "volume": 9402600
+        },
+        {
+          "date": "2026-03-27",
+          "close": 161.14,
+          "volume": 12289900
+        },
+        {
+          "date": "2026-03-30",
+          "close": 160.79,
+          "volume": 11775200
+        },
+        {
+          "date": "2026-03-31",
+          "close": 174.61,
+          "volume": 12665100
+        },
+        {
+          "date": "2026-04-01",
+          "close": 172.99,
+          "volume": 8828600
+        },
+        {
+          "date": "2026-04-02",
+          "close": 171.46,
+          "volume": 8869300
+        },
+        {
+          "date": "2026-04-06",
+          "close": 174.79,
+          "volume": 7125200
+        },
+        {
+          "date": "2026-04-07",
+          "close": 175.18,
+          "volume": 7653100
+        },
+        {
+          "date": "2026-04-08",
+          "close": 175.09,
+          "volume": 9802400
+        },
+        {
+          "date": "2026-04-09",
+          "close": 169.02,
+          "volume": 10754900
+        },
+        {
+          "date": "2026-04-10",
+          "close": 167.85,
+          "volume": 7922400
+        },
+        {
+          "date": "2026-04-13",
+          "close": 174.53,
+          "volume": 7481100
+        },
+        {
+          "date": "2026-04-14",
+          "close": 184.41,
+          "volume": 10884800
+        },
+        {
+          "date": "2026-04-15",
+          "close": 195.9,
+          "volume": 11817400
+        },
+        {
+          "date": "2026-04-16",
+          "close": 199.83,
+          "volume": 11235800
+        },
+        {
+          "date": "2026-04-17",
+          "close": 206.33,
+          "volume": 15631400
+        },
+        {
+          "date": "2026-04-20",
+          "close": 205.82,
+          "volume": 5352017
+        }
+      ],
+      "is_owned": true,
+      "first_buy_date": "2026-01-05",
+      "last_buy_date": "2026-01-05",
+      "buy_count": 1,
+      "lots": [
+        {
+          "amount": 25,
+          "date": "2026-01-05"
+        }
+      ],
+      "sparkline_b64": "data:image/png;base64,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"
     }
   ],
   "watchlist": [
     {
       "symbol": "MSTR",
       "yf_symbol": "MSTR",
-      "price": 166.52,
+      "price": 165.28,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 79.78,
-      "signal": "\ud83d\udcc8 BIG MOVE (11.8%)",
-      "color": "purple",
+      "rsi": 83.91,
+      "signal": "\u26a0\ufe0f AVOID",
+      "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 11.8,
-      "weekly_change": 29.23,
-      "vol_ratio": 3.249557312080149,
+      "daily_change": -0.7,
+      "weekly_change": 28.48,
+      "vol_ratio": 0.5888745857060823,
       "vol_pattern": "ACCUMULATION",
       "support": 116.4,
       "resistance": 173.15,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 133.53,
-          "volume": 19538800
-        },
         {
           "date": "2026-03-09",
           "close": 138.95,
@@ -756,6 +751,11 @@
           "date": "2026-04-17",
           "close": 166.52,
           "volume": 52025900
+        },
+        {
+          "date": "2026-04-20",
+          "close": 165.28,
+          "volume": 11454653
         }
       ],
       "is_owned": false
@@ -763,29 +763,24 @@
     {
       "symbol": "TSLA",
       "yf_symbol": "TSLA",
-      "price": 400.62,
+      "price": 392.05,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 64.47,
+      "rsi": 63.52,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 3.0,
-      "weekly_change": 15.91,
-      "vol_ratio": 1.25800585493164,
+      "daily_change": -2.1,
+      "weekly_change": 12.35,
+      "vol_ratio": 0.5906190097134085,
       "vol_pattern": "ACCUMULATION",
       "support": 337.24,
       "resistance": 409.28,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 396.73,
-          "volume": 64054600
-        },
         {
           "date": "2026-03-09",
           "close": 398.68,
@@ -930,6 +925,11 @@
           "date": "2026-04-17",
           "close": 400.62,
           "volume": 90388400
+        },
+        {
+          "date": "2026-04-20",
+          "close": 392.05,
+          "volume": 42870825
         }
       ],
       "is_owned": false
@@ -937,29 +937,24 @@
     {
       "symbol": "PLTR",
       "yf_symbol": "PLTR",
-      "price": 146.39,
+      "price": 144.93,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 52.8,
+      "rsi": 56.66,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 2.5,
-      "weekly_change": 12.18,
-      "vol_ratio": 0.8859507671708001,
+      "daily_change": -1.0,
+      "weekly_change": 13.17,
+      "vol_ratio": 0.34035731519671547,
       "vol_pattern": "ACCUMULATION",
       "support": 122.68,
       "resistance": 162.4,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 157.16,
-          "volume": 74980900
-        },
         {
           "date": "2026-03-09",
           "close": 156.43,
@@ -1104,6 +1099,11 @@
           "date": "2026-04-17",
           "close": 146.39,
           "volume": 50392100
+        },
+        {
+          "date": "2026-04-20",
+          "close": 144.93,
+          "volume": 20038411
         }
       ],
       "is_owned": false
@@ -1111,29 +1111,24 @@
     {
       "symbol": "NVDA",
       "yf_symbol": "NVDA",
-      "price": 201.68,
+      "price": 199.28,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 92.81,
+      "rsi": 92.69,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.7,
-      "weekly_change": 9.66,
-      "vol_ratio": 1.1239390857461726,
+      "daily_change": -1.2,
+      "weekly_change": 5.65,
+      "vol_ratio": 0.45825590449614056,
       "vol_pattern": "ACCUMULATION",
       "support": 164.27,
       "resistance": 201.7,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 177.81,
-          "volume": 189021900
-        },
         {
           "date": "2026-03-09",
           "close": 182.64,
@@ -1278,6 +1273,11 @@
           "date": "2026-04-17",
           "close": 201.68,
           "volume": 159843200
+        },
+        {
+          "date": "2026-04-20",
+          "close": 199.28,
+          "volume": 65937049
         }
       ],
       "is_owned": false
@@ -1285,29 +1285,24 @@
     {
       "symbol": "AMD",
       "yf_symbol": "AMD",
-      "price": 278.39,
+      "price": 273.35,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 93.26,
+      "rsi": 94.23,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.0,
-      "weekly_change": 17.64,
-      "vol_ratio": 1.0646341459751265,
+      "daily_change": -1.8,
+      "weekly_change": 11.55,
+      "vol_ratio": 0.6685011907677906,
       "vol_pattern": "ACCUMULATION",
       "support": 192.87,
-      "resistance": 281.05,
+      "resistance": 287.61,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 192.43,
-          "volume": 33913800
-        },
         {
           "date": "2026-03-09",
           "close": 202.68,
@@ -1452,6 +1447,11 @@
           "date": "2026-04-17",
           "close": 278.39,
           "volume": 35441000
+        },
+        {
+          "date": "2026-04-20",
+          "close": 273.35,
+          "volume": 22051929
         }
       ],
       "is_owned": false
@@ -1459,29 +1459,24 @@
     {
       "symbol": "AVGO",
       "yf_symbol": "AVGO",
-      "price": 406.54,
+      "price": 397.4,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 93.87,
+      "rsi": 92.44,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 2.0,
-      "weekly_change": 14.55,
-      "vol_ratio": 0.8593502317365902,
+      "daily_change": -2.2,
+      "weekly_change": 6.96,
+      "vol_ratio": 0.3375937915677614,
       "vol_pattern": "ACCUMULATION",
       "support": 289.96,
       "resistance": 406.73,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 329.79,
-          "volume": 39152200
-        },
         {
           "date": "2026-03-09",
           "close": 345.03,
@@ -1626,6 +1621,11 @@
           "date": "2026-04-17",
           "close": 406.54,
           "volume": 20492100
+        },
+        {
+          "date": "2026-04-20",
+          "close": 397.4,
+          "volume": 8268732
         }
       ],
       "is_owned": false
@@ -1633,29 +1633,24 @@
     {
       "symbol": "META",
       "yf_symbol": "META",
-      "price": 688.55,
+      "price": 672.57,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 96.46,
+      "rsi": 87.71,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.7,
-      "weekly_change": 9.57,
-      "vol_ratio": 1.0917147357499584,
+      "daily_change": -2.3,
+      "weekly_change": 6.78,
+      "vol_ratio": 0.4689718248424687,
       "vol_pattern": "ACCUMULATION",
       "support": 520.26,
       "resistance": 691.52,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 644.31,
-          "volume": 13159400
-        },
         {
           "date": "2026-03-09",
           "close": 646.84,
@@ -1800,6 +1795,11 @@
           "date": "2026-04-17",
           "close": 688.55,
           "volume": 16246200
+        },
+        {
+          "date": "2026-04-20",
+          "close": 672.57,
+          "volume": 7106860
         }
       ],
       "is_owned": false
@@ -1807,29 +1807,24 @@
     {
       "symbol": "GOOGL",
       "yf_symbol": "GOOGL",
-      "price": 341.68,
+      "price": 339.03,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 93.75,
+      "rsi": 91.59,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.7,
-      "weekly_change": 7.28,
-      "vol_ratio": 1.108055252092448,
+      "daily_change": -0.8,
+      "weekly_change": 6.87,
+      "vol_ratio": 0.37311776847062805,
       "vol_pattern": "ACCUMULATION",
       "support": 272.11,
       "resistance": 342.32,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 298.31,
-          "volume": 25576900
-        },
         {
           "date": "2026-03-09",
           "close": 306.36,
@@ -1974,6 +1969,11 @@
           "date": "2026-04-17",
           "close": 341.68,
           "volume": 25519000
+        },
+        {
+          "date": "2026-04-20",
+          "close": 339.03,
+          "volume": 8736810
         }
       ],
       "is_owned": false
@@ -1981,29 +1981,24 @@
     {
       "symbol": "SOXL",
       "yf_symbol": "SOXL",
-      "price": 94.68,
+      "price": 93.8,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 90.02,
+      "rsi": 98.4,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 7.1,
-      "weekly_change": 31.54,
-      "vol_ratio": 0.8229311370567765,
+      "daily_change": -0.9,
+      "weekly_change": 22.79,
+      "vol_ratio": 0.41487788379032736,
       "vol_pattern": "ACCUMULATION",
       "support": 39.52,
-      "resistance": 94.75,
+      "resistance": 96.92,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 47.89,
-          "volume": 125241500
-        },
         {
           "date": "2026-03-09",
           "close": 53.32,
@@ -2148,6 +2143,11 @@
           "date": "2026-04-17",
           "close": 94.68,
           "volume": 66561600
+        },
+        {
+          "date": "2026-04-20",
+          "close": 93.8,
+          "volume": 31983994
         }
       ],
       "is_owned": false
@@ -2155,29 +2155,24 @@
     {
       "symbol": "TQQQ",
       "yf_symbol": "TQQQ",
-      "price": 58.59,
+      "price": 57.6,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 95.88,
+      "rsi": 95.44,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 3.8,
-      "weekly_change": 19.67,
-      "vol_ratio": 1.1885778851355648,
+      "daily_change": -1.7,
+      "weekly_change": 17.14,
+      "vol_ratio": 0.5461079502469475,
       "vol_pattern": "ACCUMULATION",
       "support": 37.32,
       "resistance": 58.94,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 47.46,
-          "volume": 141012200
-        },
         {
           "date": "2026-03-09",
           "close": 49.31,
@@ -2322,6 +2317,11 @@
           "date": "2026-04-17",
           "close": 58.59,
           "volume": 103173600
+        },
+        {
+          "date": "2026-04-20",
+          "close": 57.6,
+          "volume": 46956475
         }
       ],
       "is_owned": false
@@ -2329,29 +2329,24 @@
     {
       "symbol": "SPY",
       "yf_symbol": "SPY",
-      "price": 710.14,
+      "price": 707.58,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 96.83,
+      "rsi": 96.31,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.2,
-      "weekly_change": 4.45,
-      "vol_ratio": 1.1829074420024215,
+      "daily_change": -0.4,
+      "weekly_change": 4.14,
+      "vol_ratio": 0.3455115153228531,
       "vol_pattern": "ACCUMULATION",
       "support": 629.28,
       "resistance": 712.39,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 670.55,
-          "volume": 100687000
-        },
         {
           "date": "2026-03-09",
           "close": 676.42,
@@ -2496,6 +2491,11 @@
           "date": "2026-04-17",
           "close": 710.14,
           "volume": 70538900
+        },
+        {
+          "date": "2026-04-20",
+          "close": 707.58,
+          "volume": 20678802
         }
       ],
       "is_owned": false
@@ -2503,29 +2503,24 @@
     {
       "symbol": "QQQ",
       "yf_symbol": "QQQ",
-      "price": 648.85,
+      "price": 645.03,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 95.47,
+      "rsi": 95.95,
       "signal": "\u26a0\ufe0f AVOID",
       "color": "red",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.3,
-      "weekly_change": 6.34,
-      "vol_ratio": 1.1962603461619992,
+      "daily_change": -0.6,
+      "weekly_change": 5.56,
+      "vol_ratio": 0.5323375182630106,
       "vol_pattern": "ACCUMULATION",
       "support": 555.6,
       "resistance": 650.0,
       "price_history": [
-        {
-          "date": "2026-03-06",
-          "close": 598.99,
-          "volume": 86302300
-        },
         {
           "date": "2026-03-09",
           "close": 606.99,
@@ -2670,6 +2665,11 @@
           "date": "2026-04-17",
           "close": 648.85,
           "volume": 53386300
+        },
+        {
+          "date": "2026-04-20",
+          "close": 645.03,
+          "volume": 23887113
         }
       ],
       "is_owned": false
@@ -2677,29 +2677,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 74406.27,
+      "price": 75379.78,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 65.11,
+      "rsi": 66.38,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -1.7,
-      "weekly_change": -0.11,
-      "vol_ratio": 0.8445835193012662,
+      "daily_change": 2.1,
+      "weekly_change": 1.62,
+      "vol_ratio": 0.9808694025942748,
       "vol_pattern": "ACCUMULATION",
       "support": 65725.26,
       "resistance": 78320.68,
       "price_history": [
-        {
-          "date": "2026-03-21",
-          "close": 68711.52,
-          "volume": 21109354718
-        },
         {
           "date": "2026-03-22",
           "close": 67845.21,
@@ -2841,9 +2836,14 @@
           "volume": 26014416776
         },
         {
+          "date": "2026-04-19",
+          "close": 73856.35,
+          "volume": 30931515195
+        },
+        {
           "date": "2026-04-20",
-          "close": 74406.27,
-          "volume": 33366589440
+          "close": 75379.78,
+          "volume": 37979021312
         }
       ],
       "is_owned": false
@@ -2851,29 +2851,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2275.18,
+      "price": 2300.24,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 59.57,
+      "rsi": 60.54,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -3.2,
-      "weekly_change": -4.03,
-      "vol_ratio": 0.9266605100967688,
-      "vol_pattern": "ACCUMULATION",
-      "support": 2011.8,
+      "daily_change": 1.6,
+      "weekly_change": -0.99,
+      "vol_ratio": 1.067341452112048,
+      "vol_pattern": "NEUTRAL",
+      "support": 2016.99,
       "resistance": 2464.78,
       "price_history": [
-        {
-          "date": "2026-03-21",
-          "close": 2076.69,
-          "volume": 8654913047
-        },
         {
           "date": "2026-03-22",
           "close": 2053.05,
@@ -3015,9 +3010,14 @@
           "volume": 14400085617
         },
         {
+          "date": "2026-04-19",
+          "close": 2264.92,
+          "volume": 17083701612
+        },
+        {
           "date": "2026-04-20",
-          "close": 2275.18,
-          "volume": 17573916672
+          "close": 2300.24,
+          "volume": 20227497984
         }
       ],
       "is_owned": false
@@ -3025,29 +3025,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 84.06,
+      "price": 85.39,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 53.22,
+      "rsi": 57.53,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -2.5,
-      "weekly_change": -3.0,
-      "vol_ratio": 0.7043915035632463,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 2.2,
+      "weekly_change": 1.93,
+      "vol_ratio": 0.727094726145737,
+      "vol_pattern": "NEUTRAL",
       "support": 76.82,
       "resistance": 90.67,
       "price_history": [
-        {
-          "date": "2026-03-21",
-          "close": 87.47,
-          "volume": 1903136993
-        },
         {
           "date": "2026-03-22",
           "close": 86.13,
@@ -3189,9 +3184,14 @@
           "volume": 3619028688
         },
         {
+          "date": "2026-04-19",
+          "close": 83.58,
+          "volume": 4429065589
+        },
+        {
           "date": "2026-04-20",
-          "close": 84.06,
-          "volume": 4528922112
+          "close": 85.39,
+          "volume": 4671858688
         }
       ],
       "is_owned": false
@@ -3204,24 +3204,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 39.71,
+      "rsi": 43.65,
       "signal": "\ud83d\udcc9 DISTRIBUTION",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -4.3,
-      "weekly_change": -13.3,
-      "vol_ratio": 0.8859799201755603,
+      "daily_change": 0.8,
+      "weekly_change": -7.04,
+      "vol_ratio": 0.9263580744157317,
       "vol_pattern": "DISTRIBUTION",
       "support": 0.21,
       "resistance": 0.26,
       "price_history": [
-        {
-          "date": "2026-03-21",
-          "close": 0.22,
-          "volume": 126712364
-        },
         {
           "date": "2026-03-22",
           "close": 0.21,
@@ -3363,9 +3358,14 @@
           "volume": 167250910
         },
         {
+          "date": "2026-04-19",
+          "close": 0.21,
+          "volume": 142611835
+        },
+        {
           "date": "2026-04-20",
           "close": 0.21,
-          "volume": 142072464
+          "volume": 146962448
         }
       ],
       "is_owned": false
@@ -3378,24 +3378,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 53.34,
+      "rsi": 56.41,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.7,
-      "weekly_change": 0.1,
-      "vol_ratio": 1.0785054438280879,
+      "daily_change": 1.5,
+      "weekly_change": 1.56,
+      "vol_ratio": 0.8710451666067792,
       "vol_pattern": "ACCUMULATION",
       "support": 0.09,
       "resistance": 0.1,
       "price_history": [
-        {
-          "date": "2026-03-21",
-          "close": 0.09,
-          "volume": 522903398
-        },
         {
           "date": "2026-03-22",
           "close": 0.09,
@@ -3537,9 +3532,14 @@
           "volume": 1628522617
         },
         {
+          "date": "2026-04-19",
+          "close": 0.09,
+          "volume": 1874450943
+        },
+        {
           "date": "2026-04-20",
           "close": 0.09,
-          "volume": 1878526208
+          "volume": 1552144896
         }
       ],
       "is_owned": false
@@ -3547,31 +3547,25 @@
   ],
   "benchmarks": {
     "SPY": {
-      "current": 710.14,
-      "change_pct": 4.45,
+      "current": 707.57,
+      "change_pct": 4.14,
       "period_days": 7
     },
     "QQQ": {
-      "current": 648.85,
-      "change_pct": 6.34,
+      "current": 645.1,
+      "change_pct": 5.57,
       "period_days": 7
     }
   },
   "summary": {
     "total_invested": 150,
-    "total_current": 157.82,
-    "total_gain_loss": 7.82,
-    "total_gain_loss_pct": 5.21,
+    "total_current": 154.17,
+    "total_gain_loss": 4.17,
+    "total_gain_loss_pct": 2.78,
     "position_count": 3,
-    "avg_risk_score": 65.0
+    "avg_risk_score": 71.0
   },
-  "whale_activity": [
-    {
-      "symbol": "MSTR",
-      "kind": "volume",
-      "detail": "\ud83d\udcca Volume 3.2x avg"
-    }
-  ],
+  "whale_activity": [],
   "recent_signals": [
     {
       "timestamp": "2026-04-20T06:07:08.356153+00:00",
@@ -3854,8 +3848,8 @@
             "Uptrend",
             "Accumulation pattern"
           ],
-          "current_price": 400.62,
-          "rsi": 64.47
+          "current_price": 392.05,
+          "rsi": 63.52
         },
         {
           "ticker": "PLTR",
@@ -3864,18 +3858,8 @@
             "Uptrend",
             "Accumulation pattern"
           ],
-          "current_price": 146.39,
-          "rsi": 52.8
-        },
-        {
-          "ticker": "ETH",
-          "score": 45,
-          "reasons": [
-            "Uptrend",
-            "Accumulation pattern"
-          ],
-          "current_price": 2275.18,
-          "rsi": 59.57
+          "current_price": 144.93,
+          "rsi": 56.66
         },
         {
           "ticker": "DOGE",
@@ -3885,7 +3869,7 @@
             "Accumulation pattern"
           ],
           "current_price": 0.09,
-          "rsi": 53.34
+          "rsi": 56.41
         }
       ]
     },
@@ -3895,12 +3879,12 @@
       "winners": 1,
       "losers": 2,
       "win_rate": 33.3,
-      "total_gain": 11.86,
-      "total_loss": 4.04,
-      "net_pnl": 7.82,
-      "avg_win": 11.86,
-      "avg_loss": 2.02,
-      "profit_factor": 2.94,
+      "total_gain": 8.48,
+      "total_loss": 4.31,
+      "net_pnl": 4.17,
+      "avg_win": 8.48,
+      "avg_loss": 2.16,
+      "profit_factor": 1.97,
       "categories": {
         "crypto": {
           "count": 0,
@@ -3916,21 +3900,30 @@
         },
         "stock": {
           "count": 3,
-          "pnl": 7.819999999999999,
+          "pnl": 4.17,
           "invested": 150,
-          "return_pct": 5.2
+          "return_pct": 2.8
         }
       }
     },
     "tax_lots": [
+      {
+        "ticker": "MARA",
+        "holding_days": 115,
+        "status": "SHORT_TERM",
+        "days_to_long_term": 250,
+        "alert": "250 days until long-term eligible",
+        "gain_loss_pct": 8.5,
+        "gain_loss_dollars": 8.48
+      },
       {
         "ticker": "MSFT",
         "holding_days": 95,
         "status": "SHORT_TERM",
         "days_to_long_term": 270,
         "alert": "270 days until long-term eligible",
-        "gain_loss_pct": -6.8,
-        "gain_loss_dollars": -1.69
+        "gain_loss_pct": -7.6,
+        "gain_loss_dollars": -1.9
       },
       {
         "ticker": "COIN",
@@ -3938,17 +3931,8 @@
         "status": "SHORT_TERM",
         "days_to_long_term": 260,
         "alert": "260 days until long-term eligible",
-        "gain_loss_pct": -9.4,
-        "gain_loss_dollars": -2.35
-      },
-      {
-        "ticker": "MARA",
-        "holding_days": 114,
-        "status": "SHORT_TERM",
-        "days_to_long_term": 251,
-        "alert": "251 days until long-term eligible",
-        "gain_loss_pct": 11.9,
-        "gain_loss_dollars": 11.86
+        "gain_loss_pct": -9.6,
+        "gain_loss_dollars": -2.41
       }
     ],
     "tax_alerts": [],
@@ -3958,7 +3942,7 @@
       "positions": [
         {
           "ticker": "MSFT",
-          "value": 23.31,
+          "value": 23.1,
           "yield_pct": 0.7,
           "annual_income": 0.16,
           "monthly_income": 0.01
@@ -3967,14 +3951,14 @@
       "yield_on_portfolio": 0.7
     },
     "benchmark_comparison": {
-      "portfolio_return": 5.21,
-      "spy_return": 4.45,
-      "qqq_return": 6.34,
-      "vs_spy": 0.76,
-      "vs_qqq": -1.13,
-      "beating_spy": "True",
+      "portfolio_return": 2.78,
+      "spy_return": 4.14,
+      "qqq_return": 5.57,
+      "vs_spy": -1.36,
+      "vs_qqq": -2.79,
+      "beating_spy": "False",
       "beating_qqq": "False",
-      "alpha": -0.18
+      "alpha": -2.07
     },
     "entry_alerts": [
       {
@@ -3995,82 +3979,82 @@
     "position_sizing": [
       {
         "ticker": "MSTR",
-        "current_price": 166.52,
-        "suggested_stop": 149.87,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 165.28,
+        "suggested_stop": 148.75,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "TSLA",
-        "current_price": 400.62,
-        "suggested_stop": 360.56,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 392.05,
+        "suggested_stop": 352.84,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "PLTR",
-        "current_price": 146.39,
-        "suggested_stop": 131.75,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 144.93,
+        "suggested_stop": 130.44,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "NVDA",
-        "current_price": 201.68,
-        "suggested_stop": 181.51,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 199.28,
+        "suggested_stop": 179.35,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "AMD",
-        "current_price": 278.39,
-        "suggested_stop": 250.55,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 273.35,
+        "suggested_stop": 246.02,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "AVGO",
-        "current_price": 406.54,
-        "suggested_stop": 365.89,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 397.4,
+        "suggested_stop": 357.66,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "META",
-        "current_price": 688.55,
-        "suggested_stop": 619.69,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 672.57,
+        "suggested_stop": 605.31,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "GOOGL",
-        "current_price": 341.68,
-        "suggested_stop": 307.51,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 339.03,
+        "suggested_stop": 305.13,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "SOXL",
-        "current_price": 94.68,
-        "suggested_stop": 85.21,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 93.8,
+        "suggested_stop": 84.42,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       },
       {
         "ticker": "TQQQ",
-        "current_price": 58.59,
-        "suggested_stop": 52.73,
-        "suggested_amount": 15.78,
-        "risk_if_stopped": 1.58,
+        "current_price": 57.6,
+        "suggested_stop": 51.84,
+        "suggested_amount": 15.42,
+        "risk_if_stopped": 1.54,
         "position_pct": 10.0
       }
     ],
