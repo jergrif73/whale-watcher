@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-04-20T06:07:08.356153+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "166.52",
+    "notes": "Major move: 11.8%"
+  },
+  {
     "timestamp": "2026-04-17T16:39:57.621981+00:00",
     "ticker": "MSTR",
     "action": "ALERT",
@@ -164,12 +171,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "455.62",
     "gain_loss_pct": "-16.4"
-  },
-  {
-    "timestamp": "2026-04-13T16:51:15.815628+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "133.35",
-    "notes": "RSI oversold: 28.7"
   }
 ]
