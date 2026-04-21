@@ -900,8 +900,10 @@
             <div class="form-actions">
                 <button class="btn" onclick="closeModal()">Cancel</button>
                 <button class="btn" onclick="clearToken()" style="color: var(--red-light);">Clear Token</button>
+                <button class="btn" onclick="testToken()">Test Token</button>
                 <button class="btn btn-primary" onclick="saveSettings()">Save</button>
             </div>
+            <div id="settings-status" style="margin-top: 12px;"></div>
         </div>
     </div>
 
@@ -1625,7 +1627,49 @@
             closeModal();
             alert('Token cleared');
         }
-        
+
+        async function testToken() {
+            const token = document.getElementById('settings-token').value.trim();
+            if (!token) {
+                showStatus('settings-status', '⚠️ Paste a token first', 'error');
+                return;
+            }
+            showStatus('settings-status', 'Testing token...', 'success');
+            try {
+                const response = await fetch('https://api.github.com/user', {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (response.ok) {
+                    const user = await response.json();
+                    const scopes = response.headers.get('x-oauth-scopes') || '(fine-grained PAT)';
+                    showStatus('settings-status', `✅ Valid — authenticated as <strong>${user.login}</strong> · scopes: ${scopes || 'none'}`, 'success');
+                } else if (response.status === 401) {
+                    showStatus('settings-status', '❌ 401 — token is invalid, expired, or revoked. Generate a new one.', 'error');
+                } else if (response.status === 403) {
+                    showStatus('settings-status', '❌ 403 — token lacks required permissions.', 'error');
+                } else {
+                    showStatus('settings-status', `❌ GitHub returned ${response.status}`, 'error');
+                }
+            } catch (err) {
+                showStatus('settings-status', `❌ Network error: ${err.message}`, 'error');
+            }
+        }
+
+        function friendlyGitHubError(err) {
+            const msg = err && err.message ? err.message : '';
+            const openLink = '<a href="#" onclick="closeModal();openSettingsModal();return false;" style="color: var(--blue); text-decoration: underline;">Open Settings</a>';
+            if (msg.includes('401')) {
+                return `❌ Your GitHub token is invalid or expired. ${openLink} to paste a new one.`;
+            }
+            if (msg.includes('403')) {
+                return `❌ Token is valid but lacks permission (needs <strong>repo</strong> scope). ${openLink}.`;
+            }
+            return `❌ Error: ${msg}`;
+        }
+
         // ============ GitHub API Functions ============
         async function getFileFromGitHub(path) {
             const token = localStorage.getItem('ww_token');
@@ -1730,10 +1774,10 @@
                 
             } catch (err) {
                 console.error(err);
-                showStatus('trade-status', `❌ Error: ${err.message}`, 'error');
+                showStatus('trade-status', friendlyGitHubError(err), 'error');
             }
         }
-        
+
         async function addToWatchlist() {
             const ticker = document.getElementById('watchlist-ticker').value.trim().toUpperCase();
             
@@ -1765,7 +1809,8 @@
                 setTimeout(closeModal, 1500);
                 
             } catch (err) {
-                showStatus('watchlist-status', `❌ Error: ${err.message}`, 'error');
+                console.error(err);
+                showStatus('watchlist-status', friendlyGitHubError(err), 'error');
             }
         }
         
