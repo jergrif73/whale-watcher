@@ -216,6 +216,17 @@ elif current_rsi < 20:  # Changed from 15
 2. Check that the date format is `YYYY-MM-DD`
 3. Run the workflow manually to see debug output
 
+### "GitHub API error: 401" when logging a trade
+
+The dashboard commits trades by calling the GitHub API from your browser using a Personal Access Token saved in `localStorage`. A 401 means that token is invalid, expired, or revoked.
+
+1. Open the dashboard → click ⚙️ Settings
+2. Click **Clear Token**
+3. Generate a new PAT at https://github.com/settings/tokens/new with **repo** scope
+4. Paste it into the Settings token field
+5. Click **Test Token** to verify it authenticates (you should see `✅ Valid — authenticated as <your-login>`)
+6. Click **Save** and retry the trade
+
 ---
 
 ## License
