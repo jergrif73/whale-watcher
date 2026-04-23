@@ -1,5 +1,15 @@
 [
   {
+    "timestamp": "2026-04-23T17:06:27.826862+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "416.0",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "464.89",
+    "gain_loss_pct": "-10.5",
+    "holding_days": "98"
+  },
+  {
     "timestamp": "2026-04-20T06:07:08.356153+00:00",
     "ticker": "MSTR",
     "action": "ALERT",
@@ -162,14 +172,5 @@
     "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
     "entry_price": "252.69",
     "gain_loss_pct": "-31.3"
-  },
-  {
-    "timestamp": "2026-04-13T16:51:14.029741+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "381.05",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-16.4"
   }
 ]
