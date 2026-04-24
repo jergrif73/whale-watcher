@@ -1,5 +1,29 @@
 [
   {
+    "timestamp": "2026-04-24T16:42:28.980227+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "419.27",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "469.21",
+    "gain_loss_pct": "-10.6",
+    "holding_days": "99"
+  },
+  {
+    "timestamp": "2026-04-24T16:42:31.768675+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "350.54",
+    "notes": "Major move: 14.8%"
+  },
+  {
+    "timestamp": "2026-04-24T16:42:34.081262+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "129.15",
+    "notes": "Major move: 14.5%"
+  },
+  {
     "timestamp": "2026-04-24T06:00:46.109921+00:00",
     "ticker": "MSFT",
     "action": "EVALUATE",
@@ -148,30 +172,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "455.62",
     "gain_loss_pct": "-13.5"
-  },
-  {
-    "timestamp": "2026-04-14T05:53:26.650824+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "174.53",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "255.86",
-    "gain_loss_pct": "-31.8"
-  },
-  {
-    "timestamp": "2026-04-14T05:53:27.006964+00:00",
-    "ticker": "MSFT",
-    "action": "SELL_ALL",
-    "price": "384.37",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-15.6"
-  },
-  {
-    "timestamp": "2026-04-14T05:53:28.056879+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "132.37",
-    "notes": "RSI oversold: 27.6"
   }
 ]
