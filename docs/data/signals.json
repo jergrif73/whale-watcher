@@ -1,5 +1,29 @@
 [
   {
+    "timestamp": "2026-04-27T06:20:00.765789+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "424.62",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "469.21",
+    "gain_loss_pct": "-9.5",
+    "holding_days": "102"
+  },
+  {
+    "timestamp": "2026-04-27T06:20:02.374892+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "347.81",
+    "notes": "Major move: 13.9%"
+  },
+  {
+    "timestamp": "2026-04-27T06:20:03.557795+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "128.32",
+    "notes": "Major move: 13.8%"
+  },
+  {
     "timestamp": "2026-04-25T16:27:15.940628+00:00",
     "ticker": "FET",
     "action": "BUY_SIGNAL",
@@ -143,32 +167,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "455.62",
     "gain_loss_pct": "-10.4"
-  },
-  {
-    "timestamp": "2026-04-15T05:53:05.553886+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "184.41",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "239.28",
-    "gain_loss_pct": "-22.9"
-  },
-  {
-    "timestamp": "2026-04-15T05:53:05.854084+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "393.11",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "455.62",
-    "gain_loss_pct": "-13.7"
-  },
-  {
-    "timestamp": "2026-04-14T16:53:01.060374+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "186.01",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "255.86",
-    "gain_loss_pct": "-27.3"
   }
 ]
