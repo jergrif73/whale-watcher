@@ -1,5 +1,22 @@
 [
   {
+    "timestamp": "2026-04-28T06:22:52.475757+00:00",
+    "ticker": "MSFT",
+    "action": "EVALUATE",
+    "price": "424.82",
+    "notes": "Approaching stop loss at -15.0%",
+    "entry_price": "480.53",
+    "gain_loss_pct": "-11.6",
+    "holding_days": "103"
+  },
+  {
+    "timestamp": "2026-04-28T06:22:57.332775+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.2",
+    "notes": "RSI oversold: 27.11"
+  },
+  {
     "timestamp": "2026-04-27T17:13:19.046922+00:00",
     "ticker": "MSFT",
     "action": "EVALUATE",
@@ -148,23 +165,5 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "458.81",
     "gain_loss_pct": "-8.7"
-  },
-  {
-    "timestamp": "2026-04-16T05:54:25.074067+00:00",
-    "ticker": "COIN",
-    "action": "SELL_ALL",
-    "price": "195.9",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "241.15",
-    "gain_loss_pct": "-18.8"
-  },
-  {
-    "timestamp": "2026-04-16T05:54:25.385895+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "411.22",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "458.81",
-    "gain_loss_pct": "-10.4"
   }
 ]
