@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-04-29T06:14:52.207785+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "109.56",
+    "notes": "Major move: -11.2%"
+  },
+  {
     "timestamp": "2026-04-28T17:26:43.020368+00:00",
     "ticker": "MSFT",
     "action": "EVALUATE",
@@ -152,15 +159,5 @@
     "action": "ALERT",
     "price": "172.05",
     "notes": "Major move: 15.5%"
-  },
-  {
-    "timestamp": "2026-04-17T07:25:04.249787+00:00",
-    "ticker": "COIN",
-    "action": "EVALUATE",
-    "price": "199.83",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "227.73",
-    "gain_loss_pct": "-12.3",
-    "holding_days": "102"
   }
 ]
