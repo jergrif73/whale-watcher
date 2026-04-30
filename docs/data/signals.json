@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-04-30T17:06:19.461409+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "82.99",
+    "notes": "RSI oversold: 29.29"
+  },
+  {
+    "timestamp": "2026-04-30T17:06:19.789465+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.2",
+    "notes": "RSI oversold: 16.44"
+  },
+  {
     "timestamp": "2026-04-30T06:20:12.459597+00:00",
     "ticker": "FET",
     "action": "BUY_SIGNAL",
@@ -142,22 +156,5 @@
     "entry_price": "469.21",
     "gain_loss_pct": "-11.4",
     "holding_days": "99"
-  },
-  {
-    "timestamp": "2026-04-23T17:06:27.826862+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "416.0",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "464.89",
-    "gain_loss_pct": "-10.5",
-    "holding_days": "98"
-  },
-  {
-    "timestamp": "2026-04-20T06:07:08.356153+00:00",
-    "ticker": "MSTR",
-    "action": "ALERT",
-    "price": "166.52",
-    "notes": "Major move: 11.8%"
   }
 ]
