@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-05-01T06:30:08.317187+00:00",
+    "ticker": "META",
+    "action": "WHALE_ACTIVITY",
+    "price": "611.91",
+    "notes": "Volume 4.261282003158249x avg"
+  },
+  {
+    "timestamp": "2026-05-01T06:30:12.133013+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.2",
+    "notes": "RSI oversold: 18.16"
+  },
+  {
     "timestamp": "2026-04-30T17:06:19.461409+00:00",
     "ticker": "SOL",
     "action": "BUY_SIGNAL",
@@ -139,22 +153,5 @@
     "action": "ALERT",
     "price": "350.54",
     "notes": "Major move: 14.8%"
-  },
-  {
-    "timestamp": "2026-04-24T16:42:34.081262+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "129.15",
-    "notes": "Major move: 14.5%"
-  },
-  {
-    "timestamp": "2026-04-24T06:00:46.109921+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "415.75",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "469.21",
-    "gain_loss_pct": "-11.4",
-    "holding_days": "99"
   }
 ]
