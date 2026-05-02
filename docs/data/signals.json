@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-05-02T05:59:14.928317+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.2",
+    "notes": "RSI oversold: 22.92"
+  },
+  {
     "timestamp": "2026-05-01T16:42:03.929849+00:00",
     "ticker": "FET",
     "action": "BUY_SIGNAL",
@@ -143,15 +150,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.21",
     "notes": "RSI oversold: 29.98"
-  },
-  {
-    "timestamp": "2026-04-24T16:42:28.980227+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "419.27",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "469.21",
-    "gain_loss_pct": "-10.6",
-    "holding_days": "99"
   }
 ]
