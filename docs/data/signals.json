@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-05-06T06:23:00.404811+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "604.96",
+    "notes": "RSI oversold: 28.45"
+  },
+  {
+    "timestamp": "2026-05-06T06:23:01.520233+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "144.16",
+    "notes": "Major move: 13.0%"
+  },
+  {
     "timestamp": "2026-05-05T17:10:38.360719+00:00",
     "ticker": "META",
     "action": "BUY_SIGNAL",
@@ -133,22 +147,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.21",
     "notes": "RSI oversold: 28.35"
-  },
-  {
-    "timestamp": "2026-04-27T06:20:00.765789+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "424.62",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "469.21",
-    "gain_loss_pct": "-9.5",
-    "holding_days": "102"
-  },
-  {
-    "timestamp": "2026-04-27T06:20:02.374892+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "347.81",
-    "notes": "Major move: 13.9%"
   }
 ]
