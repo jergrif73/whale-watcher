@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-05-07T17:28:57.846724+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "614.86",
+    "notes": "RSI oversold: 25.02"
+  },
+  {
     "timestamp": "2026-05-07T06:28:07.352182+00:00",
     "ticker": "AMD",
     "action": "ALERT",
@@ -131,15 +138,5 @@
     "action": "ALERT",
     "price": "109.56",
     "notes": "Major move: -11.2%"
-  },
-  {
-    "timestamp": "2026-04-28T17:26:43.020368+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "428.6",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "480.53",
-    "gain_loss_pct": "-10.8",
-    "holding_days": "103"
   }
 ]
