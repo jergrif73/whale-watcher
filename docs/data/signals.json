@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-05-07T06:28:07.352182+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "421.39",
+    "notes": "Major move: 18.6%"
+  },
+  {
+    "timestamp": "2026-05-07T06:28:08.124721+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "612.88",
+    "notes": "RSI oversold: 29.65"
+  },
+  {
+    "timestamp": "2026-05-07T06:28:08.986034+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "165.85",
+    "notes": "Major move: 15.0%"
+  },
+  {
     "timestamp": "2026-05-06T17:18:25.273879+00:00",
     "ticker": "AMD",
     "action": "ALERT",
@@ -119,30 +140,6 @@
     "notes": "Approaching stop loss at -15.0%",
     "entry_price": "480.53",
     "gain_loss_pct": "-10.8",
-    "holding_days": "103"
-  },
-  {
-    "timestamp": "2026-04-28T17:26:47.482476+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "107.29",
-    "notes": "Major move: -13.0%"
-  },
-  {
-    "timestamp": "2026-04-28T17:26:50.870559+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.19",
-    "notes": "RSI oversold: 28.04"
-  },
-  {
-    "timestamp": "2026-04-28T06:22:52.475757+00:00",
-    "ticker": "MSFT",
-    "action": "EVALUATE",
-    "price": "424.82",
-    "notes": "Approaching stop loss at -15.0%",
-    "entry_price": "480.53",
-    "gain_loss_pct": "-11.6",
     "holding_days": "103"
   }
 ]
