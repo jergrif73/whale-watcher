@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-05-11T17:47:18.325278+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "602.55",
+    "notes": "RSI oversold: 26.98"
+  },
+  {
     "timestamp": "2026-05-11T06:57:04.022366+00:00",
     "ticker": "AMD",
     "action": "ALERT",
@@ -131,12 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.2",
     "notes": "RSI oversold: 25.89"
-  },
-  {
-    "timestamp": "2026-05-01T06:30:08.317187+00:00",
-    "ticker": "META",
-    "action": "WHALE_ACTIVITY",
-    "price": "611.91",
-    "notes": "Volume 4.261282003158249x avg"
   }
 ]
