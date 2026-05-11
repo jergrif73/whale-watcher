@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-05-11T06:57:04.022366+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "455.19",
+    "notes": "Major move: 11.4%"
+  },
+  {
+    "timestamp": "2026-05-11T06:57:05.047899+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "609.63",
+    "notes": "RSI oversold: 27.96"
+  },
+  {
+    "timestamp": "2026-05-11T06:57:06.277232+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "176.94",
+    "notes": "Major move: 16.3%"
+  },
+  {
     "timestamp": "2026-05-08T16:59:17.771411+00:00",
     "ticker": "META",
     "action": "BUY_SIGNAL",
@@ -117,26 +138,5 @@
     "action": "WHALE_ACTIVITY",
     "price": "611.91",
     "notes": "Volume 4.261282003158249x avg"
-  },
-  {
-    "timestamp": "2026-05-01T06:30:12.133013+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.2",
-    "notes": "RSI oversold: 18.16"
-  },
-  {
-    "timestamp": "2026-04-30T17:06:19.461409+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "82.99",
-    "notes": "RSI oversold: 29.29"
-  },
-  {
-    "timestamp": "2026-04-30T17:06:19.789465+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.2",
-    "notes": "RSI oversold: 16.44"
   }
 ]
