@@ -1,5 +1,22 @@
 [
   {
+    "timestamp": "2026-05-12T06:29:58.269234+00:00",
+    "ticker": "COIN",
+    "action": "SELL_QUARTER",
+    "price": "216.6",
+    "notes": "Strong gain of 53.5%; Consider trimming 25% of position",
+    "entry_price": "141.09",
+    "gain_loss_pct": "53.5",
+    "holding_days": "127"
+  },
+  {
+    "timestamp": "2026-05-12T06:30:01.525210+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "598.86",
+    "notes": "RSI oversold: 26.31"
+  },
+  {
     "timestamp": "2026-05-11T17:47:18.325278+00:00",
     "ticker": "META",
     "action": "BUY_SIGNAL",
@@ -124,19 +141,5 @@
     "action": "ALERT",
     "price": "145.54",
     "notes": "Major move: 14.1%"
-  },
-  {
-    "timestamp": "2026-05-02T05:59:14.928317+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.2",
-    "notes": "RSI oversold: 22.92"
-  },
-  {
-    "timestamp": "2026-05-01T16:42:03.929849+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.2",
-    "notes": "RSI oversold: 25.89"
   }
 ]
