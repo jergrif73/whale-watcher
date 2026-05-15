@@ -1,5 +1,22 @@
 [
   {
+    "timestamp": "2026-05-15T17:17:48.100137+00:00",
+    "ticker": "COIN",
+    "action": "SELL_HALF",
+    "price": "194.15",
+    "notes": "Dropped 12.7% from peak $222.35; Consider selling to protect remaining profits",
+    "entry_price": "166.02",
+    "gain_loss_pct": "16.9",
+    "holding_days": "130"
+  },
+  {
+    "timestamp": "2026-05-15T17:17:52.192424+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "616.78",
+    "notes": "RSI oversold: 25.84"
+  },
+  {
     "timestamp": "2026-05-15T06:48:26.938911+00:00",
     "ticker": "META",
     "action": "BUY_SIGNAL",
@@ -130,19 +147,5 @@
     "action": "BUY_SIGNAL",
     "price": "614.86",
     "notes": "RSI oversold: 25.02"
-  },
-  {
-    "timestamp": "2026-05-07T06:28:07.352182+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "421.39",
-    "notes": "Major move: 18.6%"
-  },
-  {
-    "timestamp": "2026-05-07T06:28:08.124721+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "612.88",
-    "notes": "RSI oversold: 29.65"
   }
 ]
