@@ -1,5 +1,36 @@
 [
   {
+    "timestamp": "2026-05-18T17:49:49.136029+00:00",
+    "ticker": "COIN",
+    "action": "SELL_HALF",
+    "price": "186.55",
+    "notes": "Dropped 16.1% from peak $222.35; Consider selling to protect remaining profits",
+    "entry_price": "164.05",
+    "gain_loss_pct": "13.7",
+    "holding_days": "133"
+  },
+  {
+    "timestamp": "2026-05-18T17:49:53.612772+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "613.89",
+    "notes": "RSI oversold: 26.76"
+  },
+  {
+    "timestamp": "2026-05-18T17:49:54.538124+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "147.46",
+    "notes": "Major move: -10.2%"
+  },
+  {
+    "timestamp": "2026-05-18T17:49:57.093360+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2105.83",
+    "notes": "RSI oversold: 24.56"
+  },
+  {
     "timestamp": "2026-05-18T07:52:17.177829+00:00",
     "ticker": "COIN",
     "action": "SELL_HALF",
@@ -122,33 +153,5 @@
     "action": "BUY_SIGNAL",
     "price": "598.86",
     "notes": "RSI oversold: 26.31"
-  },
-  {
-    "timestamp": "2026-05-11T17:47:18.325278+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "602.55",
-    "notes": "RSI oversold: 26.98"
-  },
-  {
-    "timestamp": "2026-05-11T06:57:04.022366+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "455.19",
-    "notes": "Major move: 11.4%"
-  },
-  {
-    "timestamp": "2026-05-11T06:57:05.047899+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "609.63",
-    "notes": "RSI oversold: 27.96"
-  },
-  {
-    "timestamp": "2026-05-11T06:57:06.277232+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "176.94",
-    "notes": "Major move: 16.3%"
   }
 ]
