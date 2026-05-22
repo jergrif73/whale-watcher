@@ -7,17 +7,9 @@ import json
 import uuid
 import requests
 import time
-import io
-import base64
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
-
-from thesis_manager import ThesisManager
 
 # --- CONFIGURATION ---
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
@@ -997,24 +989,8 @@ class TechnicalAnalyzer:
             pattern = "DISTRIBUTION"
         else:
             pattern = "NEUTRAL"
-
+        
         return vol_ratio, pattern
-
-    @staticmethod
-    def _build_sparkline_png(prices):
-        """Return a base64 PNG data URI of a 400x120 sparkline for the given price list."""
-        fig, ax = plt.subplots(figsize=(4, 1.2), facecolor='#0d1117')
-        ax.set_facecolor('#0d1117')
-        ax.plot(prices, color='#58a6ff', linewidth=1.5, solid_capstyle='round')
-        ax.axis('off')
-        fig.tight_layout(pad=0)
-        buf = io.BytesIO()
-        fig.savefig(buf, format='png', dpi=100, bbox_inches='tight',
-                    facecolor='#0d1117', edgecolor='none')
-        plt.close(fig)
-        buf.seek(0)
-        b64 = base64.b64encode(buf.read()).decode('ascii')
-        return f"data:image/png;base64,{b64}"
 
 
 class PositionAnalyzer:
@@ -1029,12 +1005,11 @@ class PositionAnalyzer:
     Properly tracks multiple purchases at different dates!
     """
     
-    def __init__(self, ticker, position, df, market_agent=None):
+    def __init__(self, ticker, position, df):
         self.ticker = ticker
         self.position = position
         self.df = df
         self.ta = TechnicalAnalyzer()
-        self.market_agent = market_agent
         
         # Current market price
         self.current_price = df['Close'].iloc[-1]
@@ -1130,38 +1105,27 @@ class PositionAnalyzer:
             print(f"      Warning: Could not get historical price for {date_str}: {e}")
             return self.current_price
     
-    def _parse_buy_date(self, date_str):
-        """Parse an ISO buy date that may be either 'YYYY-MM-DD' or full
-        ISO 8601 with time (e.g. '2025-12-26T10:00:00Z'). Returns a
-        timezone-aware UTC datetime, or None if unparseable."""
-        if not date_str:
-            return None
-        try:
-            s = str(date_str)
-            if 'T' in s:
-                return datetime.fromisoformat(s.replace('Z', '+00:00'))
-            return datetime.strptime(s[:10], '%Y-%m-%d').replace(tzinfo=timezone.utc)
-        except Exception:
-            return None
-
     def _calc_holding_days(self):
         """Calculate days since first purchase"""
-        buy_date = self._parse_buy_date(self.position.get('first_buy_date'))
-        if buy_date is None:
+        if not self.position.get('first_buy_date'):
             return None
-        return (datetime.now(timezone.utc) - buy_date).days
-
+        try:
+            buy_date = datetime.fromisoformat(self.position['first_buy_date'].replace('Z', '+00:00'))
+            return (datetime.now(timezone.utc) - buy_date).days
+        except:
+            return None
+    
     def _get_peak_since_buy(self):
         """Get the highest price since purchase"""
-        buy_date = self._parse_buy_date(self.position.get('first_buy_date'))
-        if buy_date is None:
+        if not self.position.get('first_buy_date'):
             return self.current_price
         try:
+            buy_date = datetime.fromisoformat(self.position['first_buy_date'].replace('Z', '+00:00'))
             df_since_buy = self.df[self.df.index >= buy_date.strftime('%Y-%m-%d')]
             if len(df_since_buy) > 0:
                 return df_since_buy['High'].max()
             return self.current_price
-        except Exception:
+        except:
             return self.current_price
     
     def calculate_risk_score(self):
@@ -1212,29 +1176,6 @@ class PositionAnalyzer:
         
         return max(0, min(100, score))
     
-    def _active_thesis(self):
-        """Return the active thesis dict for this ticker, or None."""
-        mgr = getattr(self.market_agent, "thesis_manager", None) if self.market_agent else None
-        if mgr is None:
-            return None
-        sym = (self.position.get("ticker") or self.position.get("symbol")
-               or self.ticker.replace("-USD", ""))
-        return mgr.get_active(sym)
-
-    def _hold_signal_while_thesis_active(self, thesis, risk_score):
-        return {
-            "signal": f"🧠 THESIS +{self.gain_loss_pct:.1f}%" if self.gain_loss_pct >= 0
-                      else f"🧠 THESIS {self.gain_loss_pct:.1f}%",
-            "color": "purple",
-            "action": "HOLD",
-            "priority": 25,
-            "reasoning": [
-                f"Stop-loss signal suppressed — active thesis: {thesis['thesis'][:80]}",
-                "See 'Active Theses' section for invalidation criteria",
-            ],
-            "risk_score": risk_score,
-        }
-
     def generate_signal(self):
         """Generate comprehensive trading signal for owned position"""
         is_settling = self.holding_days is not None and self.holding_days <= SETTLING_PERIOD_DAYS
@@ -1284,17 +1225,9 @@ class PositionAnalyzer:
             }
         
         # === SELL SIGNALS (Priority Order) ===
-
-        # Thesis override: an active thesis suppresses the recurring
-        # stop-loss alert. Invalidation is checked separately at the
-        # MarketAgent level; tripping flips status -> invalidated and
-        # the next run generates the normal stop-loss signal.
-        _active_thesis = self._active_thesis()
-
-        # 1. HARD STOP LOSS - Highest priority (unless thesis active)
+        
+        # 1. HARD STOP LOSS - Highest priority
         if self.gain_loss_pct <= STOP_LOSS_HARD:
-            if _active_thesis:
-                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"🛑 STOP LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "SELL_ALL"
@@ -1375,10 +1308,8 @@ class PositionAnalyzer:
             reasoning.append("Volume pattern suggests selling pressure")
             reasoning.append("Watch for breakdown")
         
-        # 10. SOFT STOP LOSS (suppressed if active thesis)
+        # 10. SOFT STOP LOSS
         elif self.gain_loss_pct <= STOP_LOSS_SOFT:
-            if _active_thesis:
-                return self._hold_signal_while_thesis_active(_active_thesis, risk_score)
             signal = f"⚠️ LOSS {self.gain_loss_pct:.1f}%"
             color = "red"
             action = "EVALUATE"
@@ -1487,48 +1418,12 @@ class PositionAnalyzer:
         }
 
 
-def evaluate_thesis_invalidations(thesis_manager, market_data: dict) -> list:
-    """Evaluate every active thesis against current market data.
-
-    market_data: dict keyed by ticker; each value has 'closes' list and optional
-    'indicators' dict. Trips status -> 'invalidated' on any auto condition match.
-
-    Returns list of (thesis_id, tripped_condition, detail) for alerting.
-    """
-    from invalidation_evaluator import InvalidationEvaluator
-    ev = InvalidationEvaluator()
-    tripped = []
-    for t in list(thesis_manager.list_all()):
-        if t["status"] != "active":
-            continue
-        ticker_data = market_data.get(t["ticker"])
-        if not ticker_data:
-            continue
-        for crit in t["invalidation_criteria"]:
-            if not crit.get("auto"):
-                continue
-            cond = ev.parse(crit["condition"])
-            result = ev.evaluate(
-                cond,
-                closes=ticker_data.get("closes"),
-                indicators=ticker_data.get("indicators", {}),
-            )
-            if result.tripped:
-                thesis_manager.set_status(t["id"], "invalidated")
-                tripped.append((t["id"], crit["condition"], result.detail))
-                break
-    return tripped
-
-
 class MarketAgent:
     def __init__(self):
         self.timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         self.has_critical_news = False
         self.recent_signals = []
         self.journal = TradeJournal()
-        # Thesis layer (Phase 1)
-        theses_path = Path("docs/data/theses.json")
-        self.thesis_manager = ThesisManager(theses_path) if theses_path.exists() else None
 
     def log_signal(self, ticker, action, price, entry_price=None, gain_loss_pct=None, holding_days=None, notes=""):
         """Log a trading signal for the activity feed"""
@@ -1548,25 +1443,18 @@ class MarketAgent:
         self.recent_signals.append(signal)
 
     def check_whale_intel(self, ticker_obj, symbol):
-        """Check for whale activity and insider trading. Falls back to
-        the latest news headline so the Intel column is never empty."""
+        """Check for whale activity and insider trading"""
         intel = []
-        latest_headline = ""
         try:
-            news_list = ticker_obj.news or []
+            news_list = ticker_obj.news
             for story in news_list:
-                title = story.get('title', '')
-                if not title:
-                    continue
-                if not latest_headline:
-                    latest_headline = title
-                title_lower = title.lower()
+                title = story.get('title', '').lower()
                 for whale in WHALE_KEYWORDS:
-                    if whale.lower() in title_lower:
+                    if whale.lower() in title:
                         intel.append(f"🐳 {whale}")
         except: pass
 
-        if "-" not in symbol:
+        if "-" not in symbol: 
             try:
                 insiders = ticker_obj.insider_transactions
                 if insiders is not None and not insiders.empty:
@@ -1576,17 +1464,9 @@ class MarketAgent:
                         shares = row.get('Shares', 0)
                         if "purchase" in text:
                             intel.append(f"👔 Insider Buy: {shares}")
-                            self.has_critical_news = True
+                            self.has_critical_news = True 
             except: pass
-
-        if intel:
-            return " | ".join(list(set(intel)))
-        if latest_headline:
-            trimmed = latest_headline.strip()
-            if len(trimmed) > 60:
-                trimmed = trimmed[:57].rstrip() + "..."
-            return f"📰 {trimmed}"
-        return ""
+        return " | ".join(list(set(intel)))
 
     def fetch_data_for_watchlist(self, ticker):
         """Fetch data for a watchlist item (not owned) - focus on BUY signals"""
@@ -1735,7 +1615,7 @@ class MarketAgent:
             if len(df) < 2: return None
             
             # Use PositionAnalyzer - it will look up historical price from date
-            analyzer = PositionAnalyzer(ticker, position, df, market_agent=self)
+            analyzer = PositionAnalyzer(ticker, position, df)
             signal_data = analyzer.generate_signal()
             
             # Check for critical signals
@@ -1763,9 +1643,7 @@ class MarketAgent:
             
             whale_intel = self.check_whale_intel(stock, ticker)
             clean_ticker = ticker.replace("-USD", "")
-
-            sparkline_b64 = TechnicalAnalyzer._build_sparkline_png(df['Close'].tolist())
-
+            
             print(f"   [OWNED] {clean_ticker}: ${analyzer.amount:.2f} → ${analyzer.current_value:.2f} | "
                   f"P/L: {analyzer.gain_loss_pct:.1f}% (${analyzer.gain_loss_dollars:+.2f}) | "
                   f"{analyzer.holding_days}d | Risk: {signal_data['risk_score']}")
@@ -1801,8 +1679,7 @@ class MarketAgent:
                 "first_buy_date": position['first_buy_date'],
                 "last_buy_date": position['last_buy_date'],
                 "buy_count": position.get('buy_count', 1),
-                "lots": position.get('lots', []),
-                "sparkline_b64": sparkline_b64
+                "lots": position.get('lots', [])
             }
         except Exception as e:
             print(f"   [ERROR] {ticker}: {e}")
@@ -1966,47 +1843,7 @@ class MarketAgent:
         
         # Combine all alerts
         all_alerts = tax_alerts + entry_alerts
-
-        # Thesis invalidation sweep — price + technical (Phase 2)
-        if self.thesis_manager is not None:
-            market_data = {}
-            for item in portfolio_data:
-                sym = item.get("symbol")
-                if not sym:
-                    continue
-                market_data[sym] = {
-                    "closes": item.get("recent_closes") or [item.get("price", 0)],
-                    "indicators": {
-                        "rsi": [item["rsi"]] if item.get("rsi") is not None else [],
-                        "weekly_rsi": [item["weekly_rsi"]] if item.get("weekly_rsi") is not None else [],
-                        "macd_hist": [item["macd_hist"]] if item.get("macd_hist") is not None else [],
-                    },
-                }
-            tripped = evaluate_thesis_invalidations(self.thesis_manager, market_data)
-            for tid, cond, detail in tripped:
-                print(f"   🚨 Thesis {tid} invalidated: {cond} ({detail})")
-
-        # Aggregate whale activity across portfolio + watchlist so the user
-        # always has a clear "what did we actually detect today" section.
-        whale_activity = []
-        for item in portfolio_data + watchlist_data:
-            intel = (item.get('whale_intel') or '').strip()
-            # Treat genuine whale/insider hits distinctly from the headline fallback
-            has_hit = intel and not intel.startswith("📰")
-            vol_ratio = item.get('vol_ratio') or 0
-            if has_hit:
-                whale_activity.append({
-                    "symbol": item.get('symbol'),
-                    "kind": "whale",
-                    "detail": intel
-                })
-            if vol_ratio and vol_ratio >= VOLUME_SPIKE_RATIO:
-                whale_activity.append({
-                    "symbol": item.get('symbol'),
-                    "kind": "volume",
-                    "detail": f"📊 Volume {vol_ratio:.1f}x avg"
-                })
-
+        
         return {
             "generated_at": self.timestamp,
             "deep_analysis_enabled": DEEP_ANALYSIS,
@@ -2014,7 +1851,6 @@ class MarketAgent:
             "watchlist": watchlist_data,
             "benchmarks": benchmarks,
             "summary": summary,
-            "whale_activity": whale_activity,
             "recent_signals": all_signals,
             "trade_history": self.journal.trades[-10:],
             
@@ -2079,56 +1915,17 @@ class MarketAgent:
                 current_value = item.get('current_value', 0)
                 gain_loss_dollars = item.get('gain_loss_dollars', current_value - amount_invested)
 
-                # Action/Reasoning
-                reasoning = item.get('reasoning', [])
-                action_text = reasoning[0] if reasoning else ""
-
-                # Sparkline (from feat/inline-sparklines)
-                sparkline_html = ""
-                sparkline_b64 = item.get('sparkline_b64', '')
-                if sparkline_b64:
-                    sparkline_html = (
-                        f'<img src="{sparkline_b64}" alt="3mo chart" '
-                        f'style="display:block;max-width:100%;width:160px;height:48px;" />'
-                    )
-
-                # Entry date (short) + holding duration for the Asset cell
-                entry_date_short = ""
-                raw_first = item.get('first_buy_date')
-                if raw_first:
-                    try:
-                        s = str(raw_first)
-                        _dt = (datetime.fromisoformat(s.replace('Z', '+00:00'))
-                               if 'T' in s
-                               else datetime.strptime(s[:10], '%Y-%m-%d'))
-                        entry_date_short = f"{_dt.strftime('%b')} {_dt.day}, {str(_dt.year)[-2:]}"
-                    except Exception:
-                        entry_date_short = ""
-                holding_days = item.get('holding_days')
-                held_short = ""
-                if isinstance(holding_days, int) and holding_days >= 0:
-                    if holding_days >= 30:
-                        held_short = f"{holding_days // 30}mo"
-                    else:
-                        held_short = f"{holding_days}d"
-                sub_parts = [p for p in [entry_date_short, held_short] if p]
-                sub_line = " · ".join(sub_parts)
-                sub_html = (f'<div style="color: #8b949e; font-size: 11px; '
-                            f'font-weight: normal; margin-top: 2px;">{sub_line}</div>'
-                            if sub_line else "")
-
                 row = "<tr>"
-                row += (f'<td style="{cell_style}">'
-                        f'<a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" '
-                        f'style="{link_style}" target="_blank">{item["symbol"]}</a>'
-                        f'{sub_html}'
-                        f'</td>')
+                row += f'<td style="{cell_style}"><a href="https://finance.yahoo.com/quote/{item["yf_symbol"]}" style="{link_style}" target="_blank">{item["symbol"]}</a></td>'
                 row += f'<td style="{cell_style}">${amount_invested:.2f}</td>'
                 row += f'<td style="{cell_style}">${current_value:.2f}</td>'
                 row += f'<td style="{cell_style} color: {pl_color};">{item["gain_loss_pct"]:+.1f}% (${gain_loss_dollars:+.2f})</td>'
                 row += f'<td style="{cell_style}"><span style="{badge_style}">{item["signal"]}</span></td>'
+                
+                # Action/Reasoning
+                reasoning = item.get('reasoning', [])
+                action_text = reasoning[0] if reasoning else ""
                 row += f'<td style="{cell_style} font-size: 12px; color: #8b949e;">{action_text}</td>'
-                row += f'<td style="{cell_style}">{sparkline_html}</td>'
                 row += "</tr>"
                 html_rows += row
             return html_rows
@@ -2170,72 +1967,11 @@ class MarketAgent:
         
         summary = data.get('summary', {})
         summary_color = "#3fb950" if summary.get('total_gain_loss', 0) >= 0 else "#f85149"
-
+        
         # Risk indicator
         risk = summary.get('avg_risk_score', 50)
         risk_color = "#3fb950" if risk < 40 else "#d29922" if risk < 60 else "#f85149"
         risk_label = "LOW" if risk < 40 else "MEDIUM" if risk < 60 else "HIGH"
-
-        # Whale Activity section — always rendered so the user knows
-        # the detector ran and what it found (or didn't).
-        whale_items = data.get('whale_activity', []) or []
-        if whale_items:
-            whale_rows = ""
-            for w in whale_items[:12]:
-                sym = w.get('symbol', '')
-                kind = w.get('kind', '')
-                detail = w.get('detail', '')
-                badge_bg = "#21262d" if kind == "volume" else "#1f2a3d"
-                whale_rows += (
-                    f'<tr>'
-                    f'<td style="padding: 8px 12px; border-bottom: 1px solid #21262d; '
-                    f'color: #58a6ff; font-weight: bold; font-family: sans-serif; '
-                    f'font-size: 14px; width: 80px;">{sym}</td>'
-                    f'<td style="padding: 8px 12px; border-bottom: 1px solid #21262d; '
-                    f'background-color: {badge_bg}; color: #e6edf3; font-family: sans-serif; '
-                    f'font-size: 13px;">{detail}</td>'
-                    f'</tr>'
-                )
-            whale_body = (f'<table width="100%" cellpadding="0" cellspacing="0" '
-                          f'style="border-collapse: collapse;">{whale_rows}</table>')
-        else:
-            whale_body = ('<div style="padding: 12px; color: #8b949e; '
-                          'font-style: italic; font-size: 13px;">'
-                          'No whale activity detected in the last scan.</div>')
-        whale_section_html = (
-            '<tr><td style="padding-top: 30px;">'
-            '<h3 style="margin: 0 0 15px 0; color: #e6edf3; '
-            'border-bottom: 1px solid #30363d; padding-bottom: 5px;">'
-            '🐳 Whale Activity</h3>'
-            f'{whale_body}'
-            '</td></tr>'
-        )
-
-        # Active Theses section (Phase 1) — empty string if no active theses
-        if self.thesis_manager is not None:
-            current_prices = {p.get("symbol"): p.get("current_price")
-                              for p in data.get("portfolio", []) if p.get("symbol")}
-            active_theses_html = self.thesis_manager.render_email_section(current_prices)
-        else:
-            active_theses_html = ""
-
-        # Benchmark cells (SPY & QQQ 7-day change) — falls back gracefully if missing
-        benchmarks = data.get('benchmarks', {}) or {}
-        def _bench_cell(ticker):
-            b = benchmarks.get(ticker)
-            if not b:
-                return ('<td style="color: #8b949e; font-size: 12px;">—</td>',
-                        '<td style="color: #8b949e; font-size: 18px; font-weight: bold;">—</td>')
-            pct = b.get('change_pct', 0)
-            color = "#3fb950" if pct >= 0 else "#f85149"
-            header = f'<td style="color: #8b949e; font-size: 12px;">{ticker} 7D</td>'
-            value = (f'<td style="color: #e6edf3; font-size: 18px; font-weight: bold;">'
-                     f'${b.get("current", 0)} '
-                     f'<span style="color: {color}; font-size: 13px; font-weight: normal;">'
-                     f'{pct:+.2f}%</span></td>')
-            return header, value
-        spy_header, spy_value = _bench_cell('SPY')
-        qqq_header, qqq_value = _bench_cell('QQQ')
 
         html = f"""
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -2266,25 +2002,17 @@ class MarketAgent:
                                             <td style="color: #8b949e; font-size: 12px;">CURRENT</td>
                                             <td style="color: #8b949e; font-size: 12px;">P/L</td>
                                             <td style="color: #8b949e; font-size: 12px;">RISK</td>
-                                            {spy_header}
-                                            {qqq_header}
                                         </tr>
                                         <tr>
                                             <td style="color: #e6edf3; font-size: 18px; font-weight: bold;">${summary.get('total_invested', 0):.2f}</td>
                                             <td style="color: #e6edf3; font-size: 18px; font-weight: bold;">${summary.get('total_current', 0):.2f}</td>
                                             <td style="color: {summary_color}; font-size: 18px; font-weight: bold;">{summary.get('total_gain_loss_pct', 0):+.1f}%</td>
                                             <td style="color: {risk_color}; font-size: 18px; font-weight: bold;">{risk_label}</td>
-                                            {spy_value}
-                                            {qqq_value}
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
-
-                            {whale_section_html}
-
-                            {active_theses_html}
-
+                            
                             <tr>
                                 <td style="padding-top: 30px;">
                                     <h3 style="margin: 0 0 15px 0; color: #e6edf3; border-bottom: 1px solid #30363d; padding-bottom: 5px;">💼 Positions (sorted by urgency)</h3>
@@ -2297,7 +2025,6 @@ class MarketAgent:
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">P/L</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Signal</th>
                                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">Action</th>
-                                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #30363d; color: #8b949e; font-size: 12px;">3mo Chart</th>
                                             </tr>
                                         </thead>
                                         <tbody>
