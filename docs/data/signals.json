@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-05-24T16:46:12.056490+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "76434.28",
+    "notes": "RSI oversold: 28.39"
+  },
+  {
+    "timestamp": "2026-05-24T16:46:12.347353+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2096.25",
+    "notes": "RSI oversold: 20.78"
+  },
+  {
+    "timestamp": "2026-05-24T16:46:12.645711+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "85.23",
+    "notes": "RSI oversold: 26.69"
+  },
+  {
     "timestamp": "2026-05-24T06:52:20.376675+00:00",
     "ticker": "ETH",
     "action": "BUY_SIGNAL",
@@ -132,29 +153,5 @@
     "action": "BUY_SIGNAL",
     "price": "2130.7",
     "notes": "RSI oversold: 26.38"
-  },
-  {
-    "timestamp": "2026-05-20T07:33:24.316433+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.19",
-    "notes": "RSI oversold: 29.9"
-  },
-  {
-    "timestamp": "2026-05-19T17:54:09.391970+00:00",
-    "ticker": "COIN",
-    "action": "SELL_HALF",
-    "price": "193.45",
-    "notes": "Dropped 13.0% from peak $222.35; Consider selling to protect remaining profits",
-    "entry_price": "165.94",
-    "gain_loss_pct": "16.6",
-    "holding_days": "134"
-  },
-  {
-    "timestamp": "2026-05-19T17:54:14.046572+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "602.29",
-    "notes": "RSI oversold: 24.87"
   }
 ]
