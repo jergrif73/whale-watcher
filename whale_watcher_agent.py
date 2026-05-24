@@ -539,8 +539,20 @@ class BenchmarkComparison:
     
     def compare(self):
         """Compare portfolio to SPY and QQQ"""
+        spy_return = self.benchmarks.get('SPY', {}).get('change_pct', 0)
+        qqq_return = self.benchmarks.get('QQQ', {}).get('change_pct', 0)
+        
         if not self.portfolio:
-            return {'vs_spy': 0, 'vs_qqq': 0, 'alpha': 0}
+            return {
+                'portfolio_return': 0,
+                'spy_return': spy_return,
+                'qqq_return': qqq_return,
+                'vs_spy': 0 - spy_return,
+                'vs_qqq': 0 - qqq_return,
+                'beating_spy': False,
+                'beating_qqq': False,
+                'alpha': 0
+            }
         
         # Calculate portfolio return
         total_invested = sum(p.get('amount_invested', 0) for p in self.portfolio)
