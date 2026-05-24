@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-05-24T06:52:20.376675+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2126.41",
+    "notes": "RSI oversold: 23.48"
+  },
+  {
+    "timestamp": "2026-05-24T06:52:20.556182+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "86.28",
+    "notes": "RSI oversold: 29.04"
+  },
+  {
     "timestamp": "2026-05-24T00:14:15.430785+00:00",
     "ticker": "ETH",
     "action": "BUY_SIGNAL",
@@ -142,22 +156,5 @@
     "action": "BUY_SIGNAL",
     "price": "602.29",
     "notes": "RSI oversold: 24.87"
-  },
-  {
-    "timestamp": "2026-05-19T17:54:18.268390+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2112.74",
-    "notes": "RSI oversold: 22.56"
-  },
-  {
-    "timestamp": "2026-05-19T07:33:40.341658+00:00",
-    "ticker": "COIN",
-    "action": "SELL_HALF",
-    "price": "189.44",
-    "notes": "Dropped 14.8% from peak $222.35; Consider selling to protect remaining profits",
-    "entry_price": "165.94",
-    "gain_loss_pct": "14.2",
-    "holding_days": "134"
   }
 ]
