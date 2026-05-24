@@ -1,412 +1,25 @@
 {
-  "generated_at": "2026-05-22 17:30:18",
+  "generated_at": "2026-05-24 00:14:09",
   "deep_analysis_enabled": false,
-  "portfolio": [
-    {
-      "symbol": "COIN",
-      "yf_symbol": "COIN",
-      "price": 190.2,
-      "amount_invested": 25,
-      "current_value": 29.67,
-      "trend": "SIDEWAYS",
-      "rsi": 43.2,
-      "signal": "\ud83d\udcc9 TRAILING STOP 18.7%",
-      "color": "orange",
-      "action": "SELL_HALF",
-      "priority": 90,
-      "reasoning": [
-        "Dropped 14.5% from peak $222.35",
-        "Consider selling to protect remaining profits"
-      ],
-      "risk_score": 65,
-      "whale_intel": "",
-      "holding_days": 137,
-      "gain_loss_pct": 18.7,
-      "gain_loss_dollars": 4.67,
-      "daily_change": -1.7,
-      "weekly_change": -10.29,
-      "vol_ratio": 0.4,
-      "vol_pattern": "DISTRIBUTION",
-      "peak_since_buy": 222.35,
-      "drawdown_from_peak": -14.5,
-      "support": 177.62,
-      "resistance": 222.35,
-      "price_history": [
-        {
-          "date": "2026-04-13",
-          "close": 174.53,
-          "volume": 7481100
-        },
-        {
-          "date": "2026-04-14",
-          "close": 184.41,
-          "volume": 10884800
-        },
-        {
-          "date": "2026-04-15",
-          "close": 195.9,
-          "volume": 11817400
-        },
-        {
-          "date": "2026-04-16",
-          "close": 199.83,
-          "volume": 11235800
-        },
-        {
-          "date": "2026-04-17",
-          "close": 206.33,
-          "volume": 15670400
-        },
-        {
-          "date": "2026-04-20",
-          "close": 211.63,
-          "volume": 9967500
-        },
-        {
-          "date": "2026-04-21",
-          "close": 195.95,
-          "volume": 15121100
-        },
-        {
-          "date": "2026-04-22",
-          "close": 206.24,
-          "volume": 12096800
-        },
-        {
-          "date": "2026-04-23",
-          "close": 197.93,
-          "volume": 8778500
-        },
-        {
-          "date": "2026-04-24",
-          "close": 199.77,
-          "volume": 5799100
-        },
-        {
-          "date": "2026-04-27",
-          "close": 196.68,
-          "volume": 7855600
-        },
-        {
-          "date": "2026-04-28",
-          "close": 194.1,
-          "volume": 6316100
-        },
-        {
-          "date": "2026-04-29",
-          "close": 181.73,
-          "volume": 12609600
-        },
-        {
-          "date": "2026-04-30",
-          "close": 187.77,
-          "volume": 7786700
-        },
-        {
-          "date": "2026-05-01",
-          "close": 191.25,
-          "volume": 6771100
-        },
-        {
-          "date": "2026-05-04",
-          "close": 202.99,
-          "volume": 11243400
-        },
-        {
-          "date": "2026-05-05",
-          "close": 197.75,
-          "volume": 10074200
-        },
-        {
-          "date": "2026-05-06",
-          "close": 197.96,
-          "volume": 7764900
-        },
-        {
-          "date": "2026-05-07",
-          "close": 192.96,
-          "volume": 9158100
-        },
-        {
-          "date": "2026-05-08",
-          "close": 201.16,
-          "volume": 12909400
-        },
-        {
-          "date": "2026-05-11",
-          "close": 216.6,
-          "volume": 13659300
-        },
-        {
-          "date": "2026-05-12",
-          "close": 207.64,
-          "volume": 9514400
-        },
-        {
-          "date": "2026-05-13",
-          "close": 201.8,
-          "volume": 8370200
-        },
-        {
-          "date": "2026-05-14",
-          "close": 212.01,
-          "volume": 16576900
-        },
-        {
-          "date": "2026-05-15",
-          "close": 195.43,
-          "volume": 14428600
-        },
-        {
-          "date": "2026-05-18",
-          "close": 189.44,
-          "volume": 10399800
-        },
-        {
-          "date": "2026-05-19",
-          "close": 193.45,
-          "volume": 7085000
-        },
-        {
-          "date": "2026-05-20",
-          "close": 191.29,
-          "volume": 7044200
-        },
-        {
-          "date": "2026-05-21",
-          "close": 193.56,
-          "volume": 5657100
-        },
-        {
-          "date": "2026-05-22",
-          "close": 190.2,
-          "volume": 4262476
-        }
-      ],
-      "is_owned": true,
-      "first_buy_date": "2026-01-05",
-      "last_buy_date": "2026-01-05",
-      "buy_count": 1,
-      "lots": [
-        {
-          "amount": 25,
-          "date": "2026-01-05"
-        }
-      ],
-      "sparkline_b64": "data:image/png;base64,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"
-    },
-    {
-      "symbol": "MSFT",
-      "yf_symbol": "MSFT",
-      "price": 418.89,
-      "amount_invested": 25,
-      "current_value": 27.3,
-      "trend": "UP",
-      "rsi": 55.5,
-      "signal": "\ud83d\udc8e HOLD +9.2%",
-      "color": "blue",
-      "action": "HOLD",
-      "priority": 10,
-      "reasoning": [
-        "Position profitable",
-        "Trend supportive"
-      ],
-      "risk_score": 40,
-      "whale_intel": "",
-      "holding_days": 127,
-      "gain_loss_pct": 9.2,
-      "gain_loss_dollars": 2.3,
-      "daily_change": -0.0,
-      "weekly_change": 2.53,
-      "vol_ratio": 0.37,
-      "vol_pattern": "NEUTRAL",
-      "peak_since_buy": 432.76,
-      "drawdown_from_peak": -3.2,
-      "support": 397.15,
-      "resistance": 431.76,
-      "price_history": [
-        {
-          "date": "2026-04-13",
-          "close": 383.54,
-          "volume": 35745800
-        },
-        {
-          "date": "2026-04-14",
-          "close": 392.26,
-          "volume": 37504500
-        },
-        {
-          "date": "2026-04-15",
-          "close": 410.33,
-          "volume": 45063400
-        },
-        {
-          "date": "2026-04-16",
-          "close": 419.35,
-          "volume": 41642400
-        },
-        {
-          "date": "2026-04-17",
-          "close": 421.88,
-          "volume": 48568200
-        },
-        {
-          "date": "2026-04-20",
-          "close": 417.17,
-          "volume": 27582200
-        },
-        {
-          "date": "2026-04-21",
-          "close": 423.24,
-          "volume": 32048500
-        },
-        {
-          "date": "2026-04-22",
-          "close": 431.98,
-          "volume": 29378200
-        },
-        {
-          "date": "2026-04-23",
-          "close": 414.85,
-          "volume": 38308000
-        },
-        {
-          "date": "2026-04-24",
-          "close": 423.7,
-          "volume": 27457400
-        },
-        {
-          "date": "2026-04-27",
-          "close": 423.9,
-          "volume": 30867300
-        },
-        {
-          "date": "2026-04-28",
-          "close": 428.32,
-          "volume": 30438100
-        },
-        {
-          "date": "2026-04-29",
-          "close": 423.54,
-          "volume": 38288300
-        },
-        {
-          "date": "2026-04-30",
-          "close": 406.9,
-          "volume": 70909400
-        },
-        {
-          "date": "2026-05-01",
-          "close": 413.54,
-          "volume": 31372400
-        },
-        {
-          "date": "2026-05-04",
-          "close": 412.73,
-          "volume": 28066500
-        },
-        {
-          "date": "2026-05-05",
-          "close": 410.49,
-          "volume": 25700900
-        },
-        {
-          "date": "2026-05-06",
-          "close": 413.07,
-          "volume": 30285900
-        },
-        {
-          "date": "2026-05-07",
-          "close": 419.86,
-          "volume": 34942400
-        },
-        {
-          "date": "2026-05-08",
-          "close": 414.22,
-          "volume": 33383800
-        },
-        {
-          "date": "2026-05-11",
-          "close": 411.77,
-          "volume": 35657900
-        },
-        {
-          "date": "2026-05-12",
-          "close": 406.89,
-          "volume": 38594200
-        },
-        {
-          "date": "2026-05-13",
-          "close": 404.33,
-          "volume": 29667100
-        },
-        {
-          "date": "2026-05-14",
-          "close": 408.55,
-          "volume": 27077500
-        },
-        {
-          "date": "2026-05-15",
-          "close": 421.01,
-          "volume": 50771200
-        },
-        {
-          "date": "2026-05-18",
-          "close": 422.62,
-          "volume": 32564100
-        },
-        {
-          "date": "2026-05-19",
-          "close": 416.52,
-          "volume": 33018700
-        },
-        {
-          "date": "2026-05-20",
-          "close": 420.15,
-          "volume": 27864000
-        },
-        {
-          "date": "2026-05-21",
-          "close": 419.09,
-          "volume": 31303300
-        },
-        {
-          "date": "2026-05-22",
-          "close": 418.89,
-          "volume": 12642450
-        }
-      ],
-      "is_owned": true,
-      "first_buy_date": "2026-01-15",
-      "last_buy_date": "2026-01-15",
-      "buy_count": 1,
-      "lots": [
-        {
-          "amount": 25,
-          "date": "2026-01-15"
-        }
-      ],
-      "sparkline_b64": "data:image/png;base64,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"
-    }
-  ],
+  "portfolio": [],
   "watchlist": [
     {
       "symbol": "MSTR",
       "yf_symbol": "MSTR",
-      "price": 163.72,
+      "price": 159.89,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 37.25,
-      "signal": "\ud83d\udcc9 DISTRIBUTION",
-      "color": "orange",
+      "rsi": 35.52,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.7,
-      "weekly_change": -12.44,
-      "vol_ratio": 0.4704147687568434,
+      "daily_change": -3.0,
+      "weekly_change": -14.48,
+      "vol_ratio": 0.880243708242462,
       "vol_pattern": "DISTRIBUTION",
       "support": 156.11,
       "resistance": 197.0,
@@ -554,12 +167,186 @@
         {
           "date": "2026-05-21",
           "close": 164.85,
-          "volume": 10483200
+          "volume": 10526900
         },
         {
           "date": "2026-05-22",
-          "close": 163.72,
-          "volume": 6792380
+          "close": 159.89,
+          "volume": 12713800
+        }
+      ],
+      "is_owned": false
+    },
+    {
+      "symbol": "COIN",
+      "yf_symbol": "COIN",
+      "price": 184.99,
+      "entry_price": 0,
+      "cost_basis": 0,
+      "shares": 0,
+      "trend": "DOWN",
+      "rsi": 40.88,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
+      "whale_intel": "",
+      "holding_days": null,
+      "gain_loss_pct": 0,
+      "daily_change": -4.4,
+      "weekly_change": -12.74,
+      "vol_ratio": 0.7469092512830996,
+      "vol_pattern": "DISTRIBUTION",
+      "support": 177.62,
+      "resistance": 222.35,
+      "price_history": [
+        {
+          "date": "2026-04-13",
+          "close": 174.53,
+          "volume": 7481100
+        },
+        {
+          "date": "2026-04-14",
+          "close": 184.41,
+          "volume": 10884800
+        },
+        {
+          "date": "2026-04-15",
+          "close": 195.9,
+          "volume": 11817400
+        },
+        {
+          "date": "2026-04-16",
+          "close": 199.83,
+          "volume": 11235800
+        },
+        {
+          "date": "2026-04-17",
+          "close": 206.33,
+          "volume": 15670400
+        },
+        {
+          "date": "2026-04-20",
+          "close": 211.63,
+          "volume": 9967500
+        },
+        {
+          "date": "2026-04-21",
+          "close": 195.95,
+          "volume": 15121100
+        },
+        {
+          "date": "2026-04-22",
+          "close": 206.24,
+          "volume": 12096800
+        },
+        {
+          "date": "2026-04-23",
+          "close": 197.93,
+          "volume": 8778500
+        },
+        {
+          "date": "2026-04-24",
+          "close": 199.77,
+          "volume": 5799100
+        },
+        {
+          "date": "2026-04-27",
+          "close": 196.68,
+          "volume": 7855600
+        },
+        {
+          "date": "2026-04-28",
+          "close": 194.1,
+          "volume": 6316100
+        },
+        {
+          "date": "2026-04-29",
+          "close": 181.73,
+          "volume": 12609600
+        },
+        {
+          "date": "2026-04-30",
+          "close": 187.77,
+          "volume": 7786700
+        },
+        {
+          "date": "2026-05-01",
+          "close": 191.25,
+          "volume": 6771100
+        },
+        {
+          "date": "2026-05-04",
+          "close": 202.99,
+          "volume": 11243400
+        },
+        {
+          "date": "2026-05-05",
+          "close": 197.75,
+          "volume": 10074200
+        },
+        {
+          "date": "2026-05-06",
+          "close": 197.96,
+          "volume": 7764900
+        },
+        {
+          "date": "2026-05-07",
+          "close": 192.96,
+          "volume": 9158100
+        },
+        {
+          "date": "2026-05-08",
+          "close": 201.16,
+          "volume": 12909400
+        },
+        {
+          "date": "2026-05-11",
+          "close": 216.6,
+          "volume": 13659300
+        },
+        {
+          "date": "2026-05-12",
+          "close": 207.64,
+          "volume": 9514400
+        },
+        {
+          "date": "2026-05-13",
+          "close": 201.8,
+          "volume": 8370200
+        },
+        {
+          "date": "2026-05-14",
+          "close": 212.01,
+          "volume": 16576900
+        },
+        {
+          "date": "2026-05-15",
+          "close": 195.43,
+          "volume": 14428600
+        },
+        {
+          "date": "2026-05-18",
+          "close": 189.44,
+          "volume": 10399800
+        },
+        {
+          "date": "2026-05-19",
+          "close": 193.45,
+          "volume": 7085000
+        },
+        {
+          "date": "2026-05-20",
+          "close": 191.29,
+          "volume": 7044200
+        },
+        {
+          "date": "2026-05-21",
+          "close": 193.56,
+          "volume": 5674300
+        },
+        {
+          "date": "2026-05-22",
+          "close": 184.99,
+          "volume": 7892000
         }
       ],
       "is_owned": false
@@ -567,20 +354,20 @@
     {
       "symbol": "TSLA",
       "yf_symbol": "TSLA",
-      "price": 429.95,
+      "price": 426.01,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 62.55,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 61.54,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 2.9,
-      "weekly_change": -3.01,
-      "vol_ratio": 0.5439448556573633,
+      "daily_change": 2.0,
+      "weekly_change": -3.9,
+      "vol_ratio": 0.8234534606603063,
       "vol_pattern": "NEUTRAL",
       "support": 364.02,
       "resistance": 453.4,
@@ -728,12 +515,12 @@
         {
           "date": "2026-05-21",
           "close": 417.85,
-          "volume": 42487100
+          "volume": 42636900
         },
         {
           "date": "2026-05-22",
-          "close": 429.95,
-          "volume": 30340934
+          "close": 426.01,
+          "volume": 45944100
         }
       ],
       "is_owned": false
@@ -741,20 +528,20 @@
     {
       "symbol": "PLTR",
       "yf_symbol": "PLTR",
-      "price": 137.51,
+      "price": 136.88,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 36.46,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 35.66,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.1,
-      "weekly_change": 2.83,
-      "vol_ratio": 0.4978169448816822,
+      "daily_change": -0.4,
+      "weekly_change": 2.36,
+      "vol_ratio": 0.7545569702963012,
       "vol_pattern": "ACCUMULATION",
       "support": 128.75,
       "resistance": 149.64,
@@ -902,12 +689,12 @@
         {
           "date": "2026-05-21",
           "close": 137.41,
-          "volume": 24222500
+          "volume": 24311900
         },
         {
           "date": "2026-05-22",
-          "close": 137.51,
-          "volume": 18128243
+          "close": 136.88,
+          "volume": 27484300
         }
       ],
       "is_owned": false
@@ -915,21 +702,21 @@
     {
       "symbol": "NVDA",
       "yf_symbol": "NVDA",
-      "price": 218.12,
+      "price": 215.33,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 65.21,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 62.51,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.6,
-      "weekly_change": -7.47,
-      "vol_ratio": 0.5929227138098523,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": -1.9,
+      "weekly_change": -8.66,
+      "vol_ratio": 1.024464020410133,
+      "vol_pattern": "DISTRIBUTION",
       "support": 194.74,
       "resistance": 236.54,
       "price_history": [
@@ -1076,12 +863,12 @@
         {
           "date": "2026-05-21",
           "close": 219.51,
-          "volume": 202582500
+          "volume": 203381800
         },
         {
           "date": "2026-05-22",
-          "close": 218.12,
-          "volume": 97385356
+          "close": 215.33,
+          "volume": 168346300
         }
       ],
       "is_owned": false
@@ -1089,23 +876,23 @@
     {
       "symbol": "AMD",
       "yf_symbol": "AMD",
-      "price": 471.16,
+      "price": 467.51,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 75.58,
-      "signal": "\ud83d\udcca OVERBOUGHT",
-      "color": "orange",
+      "rsi": 75.22,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 4.8,
-      "weekly_change": 4.77,
-      "vol_ratio": 0.6613769939824459,
+      "daily_change": 4.0,
+      "weekly_change": 3.96,
+      "vol_ratio": 0.9638647692275606,
       "vol_pattern": "ACCUMULATION",
       "support": 310.0,
-      "resistance": 481.37,
+      "resistance": 481.41,
       "price_history": [
         {
           "date": "2026-04-13",
@@ -1250,12 +1037,12 @@
         {
           "date": "2026-05-21",
           "close": 449.59,
-          "volume": 27126100
+          "volume": 27252000
         },
         {
           "date": "2026-05-22",
-          "close": 471.16,
-          "volume": 23775286
+          "close": 467.51,
+          "volume": 34661300
         }
       ],
       "is_owned": false
@@ -1263,20 +1050,20 @@
     {
       "symbol": "AVGO",
       "yf_symbol": "AVGO",
-      "price": 414.49,
+      "price": 414.14,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 49.15,
-      "signal": "\ud83d\udc40 UPTREND DIP",
-      "color": "blue",
+      "rsi": 49.0,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.0,
-      "weekly_change": -5.75,
-      "vol_ratio": 0.39462842336576875,
+      "daily_change": -0.1,
+      "weekly_change": -5.83,
+      "vol_ratio": 0.757017516470478,
       "vol_pattern": "ACCUMULATION",
       "support": 394.65,
       "resistance": 442.36,
@@ -1424,12 +1211,12 @@
         {
           "date": "2026-05-21",
           "close": 414.57,
-          "volume": 16821400
+          "volume": 16865300
         },
         {
           "date": "2026-05-22",
-          "close": 414.49,
-          "volume": 7328751
+          "close": 414.14,
+          "volume": 14062100
         }
       ],
       "is_owned": false
@@ -1437,20 +1224,20 @@
     {
       "symbol": "META",
       "yf_symbol": "META",
-      "price": 610.1,
+      "price": 610.26,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 49.8,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 49.9,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.4,
-      "weekly_change": -1.35,
-      "vol_ratio": 0.4429909431239284,
+      "daily_change": 0.5,
+      "weekly_change": -1.32,
+      "vol_ratio": 0.8996458178370608,
       "vol_pattern": "ACCUMULATION",
       "support": 592.6,
       "resistance": 682.5,
@@ -1598,12 +1385,12 @@
         {
           "date": "2026-05-21",
           "close": 607.38,
-          "volume": 13454200
+          "volume": 13476100
         },
         {
           "date": "2026-05-22",
-          "close": 610.1,
-          "volume": 5746195
+          "close": 610.26,
+          "volume": 11671600
         }
       ],
       "is_owned": false
@@ -1611,21 +1398,21 @@
     {
       "symbol": "GOOGL",
       "yf_symbol": "GOOGL",
-      "price": 386.32,
+      "price": 382.97,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 52.34,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 49.8,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.3,
-      "weekly_change": -3.68,
-      "vol_ratio": 0.3457918359523448,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": -1.2,
+      "weekly_change": -4.51,
+      "vol_ratio": 0.7533822419970746,
+      "vol_pattern": "NEUTRAL",
       "support": 342.73,
       "resistance": 408.61,
       "price_history": [
@@ -1772,12 +1559,186 @@
         {
           "date": "2026-05-21",
           "close": 387.66,
-          "volume": 24818800
+          "volume": 24852800
         },
         {
           "date": "2026-05-22",
-          "close": 386.32,
-          "volume": 9363009
+          "close": 382.97,
+          "volume": 20401900
+        }
+      ],
+      "is_owned": false
+    },
+    {
+      "symbol": "MSFT",
+      "yf_symbol": "MSFT",
+      "price": 418.57,
+      "entry_price": 0,
+      "cost_basis": 0,
+      "shares": 0,
+      "trend": "UP",
+      "rsi": 55.15,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
+      "whale_intel": "",
+      "holding_days": null,
+      "gain_loss_pct": 0,
+      "daily_change": -0.1,
+      "weekly_change": 2.45,
+      "vol_ratio": 0.6571301677686534,
+      "vol_pattern": "NEUTRAL",
+      "support": 397.15,
+      "resistance": 431.76,
+      "price_history": [
+        {
+          "date": "2026-04-13",
+          "close": 383.54,
+          "volume": 35745800
+        },
+        {
+          "date": "2026-04-14",
+          "close": 392.26,
+          "volume": 37504500
+        },
+        {
+          "date": "2026-04-15",
+          "close": 410.33,
+          "volume": 45063400
+        },
+        {
+          "date": "2026-04-16",
+          "close": 419.35,
+          "volume": 41642400
+        },
+        {
+          "date": "2026-04-17",
+          "close": 421.88,
+          "volume": 48568200
+        },
+        {
+          "date": "2026-04-20",
+          "close": 417.17,
+          "volume": 27582200
+        },
+        {
+          "date": "2026-04-21",
+          "close": 423.24,
+          "volume": 32048500
+        },
+        {
+          "date": "2026-04-22",
+          "close": 431.98,
+          "volume": 29378200
+        },
+        {
+          "date": "2026-04-23",
+          "close": 414.85,
+          "volume": 38308000
+        },
+        {
+          "date": "2026-04-24",
+          "close": 423.7,
+          "volume": 27457400
+        },
+        {
+          "date": "2026-04-27",
+          "close": 423.9,
+          "volume": 30867300
+        },
+        {
+          "date": "2026-04-28",
+          "close": 428.32,
+          "volume": 30438100
+        },
+        {
+          "date": "2026-04-29",
+          "close": 423.54,
+          "volume": 38288300
+        },
+        {
+          "date": "2026-04-30",
+          "close": 406.9,
+          "volume": 70909400
+        },
+        {
+          "date": "2026-05-01",
+          "close": 413.54,
+          "volume": 31372400
+        },
+        {
+          "date": "2026-05-04",
+          "close": 412.73,
+          "volume": 28066500
+        },
+        {
+          "date": "2026-05-05",
+          "close": 410.49,
+          "volume": 25700900
+        },
+        {
+          "date": "2026-05-06",
+          "close": 413.07,
+          "volume": 30285900
+        },
+        {
+          "date": "2026-05-07",
+          "close": 419.86,
+          "volume": 34942400
+        },
+        {
+          "date": "2026-05-08",
+          "close": 414.22,
+          "volume": 33383800
+        },
+        {
+          "date": "2026-05-11",
+          "close": 411.77,
+          "volume": 35657900
+        },
+        {
+          "date": "2026-05-12",
+          "close": 406.89,
+          "volume": 38594200
+        },
+        {
+          "date": "2026-05-13",
+          "close": 404.33,
+          "volume": 29667100
+        },
+        {
+          "date": "2026-05-14",
+          "close": 408.55,
+          "volume": 27077500
+        },
+        {
+          "date": "2026-05-15",
+          "close": 421.01,
+          "volume": 50771200
+        },
+        {
+          "date": "2026-05-18",
+          "close": 422.62,
+          "volume": 32564100
+        },
+        {
+          "date": "2026-05-19",
+          "close": 416.52,
+          "volume": 33018700
+        },
+        {
+          "date": "2026-05-20",
+          "close": 420.15,
+          "volume": 27864000
+        },
+        {
+          "date": "2026-05-21",
+          "close": 419.09,
+          "volume": 31393500
+        },
+        {
+          "date": "2026-05-22",
+          "close": 418.57,
+          "volume": 22341900
         }
       ],
       "is_owned": false
@@ -1785,23 +1746,23 @@
     {
       "symbol": "SOXL",
       "yf_symbol": "SOXL",
-      "price": 194.79,
+      "price": 190.56,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 66.86,
-      "signal": "NEUTRAL",
-      "color": "black",
+      "rsi": 66.14,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 9.2,
-      "weekly_change": 4.62,
-      "vol_ratio": 0.526280761870429,
+      "daily_change": 6.8,
+      "weekly_change": 2.35,
+      "vol_ratio": 0.7144679427126738,
       "vol_pattern": "ACCUMULATION",
       "support": 103.99,
-      "resistance": 195.26,
+      "resistance": 195.27,
       "price_history": [
         {
           "date": "2026-04-13",
@@ -1946,12 +1907,12 @@
         {
           "date": "2026-05-21",
           "close": 178.39,
-          "volume": 51713500
+          "volume": 52278700
         },
         {
           "date": "2026-05-22",
-          "close": 194.79,
-          "volume": 32935029
+          "close": 190.56,
+          "volume": 44752300
         }
       ],
       "is_owned": false
@@ -1959,20 +1920,20 @@
     {
       "symbol": "TQQQ",
       "yf_symbol": "TQQQ",
-      "price": 79.26,
+      "price": 77.84,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 73.26,
-      "signal": "\ud83d\udcca OVERBOUGHT",
-      "color": "orange",
+      "rsi": 71.97,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 3.0,
-      "weekly_change": 0.4,
-      "vol_ratio": 0.5573301756124124,
+      "daily_change": 1.2,
+      "weekly_change": -1.41,
+      "vol_ratio": 0.7780478272305371,
       "vol_pattern": "ACCUMULATION",
       "support": 59.68,
       "resistance": 79.68,
@@ -2120,12 +2081,12 @@
         {
           "date": "2026-05-21",
           "close": 76.95,
-          "volume": 73943900
+          "volume": 74958100
         },
         {
           "date": "2026-05-22",
-          "close": 79.26,
-          "volume": 41368685
+          "close": 77.84,
+          "volume": 57830700
         }
       ],
       "is_owned": false
@@ -2133,21 +2094,21 @@
     {
       "symbol": "SPY",
       "yf_symbol": "SPY",
-      "price": 748.76,
+      "price": 745.64,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 73.17,
-      "signal": "\ud83d\udcca OVERBOUGHT",
-      "color": "orange",
+      "rsi": 71.84,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.8,
-      "weekly_change": 0.08,
-      "vol_ratio": 0.3323108813658201,
-      "vol_pattern": "NEUTRAL",
+      "daily_change": 0.4,
+      "weekly_change": -0.34,
+      "vol_ratio": 0.856466380984678,
+      "vol_pattern": "DISTRIBUTION",
       "support": 708.37,
       "resistance": 749.53,
       "price_history": [
@@ -2294,12 +2255,12 @@
         {
           "date": "2026-05-21",
           "close": 742.72,
-          "volume": 43248300
+          "volume": 43332200
         },
         {
           "date": "2026-05-22",
-          "close": 748.76,
-          "volume": 16165964
+          "close": 745.64,
+          "volume": 41671800
         }
       ],
       "is_owned": false
@@ -2307,21 +2268,21 @@
     {
       "symbol": "QQQ",
       "yf_symbol": "QQQ",
-      "price": 721.89,
+      "price": 717.54,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 74.68,
-      "signal": "\ud83d\udcca OVERBOUGHT",
-      "color": "orange",
+      "rsi": 73.52,
+      "signal": "\u23f8\ufe0f WEEKEND",
+      "color": "gray",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 1.0,
-      "weekly_change": 0.29,
-      "vol_ratio": 0.4336432055888167,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 0.4,
+      "weekly_change": -0.31,
+      "vol_ratio": 0.7834629386674036,
+      "vol_pattern": "NEUTRAL",
       "support": 653.81,
       "resistance": 722.12,
       "price_history": [
@@ -2468,12 +2429,12 @@
         {
           "date": "2026-05-21",
           "close": 714.51,
-          "volume": 36225800
+          "volume": 36415400
         },
         {
           "date": "2026-05-22",
-          "close": 721.89,
-          "volume": 18256908
+          "close": 717.54,
+          "volume": 32999600
         }
       ],
       "is_owned": false
@@ -2481,29 +2442,24 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 76978.99,
+      "price": 76597.55,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 36.89,
+      "rsi": 35.84,
       "signal": "\ud83d\udcc9 DISTRIBUTION",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.7,
-      "weekly_change": -1.48,
-      "vol_ratio": 0.7995594300044085,
+      "daily_change": 1.5,
+      "weekly_change": -1.07,
+      "vol_ratio": 0.9475533124860769,
       "vol_pattern": "DISTRIBUTION",
-      "support": 76029.23,
+      "support": 75323.88,
       "resistance": 82792.21,
       "price_history": [
-        {
-          "date": "2026-04-23",
-          "close": 78268.95,
-          "volume": 40354900916
-        },
         {
           "date": "2026-04-24",
           "close": 77455.31,
@@ -2646,8 +2602,13 @@
         },
         {
           "date": "2026-05-22",
-          "close": 76978.99,
-          "volume": 25292888064
+          "close": 75488.24,
+          "volume": 27859040109
+        },
+        {
+          "date": "2026-05-24",
+          "close": 76597.55,
+          "volume": 29564389376
         }
       ],
       "is_owned": false
@@ -2655,29 +2616,24 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2126.68,
+      "price": 2113.6,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 27.22,
+      "rsi": 28.12,
       "signal": "\u2705 BUY DIP",
       "color": "green",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.2,
-      "weekly_change": -2.43,
-      "vol_ratio": 0.7526331618716385,
-      "vol_pattern": "ACCUMULATION",
-      "support": 2078.62,
+      "daily_change": 2.4,
+      "weekly_change": -0.66,
+      "vol_ratio": 1.1308604545831469,
+      "vol_pattern": "DISTRIBUTION",
+      "support": 2056.93,
       "resistance": 2423.04,
       "price_history": [
-        {
-          "date": "2026-04-23",
-          "close": 2331.51,
-          "volume": 19909161913
-        },
         {
           "date": "2026-04-24",
           "close": 2315.69,
@@ -2820,8 +2776,13 @@
         },
         {
           "date": "2026-05-22",
-          "close": 2126.68,
-          "volume": 11062732800
+          "close": 2064.64,
+          "volume": 13229489284
+        },
+        {
+          "date": "2026-05-24",
+          "close": 2113.6,
+          "volume": 16292435968
         }
       ],
       "is_owned": false
@@ -2829,29 +2790,24 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 86.94,
+      "price": 85.59,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
-      "trend": "UP",
-      "rsi": 39.6,
-      "signal": "\ud83d\udc40 UPTREND DIP",
-      "color": "blue",
+      "trend": "DOWN",
+      "rsi": 35.9,
+      "signal": "NEUTRAL",
+      "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.2,
-      "weekly_change": 0.47,
-      "vol_ratio": 0.8771400421085882,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 1.5,
+      "weekly_change": 0.49,
+      "vol_ratio": 1.1057932249553537,
+      "vol_pattern": "NEUTRAL",
       "support": 83.37,
       "resistance": 98.27,
       "price_history": [
-        {
-          "date": "2026-04-23",
-          "close": 86.14,
-          "volume": 4738760145
-        },
         {
           "date": "2026-04-24",
           "close": 86.23,
@@ -2994,8 +2950,13 @@
         },
         {
           "date": "2026-05-22",
-          "close": 86.94,
-          "volume": 3219414016
+          "close": 84.31,
+          "volume": 3382830764
+        },
+        {
+          "date": "2026-05-24",
+          "close": 85.59,
+          "volume": 3967541760
         }
       ],
       "is_owned": false
@@ -3008,24 +2969,19 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "DOWN",
-      "rsi": 38.11,
+      "rsi": 35.95,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 9.7,
-      "weekly_change": 8.72,
-      "vol_ratio": 1.4389161021880645,
+      "daily_change": 5.6,
+      "weekly_change": 9.09,
+      "vol_ratio": 0.9382646991101955,
       "vol_pattern": "ACCUMULATION",
       "support": 0.19,
       "resistance": 0.25,
       "price_history": [
-        {
-          "date": "2026-04-23",
-          "close": 0.21,
-          "volume": 148155899
-        },
         {
           "date": "2026-04-24",
           "close": 0.21,
@@ -3168,8 +3124,13 @@
         },
         {
           "date": "2026-05-22",
+          "close": 0.2,
+          "volume": 237143070
+        },
+        {
+          "date": "2026-05-24",
           "close": 0.21,
-          "volume": 236056592
+          "volume": 159443184
         }
       ],
       "is_owned": false
@@ -3177,29 +3138,24 @@
     {
       "symbol": "DOGE",
       "yf_symbol": "DOGE-USD",
-      "price": 0.11,
+      "price": 0.1,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 43.82,
-      "signal": "\ud83d\udc40 UPTREND DIP",
-      "color": "blue",
+      "rsi": 40.24,
+      "signal": "\ud83d\udcc9 DISTRIBUTION",
+      "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
       "daily_change": 0.5,
-      "weekly_change": -3.06,
-      "vol_ratio": 0.4860819452559217,
-      "vol_pattern": "NEUTRAL",
+      "weekly_change": -5.49,
+      "vol_ratio": 0.8679074764222662,
+      "vol_pattern": "DISTRIBUTION",
       "support": 0.1,
       "resistance": 0.12,
       "price_history": [
-        {
-          "date": "2026-04-23",
-          "close": 0.1,
-          "volume": 1613587143
-        },
         {
           "date": "2026-04-24",
           "close": 0.1,
@@ -3342,8 +3298,13 @@
         },
         {
           "date": "2026-05-22",
-          "close": 0.11,
-          "volume": 656362560
+          "close": 0.1,
+          "volume": 782017162
+        },
+        {
+          "date": "2026-05-24",
+          "close": 0.1,
+          "volume": 1133868416
         }
       ],
       "is_owned": false
@@ -3351,26 +3312,32 @@
   ],
   "benchmarks": {
     "SPY": {
-      "current": 748.59,
-      "change_pct": 0.06,
+      "current": 745.64,
+      "change_pct": -0.34,
       "period_days": 7
     },
     "QQQ": {
-      "current": 721.77,
-      "change_pct": 0.28,
+      "current": 717.54,
+      "change_pct": -0.31,
       "period_days": 7
     }
   },
   "summary": {
-    "total_invested": 50,
-    "total_current": 56.97,
-    "total_gain_loss": 6.97,
-    "total_gain_loss_pct": 13.94,
-    "position_count": 2,
-    "avg_risk_score": 52.0
+    "total_invested": 0,
+    "total_current": 0,
+    "total_gain_loss": 0,
+    "total_gain_loss_pct": 0,
+    "position_count": 0,
+    "avg_risk_score": 0
   },
-  "whale_activity": [],
   "recent_signals": [
+    {
+      "timestamp": "2026-05-24T00:14:15.430785+00:00",
+      "ticker": "ETH",
+      "action": "BUY_SIGNAL",
+      "price": "2113.6",
+      "notes": "RSI oversold: 28.12"
+    },
     {
       "timestamp": "2026-05-22T17:30:19.073708+00:00",
       "ticker": "COIN",
@@ -3524,33 +3491,9 @@
       "entry_price": "165.94",
       "gain_loss_pct": "14.2",
       "holding_days": "134"
-    },
-    {
-      "timestamp": "2026-05-19T07:33:45.335988+00:00",
-      "ticker": "META",
-      "action": "BUY_SIGNAL",
-      "price": "611.21",
-      "notes": "RSI oversold: 26.19"
     }
   ],
   "trade_history": [
-    {
-      "id": "002",
-      "ticker": "MARA",
-      "action": "BUY",
-      "amount_invested": 50,
-      "price_at_purchase": 50,
-      "date": "2025-12-26T10:00:00Z",
-      "notes": "Initial position"
-    },
-    {
-      "id": "gopw8umj",
-      "ticker": "COIN",
-      "action": "BUY",
-      "amount": 25,
-      "date": "2026-01-05",
-      "notes": ""
-    },
     {
       "id": "jrw338w4",
       "ticker": "META",
@@ -3614,6 +3557,22 @@
       "amount": 106.25,
       "date": "2026-04-21",
       "notes": ""
+    },
+    {
+      "id": "06e99bz3",
+      "ticker": "COIN",
+      "action": "SELL",
+      "amount": 29.67,
+      "date": "2026-05-22",
+      "notes": ""
+    },
+    {
+      "id": "c4eyy6fo",
+      "ticker": "MSFT",
+      "action": "SELL",
+      "amount": 27.3,
+      "date": "2026-05-22",
+      "notes": ""
     }
   ],
   "ai_insights": {},
@@ -3622,25 +3581,14 @@
       "positions": {},
       "suggestions": [
         {
-          "ticker": "SOL",
-          "score": 75,
-          "reasons": [
-            "RSI in buy zone",
-            "Uptrend",
-            "Accumulation pattern"
-          ],
-          "current_price": 86.94,
-          "rsi": 39.6
-        },
-        {
           "ticker": "MSTR",
           "score": 50,
           "reasons": [
             "RSI in buy zone",
             "Uptrend"
           ],
-          "current_price": 163.72,
-          "rsi": 37.25
+          "current_price": 159.89,
+          "rsi": 35.52
         },
         {
           "ticker": "BTC",
@@ -3649,8 +3597,8 @@
             "RSI in buy zone",
             "Uptrend"
           ],
-          "current_price": 76978.99,
-          "rsi": 36.89
+          "current_price": 76597.55,
+          "rsi": 35.84
         },
         {
           "ticker": "AVGO",
@@ -3659,31 +3607,21 @@
             "Uptrend",
             "Accumulation pattern"
           ],
-          "current_price": 414.49,
-          "rsi": 49.15
-        },
-        {
-          "ticker": "GOOGL",
-          "score": 45,
-          "reasons": [
-            "Uptrend",
-            "Accumulation pattern"
-          ],
-          "current_price": 386.32,
-          "rsi": 52.34
+          "current_price": 414.14,
+          "rsi": 49.0
         }
       ]
     },
     "performance": {
-      "total_trades": 11,
-      "total_positions": 2,
-      "winners": 2,
+      "total_trades": 13,
+      "total_positions": 0,
+      "winners": 0,
       "losers": 0,
-      "win_rate": 100.0,
-      "total_gain": 6.97,
+      "win_rate": 0,
+      "total_gain": 0,
       "total_loss": 0,
-      "net_pnl": 6.97,
-      "avg_win": 3.48,
+      "net_pnl": 0,
+      "avg_win": 0,
       "avg_loss": 0,
       "profit_factor": 999,
       "categories": {
@@ -3700,153 +3638,133 @@
           "return_pct": 0
         },
         "stock": {
-          "count": 2,
-          "pnl": 6.97,
-          "invested": 50,
-          "return_pct": 13.9
+          "count": 0,
+          "pnl": 0,
+          "invested": 0,
+          "return_pct": 0
         }
       }
     },
-    "tax_lots": [
-      {
-        "ticker": "COIN",
-        "holding_days": 137,
-        "status": "SHORT_TERM",
-        "days_to_long_term": 228,
-        "alert": "228 days until long-term eligible",
-        "gain_loss_pct": 18.7,
-        "gain_loss_dollars": 4.67
-      },
-      {
-        "ticker": "MSFT",
-        "holding_days": 127,
-        "status": "SHORT_TERM",
-        "days_to_long_term": 238,
-        "alert": "238 days until long-term eligible",
-        "gain_loss_pct": 9.2,
-        "gain_loss_dollars": 2.3
-      }
-    ],
+    "tax_lots": [],
     "tax_alerts": [],
     "dividends": {
-      "total_annual": 0.19,
-      "total_monthly": 0.02,
-      "positions": [
-        {
-          "ticker": "MSFT",
-          "value": 27.3,
-          "yield_pct": 0.7,
-          "annual_income": 0.19,
-          "monthly_income": 0.02
-        }
-      ],
-      "yield_on_portfolio": 0.7
+      "total_annual": 0,
+      "total_monthly": 0.0,
+      "positions": [],
+      "yield_on_portfolio": 0
     },
     "benchmark_comparison": {
-      "portfolio_return": 13.94,
-      "spy_return": 0.06,
-      "qqq_return": 0.28,
-      "vs_spy": 13.88,
-      "vs_qqq": 13.66,
-      "beating_spy": "True",
-      "beating_qqq": "True",
-      "alpha": 13.77
+      "portfolio_return": 0,
+      "spy_return": -0.34,
+      "qqq_return": -0.31,
+      "vs_spy": 0.34,
+      "vs_qqq": 0.31,
+      "beating_spy": false,
+      "beating_qqq": false,
+      "alpha": 0
     },
     "entry_alerts": [
       {
         "ticker": "BTC",
         "type": "NEAR_SUPPORT",
-        "price": 76978.99,
-        "support": 76029.23,
-        "message": "\ud83d\udee1\ufe0f BTC near support $76029.23 - potential entry"
+        "price": 76597.55,
+        "support": 75323.88,
+        "message": "\ud83d\udee1\ufe0f BTC near support $75323.88 - potential entry"
       },
       {
         "ticker": "ETH",
         "type": "RSI_OVERSOLD",
-        "price": 2126.68,
-        "rsi": 27.22,
-        "message": "\ud83d\udcc9 ETH RSI at 27.22 - oversold entry zone"
+        "price": 2113.6,
+        "rsi": 28.12,
+        "message": "\ud83d\udcc9 ETH RSI at 28.12 - oversold entry zone"
+      },
+      {
+        "ticker": "DOGE",
+        "type": "NEAR_SUPPORT",
+        "price": 0.1,
+        "support": 0.1,
+        "message": "\ud83d\udee1\ufe0f DOGE near support $0.10 - potential entry"
       }
     ],
     "position_sizing": [
       {
         "ticker": "MSTR",
-        "current_price": 163.72,
+        "current_price": 159.89,
         "suggested_stop": 156.11,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.26,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 2.36,
+        "position_pct": 10.0
+      },
+      {
+        "ticker": "COIN",
+        "current_price": 184.99,
+        "suggested_stop": 177.62,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 3.98,
         "position_pct": 10.0
       },
       {
         "ticker": "TSLA",
-        "current_price": 429.95,
-        "suggested_stop": 386.96,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
+        "current_price": 426.01,
+        "suggested_stop": 383.41,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 10.0,
         "position_pct": 10.0
       },
       {
         "ticker": "PLTR",
-        "current_price": 137.51,
+        "current_price": 136.88,
         "suggested_stop": 128.75,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.36,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 5.94,
         "position_pct": 10.0
       },
       {
         "ticker": "NVDA",
-        "current_price": 218.12,
-        "suggested_stop": 196.31,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
+        "current_price": 215.33,
+        "suggested_stop": 194.74,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 9.56,
         "position_pct": 10.0
       },
       {
         "ticker": "AMD",
-        "current_price": 471.16,
-        "suggested_stop": 424.04,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
+        "current_price": 467.51,
+        "suggested_stop": 420.76,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 10.0,
         "position_pct": 10.0
       },
       {
         "ticker": "AVGO",
-        "current_price": 414.49,
+        "current_price": 414.14,
         "suggested_stop": 394.65,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.27,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 4.71,
         "position_pct": 10.0
       },
       {
         "ticker": "META",
-        "current_price": 610.1,
+        "current_price": 610.26,
         "suggested_stop": 592.6,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.16,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 2.89,
         "position_pct": 10.0
       },
       {
         "ticker": "GOOGL",
-        "current_price": 386.32,
-        "suggested_stop": 347.69,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
+        "current_price": 382.97,
+        "suggested_stop": 344.67,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 10.0,
         "position_pct": 10.0
       },
       {
-        "ticker": "SOXL",
-        "current_price": 194.79,
-        "suggested_stop": 175.31,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
-        "position_pct": 10.0
-      },
-      {
-        "ticker": "TQQQ",
-        "current_price": 79.26,
-        "suggested_stop": 71.33,
-        "suggested_amount": 5.7,
-        "risk_if_stopped": 0.57,
+        "ticker": "MSFT",
+        "current_price": 418.57,
+        "suggested_stop": 397.15,
+        "suggested_amount": 100.0,
+        "risk_if_stopped": 5.12,
         "position_pct": 10.0
       }
     ],
@@ -3854,16 +3772,23 @@
       {
         "ticker": "BTC",
         "type": "NEAR_SUPPORT",
-        "price": 76978.99,
-        "support": 76029.23,
-        "message": "\ud83d\udee1\ufe0f BTC near support $76029.23 - potential entry"
+        "price": 76597.55,
+        "support": 75323.88,
+        "message": "\ud83d\udee1\ufe0f BTC near support $75323.88 - potential entry"
       },
       {
         "ticker": "ETH",
         "type": "RSI_OVERSOLD",
-        "price": 2126.68,
-        "rsi": 27.22,
-        "message": "\ud83d\udcc9 ETH RSI at 27.22 - oversold entry zone"
+        "price": 2113.6,
+        "rsi": 28.12,
+        "message": "\ud83d\udcc9 ETH RSI at 28.12 - oversold entry zone"
+      },
+      {
+        "ticker": "DOGE",
+        "type": "NEAR_SUPPORT",
+        "price": 0.1,
+        "support": 0.1,
+        "message": "\ud83d\udee1\ufe0f DOGE near support $0.10 - potential entry"
       }
     ]
   },
