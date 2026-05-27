@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-05-27T07:53:29.289109+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "225.79",
+    "notes": "Major move: 18.5%"
+  },
+  {
+    "timestamp": "2026-05-27T07:53:32.177195+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2078.56",
+    "notes": "RSI oversold: 28.44"
+  },
+  {
+    "timestamp": "2026-05-27T07:53:33.525673+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.1",
+    "notes": "RSI oversold: 28.22"
+  },
+  {
     "timestamp": "2026-05-26T18:14:12.958129+00:00",
     "ticker": "SOXL",
     "action": "ALERT",
@@ -120,29 +141,5 @@
     "entry_price": "160.24",
     "gain_loss_pct": "18.7",
     "holding_days": "137"
-  },
-  {
-    "timestamp": "2026-05-22T17:30:24.918017+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2126.68",
-    "notes": "RSI oversold: 27.22"
-  },
-  {
-    "timestamp": "2026-05-22T07:33:11.325514+00:00",
-    "ticker": "COIN",
-    "action": "SELL_HALF",
-    "price": "193.56",
-    "notes": "Dropped 12.9% from peak $222.35; Consider selling to protect remaining profits",
-    "entry_price": "160.24",
-    "gain_loss_pct": "20.8",
-    "holding_days": "137"
-  },
-  {
-    "timestamp": "2026-05-22T07:33:15.743304+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2128.56",
-    "notes": "RSI oversold: 27.35"
   }
 ]
