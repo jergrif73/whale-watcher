@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-05-29T18:24:27.719494+00:00",
+    "ticker": "GOOGL",
+    "action": "SUPPORT_BUY",
+    "price": "382.74",
+    "notes": "Near support $379.05"
+  },
+  {
+    "timestamp": "2026-05-29T18:24:29.969188+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "73724.22",
+    "notes": "RSI oversold: 25.45"
+  },
+  {
+    "timestamp": "2026-05-29T18:24:30.279524+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2021.25",
+    "notes": "RSI oversold: 24.96"
+  },
+  {
+    "timestamp": "2026-05-29T18:24:30.730352+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.26",
+    "notes": "Major move: 12.5%"
+  },
+  {
+    "timestamp": "2026-05-29T18:24:30.996288+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.1",
+    "notes": "RSI oversold: 18.5"
+  },
+  {
     "timestamp": "2026-05-29T07:43:15.366603+00:00",
     "ticker": "BTC",
     "action": "BUY_SIGNAL",
@@ -103,40 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.1",
     "notes": "RSI oversold: 24.93"
-  },
-  {
-    "timestamp": "2026-05-27T07:53:29.289109+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "225.79",
-    "notes": "Major move: 18.5%"
-  },
-  {
-    "timestamp": "2026-05-27T07:53:32.177195+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2078.56",
-    "notes": "RSI oversold: 28.44"
-  },
-  {
-    "timestamp": "2026-05-27T07:53:33.525673+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.1",
-    "notes": "RSI oversold: 28.22"
-  },
-  {
-    "timestamp": "2026-05-26T18:14:12.958129+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "222.58",
-    "notes": "Major move: 16.8%"
-  },
-  {
-    "timestamp": "2026-05-26T18:14:15.345436+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2072.08",
-    "notes": "RSI oversold: 26.07"
   }
 ]
