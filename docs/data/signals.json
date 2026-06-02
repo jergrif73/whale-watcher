@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-06-02T08:17:04.827805+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "149.78",
+    "notes": "RSI oversold: 21.64"
+  },
+  {
+    "timestamp": "2026-06-02T08:17:08.802858+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "69911.46",
+    "notes": "RSI oversold: 23.21"
+  },
+  {
     "timestamp": "2026-06-01T20:07:38.946723+00:00",
     "ticker": "MSTR",
     "action": "BUY_SIGNAL",
@@ -124,19 +138,5 @@
     "action": "ALERT",
     "price": "0.26",
     "notes": "Major move: 12.5%"
-  },
-  {
-    "timestamp": "2026-05-29T18:24:30.996288+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.1",
-    "notes": "RSI oversold: 18.5"
-  },
-  {
-    "timestamp": "2026-05-29T07:43:15.366603+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "73322.36",
-    "notes": "RSI oversold: 23.66"
   }
 ]
