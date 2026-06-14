@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-06-14T17:04:52.912994+00:00",
+    "ticker": "BTC",
+    "action": "BUY_SIGNAL",
+    "price": "63972.63",
+    "notes": "RSI oversold: 26.37"
+  },
+  {
+    "timestamp": "2026-06-14T17:04:53.222544+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1662.74",
+    "notes": "RSI oversold: 26.24"
+  },
+  {
+    "timestamp": "2026-06-14T17:04:53.631554+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "67.58",
+    "notes": "RSI oversold: 29.27"
+  },
+  {
     "timestamp": "2026-06-14T08:05:41.688064+00:00",
     "ticker": "BTC",
     "action": "BUY_SIGNAL",
@@ -117,26 +138,5 @@
     "action": "ALERT",
     "price": "223.99",
     "notes": "Major move: 24.0%"
-  },
-  {
-    "timestamp": "2026-06-12T08:13:34.109446+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "63253.38",
-    "notes": "RSI oversold: 24.51"
-  },
-  {
-    "timestamp": "2026-06-12T08:13:34.523896+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1665.4",
-    "notes": "RSI oversold: 25.54"
-  },
-  {
-    "timestamp": "2026-06-12T08:13:34.959451+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "66.59",
-    "notes": "RSI oversold: 26.83"
   }
 ]
