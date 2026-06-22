@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-06-22T09:35:19.872915+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "112.53",
+    "notes": "RSI oversold: 26.07"
+  },
+  {
+    "timestamp": "2026-06-22T09:35:21.007438+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "128.47",
+    "notes": "RSI oversold: 23.69"
+  },
+  {
+    "timestamp": "2026-06-22T09:35:23.392531+00:00",
+    "ticker": "MSFT",
+    "action": "BUY_SIGNAL",
+    "price": "379.4",
+    "notes": "RSI oversold: 18.55"
+  },
+  {
+    "timestamp": "2026-06-22T09:35:23.915268+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "279.29",
+    "notes": "Major move: 19.4%"
+  },
+  {
     "timestamp": "2026-06-19T17:45:17.540051+00:00",
     "ticker": "MSTR",
     "action": "BUY_SIGNAL",
@@ -110,33 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "nan",
     "notes": "RSI oversold: 28.2"
-  },
-  {
-    "timestamp": "2026-06-15T19:36:18.267634+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "273.09",
-    "notes": "Major move: 16.4%"
-  },
-  {
-    "timestamp": "2026-06-15T09:47:53.066495+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "123.97",
-    "notes": "RSI oversold: 29.43"
-  },
-  {
-    "timestamp": "2026-06-14T17:04:52.912994+00:00",
-    "ticker": "BTC",
-    "action": "BUY_SIGNAL",
-    "price": "63972.63",
-    "notes": "RSI oversold: 26.37"
-  },
-  {
-    "timestamp": "2026-06-14T17:04:53.222544+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1662.74",
-    "notes": "RSI oversold: 26.24"
   }
 ]
