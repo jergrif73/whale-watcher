@@ -1,5 +1,40 @@
 [
   {
+    "timestamp": "2026-06-24T07:29:52.322527+00:00",
+    "ticker": "TSLA",
+    "action": "SUPPORT_BUY",
+    "price": "381.61",
+    "notes": "Near support $379.06"
+  },
+  {
+    "timestamp": "2026-06-24T07:29:52.797506+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "116.7",
+    "notes": "RSI oversold: 16.24"
+  },
+  {
+    "timestamp": "2026-06-24T07:29:54.287915+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "380.15",
+    "notes": "RSI oversold: 29.21"
+  },
+  {
+    "timestamp": "2026-06-24T07:29:55.886366+00:00",
+    "ticker": "MSFT",
+    "action": "BUY_SIGNAL",
+    "price": "373.94",
+    "notes": "RSI oversold: 16.91"
+  },
+  {
+    "timestamp": "2026-06-24T07:29:56.522364+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "231.42",
+    "notes": "Major move: -23.1%"
+  },
+  {
     "timestamp": "2026-06-23T17:42:49.653211+00:00",
     "ticker": "TSLA",
     "action": "SUPPORT_BUY",
@@ -103,40 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "112.53",
     "notes": "RSI oversold: 26.07"
-  },
-  {
-    "timestamp": "2026-06-22T09:35:21.007438+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "128.47",
-    "notes": "RSI oversold: 23.69"
-  },
-  {
-    "timestamp": "2026-06-22T09:35:23.392531+00:00",
-    "ticker": "MSFT",
-    "action": "BUY_SIGNAL",
-    "price": "379.4",
-    "notes": "RSI oversold: 18.55"
-  },
-  {
-    "timestamp": "2026-06-22T09:35:23.915268+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "279.29",
-    "notes": "Major move: 19.4%"
-  },
-  {
-    "timestamp": "2026-06-19T17:45:17.540051+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "112.53",
-    "notes": "RSI oversold: 26.07"
-  },
-  {
-    "timestamp": "2026-06-19T17:45:18.846630+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "128.47",
-    "notes": "RSI oversold: 23.69"
   }
 ]
