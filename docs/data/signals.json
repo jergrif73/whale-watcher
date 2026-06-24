@@ -1,5 +1,47 @@
 [
   {
+    "timestamp": "2026-06-24T17:45:26.676162+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "92.53",
+    "notes": "Major move: -10.9%"
+  },
+  {
+    "timestamp": "2026-06-24T17:45:27.563814+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "112.76",
+    "notes": "RSI oversold: 18.34"
+  },
+  {
+    "timestamp": "2026-06-24T17:45:28.529415+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "380.42",
+    "notes": "RSI oversold: 29.58"
+  },
+  {
+    "timestamp": "2026-06-24T17:45:28.860617+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "556.74",
+    "notes": "RSI oversold: 29.69"
+  },
+  {
+    "timestamp": "2026-06-24T17:45:29.651769+00:00",
+    "ticker": "MSFT",
+    "action": "BUY_SIGNAL",
+    "price": "370.77",
+    "notes": "RSI oversold: 18.92"
+  },
+  {
+    "timestamp": "2026-06-24T17:45:32.789021+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.07",
+    "notes": "RSI oversold: 28.25"
+  },
+  {
     "timestamp": "2026-06-24T07:29:52.322527+00:00",
     "ticker": "TSLA",
     "action": "SUPPORT_BUY",
@@ -96,47 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "367.34",
     "notes": "RSI oversold: 9.28"
-  },
-  {
-    "timestamp": "2026-06-22T19:00:50.026529+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "108.36",
-    "notes": "RSI oversold: 27.53"
-  },
-  {
-    "timestamp": "2026-06-22T19:00:50.998127+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "119.57",
-    "notes": "RSI oversold: 14.67"
-  },
-  {
-    "timestamp": "2026-06-22T19:00:52.449445+00:00",
-    "ticker": "META",
-    "action": "SUPPORT_BUY",
-    "price": "565.03",
-    "notes": "Near support $556.49"
-  },
-  {
-    "timestamp": "2026-06-22T19:00:52.764808+00:00",
-    "ticker": "GOOGL",
-    "action": "SUPPORT_BUY",
-    "price": "347.5",
-    "notes": "Near support $341.72"
-  },
-  {
-    "timestamp": "2026-06-22T19:00:53.184161+00:00",
-    "ticker": "MSFT",
-    "action": "BUY_SIGNAL",
-    "price": "369.14",
-    "notes": "RSI oversold: 9.43"
-  },
-  {
-    "timestamp": "2026-06-22T09:35:19.872915+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "112.53",
-    "notes": "RSI oversold: 26.07"
   }
 ]
