@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-07-24T06:16:04.996004+00:00",
+    "ticker": "TSLA",
+    "action": "ALERT",
+    "price": "319.69",
+    "notes": "Major move: -14.5%"
+  },
+  {
+    "timestamp": "2026-07-24T06:16:06.856377+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "317.69",
+    "notes": "RSI oversold: 29.65"
+  },
+  {
+    "timestamp": "2026-07-24T06:16:08.653973+00:00",
+    "ticker": "QQQ",
+    "action": "SUPPORT_BUY",
+    "price": "691.96",
+    "notes": "Near support $686.76"
+  },
+  {
     "timestamp": "2026-07-23T17:06:59.383579+00:00",
     "ticker": "TSLA",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.16",
     "notes": "RSI oversold: 19.13"
-  },
-  {
-    "timestamp": "2026-07-17T06:06:58.611883+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "142.48",
-    "notes": "Major move: -13.9%"
-  },
-  {
-    "timestamp": "2026-07-17T06:07:02.069421+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.16",
-    "notes": "RSI oversold: 24.38"
-  },
-  {
-    "timestamp": "2026-07-16T16:58:42.831767+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "143.35",
-    "notes": "Major move: -13.4%"
   }
 ]
