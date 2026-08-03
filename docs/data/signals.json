@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-08-03T06:49:02.192263+00:00",
+    "ticker": "COIN",
+    "action": "ALERT",
+    "price": "146.26",
+    "notes": "Major move: -10.6%"
+  },
+  {
+    "timestamp": "2026-08-03T06:49:02.446108+00:00",
+    "ticker": "TSLA",
+    "action": "BUY_SIGNAL",
+    "price": "311.21",
+    "notes": "RSI oversold: 18.08"
+  },
+  {
+    "timestamp": "2026-08-03T06:49:03.887174+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "556.71",
+    "notes": "RSI oversold: 22.9"
+  },
+  {
     "timestamp": "2026-08-02T16:42:22.957892+00:00",
     "ticker": "BTC",
     "action": "SUPPORT_BUY",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "298.32",
     "notes": "RSI oversold: 9.07"
-  },
-  {
-    "timestamp": "2026-07-30T06:14:51.521953+00:00",
-    "ticker": "AMD",
-    "action": "BUY_SIGNAL",
-    "price": "429.56",
-    "notes": "RSI oversold: 29.09"
-  },
-  {
-    "timestamp": "2026-07-30T06:14:52.975404+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "91.99",
-    "notes": "Major move: -16.0%"
-  },
-  {
-    "timestamp": "2026-07-30T06:14:53.327585+00:00",
-    "ticker": "TQQQ",
-    "action": "BUY_SIGNAL",
-    "price": "57.75",
-    "notes": "RSI oversold: 21.32"
   }
 ]
