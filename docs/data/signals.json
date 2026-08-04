@@ -1,5 +1,33 @@
 [
   {
+    "timestamp": "2026-08-04T17:26:18.040591+00:00",
+    "ticker": "TSLA",
+    "action": "BUY_SIGNAL",
+    "price": "326.89",
+    "notes": "RSI oversold: 26.44"
+  },
+  {
+    "timestamp": "2026-08-04T17:26:18.368698+00:00",
+    "ticker": "PLTR",
+    "action": "ALERT",
+    "price": "162.41",
+    "notes": "Major move: 29.3%"
+  },
+  {
+    "timestamp": "2026-08-04T17:26:19.860783+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "587.36",
+    "notes": "RSI oversold: 26.08"
+  },
+  {
+    "timestamp": "2026-08-04T17:26:21.042199+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "140.89",
+    "notes": "Major move: 20.7%"
+  },
+  {
     "timestamp": "2026-08-04T06:17:10.507921+00:00",
     "ticker": "TSLA",
     "action": "BUY_SIGNAL",
@@ -110,33 +138,5 @@
     "action": "ALERT",
     "price": "451.1",
     "notes": "Major move: 15.5%"
-  },
-  {
-    "timestamp": "2026-07-31T06:34:47.322986+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "114.72",
-    "notes": "Major move: 24.7%"
-  },
-  {
-    "timestamp": "2026-07-30T17:11:51.126079+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "305.96",
-    "notes": "RSI oversold: 13.29"
-  },
-  {
-    "timestamp": "2026-07-30T17:11:52.457953+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "485.89",
-    "notes": "Major move: 13.1%"
-  },
-  {
-    "timestamp": "2026-07-30T17:11:53.088289+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "531.92",
-    "notes": "RSI oversold: 13.18"
   }
 ]
