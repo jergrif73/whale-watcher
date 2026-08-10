@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-08-10T05:12:42.104797+00:00",
+    "ticker": "PLTR",
+    "action": "ALERT",
+    "price": "172.01",
+    "notes": "Major move: 10.3%"
+  },
+  {
+    "timestamp": "2026-08-10T05:12:47.088393+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.14",
+    "notes": "RSI oversold: 29.71"
+  },
+  {
     "timestamp": "2026-08-07T05:25:43.609984+00:00",
     "ticker": "TSLA",
     "action": "BUY_SIGNAL",
@@ -124,19 +138,5 @@
     "action": "ALERT",
     "price": "146.26",
     "notes": "Major move: -10.6%"
-  },
-  {
-    "timestamp": "2026-08-03T06:49:02.446108+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "311.21",
-    "notes": "RSI oversold: 18.08"
-  },
-  {
-    "timestamp": "2026-08-03T06:49:03.887174+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "556.71",
-    "notes": "RSI oversold: 22.9"
   }
 ]
