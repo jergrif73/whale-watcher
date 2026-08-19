@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-08-19T04:23:42.089586+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "129.1",
+    "notes": "Major move: -14.8%"
+  },
+  {
+    "timestamp": "2026-08-19T04:23:44.820508+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.12",
+    "notes": "RSI oversold: 16.01"
+  },
+  {
     "timestamp": "2026-08-18T16:15:31.908241+00:00",
     "ticker": "SOXL",
     "action": "ALERT",
@@ -124,19 +138,5 @@
     "action": "ALERT",
     "price": "74.82",
     "notes": "Major move: 10.1%"
-  },
-  {
-    "timestamp": "2026-08-04T17:26:18.040591+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "326.89",
-    "notes": "RSI oversold: 26.44"
-  },
-  {
-    "timestamp": "2026-08-04T17:26:18.368698+00:00",
-    "ticker": "PLTR",
-    "action": "ALERT",
-    "price": "162.41",
-    "notes": "Major move: 29.3%"
   }
 ]
