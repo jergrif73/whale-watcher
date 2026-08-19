@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-08-19T16:15:43.808678+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "105.64",
+    "notes": "Major move: 14.2%"
+  },
+  {
+    "timestamp": "2026-08-19T16:15:44.131011+00:00",
+    "ticker": "COIN",
+    "action": "ALERT",
+    "price": "164.24",
+    "notes": "Major move: 12.3%"
+  },
+  {
+    "timestamp": "2026-08-19T16:15:51.334286+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.13",
+    "notes": "RSI oversold: 29.16"
+  },
+  {
     "timestamp": "2026-08-19T04:23:42.089586+00:00",
     "ticker": "SOXL",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "ALERT",
     "price": "162.66",
     "notes": "Major move: 29.5%"
-  },
-  {
-    "timestamp": "2026-08-05T06:15:56.894486+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "587.94",
-    "notes": "RSI oversold: 26.16"
-  },
-  {
-    "timestamp": "2026-08-05T06:15:57.663658+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "139.9",
-    "notes": "Major move: 19.9%"
-  },
-  {
-    "timestamp": "2026-08-05T06:15:57.968632+00:00",
-    "ticker": "TQQQ",
-    "action": "ALERT",
-    "price": "74.82",
-    "notes": "Major move: 10.1%"
   }
 ]
