@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-08-20T04:23:10.390021+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "104.25",
+    "notes": "Major move: 12.7%"
+  },
+  {
+    "timestamp": "2026-08-20T04:23:17.969083+00:00",
+    "ticker": "ETH",
+    "action": "ALERT",
+    "price": "2251.86",
+    "notes": "Major move: 17.5%"
+  },
+  {
+    "timestamp": "2026-08-20T04:23:18.340431+00:00",
+    "ticker": "SOL",
+    "action": "WHALE_ACTIVITY",
+    "price": "84.47",
+    "notes": "Volume 4.112667169096728x avg"
+  },
+  {
     "timestamp": "2026-08-19T16:15:43.808678+00:00",
     "ticker": "MSTR",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "323.48",
     "notes": "RSI oversold: 26.59"
-  },
-  {
-    "timestamp": "2026-08-05T17:15:15.105432+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "584.38",
-    "notes": "RSI oversold: 28.05"
-  },
-  {
-    "timestamp": "2026-08-05T06:15:55.738641+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "327.35",
-    "notes": "RSI oversold: 26.68"
-  },
-  {
-    "timestamp": "2026-08-05T06:15:55.951788+00:00",
-    "ticker": "PLTR",
-    "action": "ALERT",
-    "price": "162.66",
-    "notes": "Major move: 29.5%"
   }
 ]
