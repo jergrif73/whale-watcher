@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-08-21T04:25:24.551066+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.15",
+    "notes": "Major move: 12.5%"
+  },
+  {
+    "timestamp": "2026-08-21T04:25:24.868478+00:00",
+    "ticker": "DOGE",
+    "action": "WHALE_ACTIVITY",
+    "price": "0.08",
+    "notes": "Volume 4.348784152508175x avg"
+  },
+  {
     "timestamp": "2026-08-20T16:18:24.939705+00:00",
     "ticker": "ETH",
     "action": "WHALE_ACTIVITY",
@@ -124,19 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.14",
     "notes": "RSI oversold: 29.71"
-  },
-  {
-    "timestamp": "2026-08-07T05:25:43.609984+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "319.53",
-    "notes": "RSI oversold: 27.8"
-  },
-  {
-    "timestamp": "2026-08-06T06:19:30.685036+00:00",
-    "ticker": "TSLA",
-    "action": "BUY_SIGNAL",
-    "price": "321.55",
-    "notes": "RSI oversold: 26.24"
   }
 ]
