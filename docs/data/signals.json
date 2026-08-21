@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-08-21T16:16:40.320019+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "344.35",
+    "notes": "RSI oversold: 25.0"
+  },
+  {
+    "timestamp": "2026-08-21T16:16:43.550419+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.16",
+    "notes": "Major move: 12.1%"
+  },
+  {
+    "timestamp": "2026-08-21T16:16:43.951339+00:00",
+    "ticker": "DOGE",
+    "action": "WHALE_ACTIVITY",
+    "price": "0.08",
+    "notes": "Volume 3.6445644254241825x avg"
+  },
+  {
     "timestamp": "2026-08-21T04:25:24.551066+00:00",
     "ticker": "FET",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.12",
     "notes": "RSI oversold: 23.85"
-  },
-  {
-    "timestamp": "2026-08-16T16:09:20.813825+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.12",
-    "notes": "RSI oversold: 24.99"
-  },
-  {
-    "timestamp": "2026-08-10T05:12:42.104797+00:00",
-    "ticker": "PLTR",
-    "action": "ALERT",
-    "price": "172.01",
-    "notes": "Major move: 10.3%"
-  },
-  {
-    "timestamp": "2026-08-10T05:12:47.088393+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.14",
-    "notes": "RSI oversold: 29.71"
   }
 ]
