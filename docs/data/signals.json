@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-08-28T00:38:58.401596+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "137.4",
+    "notes": "Major move: 11.5%"
+  },
+  {
+    "timestamp": "2026-08-28T00:39:02.451468+00:00",
+    "ticker": "AVGO",
+    "action": "BUY_SIGNAL",
+    "price": "371.54",
+    "notes": "RSI oversold: 22.87"
+  },
+  {
+    "timestamp": "2026-08-28T00:39:03.633892+00:00",
+    "ticker": "GOOGL",
+    "action": "SUPPORT_BUY",
+    "price": "340.65",
+    "notes": "Near support $338.52"
+  },
+  {
     "timestamp": "2026-08-27T14:49:27.206106+00:00",
     "ticker": "AVGO",
     "action": "BUY_SIGNAL",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "344.35",
     "notes": "RSI oversold: 25.0"
-  },
-  {
-    "timestamp": "2026-08-21T16:16:43.550419+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.16",
-    "notes": "Major move: 12.1%"
-  },
-  {
-    "timestamp": "2026-08-21T16:16:43.951339+00:00",
-    "ticker": "DOGE",
-    "action": "WHALE_ACTIVITY",
-    "price": "0.08",
-    "notes": "Volume 3.6445644254241825x avg"
-  },
-  {
-    "timestamp": "2026-08-21T04:25:24.551066+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.15",
-    "notes": "Major move: 12.5%"
   }
 ]
