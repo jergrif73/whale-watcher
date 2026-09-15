@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-09-15T09:00:08.727466+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "101.13",
+    "notes": "Major move: -17.0%"
+  },
+  {
+    "timestamp": "2026-09-15T09:00:10.112489+00:00",
+    "ticker": "BTC",
+    "action": "SUPPORT_BUY",
+    "price": "76932.25",
+    "notes": "Near support $76162.91"
+  },
+  {
     "timestamp": "2026-09-14T19:58:51.514416+00:00",
     "ticker": "SOXL",
     "action": "ALERT",
@@ -124,19 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "369.01",
     "notes": "RSI oversold: 24.51"
-  },
-  {
-    "timestamp": "2026-09-02T19:00:24.618162+00:00",
-    "ticker": "SOXL",
-    "action": "BUY_SIGNAL",
-    "price": "106.42",
-    "notes": "RSI oversold: 26.47"
-  },
-  {
-    "timestamp": "2026-09-02T19:00:25.257752+00:00",
-    "ticker": "TQQQ",
-    "action": "BUY_SIGNAL",
-    "price": "69.31",
-    "notes": "RSI oversold: 28.53"
   }
 ]
