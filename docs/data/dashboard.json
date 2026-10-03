@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03 09:27:54",
+  "generated_at": "2026-10-03 18:51:10",
   "deep_analysis_enabled": false,
   "portfolio": [],
   "watchlist": [
@@ -2442,20 +2442,20 @@
     {
       "symbol": "BTC",
       "yf_symbol": "BTC-USD",
-      "price": 84582.93,
+      "price": 84928.86,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 64.65,
+      "rsi": 65.69,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.1,
-      "weekly_change": 0.15,
-      "vol_ratio": 1.0089326860298486,
+      "daily_change": 0.5,
+      "weekly_change": 0.56,
+      "vol_ratio": 0.4527991246802435,
       "vol_pattern": "NEUTRAL",
       "support": 74944.59,
       "resistance": 87363.76,
@@ -2607,8 +2607,8 @@
         },
         {
           "date": "2026-10-03",
-          "close": 84582.93,
-          "volume": 34113005568
+          "close": 84928.86,
+          "volume": 15309583360
         }
       ],
       "is_owned": false
@@ -2616,20 +2616,20 @@
     {
       "symbol": "ETH",
       "yf_symbol": "ETH-USD",
-      "price": 2684.46,
+      "price": 2683.8,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 57.47,
+      "rsi": 57.39,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
       "daily_change": 0.6,
-      "weekly_change": -0.09,
-      "vol_ratio": 1.0672309132278572,
+      "weekly_change": -0.12,
+      "vol_ratio": 0.4560243981880799,
       "vol_pattern": "NEUTRAL",
       "support": 2357.96,
       "resistance": 2805.5,
@@ -2781,8 +2781,8 @@
         },
         {
           "date": "2026-10-03",
-          "close": 2684.46,
-          "volume": 14624126976
+          "close": 2683.8,
+          "volume": 6248843264
         }
       ],
       "is_owned": false
@@ -2790,20 +2790,20 @@
     {
       "symbol": "SOL",
       "yf_symbol": "SOL-USD",
-      "price": 119.2,
+      "price": 119.87,
       "entry_price": 0,
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 66.07,
+      "rsi": 66.94,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.5,
-      "weekly_change": -2.34,
-      "vol_ratio": 0.7736904007867815,
+      "daily_change": 1.1,
+      "weekly_change": -1.79,
+      "vol_ratio": 0.4202855217104582,
       "vol_pattern": "ACCUMULATION",
       "support": 96.23,
       "resistance": 124.62,
@@ -2955,8 +2955,8 @@
         },
         {
           "date": "2026-10-03",
-          "close": 119.2,
-          "volume": 3194009088
+          "close": 119.87,
+          "volume": 1735055488
         }
       ],
       "is_owned": false
@@ -2969,16 +2969,16 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 63.65,
+      "rsi": 65.0,
       "signal": "NEUTRAL",
       "color": "black",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": 0.0,
-      "weekly_change": -11.55,
-      "vol_ratio": 0.9294193752339011,
-      "vol_pattern": "ACCUMULATION",
+      "daily_change": 2.7,
+      "weekly_change": -9.15,
+      "vol_ratio": 0.852862894257206,
+      "vol_pattern": "NEUTRAL",
       "support": 0.15,
       "resistance": 0.26,
       "price_history": [
@@ -3130,7 +3130,7 @@
         {
           "date": "2026-10-03",
           "close": 0.22,
-          "volume": 186823824
+          "volume": 171435104
         }
       ],
       "is_owned": false
@@ -3143,15 +3143,15 @@
       "cost_basis": 0,
       "shares": 0,
       "trend": "UP",
-      "rsi": 56.9,
+      "rsi": 57.58,
       "signal": "\ud83d\udcc9 DISTRIBUTION",
       "color": "orange",
       "whale_intel": "",
       "holding_days": null,
       "gain_loss_pct": 0,
-      "daily_change": -0.4,
-      "weekly_change": -4.54,
-      "vol_ratio": 0.8587567386590226,
+      "daily_change": 0.1,
+      "weekly_change": -4.07,
+      "vol_ratio": 0.504202111966442,
       "vol_pattern": "DISTRIBUTION",
       "support": 0.08,
       "resistance": 0.11,
@@ -3304,7 +3304,7 @@
         {
           "date": "2026-10-03",
           "close": 0.09,
-          "volume": 1103914880
+          "volume": 648141888
         }
       ],
       "is_owned": false
@@ -3568,16 +3568,6 @@
           ],
           "current_price": 517.53,
           "rsi": 57.83
-        },
-        {
-          "ticker": "FET",
-          "score": 45,
-          "reasons": [
-            "Uptrend",
-            "Accumulation pattern"
-          ],
-          "current_price": 0.22,
-          "rsi": 63.65
         }
       ]
     },
