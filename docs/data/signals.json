@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": "2026-10-08T10:58:34.571128+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2549.32",
+    "notes": "RSI oversold: 29.2"
+  },
+  {
     "timestamp": "2026-10-04T18:50:50.577740+00:00",
     "ticker": "FET",
     "action": "ALERT",
@@ -131,12 +138,5 @@
     "action": "ALERT",
     "price": "101.13",
     "notes": "Major move: -17.0%"
-  },
-  {
-    "timestamp": "2026-09-15T09:00:10.112489+00:00",
-    "ticker": "BTC",
-    "action": "SUPPORT_BUY",
-    "price": "76932.25",
-    "notes": "Near support $76162.91"
   }
 ]
