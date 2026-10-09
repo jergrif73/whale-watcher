@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-10-09T20:22:37.196342+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2478.4",
+    "notes": "RSI oversold: 24.28"
+  },
+  {
+    "timestamp": "2026-10-09T20:22:37.849662+00:00",
+    "ticker": "SOL",
+    "action": "STRONG_BUY",
+    "price": "109.04",
+    "notes": "RSI 20.27 in uptrend"
+  },
+  {
+    "timestamp": "2026-10-09T20:22:39.434531+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.08",
+    "notes": "RSI oversold: 19.76"
+  },
+  {
     "timestamp": "2026-10-09T10:57:06.013648+00:00",
     "ticker": "COIN",
     "action": "BUY_SIGNAL",
@@ -117,26 +138,5 @@
     "action": "ALERT",
     "price": "142.04",
     "notes": "Major move: 14.9%"
-  },
-  {
-    "timestamp": "2026-09-21T20:08:53.581748+00:00",
-    "ticker": "FET",
-    "action": "ALERT",
-    "price": "0.2",
-    "notes": "Major move: 15.8%"
-  },
-  {
-    "timestamp": "2026-09-21T20:08:54.038499+00:00",
-    "ticker": "DOGE",
-    "action": "ALERT",
-    "price": "0.1",
-    "notes": "Major move: 13.4%"
-  },
-  {
-    "timestamp": "2026-09-21T09:20:20.639680+00:00",
-    "ticker": "MSTR",
-    "action": "ALERT",
-    "price": "153.92",
-    "notes": "Major move: 16.4%"
   }
 ]
