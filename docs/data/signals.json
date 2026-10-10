@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-10-10T10:09:53.642730+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2492.88",
+    "notes": "RSI oversold: 26.03"
+  },
+  {
+    "timestamp": "2026-10-10T10:09:53.911018+00:00",
+    "ticker": "SOL",
+    "action": "STRONG_BUY",
+    "price": "109.59",
+    "notes": "RSI 22.58 in uptrend"
+  },
+  {
+    "timestamp": "2026-10-10T10:09:55.500048+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.09",
+    "notes": "RSI oversold: 25.89"
+  },
+  {
     "timestamp": "2026-10-09T20:22:37.196342+00:00",
     "ticker": "ETH",
     "action": "BUY_SIGNAL",
@@ -117,26 +138,5 @@
     "action": "ALERT",
     "price": "141.93",
     "notes": "Major move: 14.8%"
-  },
-  {
-    "timestamp": "2026-09-22T08:50:36.027416+00:00",
-    "ticker": "DOGE",
-    "action": "WHALE_ACTIVITY",
-    "price": "0.1",
-    "notes": "Volume 3.80172634187847x avg"
-  },
-  {
-    "timestamp": "2026-09-21T20:08:50.701166+00:00",
-    "ticker": "META",
-    "action": "ALERT",
-    "price": "741.24",
-    "notes": "Major move: 11.3%"
-  },
-  {
-    "timestamp": "2026-09-21T20:08:51.743873+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "142.04",
-    "notes": "Major move: 14.9%"
   }
 ]
