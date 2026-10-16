@@ -2,8 +2,8 @@
 market snapshot, deterministic rule checks.
 
 Research aid only. Nothing in this package places trades or talks to a
-brokerage. It reads the trade journal, prices from yfinance, news from
-Alpha Vantage, and writes JSON + static HTML.
+brokerage. It reads the trade journal, prices from yfinance, free headlines
+from Google News RSS, and writes JSON + static HTML.
 """
 
 import csv
@@ -311,23 +311,12 @@ def google_news(query: str, limit: int = 8) -> list:
 
 
 def fetch_news(theses: dict, tickers: list) -> dict:
-    """Alpha Vantage NEWS_SENTIMENT first (through the agent's own client).
-    That endpoint answers "premium endpoint" on the current free key, so
-    fall back to Google News RSS headlines with no sentiment score."""
-    key = os.environ.get("ALPHA_VANTAGE_KEY", "")
-    agent = None
-    if key:
-        from whale_watcher_agent import AIResearchAgent
-        agent = AIResearchAgent(key)
+    """Free headlines from Google News RSS, one query per holding. No paid
+    news service is used (Alpha Vantage news is premium-only)."""
     by_ticker = {h["ticker"]: h for h in theses.get("holdings", [])}
     out = {}
     for t in tickers:
         th = by_ticker.get(t) or {}
-        r = agent.get_news_sentiment(th.get("news_symbol") or t) if agent else None
-        if r and r.get("news_count"):
-            out[t] = {"source": "Alpha Vantage NEWS_SENTIMENT", "sentiment_label": r["sentiment_label"],
-                      "sentiment_score": r["sentiment_score"], "headlines": r["headlines"]}
-            continue
         query = th.get("news_query") or t
         try:
             out[t] = {"source": f"Google News RSS, query {query!r}, last 3 days, no sentiment score",

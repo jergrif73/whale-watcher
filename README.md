@@ -254,7 +254,7 @@ python -m decision_desk.weekly_review --dry-run
 python -m pytest tests/test_decision_desk.py
 ```
 
-Secrets used: `ANTHROPIC_API_KEY`, `ALPHA_VANTAGE_KEY`. The repo is public, so theses, decisions, and costs are public too.
+Secret used: `ANTHROPIC_API_KEY` only. News headlines come from the free Google News RSS feed; Alpha Vantage is not used here. The repo is public, so theses, decisions, and costs are public too.
 ## License
 
 MIT License - feel free to modify and use for personal trading.

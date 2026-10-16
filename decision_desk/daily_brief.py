@@ -5,7 +5,7 @@
     python -m decision_desk.daily_brief --scheduled   # cron mode: skips weekends, pre-close, and repeats
 
 Gathers positions, lots, cost basis, day/week moves, allocation drift and
-Alpha Vantage news, asks a Sonnet-class model for a structured per-holding
+free Google News headlines, asks a Sonnet-class model for a structured per-holding
 brief, writes briefs/YYYY-MM-DD.json and docs/today.html.
 """
 

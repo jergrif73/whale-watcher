@@ -42,7 +42,6 @@ jobs:
       - name: Run weekly review
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             python -m decision_desk.weekly_review --dry-run
