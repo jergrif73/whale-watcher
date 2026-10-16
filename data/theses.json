@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "review_status": "NEEDS JEREMIAH REVIEW",
+  "status_note": "Drafted by Claude on 2026-10-16 from docs/data/trade_journal.json, the agent settings in whale_watcher_agent.py, and the April 2026 COIN thesis in docs/data/theses.json. Every field marked DRAFT is an inference, not your words. Rewrite it, then change review_status to REVIEWED on that holding.",
+  "portfolio": {
+    "review_status": "NEEDS JEREMIAH REVIEW",
+    "planned_capital_usd": 1000,
+    "planned_capital_note": "DRAFT: taken from DEFAULT_PORTFOLIO_SIZE in whale_watcher_agent.py. Allocation % is measured against this number (uninvested money counts as cash). Set to null to measure against current holdings only.",
+    "max_position_pct": 10,
+    "rebalance_band_pts": 5,
+    "stop_loss_soft_pct": -8,
+    "stop_loss_hard_pct": -15,
+    "trailing_stop_pct": 12,
+    "rules": [
+      "DRAFT: No single position above max_position_pct of planned capital (from MAX_POSITION_PCT = 10).",
+      "DRAFT: Do not add to a position within 7 days of the last buy (from MIN_HOLD_FOR_ADD = 7).",
+      "DRAFT: A soft stop at -8% means re-read the thesis before doing anything; a hard stop at -15% means exit unless the thesis has been re-written and re-dated (from STOP_LOSS_SOFT / STOP_LOSS_HARD).",
+      "DRAFT: Every buy or sell, and every deliberate decision not to act, gets a line in data/decisions.json with the reasoning written before the trade."
+    ]
+  },
+  "holdings": [
+    {
+      "ticker": "BTC",
+      "yf_symbol": "BTC-USD",
+      "news_symbol": "CRYPTO:BTC",
+      "asset_class": "crypto",
+      "review_status": "NEEDS JEREMIAH REVIEW",
+      "last_reviewed": null,
+      "review_by": "2027-01-07",
+      "why_i_own_it": "DRAFT: Direct BTC exposure, bought $44.14 on 2026-10-07 after closing every equity position (last sells 2026-05-22). Inferred link: the April 2026 COIN thesis was really a BTC halving-cycle thesis expressed through COIN; owning BTC directly removes the take-rate and regulatory risk the red-team critique raised against COIN. Replace with your actual reason.",
+      "what_would_make_me_sell": [
+        "DRAFT: Hard stop, position down 15% from cost basis (STOP_LOSS_HARD).",
+        "DRAFT: Trailing stop, price 12% below the peak since purchase (TRAILING_STOP_PCT).",
+        "DRAFT: The halving-cycle reason no longer holds. Note: your own April 2026 pre-mortem said that thesis is wrong if BTC had not reclaimed its prior cycle high by end of Q3 2026. That date has passed. Decide whether that test still applies before relying on it.",
+        "DRAFT: Scale-out at +15 / +25 / +40 / +60% gain (PROFIT_TIER_1..4), trimming roughly a quarter each time."
+      ],
+      "target_allocation_pct": 10,
+      "dca_rules": {
+        "frequency": "weekly",
+        "amount_usd": 25,
+        "max_buys_per_month": 4,
+        "min_days_between_buys": 7,
+        "pause_conditions": [
+          "DRAFT: Pause DCA when the position is at or above target_allocation_pct.",
+          "DRAFT: Pause DCA while thesis_status is broken.",
+          "DRAFT: Extra add only on a dip (RSI under 35 or 10% below cost basis), per ADD_ON_DIP_RSI / ADD_ON_DIP_DRAWDOWN."
+        ],
+        "notes": "DRAFT: Amount and cadence inferred from your past buys ($20 to $50, mostly $25) and DCA_DEFAULT_FREQUENCY = weekly."
+      }
+    }
+  ],
+  "related": "docs/data/theses.json holds the older red-team thesis layer (one COIN thesis from 2026-04-17, position closed 2026-05-22). It is left untouched."
+}

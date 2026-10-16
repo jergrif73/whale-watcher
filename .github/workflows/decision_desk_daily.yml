@@ -1,0 +1,60 @@
+name: Decision Desk Daily
+
+# Weekdays about 30 minutes after the 4:00 PM New York close. Two slots cover
+# daylight and standard time; the script skips the slot that lands before
+# 16:15 New York and any day that already has a brief.
+on:
+  schedule:
+    - cron: '30 20 * * 1-5'
+    - cron: '30 21 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: print the prompt and token estimate, no API call'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: decision-desk
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy lxml requests anthropic
+
+      - name: Run daily brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python -m decision_desk.daily_brief --dry-run
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            python -m decision_desk.daily_brief --scheduled
+          else
+            python -m decision_desk.daily_brief
+          fi
+
+      - name: Commit brief, page, and cost log
+        if: ${{ !inputs.dry_run && !cancelled() }}
+        run: |
+          git config user.name "decision-desk"
+          git config user.email "action@github.com"
+          for p in briefs docs/today.html data/api_costs.csv data/decisions.json; do if [ -e "$p" ]; then git add -A "$p"; fi; done
+          if git diff --staged --quiet; then echo "Nothing to commit"; exit 0; fi
+          git commit -m "Decision Desk daily brief $(TZ=America/New_York date +%F) [skip ci]"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
+          exit 1

@@ -1,0 +1,64 @@
+name: Decision Desk Weekly
+
+# Sunday 15:00 UTC (11:00 or 10:00 New York). Uses the Message Batches API;
+# the job waits for the batch (most finish well inside an hour). If it is
+# still running at the timeout, the batch id stays in reviews/pending.json
+# and a manual run with collect_only picks it up.
+on:
+  schedule:
+    - cron: '0 15 * * 0'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: print the prompts and token estimate, no API call'
+        type: boolean
+        default: false
+      collect_only:
+        description: 'Only collect a batch left pending by an earlier run'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: decision-desk
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy lxml requests anthropic
+
+      - name: Run weekly review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python -m decision_desk.weekly_review --dry-run
+          elif [ "${{ inputs.collect_only }}" = "true" ]; then
+            python -m decision_desk.weekly_review --collect
+          else
+            python -m decision_desk.weekly_review
+          fi
+
+      - name: Commit review, page, and cost log
+        if: ${{ !inputs.dry_run && !cancelled() }}
+        run: |
+          git config user.name "decision-desk"
+          git config user.email "action@github.com"
+          for p in reviews docs/weekly.html data/api_costs.csv data/decisions.json; do if [ -e "$p" ]; then git add -A "$p"; fi; done
+          if git diff --staged --quiet; then echo "Nothing to commit"; exit 0; fi
+          git commit -m "Decision Desk weekly review $(date +%G-%V) [skip ci]"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
+          exit 1

@@ -229,6 +229,32 @@ The dashboard commits trades by calling the GitHub API from your browser using a
 
 ---
 
+
+---
+
+## Decision Desk (added 2026-10-16)
+
+A journaling layer on top of the tracker. Its job is disciplined, written-down decisions, not buy or sell predictions. It never places trades or calls a brokerage, and every page says so.
+
+| Piece | Where |
+|---|---|
+| Theses, one per holding (why I own it, sell criteria, target allocation, DCA rules) | `data/theses.json` (drafts marked `NEEDS JEREMIAH REVIEW`) |
+| Decision journal | `data/decisions.json`, or the form on the Today page |
+| Daily brief, weekdays about 30 min after the close, Sonnet-class model | `decision_desk/daily_brief.py`, `briefs/YYYY-MM-DD.json`, `docs/today.html` |
+| Weekly deep review, Sunday, Opus-class model via Message Batches | `decision_desk/weekly_review.py`, `reviews/YYYY-WW.json`, `docs/weekly.html` |
+| Token and cost log | `data/api_costs.csv`; month-to-date shows on both pages |
+
+Guardrails: per-call `max_tokens` caps, structured JSON output, prompt caching on the fixed rubric plus theses, and a hard stop before any call that would take month-to-date estimated spend past $150 (`DESK_MTD_CAP_USD`). Numbers (allocation, P/L, rule checks) are computed in Python; the model reads them as facts.
+
+Run from a phone: Actions, then Decision Desk Daily or Decision Desk Weekly, then Run workflow. Tick `dry_run` to print the full prompt and token estimate without calling the Messages API. Locally:
+
+```bash
+python -m decision_desk.daily_brief --dry-run
+python -m decision_desk.weekly_review --dry-run
+python -m pytest tests/test_decision_desk.py
+```
+
+Secrets used: `ANTHROPIC_API_KEY`, `ALPHA_VANTAGE_KEY`. The repo is public, so theses, decisions, and costs are public too.
 ## License
 
 MIT License - feel free to modify and use for personal trading.
