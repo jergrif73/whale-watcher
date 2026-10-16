@@ -289,24 +289,51 @@ def build_snapshot(theses: dict) -> dict:
     }
 
 
+def google_news(query: str, limit: int = 8) -> list:
+    """Headlines from the Google News RSS search feed (no key). Titles only."""
+    import requests
+    import xml.etree.ElementTree as ET
+    from email.utils import parsedate_to_datetime
+    r = requests.get("https://news.google.com/rss/search",
+                     params={"q": f"{query} when:3d", "hl": "en-US", "gl": "US", "ceid": "US:en"},
+                     headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
+    r.raise_for_status()
+    items = []
+    for it in ET.fromstring(r.content).findall("./channel/item"):
+        try:
+            when = parsedate_to_datetime(it.findtext("pubDate"))
+        except (TypeError, ValueError):
+            continue
+        items.append({"time": when.isoformat(timespec="minutes"), "source": it.findtext("source") or "",
+                      "title": (it.findtext("title") or "")[:160]})
+    items.sort(key=lambda x: x["time"], reverse=True)
+    return items[:limit]
+
+
 def fetch_news(theses: dict, tickers: list) -> dict:
-    """Alpha Vantage NEWS_SENTIMENT via the agent's own client (free tier,
-    25 calls/day shared with the hourly agent, so one call per holding)."""
+    """Alpha Vantage NEWS_SENTIMENT first (through the agent's own client).
+    That endpoint answers "premium endpoint" on the current free key, so
+    fall back to Google News RSS headlines with no sentiment score."""
     key = os.environ.get("ALPHA_VANTAGE_KEY", "")
-    if not key:
-        return {t: {"note": "ALPHA_VANTAGE_KEY not set, no news fetched"} for t in tickers}
-    from whale_watcher_agent import AIResearchAgent
-    agent = AIResearchAgent(key)
+    agent = None
+    if key:
+        from whale_watcher_agent import AIResearchAgent
+        agent = AIResearchAgent(key)
     by_ticker = {h["ticker"]: h for h in theses.get("holdings", [])}
     out = {}
     for t in tickers:
-        sym = (by_ticker.get(t) or {}).get("news_symbol") or t
-        r = agent.get_news_sentiment(sym)
-        if not r:
-            out[t] = {"note": "no news returned"}
+        th = by_ticker.get(t) or {}
+        r = agent.get_news_sentiment(th.get("news_symbol") or t) if agent else None
+        if r and r.get("news_count"):
+            out[t] = {"source": "Alpha Vantage NEWS_SENTIMENT", "sentiment_label": r["sentiment_label"],
+                      "sentiment_score": r["sentiment_score"], "headlines": r["headlines"]}
             continue
-        out[t] = {"sentiment_label": r["sentiment_label"], "sentiment_score": r["sentiment_score"],
-                  "headlines": r["headlines"]}
+        query = th.get("news_query") or t
+        try:
+            out[t] = {"source": f"Google News RSS, query {query!r}, last 3 days, no sentiment score",
+                      "headlines": google_news(query)}
+        except Exception as e:  # noqa: BLE001 - news is optional context
+            out[t] = {"note": f"no news available ({e})"}
     return out
 
 
