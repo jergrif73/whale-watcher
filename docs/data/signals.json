@@ -1,5 +1,47 @@
 [
   {
+    "timestamp": "2026-10-16T19:04:23.551786+00:00",
+    "ticker": "MSTR",
+    "action": "ALERT",
+    "price": "134.44",
+    "notes": "Major move: -11.1%"
+  },
+  {
+    "timestamp": "2026-10-16T19:04:25.495092+00:00",
+    "ticker": "AMD",
+    "action": "BUY_SIGNAL",
+    "price": "531.65",
+    "notes": "RSI oversold: 29.6"
+  },
+  {
+    "timestamp": "2026-10-16T19:04:27.674463+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "94.81",
+    "notes": "Major move: -11.7%"
+  },
+  {
+    "timestamp": "2026-10-16T19:04:29.944599+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2399.53",
+    "notes": "RSI oversold: 29.65"
+  },
+  {
+    "timestamp": "2026-10-16T19:04:30.230897+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "102.65",
+    "notes": "RSI oversold: 24.18"
+  },
+  {
+    "timestamp": "2026-10-16T19:04:31.277569+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.08",
+    "notes": "RSI oversold: 26.98"
+  },
+  {
     "timestamp": "2026-10-16T08:32:33.432464+00:00",
     "ticker": "SOXL",
     "action": "BUY_SIGNAL",
@@ -96,47 +138,5 @@
     "action": "SUPPORT_BUY",
     "price": "0.19",
     "notes": "Near support $0.19"
-  },
-  {
-    "timestamp": "2026-10-14T19:46:32.028898+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.08",
-    "notes": "RSI oversold: 27.68"
-  },
-  {
-    "timestamp": "2026-10-14T09:04:18.107790+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "106.95",
-    "notes": "RSI oversold: 28.06"
-  },
-  {
-    "timestamp": "2026-10-13T20:51:14.268663+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "107.02",
-    "notes": "RSI oversold: 27.12"
-  },
-  {
-    "timestamp": "2026-10-13T11:13:17.752253+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "105.8",
-    "notes": "RSI oversold: 23.58"
-  },
-  {
-    "timestamp": "2026-10-13T11:13:19.464920+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.08",
-    "notes": "RSI oversold: 29.15"
-  },
-  {
-    "timestamp": "2026-10-12T22:38:03.700211+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "2486.62",
-    "notes": "RSI oversold: 29.87"
   }
 ]
