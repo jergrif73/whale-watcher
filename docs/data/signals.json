@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-10-17T08:05:15.314742+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2430.64",
+    "notes": "RSI oversold: 29.68"
+  },
+  {
+    "timestamp": "2026-10-17T08:05:15.604797+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "104.88",
+    "notes": "RSI oversold: 24.39"
+  },
+  {
+    "timestamp": "2026-10-17T08:05:16.685476+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.08",
+    "notes": "RSI oversold: 28.11"
+  },
+  {
     "timestamp": "2026-10-16T19:04:23.551786+00:00",
     "ticker": "MSTR",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "171.95",
     "notes": "RSI oversold: 28.38"
-  },
-  {
-    "timestamp": "2026-10-14T19:46:25.300190+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "111.4",
-    "notes": "Major move: -12.7%"
-  },
-  {
-    "timestamp": "2026-10-14T19:46:29.877913+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "104.15",
-    "notes": "RSI oversold: 24.85"
-  },
-  {
-    "timestamp": "2026-10-14T19:46:30.414464+00:00",
-    "ticker": "FET",
-    "action": "SUPPORT_BUY",
-    "price": "0.19",
-    "notes": "Near support $0.19"
   }
 ]
