@@ -1,5 +1,26 @@
 [
   {
+    "timestamp": "2026-10-31T09:59:21.968669+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "2242.33",
+    "notes": "RSI oversold: 29.52"
+  },
+  {
+    "timestamp": "2026-10-31T09:59:22.365780+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "95.34",
+    "notes": "RSI oversold: 29.55"
+  },
+  {
+    "timestamp": "2026-10-31T09:59:22.752638+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.16",
+    "notes": "RSI oversold: 29.04"
+  },
+  {
     "timestamp": "2026-10-30T20:12:31.239542+00:00",
     "ticker": "COIN",
     "action": "ALERT",
@@ -117,26 +138,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.16",
     "notes": "RSI oversold: 24.76"
-  },
-  {
-    "timestamp": "2026-10-29T20:42:37.487140+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "624.52",
-    "notes": "RSI oversold: 27.84"
-  },
-  {
-    "timestamp": "2026-10-29T20:42:37.862449+00:00",
-    "ticker": "GOOGL",
-    "action": "ALERT",
-    "price": "283.82",
-    "notes": "Major move: -12.6%"
-  },
-  {
-    "timestamp": "2026-10-29T20:42:40.113384+00:00",
-    "ticker": "SPY",
-    "action": "SUPPORT_BUY",
-    "price": "769.36",
-    "notes": "Near support $758.68"
   }
 ]
