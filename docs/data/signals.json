@@ -1,5 +1,98 @@
 [
   {
+    "timestamp": "2026-11-05T21:37:02.624784+00:00",
+    "ticker": "BTC",
+    "action": "EVALUATE",
+    "price": "75981.14",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-8.8"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:03.624204+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "136.82",
+    "notes": "RSI oversold: 28.97"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:04.048084+00:00",
+    "ticker": "TSLA",
+    "action": "ALERT",
+    "price": "343.69",
+    "notes": "Major move: -10.8%"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:04.402929+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "154.99",
+    "notes": "RSI oversold: 28.09"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:04.738379+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "181.6",
+    "notes": "RSI oversold: 27.62"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:05.080173+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "404.4",
+    "notes": "Major move: -17.3%"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:05.434054+00:00",
+    "ticker": "AVGO",
+    "action": "ALERT",
+    "price": "291.53",
+    "notes": "Major move: -10.4%"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:05.751188+00:00",
+    "ticker": "META",
+    "action": "BUY_SIGNAL",
+    "price": "605.08",
+    "notes": "RSI oversold: 21.26"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:06.097138+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "282.57",
+    "notes": "RSI oversold: 21.35"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:07.332418+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "40.87",
+    "notes": "Major move: -38.7%"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:08.157490+00:00",
+    "ticker": "TQQQ",
+    "action": "ALERT",
+    "price": "50.47",
+    "notes": "Major move: -18.9%"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:09.989190+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "90.06",
+    "notes": "RSI oversold: 23.4"
+  },
+  {
+    "timestamp": "2026-11-05T21:37:10.467300+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.15",
+    "notes": "RSI oversold: 27.83"
+  },
+  {
     "timestamp": "2026-11-05T11:40:20.287808+00:00",
     "ticker": "PLTR",
     "action": "BUY_SIGNAL",
@@ -47,96 +140,5 @@
     "action": "BUY_SIGNAL",
     "price": "94.56",
     "notes": "RSI oversold: 22.49"
-  },
-  {
-    "timestamp": "2026-11-04T21:35:23.424397+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.16",
-    "notes": "RSI oversold: 26.86"
-  },
-  {
-    "timestamp": "2026-11-04T11:39:12.969816+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "621.03",
-    "notes": "RSI oversold: 16.85"
-  },
-  {
-    "timestamp": "2026-11-04T11:39:13.495034+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "280.03",
-    "notes": "RSI oversold: 14.86"
-  },
-  {
-    "timestamp": "2026-11-04T11:39:17.837356+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "93.91",
-    "notes": "RSI oversold: 20.16"
-  },
-  {
-    "timestamp": "2026-11-04T11:39:18.370385+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.16",
-    "notes": "RSI oversold: 27.65"
-  },
-  {
-    "timestamp": "2026-11-03T21:18:57.949155+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "621.03",
-    "notes": "RSI oversold: 16.85"
-  },
-  {
-    "timestamp": "2026-11-03T21:18:58.412643+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "280.03",
-    "notes": "RSI oversold: 14.86"
-  },
-  {
-    "timestamp": "2026-11-03T21:19:02.706558+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "93.76",
-    "notes": "RSI oversold: 20.97"
-  },
-  {
-    "timestamp": "2026-11-03T21:19:03.420385+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.16",
-    "notes": "RSI oversold: 22.96"
-  },
-  {
-    "timestamp": "2026-11-03T11:25:41.105861+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "137.83",
-    "notes": "RSI oversold: 25.16"
-  },
-  {
-    "timestamp": "2026-11-03T11:25:41.771758+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "178.34",
-    "notes": "RSI oversold: 28.37"
-  },
-  {
-    "timestamp": "2026-11-03T11:25:42.092303+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "202.06",
-    "notes": "RSI oversold: 26.93"
-  },
-  {
-    "timestamp": "2026-11-03T11:25:42.389232+00:00",
-    "ticker": "AMD",
-    "action": "BUY_SIGNAL",
-    "price": "466.84",
-    "notes": "RSI oversold: 29.25"
   }
 ]
