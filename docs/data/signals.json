@@ -1,5 +1,21 @@
 [
   {
+    "timestamp": "2026-11-07T10:44:03.709289+00:00",
+    "ticker": "BTC",
+    "action": "EVALUATE",
+    "price": "75884.66",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-8.9"
+  },
+  {
+    "timestamp": "2026-11-07T10:44:10.382971+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "89.78",
+    "notes": "RSI oversold: 26.15"
+  },
+  {
     "timestamp": "2026-11-06T21:07:29.802906+00:00",
     "ticker": "BTC",
     "action": "EVALUATE",
@@ -128,19 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "605.08",
     "notes": "RSI oversold: 21.26"
-  },
-  {
-    "timestamp": "2026-11-06T11:38:48.931659+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "282.57",
-    "notes": "RSI oversold: 21.35"
-  },
-  {
-    "timestamp": "2026-11-06T11:38:50.136832+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "40.87",
-    "notes": "Major move: -38.7%"
   }
 ]
