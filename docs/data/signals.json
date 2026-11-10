@@ -1,5 +1,84 @@
 [
   {
+    "timestamp": "2026-11-10T11:53:28.910811+00:00",
+    "ticker": "BTC",
+    "action": "EVALUATE",
+    "price": "74338.48",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-10.7"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:29.687944+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "136.1",
+    "notes": "RSI oversold: 28.98"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:30.653640+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "178.67",
+    "notes": "RSI oversold: 26.98"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:30.977112+00:00",
+    "ticker": "AMD",
+    "action": "ALERT",
+    "price": "508.58",
+    "notes": "Major move: 13.3%"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:31.945326+00:00",
+    "ticker": "GOOGL",
+    "action": "BUY_SIGNAL",
+    "price": "288.15",
+    "notes": "RSI oversold: 23.76"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:32.782694+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "56.2",
+    "notes": "Major move: 22.3%"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:33.360053+00:00",
+    "ticker": "TQQQ",
+    "action": "ALERT",
+    "price": "57.58",
+    "notes": "Major move: 10.2%"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:34.745392+00:00",
+    "ticker": "ETH",
+    "action": "SUPPORT_BUY",
+    "price": "2093.04",
+    "notes": "Near support $2081.50"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:35.062536+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "84.64",
+    "notes": "RSI oversold: 22.23"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:35.471121+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.15",
+    "notes": "RSI oversold: 29.42"
+  },
+  {
+    "timestamp": "2026-11-10T11:53:36.494723+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.07",
+    "notes": "RSI oversold: 29.22"
+  },
+  {
     "timestamp": "2026-11-09T23:52:35.200048+00:00",
     "ticker": "BTC",
     "action": "EVALUATE",
@@ -65,84 +144,5 @@
     "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
     "entry_price": "83275.93",
     "gain_loss_pct": "-10.6"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:09.404719+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "134.76",
-    "notes": "RSI oversold: 29.88"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:10.282582+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "160.38",
-    "notes": "RSI oversold: 25.2"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:10.823617+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "186.64",
-    "notes": "RSI oversold: 29.63"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:11.223578+00:00",
-    "ticker": "AMD",
-    "action": "ALERT",
-    "price": "449.04",
-    "notes": "Major move: 11.0%"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:12.252752+00:00",
-    "ticker": "META",
-    "action": "BUY_SIGNAL",
-    "price": "610.15",
-    "notes": "RSI oversold: 23.9"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:12.660792+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "284.78",
-    "notes": "RSI oversold: 20.26"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:14.332635+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "45.97",
-    "notes": "Major move: 12.5%"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:14.937684+00:00",
-    "ticker": "TQQQ",
-    "action": "BUY_SIGNAL",
-    "price": "52.25",
-    "notes": "RSI oversold: 29.13"
-  },
-  {
-    "timestamp": "2026-11-09T12:13:17.495297+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "86.3",
-    "notes": "RSI oversold: 24.43"
-  },
-  {
-    "timestamp": "2026-11-08T20:00:33.745457+00:00",
-    "ticker": "BTC",
-    "action": "EVALUATE",
-    "price": "75830.75",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-8.9"
-  },
-  {
-    "timestamp": "2026-11-08T20:00:39.037746+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "89.41",
-    "notes": "RSI oversold: 26.84"
   }
 ]
