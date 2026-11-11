@@ -1,5 +1,49 @@
 [
   {
+    "timestamp": "2026-11-11T22:19:52.255082+00:00",
+    "ticker": "BTC",
+    "action": "EVALUATE",
+    "price": "74420.91",
+    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-10.6"
+  },
+  {
+    "timestamp": "2026-11-11T22:19:53.147424+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "136.27",
+    "notes": "RSI oversold: 28.57"
+  },
+  {
+    "timestamp": "2026-11-11T22:19:54.018214+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "173.73",
+    "notes": "RSI oversold: 26.38"
+  },
+  {
+    "timestamp": "2026-11-11T22:19:55.776959+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "66.03",
+    "notes": "Major move: 17.8%"
+  },
+  {
+    "timestamp": "2026-11-11T22:19:57.560536+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "84.73",
+    "notes": "RSI oversold: 22.29"
+  },
+  {
+    "timestamp": "2026-11-11T22:19:58.622630+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.07",
+    "notes": "RSI oversold: 27.32"
+  },
+  {
     "timestamp": "2026-11-11T11:29:59.793395+00:00",
     "ticker": "BTC",
     "action": "EVALUATE",
@@ -100,49 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "168.82",
     "notes": "RSI oversold: 25.31"
-  },
-  {
-    "timestamp": "2026-11-10T21:29:53.346314+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "168.89",
-    "notes": "RSI oversold: 19.28"
-  },
-  {
-    "timestamp": "2026-11-10T21:29:54.949485+00:00",
-    "ticker": "GOOGL",
-    "action": "BUY_SIGNAL",
-    "price": "287.38",
-    "notes": "RSI oversold: 24.96"
-  },
-  {
-    "timestamp": "2026-11-10T21:29:58.195951+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "83.39",
-    "notes": "RSI oversold: 21.34"
-  },
-  {
-    "timestamp": "2026-11-10T21:29:58.510671+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.14",
-    "notes": "RSI oversold: 27.79"
-  },
-  {
-    "timestamp": "2026-11-10T21:29:59.456667+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.07",
-    "notes": "RSI oversold: 27.34"
-  },
-  {
-    "timestamp": "2026-11-10T11:53:28.910811+00:00",
-    "ticker": "BTC",
-    "action": "EVALUATE",
-    "price": "74338.48",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-10.7"
   }
 ]
