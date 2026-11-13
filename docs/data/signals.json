@@ -1,5 +1,49 @@
 [
   {
+    "timestamp": "2026-11-13T11:39:14.832062+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "69227.67",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-16.9"
+  },
+  {
+    "timestamp": "2026-11-13T11:39:15.309555+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "114.41",
+    "notes": "RSI oversold: 27.07"
+  },
+  {
+    "timestamp": "2026-11-13T11:39:15.627568+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "130.67",
+    "notes": "RSI oversold: 28.21"
+  },
+  {
+    "timestamp": "2026-11-13T11:39:16.385204+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "166.19",
+    "notes": "RSI oversold: 24.49"
+  },
+  {
+    "timestamp": "2026-11-13T11:39:20.610122+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "80.53",
+    "notes": "RSI oversold: 19.31"
+  },
+  {
+    "timestamp": "2026-11-13T11:39:21.601973+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.07",
+    "notes": "RSI oversold: 24.98"
+  },
+  {
     "timestamp": "2026-11-12T21:56:35.616393+00:00",
     "ticker": "BTC",
     "action": "EVALUATE",
@@ -102,49 +146,5 @@
     "action": "BUY_SIGNAL",
     "price": "136.27",
     "notes": "RSI oversold: 28.57"
-  },
-  {
-    "timestamp": "2026-11-11T22:19:54.018214+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "173.73",
-    "notes": "RSI oversold: 26.38"
-  },
-  {
-    "timestamp": "2026-11-11T22:19:55.776959+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "66.03",
-    "notes": "Major move: 17.8%"
-  },
-  {
-    "timestamp": "2026-11-11T22:19:57.560536+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "84.73",
-    "notes": "RSI oversold: 22.29"
-  },
-  {
-    "timestamp": "2026-11-11T22:19:58.622630+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.07",
-    "notes": "RSI oversold: 27.32"
-  },
-  {
-    "timestamp": "2026-11-11T11:29:59.793395+00:00",
-    "ticker": "BTC",
-    "action": "EVALUATE",
-    "price": "73935.2",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-11.2"
-  },
-  {
-    "timestamp": "2026-11-11T11:30:00.415498+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "121.07",
-    "notes": "RSI oversold: 26.02"
   }
 ]
