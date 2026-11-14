@@ -1,5 +1,42 @@
 [
   {
+    "timestamp": "2026-11-14T20:10:51.584249+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "65633.74",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-21.2"
+  },
+  {
+    "timestamp": "2026-11-14T20:11:00.579767+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1831.97",
+    "notes": "RSI oversold: 25.08"
+  },
+  {
+    "timestamp": "2026-11-14T20:11:01.050068+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "72.19",
+    "notes": "RSI oversold: 14.94"
+  },
+  {
+    "timestamp": "2026-11-14T20:11:01.610790+00:00",
+    "ticker": "FET",
+    "action": "ALERT",
+    "price": "0.13",
+    "notes": "Major move: -11.7%"
+  },
+  {
+    "timestamp": "2026-11-14T20:11:03.200430+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.06",
+    "notes": "RSI oversold: 20.1"
+  },
+  {
     "timestamp": "2026-11-14T11:00:21.465318+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -109,42 +146,5 @@
     "action": "BUY_SIGNAL",
     "price": "114.41",
     "notes": "RSI oversold: 27.07"
-  },
-  {
-    "timestamp": "2026-11-13T11:39:15.627568+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "130.67",
-    "notes": "RSI oversold: 28.21"
-  },
-  {
-    "timestamp": "2026-11-13T11:39:16.385204+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "166.19",
-    "notes": "RSI oversold: 24.49"
-  },
-  {
-    "timestamp": "2026-11-13T11:39:20.610122+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "80.53",
-    "notes": "RSI oversold: 19.31"
-  },
-  {
-    "timestamp": "2026-11-13T11:39:21.601973+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.07",
-    "notes": "RSI oversold: 24.98"
-  },
-  {
-    "timestamp": "2026-11-12T21:56:35.616393+00:00",
-    "ticker": "BTC",
-    "action": "EVALUATE",
-    "price": "71489.83",
-    "notes": "Approaching stop loss at -15.0%; Downtrend - consider cutting losses",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-14.2"
   }
 ]
