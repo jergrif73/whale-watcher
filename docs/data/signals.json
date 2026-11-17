@@ -1,5 +1,70 @@
 [
   {
+    "timestamp": "2026-11-17T12:32:50.449426+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "64824.89",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-22.2"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:51.040183+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "103.03",
+    "notes": "RSI oversold: 23.54"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:51.434204+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "119.84",
+    "notes": "RSI oversold: 24.85"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:52.166702+00:00",
+    "ticker": "PLTR",
+    "action": "BUY_SIGNAL",
+    "price": "160.39",
+    "notes": "RSI oversold: 24.07"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:52.436313+00:00",
+    "ticker": "NVDA",
+    "action": "BUY_SIGNAL",
+    "price": "156.14",
+    "notes": "RSI oversold: 15.98"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:54.288071+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "48.76",
+    "notes": "Major move: -16.4%"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:55.443023+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1814.35",
+    "notes": "RSI oversold: 25.26"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:55.711151+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "73.34",
+    "notes": "RSI oversold: 22.78"
+  },
+  {
+    "timestamp": "2026-11-17T12:32:56.737383+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.06",
+    "notes": "RSI oversold: 23.59"
+  },
+  {
     "timestamp": "2026-11-16T23:52:35.529362+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -79,70 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "111.62",
     "notes": "RSI oversold: 28.47"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:37.403478+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "127.65",
-    "notes": "RSI oversold: 28.89"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:38.461464+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "167.99",
-    "notes": "RSI oversold: 26.78"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:38.845455+00:00",
-    "ticker": "NVDA",
-    "action": "BUY_SIGNAL",
-    "price": "162.85",
-    "notes": "RSI oversold: 19.12"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:41.518257+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "58.32",
-    "notes": "Major move: -11.0%"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:44.302601+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1799.68",
-    "notes": "RSI oversold: 26.72"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:44.684985+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "70.99",
-    "notes": "RSI oversold: 20.82"
-  },
-  {
-    "timestamp": "2026-11-16T12:07:46.531674+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.06",
-    "notes": "RSI oversold: 25.26"
-  },
-  {
-    "timestamp": "2026-11-15T20:37:51.325261+00:00",
-    "ticker": "BTC",
-    "action": "SELL_ALL",
-    "price": "65022.7",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-21.9"
-  },
-  {
-    "timestamp": "2026-11-15T20:37:56.467420+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1829.94",
-    "notes": "RSI oversold: 26.62"
   }
 ]
