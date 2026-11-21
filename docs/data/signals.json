@@ -1,5 +1,42 @@
 [
   {
+    "timestamp": "2026-11-21T21:15:15.947006+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "60346.75",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-27.5"
+  },
+  {
+    "timestamp": "2026-11-21T21:15:20.285214+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1684.24",
+    "notes": "RSI oversold: 17.69"
+  },
+  {
+    "timestamp": "2026-11-21T21:15:20.462630+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "70.44",
+    "notes": "RSI oversold: 22.96"
+  },
+  {
+    "timestamp": "2026-11-21T21:15:20.868835+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.11",
+    "notes": "RSI oversold: 25.66"
+  },
+  {
+    "timestamp": "2026-11-21T21:15:21.598172+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.06",
+    "notes": "RSI oversold: 20.73"
+  },
+  {
     "timestamp": "2026-11-21T11:51:22.574265+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -107,42 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "689.81",
     "notes": "RSI oversold: 29.36"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:24.597493+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1620.36",
-    "notes": "RSI oversold: 11.08"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:24.947444+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "69.03",
-    "notes": "RSI oversold: 19.05"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:25.282555+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.12",
-    "notes": "RSI oversold: 26.4"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:26.172094+00:00",
-    "ticker": "DOGE",
-    "action": "BUY_SIGNAL",
-    "price": "0.05",
-    "notes": "RSI oversold: 17.6"
-  },
-  {
-    "timestamp": "2026-11-20T12:15:43.698921+00:00",
-    "ticker": "BTC",
-    "action": "SELL_ALL",
-    "price": "61333.06",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-26.3"
   }
 ]
