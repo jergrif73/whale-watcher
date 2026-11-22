@@ -1,5 +1,42 @@
 [
   {
+    "timestamp": "2026-11-22T21:20:40.066893+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "60855.96",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-26.9"
+  },
+  {
+    "timestamp": "2026-11-22T21:20:48.873751+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1721.8",
+    "notes": "RSI oversold: 24.29"
+  },
+  {
+    "timestamp": "2026-11-22T21:20:49.165693+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "70.18",
+    "notes": "RSI oversold: 24.85"
+  },
+  {
+    "timestamp": "2026-11-22T21:20:49.705364+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.11",
+    "notes": "RSI oversold: 27.27"
+  },
+  {
+    "timestamp": "2026-11-22T21:20:50.730407+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.06",
+    "notes": "RSI oversold: 23.16"
+  },
+  {
     "timestamp": "2026-11-22T12:03:01.190846+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -109,42 +146,5 @@
     "action": "BUY_SIGNAL",
     "price": "0.05",
     "notes": "RSI oversold: 17.69"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:19.432531+00:00",
-    "ticker": "BTC",
-    "action": "SELL_ALL",
-    "price": "59058.91",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-29.1"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:20.028214+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "77.8",
-    "notes": "RSI oversold: 16.51"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:20.296775+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "101.97",
-    "notes": "RSI oversold: 25.82"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:20.964114+00:00",
-    "ticker": "PLTR",
-    "action": "BUY_SIGNAL",
-    "price": "143.49",
-    "notes": "RSI oversold: 25.34"
-  },
-  {
-    "timestamp": "2026-11-20T22:24:21.199868+00:00",
-    "ticker": "NVDA",
-    "action": "ALERT",
-    "price": "125.53",
-    "notes": "Major move: -14.0%"
   }
 ]
