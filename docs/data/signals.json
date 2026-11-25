@@ -1,5 +1,70 @@
 [
   {
+    "timestamp": "2026-11-25T13:39:51.029376+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "58351.07",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-29.9"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:52.104966+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "77.55",
+    "notes": "RSI oversold: 9.76"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:52.308921+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "102.35",
+    "notes": "RSI oversold: 16.67"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:54.607853+00:00",
+    "ticker": "MSFT",
+    "action": "BUY_SIGNAL",
+    "price": "496.13",
+    "notes": "RSI oversold: 25.68"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:55.091171+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "32.6",
+    "notes": "Major move: -24.6%"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:56.503150+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1638.29",
+    "notes": "RSI oversold: 22.56"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:56.637663+00:00",
+    "ticker": "SOL",
+    "action": "BUY_SIGNAL",
+    "price": "67.28",
+    "notes": "RSI oversold: 26.9"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:56.991419+00:00",
+    "ticker": "FET",
+    "action": "BUY_SIGNAL",
+    "price": "0.1",
+    "notes": "RSI oversold: 11.12"
+  },
+  {
+    "timestamp": "2026-11-25T13:39:57.838302+00:00",
+    "ticker": "DOGE",
+    "action": "BUY_SIGNAL",
+    "price": "0.05",
+    "notes": "RSI oversold: 22.43"
+  },
+  {
     "timestamp": "2026-11-25T00:10:46.993979+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -79,68 +144,5 @@
     "action": "BUY_SIGNAL",
     "price": "84.4",
     "notes": "RSI oversold: 18.3"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:53.695594+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "108.78",
-    "notes": "RSI oversold: 25.0"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:54.072214+00:00",
-    "ticker": "TSLA",
-    "action": "ALERT",
-    "price": "385.46",
-    "notes": "Major move: 11.5%"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:54.545129+00:00",
-    "ticker": "PLTR",
-    "action": "ALERT",
-    "price": "159.36",
-    "notes": "Major move: 11.1%"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:54.869921+00:00",
-    "ticker": "NVDA",
-    "action": "ALERT",
-    "price": "165.05",
-    "notes": "Major move: 31.5%"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:57.514967+00:00",
-    "ticker": "SOXL",
-    "action": "ALERT",
-    "price": "43.21",
-    "notes": "Major move: 39.9%"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:58.027929+00:00",
-    "ticker": "TQQQ",
-    "action": "ALERT",
-    "price": "49.1",
-    "notes": "Major move: 19.2%"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:59.311763+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1694.65",
-    "notes": "RSI oversold: 24.97"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:59.526920+00:00",
-    "ticker": "SOL",
-    "action": "BUY_SIGNAL",
-    "price": "69.92",
-    "notes": "RSI oversold: 29.24"
-  },
-  {
-    "timestamp": "2026-11-24T14:20:59.913448+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.11",
-    "notes": "RSI oversold: 18.48"
   }
 ]
