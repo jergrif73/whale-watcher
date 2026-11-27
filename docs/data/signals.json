@@ -1,5 +1,42 @@
 [
   {
+    "timestamp": "2026-11-27T23:46:53.168864+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "59785.32",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-28.2"
+  },
+  {
+    "timestamp": "2026-11-27T23:46:53.842240+00:00",
+    "ticker": "MSTR",
+    "action": "BUY_SIGNAL",
+    "price": "81.62",
+    "notes": "RSI oversold: 16.78"
+  },
+  {
+    "timestamp": "2026-11-27T23:46:54.229934+00:00",
+    "ticker": "COIN",
+    "action": "BUY_SIGNAL",
+    "price": "107.04",
+    "notes": "RSI oversold: 27.53"
+  },
+  {
+    "timestamp": "2026-11-27T23:46:58.507210+00:00",
+    "ticker": "SOXL",
+    "action": "ALERT",
+    "price": "36.57",
+    "notes": "Major move: 14.2%"
+  },
+  {
+    "timestamp": "2026-11-27T23:47:00.951590+00:00",
+    "ticker": "ETH",
+    "action": "BUY_SIGNAL",
+    "price": "1658.94",
+    "notes": "RSI oversold: 28.95"
+  },
+  {
     "timestamp": "2026-11-27T13:13:43.327665+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -109,42 +146,5 @@
     "action": "BUY_SIGNAL",
     "price": "489.93",
     "notes": "RSI oversold: 28.96"
-  },
-  {
-    "timestamp": "2026-11-26T13:16:10.012473+00:00",
-    "ticker": "ETH",
-    "action": "BUY_SIGNAL",
-    "price": "1704.29",
-    "notes": "RSI oversold: 27.96"
-  },
-  {
-    "timestamp": "2026-11-26T13:16:10.679848+00:00",
-    "ticker": "FET",
-    "action": "BUY_SIGNAL",
-    "price": "0.12",
-    "notes": "RSI oversold: 24.34"
-  },
-  {
-    "timestamp": "2026-11-25T23:50:00.543794+00:00",
-    "ticker": "BTC",
-    "action": "SELL_ALL",
-    "price": "60275.99",
-    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
-    "entry_price": "83275.93",
-    "gain_loss_pct": "-27.6"
-  },
-  {
-    "timestamp": "2026-11-25T23:50:01.035065+00:00",
-    "ticker": "MSTR",
-    "action": "BUY_SIGNAL",
-    "price": "79.96",
-    "notes": "RSI oversold: 14.72"
-  },
-  {
-    "timestamp": "2026-11-25T23:50:01.319123+00:00",
-    "ticker": "COIN",
-    "action": "BUY_SIGNAL",
-    "price": "103.72",
-    "notes": "RSI oversold: 22.61"
   }
 ]
