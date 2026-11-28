@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-11-28T12:29:10.974444+00:00",
+    "ticker": "BTC",
+    "action": "SELL_ALL",
+    "price": "59212.73",
+    "notes": "Hard stop loss triggered at -15.0%; Cut losses to preserve capital",
+    "entry_price": "83275.93",
+    "gain_loss_pct": "-28.9"
+  },
+  {
     "timestamp": "2026-11-27T23:46:53.168864+00:00",
     "ticker": "BTC",
     "action": "SELL_ALL",
@@ -139,12 +148,5 @@
     "action": "BUY_SIGNAL",
     "price": "103.72",
     "notes": "RSI oversold: 22.61"
-  },
-  {
-    "timestamp": "2026-11-26T13:16:08.117104+00:00",
-    "ticker": "MSFT",
-    "action": "BUY_SIGNAL",
-    "price": "489.93",
-    "notes": "RSI oversold: 28.96"
   }
 ]
